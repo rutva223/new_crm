@@ -4,7 +4,7 @@
 @php
 $profile=\App\Models\Utility::get_file('uploads/avatar/');
 @endphp
-@section('page-title')
+@section('page-breadcrumb')
     {{__('Dashboard')}}
 @endsection
 @section('title')
@@ -12,9 +12,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
         <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Dashboard')}}</h5>
     </div>
 @endsection
-@section('breadcrumb')
-    <!-- <li class="breadcrumb-item active" aria-current="page">{{__('Dashboard')}}</li> -->
-@endsection
+
 @section('content')
     @if(\Auth::user()->type=='company')
         <div class="row">

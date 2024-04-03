@@ -1,297 +1,134 @@
-<script src="{{ asset('public/custom_assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/simplebar.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
+<!-- Required vendors -->
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('assets/js/custom.min.js') }}"></script>
 
-<script src="{{ asset('assets/js/dash.js') }}"></script>
-<script src="{{ asset('public/custom_assets/libs/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
-<script src="{{ asset('js/letter.avatar.js') }}"></script>
-@stack('pre-purpose-script-page')
-{{-- FullCalendar --}}
-<script src="{{ asset('assets/js/plugins/apexcharts.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/main.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/draggable/draggable.js') }}"></script>
+<script src="{{ asset('assets/vendor/chart-js/chart.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/wow-master/dist/wow.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/peity/jquery.peity.min.js') }}"></script>
 
-<!-- sweet alert Js -->
-<script src="{{ asset('assets/js/plugins/sweetalert2.all.min.js') }}"></script>
-<!-- <script src="{{ asset('assets/js/pages/ac-alert.js') }}"></script> -->
+<script src="{{ asset('assets/js/letter.avatar.js') }}"></script>
+<script src="{{ asset('assets/vendor/ckeditor/ckeditor.js') }}"></script>
 
-{{-- DataTable --}}
-<script src="{{ asset('assets/js/plugins/simple-datatables.js') }}"></script>
-<script>
-    if ($("#pc-dt-simple").length > 0) {
-        const dataTable = new simpleDatatables.DataTable("#pc-dt-simple");
-    }
-</script>
+<!--swiper-slider-->
+<script src="{{ asset('assets/vendor/swiper/js/swiper-bundle.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/wow-master/dist/wow.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/metismenu/js/metisMenu.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap-datetimepicker/js/moment.js') }}"></script>
+<script src="{{ asset('assets/vendor/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/bootstrap-select-country/js/bootstrap-select-country.min.js') }}"></script>
 
-{{-- Multi Select --}}
-<script src="{{ asset('assets/js/plugins/choices.min.js') }}"></script>
+<script src="{{ asset('assets/js/dlabnav-init.js') }}"></script>
 
+<script src="{{ asset('assets/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<!-- date -->
-<script src="{{ asset('assets/js/plugins/datepicker-full.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/dropzone-amd-module.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/dragula.min.js') }}"></script>
 
-<!--Botstrap switch-->
-<script src="{{ asset('assets/js/plugins/bootstrap-switch-button.min.js') }}"></script>
+{{-- like dropdown --}}
+<script src="{{ asset('assets/js/dashboard/cms.js') }}"></script>
 
-<script src="{{ asset('js/chatify/autosize.js') }}"></script>
-<script src='https://unpkg.com/nprogress@0.2.0/nprogress.js'></script>
-
-<script src="{{ asset('assets/js/plugins/choices.min.js') }}"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="{{ asset('css/summernote/summernote-bs4.js') }}"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
-
-<!-- <script src="{{ asset('public/custom_assets/libs/select2/dist/js/select2.min.js')}}"></script> -->
-<script>
-    if ($(".multi-select").length > 0) {
-        $($(".multi-select")).each(function(index, element) {
-            var id = $(element).attr('id');
-            var multipleCancelButton = new Choices(
-                '#' + id, {
-                    removeItemButton: true,
-                }
-            );
-        });
-    }
-</script>
-<!-- report data table-->
-<script>
-    if ($("#pc-dt-export").length > 0)
-    {
-        const table = new simpleDatatables.DataTable(".pc-dt-export");
-
-    }
-
-</script>
-<script>
-    function taskCheckbox() {
-        var checked = 0;
-        var count = 0;
-        var percentage = 0;
-
-        count = $("#check-list input[type=checkbox]").length;
-        checked = $("#check-list input[type=checkbox]:checked").length;
-        percentage = parseInt(((checked / count) * 100), 10);
-        if (isNaN(percentage)) {
-            percentage = 0;
-        }
-        $(".custom-label").text(percentage + "%");
-        $('#taskProgress').css('width', percentage + '%');
-
-
-        $('#taskProgress').removeClass('bg-warning');
-        $('#taskProgress').removeClass('bg-primary');
-        $('#taskProgress').removeClass('bg-success');
-        $('#taskProgress').removeClass('bg-danger');
-
-        if (percentage <= 15) {
-            $('#taskProgress').addClass('bg-danger');
-        } else if (percentage > 15 && percentage <= 33) {
-            $('#taskProgress').addClass('bg-warning');
-        } else if (percentage > 33 && percentage <= 70) {
-            $('#taskProgress').addClass('bg-primary');
-        } else {
-            $('#taskProgress').addClass('bg-success');
-        }
-    }
-</script>
-<script>
-    feather.replace();
-    var pctoggle = document.querySelector("#pct-toggler");
-    if (pctoggle) {
-        pctoggle.addEventListener("click", function() {
-            if (
-                !document.querySelector(".pct-customizer").classList.contains("active")
-            ) {
-                document.querySelector(".pct-customizer").classList.add("active");
-            } else {
-                document.querySelector(".pct-customizer").classList.remove("active");
-            }
-        });
-    }
-
-    if ($('#cust-darklayout').length > 0) {
-        var custdarklayout = document.querySelector("#cust-darklayout");
-            custdarklayout.addEventListener("click", function() {
-                if (custdarklayout.checked) {
-                    document
-                        .querySelector(".m-header > .b-brand > .logo-lg")
-                        .setAttribute("src", "{{ asset('/storage/uploads/logo/logo-light.png') }}");
-                    document
-                        .querySelector("#main-style-link")
-                        .setAttribute("href", "{{ asset('assets/css/style-dark.css') }}");
-                } else {
-                    document
-                        .querySelector(".m-header > .b-brand > .logo-lg")
-                        .setAttribute("src", "{{ asset('/storage/uploads/logo/logo-dark.png') }}");
-                    document
-                        .querySelector("#main-style-link")
-                        .setAttribute("href", "{{ asset('assets/css/style.css') }}");
-                }
-            });
-    }
-
-    if ($('#cust-theme-bg').length > 0) {
-        var custthemebg = document.querySelector("#cust-theme-bg");
-        custthemebg.addEventListener("click", function () {
-            if (custthemebg.checked) {
-                document.querySelector(".dash-sidebar").classList.add("transprent-bg");
-                document
-                    .querySelector(".dash-header:not(.dash-mob-header)")
-                    .classList.add("transprent-bg");
-            } else {
-                document.querySelector(".dash-sidebar").classList.remove("transprent-bg");
-                document
-                    .querySelector(".dash-header:not(.dash-mob-header)")
-                    .classList.remove("transprent-bg");
-            }
-        });
-    }
-
-    var themescolors = document.querySelectorAll(".themes-color > a");
-            for (var h = 0; h < themescolors.length; h++) {
-                var c = themescolors[h];
-
-                c.addEventListener("click", function(event) {
-                    var targetElement = event.target;
-                    if (targetElement.tagName == "SPAN") {
-                        targetElement = targetElement.parentNode;
-                    }
-                    var temp = targetElement.getAttribute("data-value");
-                    removeClassByPrefix(document.querySelector("body"), "theme-");
-                    document.querySelector("body").classList.add(temp);
-                });
-            }
-
-    function removeClassByPrefix(node, prefix) {
-        for (let i = 0; i < node.classList.length; i++) {
-            let value = node.classList[i];
-            if (value.startsWith(prefix)) {
-                node.classList.remove(value);
-            }
-        }
-    }
-</script>
-<script>
-    var timer = '';
-    var timzone = '{{ env('TIMEZONE') }}';
-
-    function TrackerTimer(start_time) {
-        timer = setInterval(function() {
-            var start = new Date(start_time);
-            //var end = new Date();
-
-            var here = new Date();
-            var end = changeTimezone(here, timzone);
-
-            var hrs = end.getHours() - start.getHours();
-
-            var min = end.getMinutes() - start.getMinutes();
-            var sec = end.getSeconds() - start.getSeconds();
-            var hour_carry = 0;
-            var Timer = $(".timer-counter");
-            var minutes_carry = 0;
-            if (min < 0) {
-                min += 60;
-                hour_carry += 1;
-            }
-            hrs = hrs - hour_carry;
-            if (sec < 0) {
-                sec += 60;
-                minutes_carry += 1;
-            }
-            min = min - minutes_carry;
-
-            Timer.text(minTwoDigits(hrs) + ':' + minTwoDigits(min) + ':' + minTwoDigits(sec));
-        }, 1000);
-    }
-    function minTwoDigits(n) {
-        return (n < 10 ? '0' : '') + n;
-    }
-
-    function changeTimezone(date, ianatz) {
-
-        var invdate = new Date(date.toLocaleString('en-US', {
-            timeZone: ianatz
-        }));
-        var diff = date.getTime() - invdate.getTime();
-        return new Date(date.getTime() - diff);
-
-    }
-    function toastrs(title, message, type) {
-        var f = document.getElementById('liveToast');
-        var a = new bootstrap.Toast(f).show();
-        if (type == 'success') {
-            $('#liveToast').addClass('bg-primary');
-        } else {
-            $('#liveToast').addClass('bg-danger');
-        }
-        $('#liveToast .toast-body').html(message);
-    }
-</script>
-
-
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script> --}}
-<script type="text/javascript">
-    $(document).on("click", ".show_confirm , .bs-pass-para", function() {
-        var form = $(this).closest("form");
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })
-        swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "This action can not be undone. Do you want to continue?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit();
-            }
-        })
-    });
-</script>
-
-{{-- 
-@php
-    if (Auth::check()) {
-        if (\Auth::user()->type == 'employee' && \Auth::user()->type != 'super admin') {
-            $userTask = App\Models\ProjectTask::where('assign_to', \Auth::user()->id)
-                ->where('time_tracking', 1)
-                ->first();
-        } else if(\Auth::user()->type != 'super admin') {
-            $userTask = App\Models\ProjectTask::where('time_tracking', 1)->where('created_by', \Auth::user()->id)->first();
-        }
-    }
-
-@endphp
-
-@if (!empty($userTask))
-    @php
-         $lastTime = App\Models\ProjectTaskTimer::where('task_id', $userTask->id)
-            ->orderBy('id', 'desc')
-            ->first();
-    @endphp
-    <script>
-        TrackerTimer("{{ $lastTime->start_time }}");
-        $('.start-task').html("{{ $userTask->title }}");
-    </script>
-@endif --}}
-@php
-$settings = \App\Models\Utility::settings();
-@endphp
-@if ($settings['enable_cookie'] == 'on')
-    {{-- @include('layouts.cookie_consent') --}}
+@if (Session::has('success'))
+    <div id="toast" class="show">
+        <div id="desc">{{ session('success') }}</div>
+    </div>
+@endif
+@if (Session::has('info'))
+    <div id="toast" class="show">
+        <div id="desc">{{ session('info') }}</div>
+    </div>
+@endif
+@if (Session::has('warning'))
+    <div id="toast" class="show">
+        <div id="desc">{{ session('warning') }}</div>
+    </div>
+@endif
+@if (Session::has('error'))
+    <div id="toast" class="show">
+        <div id="desc">{{ session('error') }}</div>
+    </div>
 @endif
 
-@stack('script-page')
 
+<!-- Datatable -->
+<script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/responsive/responsive.js') }}"></script>
+<script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
+
+
+<script>
+    $(document).ready(function() {
+        function showToast() {
+            var x = document.getElementById("toast");
+            x.classList.add("show");
+            setTimeout(function() {
+                hideToast();
+            }, 5000);
+        }
+
+        // Function to hide the toast
+        function hideToast() {
+            var x = document.getElementById("toast");
+            x.classList.remove("show");
+        }
+
+        showToast();
+
+        $("#desc").click(function() {
+            hideToast();
+        });
+    });
+
+    $(function() {
+        $("#datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', new Date());
+
+    });
+    $(document).ready(function() {
+        $(".booking-calender .fa.fa-clock-o").removeClass(this);
+        $(".booking-calender .fa.fa-clock-o").addClass('fa-clock');
+    });
+    $('.my-select').selectpicker();
+
+</script>
+
+<script>
+    $("#theme_changes").click(function() {
+        var body = $("body");
+        var lightlogo = $(".nav-header .logo-abbr").attr('data-light');
+        var logo = $(".nav-header .logo-abbr").attr('data-dark');
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('theme.setting') }}',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                if (data.theme == 'dark') {
+                    $('#icon-dark').addClass('d-none');
+                    $('#icon-light').removeClass('d-none');
+                    body.attr("data-theme-version", "dark");
+                    $(".nav-header .logo-abbr").attr(
+                        "src",
+                        lightlogo
+                    );
+                } else if (data.theme == 'light') {
+                    $('#icon-dark').removeClass('d-none');
+                    $('#icon-light').addClass('d-none');
+                    body.attr("data-theme-version", "light");
+                    $(".nav-header .logo-abbr").attr(
+                        "src",
+                        logo
+                    );
+                }
+            },
+        });
+    });
+</script>

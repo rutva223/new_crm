@@ -1,139 +1,81 @@
-@php
-    //$logo=asset(Storage::url('uploads/logo/'));
-    $logo = \App\Models\Utility::get_file('uploads/logo/');
-    $company_favicon = Utility::getValByName('company_favicon');
-    // $setting = App\Models\Utility::colorset();
+{{-- <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon-32x32.png') }}"> --}}
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+<link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
+<link href="{{ asset('assets/vendor/wow-master/css/libs/animate.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-select-country/css/bootstrap-select-country.min.css') }}">
+<link href="{{ asset('assets/vendor/datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+<!--swiper-slider-->
+<link rel="stylesheet" href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/vendor/metismenu/css/metisMenu.min.css') }}">
+<!-- Style css -->
+ <!-- Datatable -->
+ <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+ <link href="{{ asset('assets/vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+ <link href="{{ asset('assets/vendor/datatables/responsive/responsive.css') }}" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
 
-    $settings = App\Models\Utility::settings();
-    $color = !empty($settings['color']) ? $settings['color'] : 'theme-3';
-    $SITE_RTL = !empty($settings['SITE_RTL']) ? $settings['SITE_RTL'] : 'off';
-  
-@endphp
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
+<link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 
-<head>
-    <title> @yield('page-title') -
-        {{ Utility::getValByName('title_text') ? Utility::getValByName('title_text') : config('app.name', 'CRMGo SaaS') }}
-    </title>
+<link href="{{ asset('assets/css/dragula.min.css') }}" rel="stylesheet" />
+<script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+@stack('css')
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    {{-- SEO Module --}}
-    <meta name="keyword" content="{{ !empty($settings['meta_keyword']) ? $settings['meta_keyword'] : '' }}">
-    <meta name="description" content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : '' }}">
-    {{-- (isset($company_logo) && !empty($company_logo) ? $company_logo : 'logo-dark.png') --}}
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ env('APP_URL') }}">
-    <meta property="og:title" content="{{ !empty($settings['meta_keyword']) ? $settings['meta_keyword'] : '' }}">
-    <meta property="og:description"
-        content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : '' }}">
-    <meta property="og:image"
-        content="{{ asset('storage/meta/' . (isset($settings['meta_image']) && !empty($settings['meta_image']) ? $settings['meta_image'] : '')) }}">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ env('APP_URL') }}">
-    <meta property="twitter:title" content="{{ !empty($settings['meta_keyword']) ? $settings['meta_keyword'] : '' }}">
-    <meta property="twitter:description"
-        content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'meta_image.png' }}">
-    <meta property="twitter:image"
-        content="{{ isset($settings['meta_image']) && !empty($settings['meta_image']) ? $settings['meta_image'] : '' }}">
-{{--
-    <title>
-        {{ App\Models\Utility::getValByName('header_text') ? App\Models\Utility::getValByName('header_text') : config('app.name', 'Crmgo SaaS') }}
-        &dash; @yield('page-title')
-    </title> --}}
-    <link rel="icon"
-        href="{{ $logo . '/' . (isset($favicon) && !empty($favicon) ? $favicon : 'favicon.png') . '?timestamp=' . time() }}"
-        type="image/x-icon">
-
-    <meta name="author" content="Rajodiya Infotech" />
-
-    <!-- Favicon icon -->
-    {{-- <link rel="icon" href="{{$logo.(isset($company_favicon) && !empty($company_favicon)? $company_favicon :'favicon.png')}}" type="image" sizes="16x16"> --}}
-    {{-- <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon" /> --}}
-    <!--Calendar -->
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/main.css') }}">
-    <!-- font css -->
-    <link rel="stylesheet" href="{{ asset('assets/fonts/tabler-icons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/feather.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/material.css') }}">
-
-
-    @stack('pre-purpose-css-page')
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}">
-    <!-- vendor css -->
-    @if ($SITE_RTL == 'on')
-        <link rel="stylesheet" href="{{ asset('assets/css/style-rtl.css') }}" id="main-style-link">
-    @endif
-
-    @if ($settings['cust_darklayout'] == 'on')
-        <link rel="stylesheet" href="{{ asset('assets/css/style-dark.css') }}" id="style">
-        {{-- <link rel="stylesheet" href="{{ asset('css/custom-dark.css') }}" id="style"> --}}
-    @else
-        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="style">
-    @endif
-
-    <link rel="stylesheet" href="{{ asset('assets/css/customizer.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/css/custom.css') }}" id="style">
-    <link rel="stylesheet" href="{{ asset('public/custom_assets/css/custom.css') }}">
-
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/plugins/main.css')}}"> --}}
-    <!-- date -->
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/datepicker-bs5.min.css') }}">
-
-    <!-- Dragulla -->
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/dragula.min.css') }}">
-
-    <!--bootstrap switch-->
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/bootstrap-switch-button.min.css') }}">
-
-    <!-- fileupload-custom css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/dropzone.min.css') }}">
-
-    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css' />
-
-    <link rel="stylesheet" href="{{ asset('css/summernote/summernote-bs4.css') }}">
-
-      <link rel="stylesheet" href="{{ asset('css/custom-color.css') }}">
-
-    @stack('css-page')
-
-    <style>
-        [dir="rtl"] .dash-sidebar {
-            left: auto !important;
-        }
-
-        [dir="rtl"] .dash-header {
-            left: 0;
-            right: 280px;
-        }
-
-        [dir="rtl"] .dash-header:not(.transprent-bg) .header-wrapper {
-            padding: 0 0 0 30px;
-        }
-
-        [dir="rtl"] .dash-header:not(.transprent-bg):not(.dash-mob-header)~.dash-container {
-            margin-left: 0px;
-        }
-
-        [dir="rtl"] .me-auto.dash-mob-drp {
-            margin-right: 10px !important;
-        }
-
-        [dir="rtl"] .me-auto {
-            margin-left: 10px !important;
-        }
-    </style>
 
 <style>
-    :root {
-        --color-customColor: <?= $color ?>;    
+    .blur {
+    filter: blur(1px);
+        pointer-events: none;
+    }
+
+    #loader {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Adjust the opacity as needed */
+    }
+
+    .loader-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        border-top-color: #333;
+        /* Adjust the color as needed */
+        animation: spin 1s linear infinite;
+    }
+
+    .loader-text {
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: 20px;
+        text-align: center;
+        color: #fff;
+        /* Adjust the color as needed */
+        font-weight: bold;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
     }
 </style>
-
-</head>
