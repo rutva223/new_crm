@@ -1,0 +1,14 @@
+a.link_cls {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.success_cls{
+    font-weight: 600 !important;
+    color: green;
+}
+.expir_cls{
+    font-weight: 600 !important;
+    color: rgb(218, 100, 3);
+}

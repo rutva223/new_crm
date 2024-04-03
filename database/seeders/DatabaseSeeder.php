@@ -15,16 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if((Request::route() != null) && (Request::route()->getName()!='LaravelUpdater::database'))
-        {
+        // if((Request::route() != null) && (Request::route()->getName()!='LaravelUpdater::database'))
+        // {
             $this->call(PlansTableSeeder::class);
             $this->call(UsersTableSeeder::class);
             $this->call(NotificationSeeder::class);
             $this->call(AiTemplateSeeder::class);
-        }else{
-            Utility::languagecreate();
-        }
-        Artisan::call('module:migrate LandingPage');
-        Artisan::call('module:seed LandingPage');
+        // }else{
+        //     Utility::languagecreate();
+        // }
+        // Artisan::call('module:migrate LandingPage');
+        // Artisan::call('module:seed LandingPage');
     }
 }

@@ -1929,3 +1929,4 @@ Route::any('/invoice-xendit-status', [XenditPaymentController::class, 'getInvoci
 
 Route::any('invoice-with-midtrans/', [MidtransController::class, 'invoicePayWithMidtrans'])->name('invoice.with.midtrans');
 Route::any('invoice-midtrans-status/', [MidtransController::class, 'getInvociePaymentStatus'])->name('invoice.midtrans.status');
+Route::post('theme-setting', [SettingController::class, 'ThemeSetting'])->name('theme.setting');
