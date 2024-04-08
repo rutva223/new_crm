@@ -3,13 +3,11 @@
     {{ __('Plan-Request') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Plan Request') }}</h5>
-    </div>
+     {{ __('Plan Request') }}
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Plan Request') }}</li>
 @endsection
 
@@ -65,13 +63,13 @@
                                             <div>
                                                 <a href="{{ route('response.request', [$prequest->id, 1]) }}"
                                                     class="btn btn-success btn-xs">
-                                                    <i class="ti ti-check" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-check" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Accept') }}">
                                                     </i>
                                                 </a>
                                                 <a href="{{ route('response.request', [$prequest->id, 0]) }}"
                                                     class="btn btn-danger btn-xs">
-                                                    <i class="ti ti-x" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-x" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}">
                                                     </i>
                                                 </a>

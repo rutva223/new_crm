@@ -81,7 +81,7 @@
             del.setAttribute('class', "action-btn btn-danger mx-1 mt-1 btn btn-sm d-inline-flex align-items-center");
             del.setAttribute('data-toggle', "tooltip");
             del.setAttribute('data-original-title', "{{ __('Delete') }}");
-            del.innerHTML = "<i class='ti ti-trash'></i>";
+            del.innerHTML = "<i class='fa fa-trash'></i>";
 
             del.addEventListener("click", function(e) {
                 e.preventDefault();
@@ -153,7 +153,7 @@
                             "                        </div>" +
                             "                        <div class='action-btn bg-danger me-4'><div class='col-auto'><a href='#' class='mx-3 btn btn-sm  align-items-center delete-comment' data-url='" +
                             data.deleteUrl +
-                            "'><i class='ti ti-trash text-white'></i></a></div></div>" +
+                            "'><i class='fa fa-trash text-white'></i></a></div></div>" +
                             "                    </div>" +
                             "                </div>";
 
@@ -204,17 +204,14 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Contract') }}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Contract') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0"> </h5>
-    </div>
+
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item"><a href="{{ route('contract.index') }}">{{ __('contract') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ \Auth::user()->contractNumberFormat($contract->id) }}</li>
 @endsection
@@ -223,22 +220,22 @@
     <div class="col-md-6 text-end d-flex ">
         <a href="{{ route('contract.download.pdf', \Crypt::encrypt($contract->id)) }}"
             class="btn btn-sm btn-primary btn-icon m-2" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="{{ __('Download') }}" target="_blanks"><i class="ti ti-download"></i>
+            title="{{ __('Download') }}" target="_blanks"><i class="fa fa-download"></i>
         </a>
 
         <a href="{{ route('get.contract', $contract->id) }}" target="_blank" class="btn btn-sm btn-primary btn-icon m-2">
-            <i class="ti ti-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('PreView') }}"> </i>
+            <i class="fa fa-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('PreView') }}"> </i>
         </a>
 
         @if (\Auth::user()->type == 'company' && $contract->status == 'accept')
-            <a href="#" class="btn btn-sm btn-primary btn-icon m-2" data-bs-toggle="modal"
-                data-bs-target="#exampleModal" data-size="lg" data-url="{{ route('contract.copy', $contract->id) }}"
-                data-bs-whatever="{{ __('Duplicate') }}"> <span class="text-white"> <i class="ti ti-copy text-white"
+            <a href="#" class="btn btn-sm btn-primary btn-icon m-2" data-ajax-popup="true"
+                  data-size="lg" data-url="{{ route('contract.copy', $contract->id) }}"
+                data-title="{{ __('Duplicate') }}"> <span class="text-white"> <i class="fa fa-copy text-white"
                         data-bs-toggle="tooltip" data-bs-original-title="{{ __('Duplicate') }}"></i></span></a>
 
             <a href="{{ route('send.mail.contract', $contract->id) }}" class="btn btn-sm btn-primary btn-icon m-2"
                 data-bs-toggle="tooltip" data-bs-original-title="{{ __('Send Email') }}">
-                <i class="ti ti-mail text-white"></i>
+                <i class="fa fa-mail text-white"></i>
             </a>
         @endif
 
@@ -246,9 +243,9 @@
             (\Auth::user()->type == 'company' && $contract->company_signature == '') ||
                 (\Auth::user()->type == 'client' && $contract->client_signature == ''))
             {{-- @if ($contract->status == 'accept') --}}
-            <a href="#" class="btn btn-sm btn-primary btn-icon m-2" data-bs-toggle="modal"
-                data-bs-target="#exampleModal" data-size="md" data-url="{{ route('signature', $contract->id) }}"
-                data-bs-whatever="{{ __('signature') }}"> <span class="text-white"> <i class="ti ti-pencil text-white"
+            <a href="#" class="btn btn-sm btn-primary btn-icon m-2" data-ajax-popup="true"
+                  data-size="md" data-url="{{ route('signature', $contract->id) }}"
+                data-title="{{ __('signature') }}"> <span class="text-white"> <i class="fa fa-pencil text-white"
                         data-bs-toggle="tooltip" data-bs-original-title="{{ __('signature') }}"></i></span></a>
             </a>
             {{-- @endif --}}
@@ -265,7 +262,7 @@
                     <a class="dash-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
                         role="button" aria-haspopup="false" aria-expanded="false">
                         <span class="drp-text hide-mob text-primary">{{ ucfirst($contract->status) }}
-                            <i class="ti ti-chevron-down drp-arrow nocolor hide-mob"></i>
+                            <i class="fa fa-chevron-down drp-arrow nocolor hide-mob"></i>
                     </a>
                     <div class="dropdown-menu dash-h-dropdown">
                         @foreach ($status as $k => $status)
@@ -287,16 +284,16 @@
                 <div class="card sticky-top" style="top:30px">
                     <div class="list-group list-group-flush" id="useradd-sidenav">
                         <a href="#useradd-1" class="list-group-item list-group-item-action border-0">{{ __('General') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#useradd-2" class="list-group-item list-group-item-action border-0">{{ __('Attachment') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#useradd-3" class="list-group-item list-group-item-action border-0">{{ __('Comment') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#useradd-4" class="list-group-item list-group-item-action border-0">{{ __('Notes') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                     </div>
                 </div>
@@ -310,7 +307,7 @@
                                     <div class="card">
                                         <div class="card-body" style="min-height: 205px;">
                                             <div class="theme-avtar bg-primary">
-                                                <i class="ti ti-user-plus"></i>
+                                                <i class="fa fa-user-plus"></i>
                                             </div>
                                             <h6 class="mb-3 mt-4">{{ __('Attachment') }}</h6>
                                             <h3 class="mb-0">{{ count($contract->files) }}</h3>
@@ -322,7 +319,7 @@
                                     <div class="card">
                                         <div class="card-body" style="min-height: 205px;">
                                             <div class="theme-avtar bg-info">
-                                                <i class="ti ti-click"></i>
+                                                <i class="fa fa-click"></i>
                                             </div>
                                             <h6 class="mb-3 mt-4">{{ __('Comment') }}</h6>
                                             <h3 class="mb-0">{{ count($contract->comment) }}</h3>
@@ -333,7 +330,7 @@
                                     <div class="card">
                                         <div class="card-body" style="min-height: 205px;">
                                             <div class="theme-avtar bg-warning">
-                                                <i class="ti ti-file"></i>
+                                                <i class="fa fa-file"></i>
                                             </div>
                                             <h6 class="mb-3 mt-4 ">{{ __('Notes') }}</h6>
                                             <h3 class="mb-0">{{ count($contract->note) }}</h3>
@@ -430,7 +427,7 @@
                                                             class=" btn btn-sm d-inline-flex align-items-center"
                                                             download="" data-bs-toggle="tooltip" title="Download">
                                                             <span class="text-white">
-                                                                <i class="ti ti-download"></i>
+                                                                <i class="fa fa-download"></i>
                                                             </span>
                                                         </a>
                                                     </div>
@@ -441,7 +438,7 @@
                                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['contracts.file.delete', $contract->id, $file->id]]) !!}
                                                                 <a href="#!"
                                                                     class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                                    <i class="ti ti-trash text-white"
+                                                                    <i class="fa fa-trash text-white"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                                 </a>
@@ -452,11 +449,11 @@
 
                                                     <a href="#"
                                                         class="btn btn-sm btn-primary btn-icon m-1 getclienee"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                        data-ajax-popup="true"
                                                         data-url="{{ route('signature', 1) }}" data-size="lg"
-                                                        data-bs-whatever="{{ __('Signature') }}"> <span
+                                                        data-title="{{ __('Signature') }}"> <span
                                                             class="text-white">
-                                                            <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('signature') }}"></i></span>
                                                     </a>
 
@@ -484,7 +481,7 @@
                                                 data-ajax-popup-over="true" id="grammarCheck"
                                                 data-url="{{ route('grammar', ['contract_comment']) }}"
                                                 data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-                                                <i class="ti ti-rotate"></i>
+                                                <i class="fa fa-rotate"></i>
                                                 <span>{{ __('Grammar check with AI') }}</span></a>
                                         </div>
                                     @endif
@@ -501,7 +498,7 @@
                                             </form>
                                         </div>
                                         <button id="comment_submit" class="btn btn-send mt-2"><i
-                                                class="f-16 text-primary ti ti-brand-telegram"></i></button>
+                                                class="f-16 text-primary fa fa-brand-telegram"></i></button>
                                     @endif
                                 </div>
                             </div>
@@ -529,7 +526,7 @@
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['comment_store.destroy', $comment->id]]) !!}
                                                         <a href="#!"
                                                             class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                         </a>
                                                         {!! Form::close() !!}
@@ -559,7 +556,7 @@
                                                 data-ajax-popup-over="true" id="grammarCheck"
                                                 data-url="{{ route('grammar', ['contract_notes']) }}"
                                                 data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-                                                <i class="ti ti-rotate"></i>
+                                                <i class="fa fa-rotate"></i>
                                                 <span>{{ __('Grammar check with AI') }}</span></a>
                                         </div>
                                     @endif
@@ -605,7 +602,7 @@
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['note_store.destroy', $note->id]]) !!}
                                                         <a href="#!"
                                                             class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                         </a>
                                                         {!! Form::close() !!}

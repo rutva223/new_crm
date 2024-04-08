@@ -46,7 +46,7 @@
 @push('script-page')
     <script src="{{ asset('js/bootstrap-toggle.js') }}"></script>
     <script>
-        
+
         $('document').ready(function () {
             $('.toggleswitch').bootstrapToggle();
             $("fieldset[id^='demo'] .stars").click(function () {
@@ -80,7 +80,7 @@
                 }
             });
         }
-        
+
         //----Departm   ent Wise Designation------
         $(document).on('change', 'select[name=department]', function () {
             var department_id = $(this).val();
@@ -102,16 +102,14 @@
                 }
             });
         }
-           
+
     </script>
 @endpush
 @section('page-title')
     {{__('Indicator')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Indicator')}}</h5>
-    </div>
+     {{__('Indicator')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -119,10 +117,10 @@
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-size="lg" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-url="{{ route('indicator.create') }}"
-    data-bs-whatever="{{__('Create New Indicator')}}">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-size="lg" data-ajax-popup="true"
+      data-url="{{ route('indicator.create') }}"
+    data-title="{{__('Create New Indicator')}}">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
     </a>
     @endif
 
@@ -149,7 +147,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        
+
                             @foreach ($indicators as $indicator)
                                 @php
                                      if (!empty($indicator->rating)) {
@@ -170,7 +168,7 @@
                                     <td>{{ !empty($indicator->departments)?$indicator->departments->name:'' }}</td>
                                     <td>{{ !empty($indicator->designations)?$indicator->designations->name:'' }}</td>
                                     <td>{{ !empty($indicator->user)?$indicator->user->name:'' }}</td>
-                                 
+
                                     <td>
 
                                         @for($i=1; $i<=5; $i++)
@@ -193,24 +191,24 @@
                                         <td class="text-right">
                                             <div class="action-btn bg-warning ms-2">
                                                 <a href="#" class="mx-3 btn btn-sm d-flex align-items-center" data-size="lg"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    data-ajax-popup="true"
                                                     data-url="{{ route('indicator.show', $indicator->id) }}"
-                                                    data-bs-whatever="{{ __('View Indicator') }}"> <span
-                                                        class="text-white"> <i class="ti ti-eye" data-bs-toggle="tooltip"
+                                                    data-title="{{ __('View Indicator') }}"> <span
+                                                        class="text-white"> <i class="fa fa-eye" data-bs-toggle="tooltip"
                                                             data-bs-original-title="{{ __('View') }}"></i></span></a>
                                             </div>
 
                                             <div class="action-btn bg-info ms-2">
-                                                <a href="#" data-size="lg" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-url="{{ route('indicator.edit',$indicator->id) }}"
-                                                data-bs-whatever="{{__('Edit Indicator')}}"> <span class="text-white">
-                                                <i class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
+                                                <a href="#" data-size="lg" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                  data-url="{{ route('indicator.edit',$indicator->id) }}"
+                                                data-title="{{__('Edit Indicator')}}"> <span class="text-white">
+                                                <i class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                             </div>
 
                                             <div class="action-btn bg-danger ms-2">
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['indicator.destroy', $indicator->id]]) !!}
                                                 <a href="#!"  class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('delete') }}"></i>
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}
                                             </div>

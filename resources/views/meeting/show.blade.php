@@ -53,7 +53,7 @@
         </div>
     </div>
     @if(\Auth::user()->type=='company')
-    
+
         <div class="row">
                 <div class="col-md-12 text-right">
                     <span class="create-btn">
@@ -61,9 +61,9 @@
                             <i class="fa fa-pencil"></i>  {{__('Edit')}}
                         </a> -->
 
-                        <a href="#" class="btn btn-sm btn-primary rounded-pill m-1" data-bs-toggle="modal"
+                        <a href="#" class="btn btn-sm btn-primary rounded-pill m-1" data-ajax-popup="true"
                             data-bs-target="#exampleOverModal" data-url="{{ route('meeting.edit',$meeting->id) }}"
-                            data-bs-whatever="{{__('Edit Meeting')}}" >
+                            data-title="{{__('Edit Meeting')}}" >
                                 <i class="text-white"></i>{{__('Edit')}}
                         </a>
                     </span>

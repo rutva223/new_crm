@@ -82,8 +82,8 @@
     </div>
     <div class="response">
         <a class="btn btn-primary btn-sm float-left" href="#!" id="generate">{{ __('Generate') }}</a>
-        <a href="#!" onclick="copyText()" class="btn btn-primary btn-sm float-end"><i class="ti ti-copy"></i>{{ __('Copy Text') }}</a>
-        <a href="#!" onclick="copySelectedText()" class="btn btn-primary btn-sm float-end me-2"><i class="ti ti-copy"></i>{{ __('Copy Selected Text') }}</a>
+        <a href="#!" onclick="copyText()" class="btn btn-primary btn-sm float-end"><i class="fa fa-copy"></i>{{ __('Copy Text') }}</a>
+        <a href="#!" onclick="copySelectedText()" class="btn btn-primary btn-sm float-end me-2"><i class="fa fa-copy"></i>{{ __('Copy Selected Text') }}</a>
     </div>
 </form>
 <div class="form-group mt-3">

@@ -53,17 +53,15 @@
     })();
 
 
-       
-       
+
+
     </script>
 @endpush
 @section('page-title')
     {{__('Dashboard')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Dashboard')}}</h5>
-    </div>
+     {{__('Dashboard')}}
 @endsection
 @section('breadcrumb')
     <!-- <li class="breadcrumb-item active" aria-current="page">{{__('Dashboard')}}</li> -->
@@ -78,7 +76,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="theme-avtar bg-primary">
-                                        <i class="ti ti-user-plus"></i>
+                                        <i class="fa fa-user-plus"></i>
                                     </div>
                                     <p class="text-muted text-sm mt-4 mb-2"> {{__('Total Users')}} : <span class="text-dark">{{$user->total_user}}</span></p>
                                     <h6 class="mb-3">{{__('Paid Users')}}</h6>
@@ -90,7 +88,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="theme-avtar bg-warning">
-                                        <i class="ti ti-shopping-cart"></i>
+                                        <i class="fa fa-shopping-cart"></i>
                                     </div>
                                     <p class="text-muted text-sm mt-4 mb-2"> {{__('Total Orders')}} : <span class="text-dark">{{$user->total_orders}}</span></p>
                                     <h6 class="mb-3">{{__('Total Order Amount')}}</h6>
@@ -103,7 +101,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="theme-avtar bg-secondary">
-                                        <i class="ti ti-folders"></i>
+                                        <i class="fa fa-folders"></i>
                                     </div>
                                     <p class="text-muted text-sm mt-4 mb-2"> {{__('Total Plans')}} : <span class="text-dark">{{env('CURRENCY_SYMBOL').$user['total_orders_price']}}</span></p>
                                     <h6 class="mb-3">{{__('Most Purchase Plan')}}</h6>

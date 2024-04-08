@@ -8,9 +8,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
     {{__('Dashboard')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Dashboard')}}</h5>
-    </div>
+     {{__('Dashboard')}}
 @endsection
 
 @section('content')
@@ -57,7 +55,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
                                     <div class="theme-avtar bg-warning">
-                                        <i class="ti ti-click"></i>
+                                        <i class="fa fa-click"></i>
                                     </div>
                                     <div class="ms-3">
                                         <small class="text-muted">{{ __('Total') }}</small>
@@ -81,7 +79,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                 <div class="col-auto mb-3 mb-sm-0">
                                     <div class="d-flex align-items-center">
                                         <div class="theme-avtar bg-success">
-                                            <i class="ti ti-users"></i>
+                                            <i class="fa fa-users"></i>
                                         </div>
                                         <div class="ms-3">
                                             <small class="text-muted">{{ __('Total') }}</small>
@@ -106,7 +104,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
                                     <div class="theme-avtar bg-danger">
-                                        <i class="ti ti-list-check"></i>
+                                        <i class="fa fa-list-check"></i>
                                     </div>
                                     <div class="ms-3">
                                         <small class="text-muted">{{ __('Total') }}</small>
@@ -130,7 +128,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
                                     <div class="theme-avtar bg-secondary">
-                                        <i class="ti ti-layout-2"></i>
+                                        <i class="fa fa-layout-2"></i>
                                     </div>
                                     <div class="ms-3">
                                         <small class="text-muted">{{ __('Total') }}</small>
@@ -154,7 +152,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
                                     <div class="theme-avtar bg-info">
-                                        <i class="ti ti-file-invoice"></i>
+                                        <i class="fa fa-file-invoice"></i>
                                     </div>
                                     <div class="ms-3">
                                         <small class="text-muted">{{ __('Total') }}</small>
@@ -179,7 +177,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                         <div class="col-auto mb-3 mb-sm-0">
                             <div class="d-flex align-items-center">
                                 <div class="theme-avtar bg-dark">
-                                    <i class="ti ti-report-money"></i>
+                                    <i class="fa fa-report-money"></i>
                                 </div>
                                 <div class="ms-3">
                                     <small class="text-muted">{{ __('Total') }}</small>
@@ -354,7 +352,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                                     <td class="text-end">
                                                         <div class="action-btn bg-warning ms-2">
                                                             <a href="{{route('invoice.show',\Crypt::encrypt($invoice->id))}}" class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                                <i class="ti ti-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
+                                                                <i class="fa fa-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -402,7 +400,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                             <td class="text-end">
                                                 <div class="action-btn bg-warning ms-2">
                                                     <a href="{{route('project.show',\Crypt::encrypt($project->id))}}" class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                        <i class="ti ti-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
+                                                        <i class="fa fa-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
                                                     </a>
                                                 </div>
                                             </td>
@@ -454,7 +452,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                             <td class="text-end">
                                                 <div class="action-btn bg-warning ms-2">
                                                     <a href="{{route('project.show',\Crypt::encrypt($topDueTask->project_id))}}" class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                        <i class="ti ti-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
+                                                        <i class="fa fa-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
                                                     </a>
                                                 </div>
                                             </td>
@@ -606,7 +604,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                             <td>
                                                 <div class="action-btn bg-warning ms-2">
                                                     <a href="{{ route('support.reply',\Crypt::encrypt($ticket->id)) }}" class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                        <i class="ti ti-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
+                                                        <i class="fa fa-eye text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}" ></i>
                                                     </a>
                                                 </div>
                                             </td>

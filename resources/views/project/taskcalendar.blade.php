@@ -25,7 +25,7 @@ $profile = asset(Storage::url('uploads/avatar'));
     <script>
 
 
-      
+
 
         $(document).on('change', '#project', function() {
             var project_id = $(this).val();
@@ -93,11 +93,11 @@ $profile = asset(Storage::url('uploads/avatar'));
                         '                                    <div class="col-auto actions">\n' +
                         '                                        <a download href="{{ asset(Storage::url('tasks')) }}' +
                         data.file + '" class="action-btn bg-info ms-2  btn btn-sm d-inline-flex align-items-center">\n' +
-                        '                                            <i class="ti ti-download text-white"></i>\n' +
+                        '                                            <i class="fa fa-download text-white"></i>\n' +
                         '                                        </a>\n' +
                         '                                        <a href="#" class="action-btn bg-danger ms-2 btn btn-sm d-inline-flex align-items-center delete-comment-file" data-url="' +
                         data.deleteUrl + '">\n' +
-                        '                                            <i class="ti ti-trash"></i>\n' +
+                        '                                            <i class="fa fa-trash"></i>\n' +
                         '                                        </a>\n' +
                         '\n' +
                         '                                    </div>\n' +
@@ -105,7 +105,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                         '                            </div>\n' +
                         '                        </div>';
                     $("#comments-file").prepend(html);
-               
+
                 },
                 error: function(data) {
                     data = data.responseJSON;
@@ -151,30 +151,28 @@ $profile = asset(Storage::url('uploads/avatar'));
     {{ __('Task Calendar') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Task') }}</h5>
-    </div>
+     {{ __('Task') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Task Calendar') }}</li>
 @endsection
 @section('action-btn')
 
     <a href="{{ route('project.all.task') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="List View" >
-        <i class="ti ti-list text-white"></i>
+        <i class="fa fa-list text-white"></i>
     </a>
-    
+
     <a href="{{ route('project.all.task.gantt.chart') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Gantt Chart') }}">
-        <i class="ti ti-chart-bar text-white"></i>
+        <i class="fa fa-chart-bar text-white"></i>
     </a>
 
     <a href="{{ route('project.all.task.kanban') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Task Kanban') }}">
-        <i class="ti ti-layout-kanban text-white"></i>
+        <i class="fa fa-layout-kanban text-white"></i>
     </a>
-    <a href="#" data-size="lg" data-url="{{ route('project.task.create', 0) }}" data-bs-toggle="modal" data-bs-whatever="{{__('Create New Task')}}"
-    data-bs-target="#exampleModal" title="{{ __('Create New Task') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
+    <a href="#" data-size="lg" data-url="{{ route('project.task.create', 0) }}" data-ajax-popup="true" data-title="{{__('Create New Task')}}"
+      title="{{ __('Create New Task') }}" class="btn btn-sm btn-primary btn-icon m-1">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
     </a>
 @endsection
 
@@ -212,7 +210,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                 <div class="card-body">
                     <h4 class="mb-4">{{ __('Next Task') }}</h4>
                     <ul class="event-cards list-group list-group-flush mt-3 w-100">
-                    
+
                         @foreach ($userTask as $event)
                             <li class="list-group-item card mb-3">
                                 <div class="row align-items-center justify-content-between">
@@ -237,7 +235,7 @@ $profile = asset(Storage::url('uploads/avatar'));
 
 
 @push('script-page')
-    
+
     <script type="text/javascript">
         $(document).ready(function() {
             get_data();

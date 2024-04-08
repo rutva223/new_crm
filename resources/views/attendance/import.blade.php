@@ -5,7 +5,7 @@
         {{Form::label('file',__('Download sample Attendance CSV file'),['class'=>'form-control-label w-auto m-0'])}}
         <div>
             <a href="{{asset(Storage::url('uploads/sample')).'/sample-attendance.csv'}}" class="btn btn-sm btn-primary">
-                <i class="ti ti-download"></i> {{__('Download')}}
+                <i class="fa fa-download"></i> {{__('Download')}}
             </a>
         </div>
     </div>

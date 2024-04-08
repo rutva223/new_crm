@@ -1,5 +1,5 @@
 {{ Form::open(array('route' => array('project.comment.store',$project_id,$comment_id),'enctype'=>"multipart/form-data")) }}
-@php 
+@php
 $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -7,7 +7,7 @@ $plansettings = App\Models\Utility::plansettings();
 <div class="col text-end">
     <a data-size="md" class="btn btn-primary btn-icon btn-sm text-white " data-ajax-popup-over="true" id="grammarCheck" data-url="{{ route('grammar',['comment_reply']) }}"
         data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-        <i class="ti ti-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
+        <i class="fa fa-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
 </div>
  <div class="col-auto text-end">
       <a href="#" data-size="lg" data-ajax-popup-over="true" data-url="{{ route('generate',['commentreply']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Generate') }}" data-title="{{ __('Generate') }}" float-end>
@@ -15,7 +15,7 @@ $plansettings = App\Models\Utility::plansettings();
     </a>
  </div>
  @endif
- 
+
     <input type="hidden" name="parent" value="{{$comment_id}}">
     <div class="form-group  col-md-12">
         {{ Form::label('comment', __('Comment'),['class' => 'col-form-label']) }}

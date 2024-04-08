@@ -104,12 +104,10 @@
     {{ __('Lead') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Lead') }}</h5>
-    </div>
+     {{ __('Lead') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Lead') }}</li>
 @endsection
 @section('action-btn')
@@ -130,23 +128,23 @@
         @endif
     @endif
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    data-url="{{ route('lead.file.import') }}" data-bs-whatever="{{ __('Import CSV file') }}"> <span
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+    data-url="{{ route('lead.file.import') }}" data-title="{{ __('Import CSV file') }}"> <span
         class="text-white">
-        <i class="ti ti-file-import" data-bs-toggle="tooltip"
+        <i class="fa fa-file-import" data-bs-toggle="tooltip"
             data-bs-original-title="{{ __('Import item CSV file') }}"></i>
     </a>
-   
+
     <a href="{{ route('lead.grid') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-layout-grid text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}">
+        <i class="fa fa-layout-grid text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}">
         </i>
     </a>
 
     @if (\Auth::user()->type == 'company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="{{ route('lead.create') }}" data-bs-whatever="{{ __('Create New Lead') }}"
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+            data-url="{{ route('lead.create') }}" data-title="{{ __('Create New Lead') }}"
             data-bs-original-title="{{ __('Create New Lead') }}">
-            <i data-bs-toggle="tooltip" title="{{ __('Create') }}" class="ti ti-plus text-white"></i>
+            <i data-bs-toggle="tooltip" title="{{ __('Create') }}" class="fa fa-plus text-white"></i>
         </a>
     @endif
 
@@ -192,7 +190,7 @@
                                                 <div class="card-header border-0 pb-0 position-relative">
                                                     <h5>
                                                         <a href="{{ route('lead.show', \Crypt::encrypt($lead->id)) }}"
-                                                            data-bs-whatever="{{ __('View Lead Details') }}"
+                                                            data-title="{{ __('View Lead Details') }}"
                                                             data-bs-toggle="tooltip" title
                                                             data-bs-original-title="{{ __('Lead Detail') }}">{{ $lead->name }}</a>
                                                     </h5>
@@ -201,22 +199,22 @@
                                                             <button type="button" class="btn dropdown-toggle"
                                                                 data-bs-toggle="dropdown" aria-haspopup="true"
                                                                 aria-expanded="false">
-                                                                <i class="ti ti-dots-vertical"></i>
+                                                                <i class="fa fa-dots-vertical"></i>
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 @if (!$lead->is_active)
                                                                     <a href="#" class="table-action">
-                                                                        <i class="ti ti-lock"></i>
+                                                                        <i class="fa fa-lock"></i>
                                                                     </a>
                                                                 @else
                                                                     @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
                                                                         <a href="#!" class="dropdown-item"
                                                                             data-size="lg"
                                                                             data-url="{{ route('lead.edit', $lead->id) }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#exampleModal"
-                                                                            data-bs-whatever="{{ __('Edit Lead') }}">
-                                                                            <i class="ti ti-edit"></i>
+                                                                            data-ajax-popup="true"
+
+                                                                            data-title="{{ __('Edit Lead') }}">
+                                                                            <i class="fa fa-edit"></i>
                                                                             <span>{{ __('Edit') }}</span>
                                                                         </a>
                                                                     @endif
@@ -225,10 +223,10 @@
                                                                         <a href="#!" class="dropdown-item"
                                                                             data-size="lg"
                                                                             data-url="{{ route('lead.label', $lead->id) }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#exampleModal"
-                                                                            data-bs-whatever="{{ __('Add Label') }}">
-                                                                            <i class="ti ti-sticker"></i>
+                                                                            data-ajax-popup="true"
+
+                                                                            data-title="{{ __('Add Label') }}">
+                                                                            <i class="fa fa-sticker"></i>
                                                                             <span>{{ __('Add Label') }}</span>
                                                                         </a>
                                                                     @endif
@@ -241,7 +239,7 @@
                                                                         ]) !!}
                                                                         <a href="#!"
                                                                             class="dropdown-item show_confirm">
-                                                                            <i class="ti ti-trash"></i>{{ __('Delete') }}
+                                                                            <i class="fa fa-trash"></i>{{ __('Delete') }}
                                                                         </a>
                                                                         {!! Form::close() !!}
                                                                     @endif
@@ -257,7 +255,7 @@
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <ul class="list-inline mb-0">
                                                             <li class="list-inline-item d-inline-flex align-items-center"><i
-                                                                    class="f-16 text-primary ti ti-message-2"></i>{{ \Auth::user()->dateFormat($lead->date) }}
+                                                                    class="f-16 text-primary fa fa-message-2"></i>{{ \Auth::user()->dateFormat($lead->date) }}
                                                             </li>
                                                         </ul>
                                                         <div class="user-group">

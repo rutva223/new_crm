@@ -3,7 +3,7 @@
     {{ __('Journal Account Edit') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Double Entry') }}</li>
     <li class="breadcrumb-item">{{ __('Journal Entry') }}</li>
 @endsection
@@ -106,8 +106,8 @@
                 el.find('.credit').attr("disabled", false);
             }
         })
-        
-  
+
+
         $(document).on('keyup', '.credit', function() {
             var el = $(this).parent().parent().parent().parent();
             var credit = $(this).val();
@@ -137,7 +137,7 @@
             el.find('.amount').html(debit);
 
             var inputs = $(".debit");
-            
+
             var totalDebit = 0;
             for (var i = 0; i < inputs.length; i++) {
                 totalDebit = parseFloat(totalDebit) + parseFloat($(inputs[i]).val());
@@ -170,20 +170,19 @@
             if (credit == '') {
                 el.find('.debit').attr("disabled", false);
             }
-        })       
+        })
 //=========on load total amount show end====
-        
+
     </script>
 @endpush
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-1">{{ __('Manage Journal Entry') }}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-1">{{ __('Manage Journal Entry') }}
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Double Entry') }}</li>
     <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('journal-entry.index') }}">
             {{ __('Journal Account') }} </a></li>
@@ -241,8 +240,8 @@
                         <div class="col-md-12 d-flex align-items-center justify-content-between justify-content-md-end">
                             <div class="all-button-box">
                                 <a href="#" data-repeater-create="" class="btn btn-primary mr-2"
-                                    data-bs-toggle="modal" data-target="#add-bank">
-                                    <i class="ti ti-plus"></i> {{ __('Add Account') }}
+                                    data-ajax-popup="true" data-target="#add-bank">
+                                    <i class="fa fa-plus"></i> {{ __('Add Account') }}
                                 </a>
                             </div>
                         </div>
@@ -271,7 +270,7 @@
                                             {{ Form::select('account', $accounts,'', array('class' => 'form-control select','id'=>'choices-multiple1','required'=>'required')) }}
                                         </div>
                                     </td>
-    
+
                                     <td>
                                         <div class="form-group price-input">
                                             {{ Form::text('debit', '', ['class' => 'form-control debit', 'required' => 'required', 'placeholder' => __('Debit'), 'required' => 'required']) }}
@@ -318,7 +317,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal-footer pr-0">
         <button type="button" class="btn  btn-light" data-bs-dismiss="modal">{{ __('Close') }}</button>
         {{ Form::submit(__('Update'), ['class' => 'btn  btn-primary']) }}

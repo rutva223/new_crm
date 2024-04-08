@@ -127,8 +127,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <?php
-                        if (isset(app()->view->getSections()['page-breadcrumb'])) {
-                            $breadcrumb = explode(',', app()->view->getSections()['page-breadcrumb']);
+                        if (isset(app()->view->getSections()['breadcrumb'])) {
+                            $breadcrumb = explode(',', app()->view->getSections()['breadcrumb']);
                         } else {
                             $breadcrumb = [];
                         }
@@ -148,7 +148,7 @@
                                 </ol>
                             </nav>
                             <div class="text-end ">
-                                <?php echo $__env->yieldContent('page-action'); ?>
+                                <?php echo $__env->yieldContent('action-btn'); ?>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="body">
+                    <div class="modal-body">
                     </div>
                 </div>
             </div>

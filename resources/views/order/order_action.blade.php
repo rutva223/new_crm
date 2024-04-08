@@ -22,7 +22,7 @@
              <td>
                 @if($order->payment_status == 'succeeded' || $order->payment_status == 'success')
                     <div class="badge fix_badge bg-success p-2 px-3 rounded">{{ucfirst('success')}}</div>
-                @elseif($order->payment_status == 'Approve')   
+                @elseif($order->payment_status == 'Approve')
                 <div class="badge fix_badge bg-success p-2 px-3 rounded">{{ucfirst('Approve')}}</div>
                 @elseif($order->payment_status == 'Pending')
                     <div class="badge fix_badge bg-warning p-2 px-3 rounded">{{ $order->payment_status }}</div>
@@ -38,9 +38,9 @@
         <tr>
             <th>{{__('payment Receipt')}}</th>
             <td>
-                <a href="{{ asset('storage/payment_recipt/'.$order->receipt) }}" class="btn btn-primary btn-sm" download><i class="ti ti-download"></i></a>
+                <a href="{{ asset('storage/payment_recipt/'.$order->receipt) }}" class="btn btn-primary btn-sm" download><i class="fa fa-download"></i></a>
             </td>
-    
+
         </tr>
         <input type="hidden" value="{{ $order->id }}" name="order_id">
     </table>

@@ -10,23 +10,21 @@
     {{ __('Project') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Project') }}</h5>
-    </div>
+     {{ __('Project') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('All Project') }}</li>
 @endsection
 @section('action-btn')
     <a href="{{ route('project.grid') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
         data-bs-original-title="{{ __('Grid View') }}">
-        <i class="ti ti-layout-grid text-white"></i>
+        <i class="fa fa-layout-grid text-white"></i>
     </a>
     @if (\Auth::user()->type == 'company')
         <a href="{{ route('project.create') }}" class="btn btn-sm btn-primary btn-icon m-1"
-            data-bs-whatever="{{ __('Create New Project') }}" data-bs-toggle="tooltip"
-            data-bs-original-title="{{ __('Create') }}"> <i class="ti ti-plus text-white"></i></a>
+            data-title="{{ __('Create New Project') }}" data-bs-toggle="tooltip"
+            data-bs-original-title="{{ __('Create') }}"> <i class="fa fa-plus text-white"></i></a>
     @endif
 @endsection
 @section('filter')
@@ -124,12 +122,12 @@
                                         </div>
                                     </td>
                                     <td class="text-right">
-                                        
+
                                         <a href="#" class="btn btn-sm action-btn bg-secondary ms-2"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            data-ajax-popup="true"
                                             data-url="{{ route('project.copy', [$project->id]) }}"
-                                            data-bs-whatever="{{ __('Create New Item') }}"> <span class="text-white">
-                                                <i class="ti ti-copy text-white" data-bs-toggle="tooltip"
+                                            data-title="{{ __('Create New Item') }}"> <span class="text-white">
+                                                <i class="fa fa-copy text-white" data-bs-toggle="tooltip"
                                                     data-bs-original-title="{{ __('Duplicate Project') }}"></i></span>
                                         </a>
 
@@ -137,17 +135,17 @@
                                             <div class="action-btn bg-info ms-2">
                                                 <a href="{{ route('project.edit', \Crypt::encrypt($project->id)) }}"
                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                    data-bs-whatever="{{ __('Edit Project') }}" data-bs-toggle="tooltip"
+                                                    data-title="{{ __('Edit Project') }}" data-bs-toggle="tooltip"
                                                     data-bs-original-title="{{ __('Edit') }}"> <span class="text-white">
-                                                        <i class="ti ti-edit"></i></span></a>
+                                                        <i class="fa fa-edit"></i></span></a>
                                             </div>
                                         @endif
                                         <div class="action-btn bg-warning ms-2">
                                             <a href="{{ route('project.show', \Crypt::encrypt($project->id)) }}"
                                                 class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                data-bs-whatever="{{ __('View Project') }}" data-bs-toggle="tooltip"
+                                                data-title="{{ __('View Project') }}" data-bs-toggle="tooltip"
                                                 data-bs-original-title="{{ __('View') }}"> <span class="text-white"> <i
-                                                        class="ti ti-eye"></i></span></a>
+                                                        class="fa fa-eye"></i></span></a>
                                         </div>
 
 
@@ -157,7 +155,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['project.destroy', $project->id]]) !!}
                                                 <a href="#!"
                                                     class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}

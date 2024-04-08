@@ -1,5 +1,5 @@
 <div class="row">
-    @php 
+    @php
     $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -11,7 +11,7 @@
             <i class="fas fa-robot"> {{ __('Generate With AI') }}</i>
         </a>
     </div>
-    @endif    
+    @endif
     {{ Form::model($holiday, ['route' => ['holiday.update', $holiday->id], 'method' => 'PUT']) }}
     <div class="form-group">
         {{ Form::label('date', __('Date'), ['class' => 'col-form-label']) }}
@@ -28,7 +28,7 @@
             <div class="form-group action-btn bg-danger">
                 {!! Form::open(['method' => 'DELETE', 'route' => ['holiday.destroy', $holiday->id]]) !!}
                 <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                 </a>
                 {!! Form::close() !!}
             </div>

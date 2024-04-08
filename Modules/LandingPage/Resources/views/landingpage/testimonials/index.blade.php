@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 justify-content-end d-flex">
                                         <a data-size="lg" data-url="{{ route('testimonials_create') }}" data-ajax-popup="true"  data-bs-toggle="tooltip"  data-title="{{__('Testimonials Create')}}"  class="btn btn-sm btn-primary">
-                                            <i class="ti ti-plus text-light"></i>
+                                            <i class="fa fa-plus text-light"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                                 <!-- {{-- <div class="justify-content-end d-flex">
 
                                     <a data-size="lg" data-url="{{ route('users.create') }}" data-ajax-popup="true"  data-bs-toggle="tooltip" title="{{__('Create')}}"  class="btn btn-sm btn-primary">
-                                        <i class="ti ti-plus text-light"></i>
+                                        <i class="fa fa-plus text-light"></i>
                                     </a>
                                 </div> --}} -->
 
@@ -154,7 +154,7 @@
                                                             <span>
                                                                 <div class="action-btn bg-primary ms-2">
                                                                         <a href="#" class="mx-3 btn btn-sm align-items-center" data-url="{{ route('testimonials_edit',$key) }}" data-ajax-popup="true" data-title="{{__('Edit Page')}}" data-size="lg" data-bs-toggle="tooltip"  title="{{__('Edit')}}" data-original-title="{{__('Edit')}}">
-                                                                        <i class="ti ti-pencil text-white"></i>
+                                                                        <i class="fa fa-pencil text-white"></i>
                                                                     </a>
                                                                 </div>
 
@@ -162,7 +162,7 @@
                                                                     {!! Form::open(['method' => 'GET', 'route' => ['testimonials_delete', $key],'id'=>'delete-form-'.$key]) !!}
 
                                                                         <a href="#" class="mx-3 btn btn-sm align-items-center bs-pass-para" data-bs-toggle="tooltip" title="{{__('Delete')}}" data-original-title="{{__('Delete')}}" data-confirm="{{__('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="document.getElementById('delete-form-{{$key}}').submit();">
-                                                                        <i class="ti ti-trash text-white"></i>
+                                                                        <i class="fa fa-trash text-white"></i>
                                                                         </a>
                                                                         {!! Form::close() !!}
                                                                     </div>

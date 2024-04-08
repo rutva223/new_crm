@@ -3,9 +3,7 @@
     {{__('Manage Journal Entry')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Manage Journal Entry')}}</h5>
-    </div>
+     {{__('Manage Journal Entry')}}
 @endsection
 
 @section('breadcrumb')
@@ -15,16 +13,16 @@
 
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-        <a href="{{ route('journal-entry.create') }}" class="btn btn-sm btn-primary btn-icon m-1" 
-            data-bs-whatever="{{__('Create New Journal')}}" > <span class="text-white"> 
-                <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span></a>
+        <a href="{{ route('journal-entry.create') }}" class="btn btn-sm btn-primary btn-icon m-1"
+            data-title="{{__('Create New Journal')}}" > <span class="text-white">
+                <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span></a>
 
-       
+
     @endif
 
 @endsection
 @section('content')
-   
+
 
     <div class="col-xl-12">
         <div class="card">
@@ -54,17 +52,17 @@
                                     <td>{{!empty($journalEntry->description)?$journalEntry->description:'-'}}</td>
                                     <td>
                                         <div class="action-btn bg-info ms-2">
-                                            <a href="{{ route('journal-entry.edit',[$journalEntry->id]) }}" 
-                                                class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-whatever="{{__('Edit Contract')}}" > 
+                                            <a href="{{ route('journal-entry.edit',[$journalEntry->id]) }}"
+                                                class="mx-3 btn btn-sm d-inline-flex align-items-center" data-title="{{__('Edit Contract')}}" >
                                                 <span class="text-white">
-                                                     <i class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}">
+                                                     <i class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}">
                                                 </i></span></a>
                                         </div>
 
                                         <div class="action-btn bg-danger ms-2">
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['journal-entry.destroy', $journalEntry->id]]) !!}
                                                 <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}
                                         </div>

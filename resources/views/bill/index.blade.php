@@ -80,7 +80,7 @@
                             <div class="col-auto">
                                 <span class="create-btn">
                                         <a href="{{ route('bill.create') }}" class="btn btn-outline-primary btn-sm">
-                                            <i class="ti ti-plus"></i>  {{__('Create')}}
+                                            <i class="fa fa-plus"></i>  {{__('Create')}}
                                         </a>
                                     </span>
                             </div>

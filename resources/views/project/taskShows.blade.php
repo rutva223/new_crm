@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="col-md-1">
                                             <a class="btn btn-sm btn-primary btn-icon" data-bs-toggle="collapse" href="#form-checklist" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                               <i class="ti ti-plus"></i>
+                                               <i class="fa fa-plus"></i>
                                             </a>
                                         </div>
 
@@ -94,7 +94,7 @@
                                                             <div class="comment-trash text-right">
                                                                 @if(\Auth::user()->type!='client' || (\Auth::user()->type=='client' && in_array('delete checklist',$perArr)))
                                                                     <a href="#" class="btn btn-outline btn-sm text-danger delete-checklist" data-url="{{route('task.checklist.destroy',[$checkList->task_id,$checkList->id])}}">
-                                                                        <i class="ti ti-trash"></i>
+                                                                        <i class="fa fa-trash"></i>
                                                                     </a>
                                                                 @endif
                                                             </div>
@@ -130,7 +130,7 @@
                                                 <p class="mb-0 text-xs">{{$comment->comment}}</p>
                                             </div>
                                             <a href="#" class="btn btn-outline btn-sm bg-danger delete-comment mx-3 d-inline-flex align-items-center" data-url="{{route('comment.destroy',$comment->id)}}">
-                                                <i class="ti ti-trash text-white"></i>
+                                                <i class="fa fa-trash text-white"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -172,10 +172,10 @@
                                     <div class="comment-trash" style="float: right">
                                         {{ number_format(\File::size(storage_path('tasks/' .$file->file)) / 1048576, 2) . ' ' . __('MB') }}
                                         <a download href="{{$file_storage.'/'.$file->file}}" class="btn btn-outline btn-sm text-primary m-0 px-2">
-                                            <i class="ti ti-download"></i>
+                                            <i class="fa fa-download"></i>
                                         </a>
                                         <a href="#" class="btn btn-outline btn-sm red text-danger delete-comment-file m-0 px-2" data-id="{{$file->id}}" data-url="{{route('comment.file.destroy',[$file->id])}}">
-                                            <i class="ti ti-trash"></i>
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
                                 </div>

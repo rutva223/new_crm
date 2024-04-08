@@ -13,18 +13,20 @@ use Illuminate\Support\Facades\Artisan;
 use App\Models\Webhook_settings;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Setting;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
 {
     public function index()
     {
-        if (\Auth::user()->type == 'company' || \Auth::user()->type == 'super admin') {
+        if (Auth::user()->type == 'company' || Auth::user()->type == 'super admin') {
             $settings                = Utility::settings();
             // dd($settings);
             $timezones               = config('timezones');
             $admin_payment_setting   = Utility::getAdminPaymentSetting();
             $company_payment_setting = Utility::getCompanyPaymentSetting();
-            $data = Webhook_settings::where('created_by', \Auth::user()->id)->get();
+            $data = Webhook_settings::where('created_by', Auth::user()->id)->get();
             return view('settings.index', compact('settings', 'timezones', 'admin_payment_setting', 'company_payment_setting', 'data'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -32,8 +34,8 @@ class SettingController extends Controller
     }
     public function saveBusinessSettings(Request $request)
     {
-        $user = \Auth::user();
-        if (\Auth::user()->type == 'super admin') {
+        $user = Auth::user();
+        if (Auth::user()->type == 'super admin') {
 
             if ($request->logo) {
                 $lightlogoName = 'logo-dark.png';
@@ -100,13 +102,13 @@ class SettingController extends Controller
                     [
                         $favicon,
                         'favicon',
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                     ]
                 );
             }
 
 
-            $request->user = \Auth::user()->id;
+            $request->user = Auth::user()->id;
             if (!empty($request->title_text) || !empty($request->footer_text) || !empty($request->default_language) || !empty($request->display_landing_page) || !empty($request->gdpr_cookie) || !empty($request->color) || !empty($request->cust_theme_bg) || !empty($request->cust_darklayout)) {
                 $post = $request->all();
 
@@ -155,12 +157,12 @@ class SettingController extends Controller
                         [
                             $data,
                             $key,
-                            \Auth::user()->creatorId(),
+                            Auth::user()->creatorId(),
                         ]
                     );
                 }
             }
-        } else if (\Auth::user()->type == 'company') {;
+        } else if (Auth::user()->type == 'company') {;
             if ($request->company_logo_dark) {
                 $logoName     = $user->id . '-logo-dark.png';
                 $dir = 'uploads/logo/';
@@ -182,7 +184,7 @@ class SettingController extends Controller
                     [
                         $logoName,
                         'company_logo_dark',
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                     ]
                 );
             }
@@ -212,7 +214,7 @@ class SettingController extends Controller
                     [
                         $logoName,
                         'company_logo_light',
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                     ]
                 );
             }
@@ -251,7 +253,7 @@ class SettingController extends Controller
                     [
                         $favicon,
                         'company_favicon',
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                     ]
                 );
             }
@@ -259,7 +261,7 @@ class SettingController extends Controller
 
 
 
-            // $request->user = \Auth::user()->id;
+            // $request->user = Auth::user()->id;
             if (!empty($request->title_text) || !empty($request->cust_theme_bg) || !empty($request->cust_darklayout) || !empty($request->color)) {
                 $post = $request->all();
                 // dd($post);
@@ -294,7 +296,7 @@ class SettingController extends Controller
                         [
                             $data,
                             $key,
-                            \Auth::user()->creatorId(),
+                            Auth::user()->creatorId(),
                         ]
                     );
                 }
@@ -309,7 +311,7 @@ class SettingController extends Controller
     {
 
 
-        if (\Auth::user()->type == 'company') {
+        if (Auth::user()->type == 'company') {
 
             $request->validate(
                 [
@@ -338,7 +340,7 @@ class SettingController extends Controller
                         [
                             $data,
                             $key,
-                            \Auth::user()->creatorId(),
+                            Auth::user()->creatorId(),
                         ]
                     );
                 }
@@ -350,7 +352,7 @@ class SettingController extends Controller
             //     'TIMEZONE' => $request->timezone,
             // ];
 
-            // $request->user = \Auth::user()->id;
+            // $request->user = Auth::user()->id;
             // Artisan::call('config:cache');
             // Artisan::call('config:clear');
 
@@ -387,7 +389,7 @@ class SettingController extends Controller
                     [
                         $data,
                         $key,
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                         date('Y-m-d H:i:s'),
                         date('Y-m-d H:i:s'),
                     ]
@@ -404,7 +406,7 @@ class SettingController extends Controller
 
     public function saveSystemSettings(Request $request)
     {
-        if (\Auth::user()->type == 'company') {
+        if (Auth::user()->type == 'company') {
             $request->validate(
                 [
                     'site_currency' => 'required',
@@ -423,7 +425,7 @@ class SettingController extends Controller
                     [
                         $data,
                         $key,
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                         date('Y-m-d H:i:s'),
                         date('Y-m-d H:i:s'),
                     ]
@@ -438,7 +440,7 @@ class SettingController extends Controller
 
     public function timeTracker(Request $request)
     {
-        if (\Auth::user()->type == 'company') {
+        if (Auth::user()->type == 'company') {
             $request->validate(
                 [
                     'interval_time' => 'required',
@@ -456,7 +458,7 @@ class SettingController extends Controller
                     [
                         $data,
                         $key,
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                         date('Y-m-d H:i:s'),
                         date('Y-m-d H:i:s'),
                     ]
@@ -470,7 +472,7 @@ class SettingController extends Controller
     }
     public function savePusherSettings(Request $request)
     {
-        if (\Auth::user()->type == 'super admin') {
+        if (Auth::user()->type == 'super admin') {
             $request->validate(
                 [
                     'pusher_app_id' => 'required',
@@ -493,7 +495,7 @@ class SettingController extends Controller
                         [
                             $data,
                             $key,
-                            \Auth::user()->creatorId(),
+                            Auth::user()->creatorId(),
                             date('Y-m-d H:i:s'),
                             date('Y-m-d H:i:s'),
                         ]
@@ -514,7 +516,7 @@ class SettingController extends Controller
     public function savePaymentSettings(Request $request)
     {
 
-        if (\Auth::user()->type == 'super admin') {
+        if (Auth::user()->type == 'super admin') {
             $validator = \Validator::make(
                 $request->all(),
                 [
@@ -1016,7 +1018,7 @@ class SettingController extends Controller
             $arr = [
                 $data,
                 $key,
-                \Auth::user()->id,
+                Auth::user()->id,
             ];
             \DB::insert(
                 'insert into company_payment_settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
@@ -1029,7 +1031,7 @@ class SettingController extends Controller
 
     public function testMail(Request $request)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         $data                      = [];
         $data['mail_driver']       = $request->mail_driver;
         $data['mail_host']         = $request->mail_host;
@@ -1582,7 +1584,7 @@ class SettingController extends Controller
             $arr = [
                 $data,
                 $key,
-                \Auth::user()->id,
+                Auth::user()->id,
             ];
             \DB::insert(
                 'insert into admin_payment_settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
@@ -1597,7 +1599,7 @@ class SettingController extends Controller
         $post = $request->all();
 
         unset($post['_token']);
-        $created_by = \Auth::user()->creatorId();
+        $created_by = Auth::user()->creatorId();
 
         foreach ($post as $key => $data) {
             \DB::insert(
@@ -1636,7 +1638,7 @@ class SettingController extends Controller
         $post['contract_create_notification'] = $request->has('contract_create_notification') ? $request->input('contract_create_notification') : 0;
         $post['support_create_notification'] = $request->has('support_create_notification') ? $request->input('support_create_notification') : 0;
         $post['event_create_notification'] = $request->has('event_create_notification') ? $request->input('event_create_notification') : 0;
-        $created_by = \Auth::user()->creatorId();
+        $created_by = Auth::user()->creatorId();
         if (isset($post) && !empty($post) && count($post) > 0) {
             $created_at = $updated_at = date('Y-m-d H:i:s');
 
@@ -1679,7 +1681,7 @@ class SettingController extends Controller
         $post['telegram_support_create_notification'] = $request->has('telegram_support_create_notification') ? $request->input('telegram_support_create_notification') : 0;
         $post['telegram_event_create_notification'] = $request->has('telegram_event_create_notification') ? $request->input('telegram_event_create_notification') : 0;
 
-        $created_by = \Auth::user()->creatorId();
+        $created_by = Auth::user()->creatorId();
         if (isset($post) && !empty($post) && count($post) > 0) {
             $created_at = $updated_at = date('Y-m-d H:i:s');
 
@@ -1717,7 +1719,7 @@ class SettingController extends Controller
         $post['twilio_invoice_payment_create_notification'] = $request->has('twilio_invoice_payment_create_notification') ? $request->input('twilio_invoice_payment_create_notification') : 0;
         $post['twilio_payment_create_notification'] = $request->has('twilio_payment_create_notification') ? $request->input('twilio_payment_create_notification') : 0;
 
-        $created_by = \Auth::user()->creatorId();
+        $created_by = Auth::user()->creatorId();
         if (isset($post) && !empty($post) && count($post) > 0) {
             $created_at = $updated_at = date('Y-m-d H:i:s');
 
@@ -1739,7 +1741,7 @@ class SettingController extends Controller
 
     public function recaptchaSettingStore(Request $request)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
         $rules = [];
         if ($request->recaptcha_module == 'yes') {
             $rules['google_recaptcha_key']      = 'required|string|max:50';
@@ -1762,7 +1764,7 @@ class SettingController extends Controller
             $post['recaptcha_module'] = 'no';
         }
 
-        $created_by = \Auth::user()->creatorId();
+        $created_by = Auth::user()->creatorId();
         $created_at = $updated_at = date('Y-m-d H:i:s');
 
         foreach ($post as $key => $data) {
@@ -1862,7 +1864,7 @@ class SettingController extends Controller
             $arr = [
                 $data,
                 $key,
-                \Auth::user()->id,
+                Auth::user()->id,
             ];
 
             \DB::insert(
@@ -1912,7 +1914,7 @@ class SettingController extends Controller
                     [
                         $data,
                         $key,
-                        \Auth::user()->id,
+                        Auth::user()->id,
                         date('Y-m-d H:i:s'),
                         date('Y-m-d H:i:s'),
                     ]
@@ -1957,7 +1959,7 @@ class SettingController extends Controller
                 [
                     $data,
                     $key,
-                    \Auth::user()->id,
+                    Auth::user()->id,
                     date('Y-m-d H:i:s'),
                     date('Y-m-d H:i:s'),
                 ]
@@ -1992,7 +1994,7 @@ class SettingController extends Controller
         $webhook->module = $request->module;
         $webhook->url = $request->url;
         $webhook->method = $request->method;
-        $webhook->created_by = \Auth::user()->id;
+        $webhook->created_by = Auth::user()->id;
         $webhook->save();
         return redirect()->back()->with('success', 'Webbook Setting Created Successfully.');
     }
@@ -2026,7 +2028,7 @@ class SettingController extends Controller
         $webhook->module = $request->module;
         $webhook->url = $request->url;
         $webhook->method = $request->method;
-        $webhook->created_by = \Auth::user()->id;
+        $webhook->created_by = Auth::user()->id;
         $webhook->update();
 
         return redirect()->back()->with('success', 'Webhook Updated Successfully.');
@@ -2102,7 +2104,7 @@ class SettingController extends Controller
                     [
                         $data,
                         $key,
-                        \Auth::user()->creatorId(),
+                        Auth::user()->creatorId(),
                         date('Y-m-d H:i:s'),
                         date('Y-m-d H:i:s'),
                     ]
@@ -2161,8 +2163,8 @@ class SettingController extends Controller
 
     public function chatgptkey(Request $request)
     {
-        if (\Auth::user()->type == 'super admin') {
-            $user = \Auth::user();
+        if (Auth::user()->type == 'super admin') {
+            $user = Auth::user();
             if (!empty($request->chatgpt_key)) {
                 $post = $request->all();
                 $post['chatgpt_key'] = $request->chatgpt_key;
@@ -2179,7 +2181,7 @@ class SettingController extends Controller
                         [
                             $data,
                             $key,
-                            \Auth::user()->creatorId(),
+                            Auth::user()->creatorId(),
                             date('Y-m-d H:i:s'),
                             date('Y-m-d H:i:s'),
                         ]
@@ -2191,5 +2193,22 @@ class SettingController extends Controller
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
+    }
+
+    public function ThemeSetting(Request $request)
+    {
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->first();
+        session()->forget('crm_theme_setting');
+        if ($user->dark_mode == 'dark') {
+            Session()->put('crm_theme_setting', 'light');
+            $user->dark_mode = 'light';
+            $user->save();
+        } elseif ($user->dark_mode	== 'light') {
+            Session()->put('crm_theme_setting', 'dark');
+            $user->dark_mode = 'dark';
+            $user->save();
+        }
+        return response()->json(['status' => true, 'theme' => $user->dark_mode]);
     }
 }

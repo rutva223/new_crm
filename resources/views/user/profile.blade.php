@@ -17,9 +17,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
     {{__('Profile')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">   {{__('Profile')}}</h5>
-    </div>
+        {{__('Profile')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -35,10 +33,10 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
             <div class="col-xl-3">
                 <div class="card sticky-top" style="top:30px">
                     <div class="list-group list-group-flush" id="useradd-sidenav">
-                        <a href="#useradd-1" class="list-group-item list-group-item-action border-0">{{ __('Personal Information') }} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-2" class="list-group-item list-group-item-action border-0">{{__('Change Password')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                        <a href="#useradd-1" class="list-group-item list-group-item-action border-0">{{ __('Personal Information') }} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-2" class="list-group-item list-group-item-action border-0">{{__('Change Password')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                         @if(\Auth::user()->type=='client')
-                        <a href="#useradd-3" class="list-group-item list-group-item-action border-0">{{__('Company Info')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                        <a href="#useradd-3" class="list-group-item list-group-item-action border-0">{{__('Company Info')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                         @endif
                     </div>
                 </div>
@@ -79,7 +77,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                         <!-- <div class="choose-files "> -->
                                             <div class="choose-files">
                                                 <label for="file-1">
-                                                    <div class=" bg-primary company_logo_update"> <i class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                    <div class=" bg-primary company_logo_update"> <i class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                     </div>
                                                     <input type="file"name="profile"id="file-1" class="form-control file mb-3" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" data-multiple-caption="{count} files selected" multiple/>
                                                         <img id="blah"  width="25%"  />

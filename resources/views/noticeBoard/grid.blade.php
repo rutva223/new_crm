@@ -18,8 +18,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Notice Board')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Notice Board')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -30,20 +29,20 @@
 
 
     <a href="{{ route('noticeBoard.index') }}" class="btn btn-sm btn-primary btn-icon m-1" >
-        <i class="ti ti-list text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}"></i>
+        <i class="fa fa-list text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}"></i>
     </a>
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('noticeBoard.create') }}"
-        data-bs-whatever="{{__('Create New Notice Board')}}"> <span class="text-white"> 
-            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('noticeBoard.create') }}"
+        data-title="{{__('Create New Notice Board')}}"> <span class="text-white">
+            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
     </a>
 
     @endif
 @endsection
 
 @section('content')
- 
+
         <div class="col-12">
             <div class=" {{isset($_GET['type'])?'show':''}}" >
                 <div class="card card-body">
@@ -58,14 +57,14 @@
                         </div>
                         <div class="action-btn bg-info ms-2">
                             <div class="col-auto">
-                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip" 
-                                data-title="{{__('Apply')}}"><i class="ti ti-search text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Apply') }}"></i></button>
+                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip"
+                                data-title="{{__('Apply')}}"><i class="fa fa-search text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Apply') }}"></i></button>
                             </div>
                         </div>
                         <div class="action-btn bg-danger ms-2">
                             <div class="col-auto">
-                                <a href="{{route('noticeBoard.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" 
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Reset') }}"></i></a>
+                                <a href="{{route('noticeBoard.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}"
+                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Reset') }}"></i></a>
                             </div>
                         </div>
                     </div>
@@ -87,17 +86,17 @@
                         <div class="text-right">
                             <div class="actions">
                                 <div class="dropdown action-item">
-                                    <a href="#" class="action-item" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></a>
+                                    <a href="#" class="action-item" data-bs-toggle="dropdown"><i class="fa fa-dots-vertical"></i></a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        
-                                            <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-url="{{ route('noticeBoard.edit',$noticeBoard->id) }}"
-                                                data-bs-whatever="{{__('Edit Notice Board')}}"> 
-                                                <i class="ti ti-edit"></i>{{__('Edit')}}</a>
+
+                                            <a href="#" class="dropdown-item" data-ajax-popup="true"
+                                                  data-url="{{ route('noticeBoard.edit',$noticeBoard->id) }}"
+                                                data-title="{{__('Edit Notice Board')}}">
+                                                <i class="fa fa-edit"></i>{{__('Edit')}}</a>
 
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['noticeBoard.destroy', $noticeBoard->id]]) !!}
                                                 <a href="#!" class=" show_confirm dropdown-item">
-                                                    <i class="ti ti-trash"></i>{{ __('Delete') }}
+                                                    <i class="fa fa-trash"></i>{{ __('Delete') }}
                                                 </a>
                                                 {!! Form::close() !!}
                                     </div>

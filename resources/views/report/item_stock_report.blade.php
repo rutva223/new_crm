@@ -6,8 +6,7 @@
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 "> {{__('Product Stock')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 "> {{__('Product Stock')}}
 @endsection
 
 @section('breadcrumb')
@@ -18,8 +17,8 @@
 @section('action-btn')
 
 <a href="{{ route('stock_report.export') }}" data-bs-toggle="tooltip" title="{{ __('Export') }}" class="btn btn-sm btn-primary">
-    <i class="ti ti-file-export"></i>
-</a> 
+    <i class="fa fa-file-export"></i>
+</a>
 @endsection
 
 @section('content')

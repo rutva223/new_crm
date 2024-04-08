@@ -7,18 +7,17 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Note') }}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Note') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Note') }}</li>
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="{{ route('note.create') }}" data-bs-whatever="{{ __('Create New Note') }}"> <span class="text-white">
-                <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+            data-url="{{ route('note.create') }}" data-title="{{ __('Create New Note') }}"> <span class="text-white">
+                <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                     data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
     @endif
@@ -40,17 +39,17 @@
                                         <div class="actions">
                                             <div class="dropdown action-item">
                                                 <a href="#" class="action-item" data-bs-toggle="dropdown"><i
-                                                        class="ti ti-dots-vertical"></i></a>
+                                                        class="fa fa-dots-vertical"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal"
+                                                    <a href="#" class="dropdown-item" data-ajax-popup="true"
+
                                                         data-url="{{ route('note.edit', $note->id) }}"
-                                                        data-bs-whatever="{{ __('Edit Note') }}">
-                                                        <i class="ti ti-edit"> </i>{{ __('Edit') }}</a>
+                                                        data-title="{{ __('Edit Note') }}">
+                                                        <i class="fa fa-edit"> </i>{{ __('Edit') }}</a>
 
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['note.destroy', $note->id]]) !!}
                                                     <a href="#!" class=" show_confirm dropdown-item">
-                                                        <i class="ti ti-trash"></i>{{ __('Delete') }}
+                                                        <i class="fa fa-trash"></i>{{ __('Delete') }}
                                                     </a>
                                                     {!! Form::close() !!}
 
@@ -79,12 +78,12 @@
                                         <div class="media-body text-end">
                                             <a href="{{ route('note.receipt', [$x, "$extension"]) }}" data-toggle="tooltip"
                                                 class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                                <i class="ti ti-download" data-bs-toggle="tooltip"
+                                                <i class="fa fa-download" data-bs-toggle="tooltip"
                                                     data-bs-original-title="{{ __('Download') }}"></i>
                                             </a>
                                             <a href="{{ $notes . $x . '.' . $extension }}" data-toggle="tooltip" target="_blank"
                                                 class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                                                <i class="ti ti-crosshair" data-bs-toggle="tooltip"
+                                                <i class="fa fa-crosshair" data-bs-toggle="tooltip"
                                                     data-bs-original-title="{{ __('Preview') }}"></i>
                                             </a>
                                         </div>

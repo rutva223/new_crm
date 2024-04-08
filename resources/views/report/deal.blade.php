@@ -87,23 +87,21 @@
     {{ __('Deal Report') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Deal Report') }}</h5>
-    </div>
+     {{ __('Deal Report') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Deal Report') }}</li>
 @endsection
 @section('action-btn')
     <a href="{{ route('deal_report.export') }}" data-bs-toggle="tooltip" title="{{ __('Export') }}"
         class="btn btn-sm btn-primary">
-        <i class="ti ti-file-export"></i>
+        <i class="fa fa-file-export"></i>
     </a>
 
     <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
     data-bs-title="{{ __('Download') }}" id="download-buttons">
-        <i class="ti ti-download"></i>
+        <i class="fa fa-download"></i>
     </a>
 @endsection
 
@@ -126,14 +124,14 @@
                         <div class="col-auto">
                             <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center"
                                 data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i
-                                    class="ti ti-search text-white"></i></button>
+                                    class="fa fa-search text-white"></i></button>
                         </div>
                     </div>
                     <div class="action-btn bg-danger ms-2">
                         <div class="col-auto">
                             <a href="{{ route('report.deal') }}" data-bs-toggle="tooltip" title="{{ __('Reset') }}"
                                 class="mx-3 btn btn-sm d-flex align-items-center"><i
-                                    class="ti ti-trash-off text-white"></i></a>
+                                    class="fa fa-trash-off text-white"></i></a>
                         </div>
                     </div>
                 </div>

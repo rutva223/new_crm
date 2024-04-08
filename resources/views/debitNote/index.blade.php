@@ -30,7 +30,7 @@
                             <div class="col-auto">
                                 <span class="create-btn">
                                         <a href="#" data-url="{{ route('debit-note.create') }}" data-ajax-popup="true" data-title="{{__('Create New Debit Note')}}" class="btn btn-outline-primary btn-sm">
-                                            <i class="ti ti-plus"></i>  {{__('Create')}}
+                                            <i class="fa fa-plus"></i>  {{__('Create')}}
                                         </a>
                                     </span>
                             </div>

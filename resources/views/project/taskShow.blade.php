@@ -1,7 +1,6 @@
 <div class="row timer_div">
     <div class="col-auto">
-        <h5 class="h5">{{ $task->title }}</h5>
-    </div>
+        <h5 class="h5">{{ $task->title }}
     <div class="col text-end start-div">
         @if ($task->time_tracking == 0)
             <a href="#" class="start-task start_timer" data-type="start" data-id="{{ $task->id }}">
@@ -106,7 +105,7 @@
                                         class="mx-1 btn btn-sm d-inline-flex btn-primary align-items-center"
                                         data-bs-toggle="collapse" data-bs-target="#form-checklist"
                                         aria-expanded="false" aria-controls="collapseExample"><i
-                                            class="ti ti-plus"></i></a>
+                                            class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -148,7 +147,7 @@
                                                     <div class="action-btn bg-danger ms-2">
                                                         <a href="#"class="mx-3 btn btn-sm d-inline-flex align-items-center delete-checklist"
                                                             data-url="{{ route('project.task.checklist.destroy', [$checkList->task_id, $checkList->id]) }}">
-                                                            <i class="ti ti-trash text-white"></i>
+                                                            <i class="fa fa-trash text-white"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -179,7 +178,7 @@
                                                 <a href="#"
                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center  delete-comment"
                                                     data-url="{{ route('project.task.comment.destroy', [$comment->id]) }}">
-                                                    <i class="ti ti-trash text-white"></i>
+                                                    <i class="fa fa-trash text-white"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -194,7 +193,7 @@
                                     <input type="text" class="form-control task_show" value=""
                                         name="comment" placeholder="Write your comment....">
                                     <button class="btn btn-send"><i
-                                            class="f-16 text-primary ti ti-brand-telegram"></i></button>
+                                            class="f-16 text-primary fa fa-brand-telegram"></i></button>
                                 </div>
                             </form>
                             @if (App\Models\Utility::is_chatgpt_enable())
@@ -203,7 +202,7 @@
                                         data-ajax-popup-over="true" id="grammarCheck"
                                         data-url="{{ route('grammar', ['task_show']) }}" data-bs-placement="top"
                                         data-title="{{ __('Grammar check with AI') }}">
-                                        <i class="ti ti-rotate"></i>
+                                        <i class="fa fa-rotate"></i>
                                         <span>{{ __('Grammar check with AI') }}</span></a>
                                 </div>
                             @endif
@@ -249,14 +248,14 @@
                                                     <div class="action-btn bg-info ms-2">
                                                         <a download href="{{ $file_storage . $file->file }}"
                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                            <i class="ti ti-download text-white"></i>
+                                                            <i class="fa fa-download text-white"></i>
                                                         </a>
                                                     </div>
                                                     <div class="action-btn bg-danger ms-2">
                                                         <a href="#"
                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center delete-comment-file"
                                                             data-url="{{ route('project.task.comment.file.destroy', [$file->id]) }}">
-                                                            <i class="ti ti-trash text-white"></i>
+                                                            <i class="fa fa-trash text-white"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -336,7 +335,7 @@
                     data.id + '">' + data.name + '</label>\n' + '</div>\n' + '</div>\n' +
                     '<div class="col-auto card-meta d-inline-flex align-items-center ml-sm-auto">\n' +
                     '<a href="#" class="action-btn bg-danger ms-2 mx-3 btn btn-sm d-inline-flex action-item delete-checklist " data-url="' +
-                    data.deleteUrl + '">\n' + '<i class="ti ti-trash"></i>\n' + '</a>\n' +
+                    data.deleteUrl + '">\n' + '<i class="fa fa-trash"></i>\n' + '</a>\n' +
                     '</div>\n' + '</div>\n' + '</div>';
                 $("#check-list").prepend(html);
                 $("#form-checklist input[name=name]").val('');
@@ -418,7 +417,7 @@
                         '                                <div class="col-auto">\n' +
                         '                                    <a href="#" class="action-item  delete-comment" data-url="' +
                         data.deleteUrl + '">\n' +
-                        '                                        <i class="ti ti-trash"></i>\n' +
+                        '                                        <i class="fa fa-trash"></i>\n' +
                         '                                    </a>\n' +
                         '                                </div>\n' +
                         '                            </div>\n' +
@@ -493,11 +492,11 @@
                     '                                        <a downloaced href="{{ asset(Storage::url('tasks')) }}' +
                     data.file +
                     '" class="action-btn bg-info ms-2  btn btn-sm d-inline-flex align-items-center">\n' +
-                    '                                            <i class="ti ti-download text-white"></i>\n' +
+                    '                                            <i class="fa fa-download text-white"></i>\n' +
                     '                                        </a>\n' +
                     '                                        <a href="#" class="action-btn bg-danger ms-2 btn btn-sm d-inline-flex align-items-center delete-comment-file" data-url="' +
                     data.deleteUrl + '">\n' +
-                    '                                            <i class="ti ti-trash"></i>\n' +
+                    '                                            <i class="fa fa-trash"></i>\n' +
                     '                                        </a>\n' +
                     '\n' +
                     '                                    </div>\n' +

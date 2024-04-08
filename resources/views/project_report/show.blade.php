@@ -5,9 +5,7 @@
 @endsection
 
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{$project->title}}</h5>
-    </div>
+     {{$project->title}}
 @endsection
 @push('css-page')
 <link rel="stylesheet" href="{{ asset('public/custom/css/datatables.min.css') }}">
@@ -15,7 +13,7 @@
 <style>
 .table.dataTable.no-footer {
     border-bottom: none !important;
-} 
+}
 .display-none {
     display: none !important;
 }
@@ -31,7 +29,7 @@
     <!-- <script src="{{ asset('js/datatable/buttons.html5.min.js') }}"></script> -->
     <script>
 
-        
+
 
         function saveAsPDF() {
        	  var filename = $('#filename').val();
@@ -77,7 +75,7 @@
 
 @section('action-btn')
     <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary py-2 dwn" data-bs-toggle="tooltip" title="{{__('Download')}}" id="download-buttons">
-        <i class="ti ti-download"></i>
+        <i class="fa fa-download"></i>
     </a>
 @endsection
 @section('content')
@@ -98,13 +96,13 @@
                                         <tbody>
                                             <tr class="border-0" >
                                                 <th class="border-0" >{{ __('Project Name')}}:</th>
-                                               
+
                                                 <td class="border-0"> {{$project->title}}</td>
                                             </tr>
                                             <tr>
                                                 <th class="border-0">{{ __('Project Status')}}:</th>
                                                 <td class="border-0">
-                                               
+
                                                 @if($project->status == 'in_progress')
                                                         <div class="badge  bg-success p-2 px-3 rounded"> {{ __('In Progress')}}</div>
                                                     @elseif($project->status == 'in_progress')
@@ -118,7 +116,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                      
+
                                             <tr role="row">
                                                 <th class="border-0">{{ __('Start Date') }}:</th>
                                                 <td class="border-0">{{($project->start_date)}}</td>
@@ -149,7 +147,7 @@
                                                                 a 15.9155 15.9155 0 0 1 0 31.831
                                                                 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                                     <path class="circle"
-                                                        stroke-dasharray="{{ $data }}, 100" d="M18 2.0845 
+                                                        stroke-dasharray="{{ $data }}, 100" d="M18 2.0845
                                                                 a 15.9155 15.9155 0 0 1 0 31.831
                                                                 a 15.9155 15.9155 0 0 1 0 -31.831" />
                                                     <text x="18" y="20.35"
@@ -171,7 +169,7 @@
                     <div class="card">
                         <div class="card-header" style="padding: 25px 35px !important;">
                             <div class="d-flex justify-content-between align-items-center">
-                                
+
                                 <div class="row">
                                     <h5 class="mb-0">{{ __('Milestone Progress') }}</h5>
                                 </div>
@@ -187,7 +185,7 @@
                                         <div class=""></div>
                                     </div>
                                 </div>
-                                <div id="milestone-chart" class="chart-canvas chartjs-render-monitor" height="150"></div> 
+                                <div id="milestone-chart" class="chart-canvas chartjs-render-monitor" height="150"></div>
                             </div>
                         </div>
                     </div>
@@ -228,7 +226,7 @@
                                     <div class="col-12">
                                         <div id="chart"></div>
                                     </div>
-                                
+
                                     </div>
                             </div>
                         </div>
@@ -249,7 +247,7 @@
                                   <div class="col-12">
                                       <div id="chart-hours"></div>
                                   </div>
-                             
+
                               </div>
                           </div>
                       </div>
@@ -272,7 +270,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                      
+
                                 @foreach($project->users as $user)
                                     @php
                                     $hours_format_number = 0;
@@ -280,7 +278,7 @@
                                             $hourdiff_late = 0;
                                             $esti_late_hour =0;
                                             $esti_late_hour_chart=0;
- 
+
                                     $total_user_task = App\Models\ProjectTask::where('project_id',$project->id)->whereRaw("FIND_IN_SET(?,  assign_to) > 0", [$user->id])->get()->count();
 
 
@@ -289,7 +287,7 @@
                                     $total_complete_task = App\Models\ProjectTask::join('project_stages','project_stages.id','=','project_tasks.stage')->where('project_id','=',$project->id)->where('stage',4)->where('assign_to','=',$user->id)->get()->count();
 
                                     $logged_hours = 0;
-                                    $timesheets = App\Models\Timesheet::where('project_id',$project->id)->where('created_by' ,$user->id)->get(); 
+                                    $timesheets = App\Models\Timesheet::where('project_id',$project->id)->where('created_by' ,$user->id)->get();
                                     @endphp
 
                                     @foreach($timesheets as $timesheet)
@@ -361,26 +359,26 @@
                                                 @else
                                                     <label class="badge bg-warning p-2 px-3 rounded">{{__('Incomplete')}}</label>
                                                 @endif</td>
-            
+
                                <td>{{$milestone->start_date}}</td>
                                <td>{{$milestone->due_date}}</td>
-                               
-                          
+
+
                             </tr>
                              @endforeach
-                        
+
                         </tbody>
                     </table>
                  </div>
 
-      
+
             </div>
         </div>
     </div>
 
 </div>
-   <div class="row">     
-       <div class="card card-body mt-3 mx-2 res">       
+   <div class="row">
+       <div class="card card-body mt-3 mx-2 res">
             <div class="col-md-12  row d-sm-flex align-items-center justify-content-end" id="show_filter">
                         <div class="col-3">
                             <select class="select form-select" name="all_users" id="all_users">
@@ -396,7 +394,7 @@
                             <option value="" class="px-4">{{ __('All Milestones') }}</option>
                             @foreach ($milestones as $milestone)
                             <option value="{{ $milestone->id }}">{{ $milestone->title }}</option>
-                        
+
                             @endforeach
                         </select>
                     </div>
@@ -405,7 +403,7 @@
                             <option value="" class="px-4">{{ __('All Status') }}</option>
                             @foreach ($stages as $stage)
                                 <option value="{{ $stage->id }}">{{ __($stage->name) }}</option>
-                            
+
                             @endforeach
                         </select>
                     </div>
@@ -419,11 +417,11 @@
                     </div>
                     <div class="col-1">
                     <button class=" btn btn-primary btn-filter apply">{{ __('Apply') }}</button>
-                </div>   
+                </div>
                 <div class="col-1">
-                    <button class=" btn btn-primary mx-2 btn-filter apply">  
+                    <button class=" btn btn-primary mx-2 btn-filter apply">
                         <a href="{{ route('project_report.export',$project->id)}}" class="text-white">
-                            {{ __('Export') }} 
+                            {{ __('Export') }}
                         </a>
                     </button>
                 </div>
@@ -436,7 +434,7 @@
                     <div class="card-body mt-3 mx-2">
                         <div class="row">
                             <div class="col-md-12 mt-2">
-        
+
                                 <div class="table-responsive">
                                     <table class="table table-centered table-hover mb-0 animated selection-datatable px-4 mt-2"
                                         id="selection-datatable1">
@@ -449,10 +447,10 @@
                                             <th> {{__('Total Logged Hours')}}</th>
                                             <th>{{ __('Priority') }}</th>
                                             <th>{{ __('Status') }}</th>
-                                            
+
                                         </thead>
                                         <tbody>
-        
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -476,7 +474,7 @@
         var element = document.getElementById('printableArea');
         var opt = {
             margin: 0.3,
-        
+
             image: {
                 type: 'jpeg',
                 quality: 1
@@ -507,7 +505,7 @@
             sparkline: {
                 enabled: true
             }
-        },     
+        },
         plotOptions: {
             radialBar: {
                 startAngle: -90,
@@ -554,7 +552,7 @@
         colors: ['#6fd943','#ff3a6e','#3ec9d6'],
         plotOptions: {
           bar: {
-             
+
             columnWidth: '50%',
             distributed: true,
           }
@@ -570,7 +568,7 @@
           labels: {
             style: {
               colors: {!! json_encode($chartData['color']) !!},
-             
+
             }
           }
         }
@@ -610,7 +608,7 @@
         var options = {
           series: [{
            data: [{!! json_encode($esti_logged_hour_chart) !!},{!! json_encode($logged_hour_chart) !!}],
-         
+
         }],
           chart: {
           height: 210,
@@ -632,14 +630,14 @@
         },
         xaxis: {
           categories: ["Estimated Hours","Logged Hours "],
-     
+
         }
         };
 
         var chart = new ApexCharts(document.querySelector("#chart-hours"), options);
         chart.render();
 
-          
+
 
 </script>
 
@@ -660,7 +658,7 @@
         loadingRecords: "{{ __('Loading...') }}",
         processing: "{{ __('Processing...') }}"
     }
-       
+
 </script>
 
 <script>
@@ -702,7 +700,7 @@
                 url: '{{ route('tasks.report.ajaxdata', [$project->id]) }}',
                 type: 'POST',
                 data:data,
-                success: function(data) {  
+                success: function(data) {
                     table.rows.add(data.data).draw(true);
                     //loadConfirm();
                 },

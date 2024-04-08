@@ -6,8 +6,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Contract')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Contract')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -16,16 +15,16 @@
 
 @section('action-btn')
     <a href="{{ route('contract.index') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-list text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}"></i>
+        <i class="fa fa-list text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}"></i>
     </a>
     @if(\Auth::user()->type=='company')
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-url="{{ route('contract.create') }}"
-    data-bs-whatever="{{__('Create New Contract')}}"> <span class="text-white"> 
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+      data-url="{{ route('contract.create') }}"
+    data-title="{{__('Create New Contract')}}"> <span class="text-white">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
     </a>
 
-     
+
     @endif
 @endsection
 @section('filter')
@@ -38,7 +37,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                              <a href="{{route('contract.show',$contract->id)}}" class="mb-0">{{ $contract->subject}}</a>             
+                              <a href="{{route('contract.show',$contract->id)}}" class="mb-0">{{ $contract->subject}}</a>
                             </div>
                             @if(\Auth::user()->type=='company')
                                 <div class="text-right">
@@ -46,20 +45,20 @@
                                         <div class="dropdown action-item">
                                             <a href="#" class="action-item" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-url="{{ route('contract.edit',$contract->id) }}" class="dropdown-item"
-                                                data-bs-whatever="{{__('Edit Contract')}}"  
+                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                  data-url="{{ route('contract.edit',$contract->id) }}" class="dropdown-item"
+                                                data-title="{{__('Edit Contract')}}"
                                                 data-bs-original-title="{{__('Edit Contract')}}"><span class=""> <i
-                                                        class="ti ti-edit"></i></span>{{ __('Edit') }}</a>
+                                                        class="fa fa-edit"></i></span>{{ __('Edit') }}</a>
 
-                                           
+
 
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['contract.destroy', $contract->id]]) !!}
                                                     <a href="#!" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm">
-                                                        <i class="ti ti-trash" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>{{ __('Delete') }}
+                                                        <i class="fa fa-trash" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>{{ __('Delete') }}
                                                     </a>
                                                 {!! Form::close() !!}
-                                                    
+
                                             </div>
                                         </div>
                                     </div>

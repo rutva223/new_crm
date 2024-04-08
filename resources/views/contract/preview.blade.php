@@ -31,7 +31,7 @@ $SITE_RTL = !empty($settings['SITE_RTL'] ) ? $settings['SITE_RTL']  : 'off';
 @endsection
 @section('title')
 
-    
+
 @endsection
 
 
@@ -40,23 +40,23 @@ $SITE_RTL = !empty($settings['SITE_RTL'] ) ? $settings['SITE_RTL']  : 'off';
     <div class="row justify-content-between align-items-center mb-2 me-5">
         <div class="col-sm-10 d-flex align-items-center justify-content-between justify-content-md-end">
             <div class="all-button-box ">
-            @if(((\Auth::user()->type =='company') && ($contract->company_signature == '')||(\Auth::user()->type =='client') && ($contract->client_signature == ''))&&$contract->status == 'Start')       
-                    <a href="#" class="btn btn-sm btn-primary btn-icon m-" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" data-size="md" data-url="{{ route('signature',$contract->id) }}"
-                        data-bs-whatever="{{__('signature')}}" > <span class="text-white"> <i
-                                class="ti ti-pencil text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('signature')}}"></i></span></a>
+            @if(((\Auth::user()->type =='company') && ($contract->company_signature == '')||(\Auth::user()->type =='client') && ($contract->client_signature == ''))&&$contract->status == 'Start')
+                    <a href="#" class="btn btn-sm btn-primary btn-icon m-" data-ajax-popup="true"
+                          data-size="md" data-url="{{ route('signature',$contract->id) }}"
+                        data-title="{{__('signature')}}" > <span class="text-white"> <i
+                                class="fa fa-pencil text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('signature')}}"></i></span></a>
                     </a>
                     @endif
                 <a href="{{route('contract.download.pdf',\Crypt::encrypt($contract->id))}}" class="btn btn-sm btn-primary btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{{__('Download')}}" target="_blanks">
-                    <i class="ti ti-download"></i>
-                </a>  
-                    
+                    <i class="fa fa-download"></i>
+                </a>
+
             </div>
         </div>
     </div>
-            
+
     <div class="row col-sm-10">
-              
+
         <div class="card contract_preview"  >
             <div class="card-body">
                             <div class="row invoice-title mt-2">
@@ -65,10 +65,10 @@ $SITE_RTL = !empty($settings['SITE_RTL'] ) ? $settings['SITE_RTL']  : 'off';
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-nd-6 col-lg-6 col-12 text-end">
                                     <h3 class="invoice-number">{{\Auth::user()->contractNumberFormat($contract->id)}}</h3>
-                                </div>    
+                                </div>
                             </div>
                             <div class="row align-items-center mb-4">
-                                
+
                                 <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
                                     <div class="col-lg-12 col-md-8 mb-3">
                                         <h6 class="d-inline-block m-0 d-print-none">{{__('Contract Type  :')}}</h6>
@@ -95,12 +95,12 @@ $SITE_RTL = !empty($settings['SITE_RTL'] ) ? $settings['SITE_RTL']  : 'off';
                                     </div>
                                 </div>
                             </div>
-                         
-                                
+
+
                                 <div class="text-md">{!!$contract->description!!}</div>
                                 <br>
                                 <div class="text-md">{!!$contract->contract_description!!}</div>
-                            
+
 
                             <div class="row">
                                 <div class="col-6">
@@ -110,7 +110,7 @@ $SITE_RTL = !empty($settings['SITE_RTL'] ) ? $settings['SITE_RTL']  : 'off';
                                     <div>
                                         <h5 class="mt-auto">{{__('Company Signature')}}</h5>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-6 text-end">
 									<div>
                                        <img width="200px" src="{{$contract->client_signature}}" >
@@ -118,11 +118,11 @@ $SITE_RTL = !empty($settings['SITE_RTL'] ) ? $settings['SITE_RTL']  : 'off';
                                     <div>
                                        <h5 class="mt-auto">{{__('Client Signature')}}</h5>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
             </div>
-        </div> 
-      
+        </div>
+
     </div>
 </div>
 

@@ -6,8 +6,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Items')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Items')}}
 @endsection
 
 @section('breadcrumb')
@@ -19,24 +18,24 @@
 @section('action-btn')
     @if(\Auth::user()->type=='company')
         <a href="{{ route('item.grid') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Grid View') }}" >
-            <i class="ti ti-layout-grid text-white"></i>
+            <i class="fa fa-layout-grid text-white"></i>
         </a>
 
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('item.file.import') }}"
-        data-bs-whatever="{{__('Import item CSV file')}}"> <span class="text-white">
-            <i class="ti ti-file-import" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Import') }}"></i></span>
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('item.file.import') }}"
+        data-title="{{__('Import item CSV file')}}"> <span class="text-white">
+            <i class="fa fa-file-import" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Import') }}"></i></span>
         </a>
 
         <a href="{{route('item.export')}}" class="btn btn-sm btn-primary btn-icon m-1" data-title="{{__('Export item CSV file')}}"
          data-bs-toggle="tooltip" data-bs-original-title="{{__('Export')}}">
-            <i class="ti ti-file-export"></i>
+            <i class="fa fa-file-export"></i>
         </a>
 
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('item.create') }}" data-size="lg"
-        data-bs-whatever="{{__('Create New Item')}}" > <span class="text-white">
-            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('item.create') }}" data-size="lg"
+        data-title="{{__('Create New Item')}}" > <span class="text-white">
+            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
 
 
@@ -100,21 +99,21 @@
                                     <td>{{ $item->description }}</td>
                                     <td class="text-right">
                                         <div class="action-btn bg-info ms-2">
-                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-url="{{ route('item.edit',$item->id) }}" data-size="lg"
-                                            data-bs-whatever="{{__('Edit Item   ')}}"> <span class="text-white"> <i
-                                                    class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
+                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                              data-url="{{ route('item.edit',$item->id) }}" data-size="lg"
+                                            data-title="{{__('Edit Item   ')}}"> <span class="text-white"> <i
+                                                    class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                         </div>
 
                                         <div class="action-btn bg-danger ms-2">
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['item.destroy', $item->id]]) !!}
                                             <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                             </a>
                                             {!! Form::close() !!}
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
                             @endforeach
                         </tbody>

@@ -96,7 +96,7 @@ $profile=asset(Storage::url('uploads/avatar'));
                 $(el.parent().parent().find('.discount')).val(0);
                 $(el.parent().parent().find('.amount')).html(item.totalAmount);
                 $(el.parent().parent().find('.discription')).val(item.product.description);
-                
+
 
                 var inputs = $(".amount");
                 var subTotal = 0;
@@ -299,7 +299,7 @@ $profile=asset(Storage::url('uploads/avatar'));
                             </div>
                             <div class="col-6 text-end">
                                 <a href="#" data-repeater-create="" title="{{ __('Create New Estimatioon Item') }}" class="btn btn-sm btn-primary btn-icon m-1 pb-2">
-                                    <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+                                    <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
                                 </a>
 
 
@@ -357,7 +357,7 @@ $profile=asset(Storage::url('uploads/avatar'));
                                     <td>
                                         <div class="form-group">
                                             <div class="input-group colorpickerinput">
-                                            {{ Form::text('description','', array('class' => 'form-control discription','placeholder'=>__('Description'))) }}   
+                                            {{ Form::text('description','', array('class' => 'form-control discription','placeholder'=>__('Description'))) }}
                                             </div>
                                         </div>
                                     </td>

@@ -73,9 +73,7 @@
     {{__('Invoice Report')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Invoice Report')}}</h5>
-    </div>
+     {{__('Invoice Report')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -85,11 +83,11 @@
 @section('action-btn')
 
     <a href="{{ route('invoice_report.export') }}" data-bs-toggle="tooltip" title="{{ __('Export') }}" class="btn btn-sm btn-primary">
-    <i class="ti ti-file-export"></i>
+    <i class="fa fa-file-export"></i>
 </a>
 
     <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{__('Download')}}" id="download-buttons">
-        <i class="ti ti-download"></i>
+        <i class="fa fa-download"></i>
     </a>
 @endsection
 
@@ -119,10 +117,10 @@
                         </div>
 
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-xs btn-primary btn-icon-only rounded-circle" data-toggle="tooltip" data-title="{{__('Apply')}}"><i class="ti ti-search"></i></button>
+                            <button type="submit" class="btn btn-xs btn-primary btn-icon-only rounded-circle" data-toggle="tooltip" data-title="{{__('Apply')}}"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="col-auto">
-                            <a href="{{route('report.invoice')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" class="btn btn-xs btn-danger btn-icon-only rounded-circle"><i class="ti ti-trash"></i></a>
+                            <a href="{{route('report.invoice')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" class="btn btn-xs btn-danger btn-icon-only rounded-circle"><i class="fa fa-trash"></i></a>
                         </div>
                     </div>
                     {{ Form::close() }}
@@ -309,14 +307,14 @@
                             </div>
                             <div class="action-btn bg-info ms-2">
                                 <div class="col-auto">
-                                    <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" 
-                                    title="{{__('Apply')}}"><i class="ti ti-search text-white"></i></button>
+                                    <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip"
+                                    title="{{__('Apply')}}"><i class="fa fa-search text-white"></i></button>
                                 </div>
                             </div>
                             <div class="action-btn bg-danger ms-2">
                                 <div class="col-auto">
-                                    <a href="{{route('report.invoice')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" 
-                                    class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                                    <a href="{{route('report.invoice')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}"
+                                    class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -336,7 +334,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-primary">
-                                            <i class="ti ti-user-plus"></i>
+                                            <i class="fa fa-user-plus"></i>
                                         </div>
                                         <h6 class="mb-3 mt-3">{{__('Total Invoice')}}</h6>
                                         <h4 class="mb-0">{{\Auth::user()->priceFormat($totalInvoice)}} </h4>
@@ -347,7 +345,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-info">
-                                            <i class="ti ti-receipt-tax"></i>
+                                            <i class="fa fa-receipt-tax"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Due')}}</h6>
                                         <h4 class="mb-0">{{\Auth::user()->priceFormat($totalDue)}}</h4>
@@ -358,7 +356,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-warning">
-                                            <i class="ti ti-discount-2"></i>
+                                            <i class="fa fa-discount-2"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Tax')}}</h6>
                                         <h4 class="mb-0">{{\Auth::user()->priceFormat($totalTax)}} </h4>
@@ -369,7 +367,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-secondary">
-                                            <i class="ti ti-discount-2"></i>
+                                            <i class="fa fa-discount-2"></i>
                                         </div>
                                         <h6 class="mb-3 mt-3">{{__('Total Discount')}}</h6>
                                         <h4 class="mb-0">{{\Auth::user()->priceFormat($totalDiscount)}} </h4>
@@ -387,12 +385,12 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-success">
-                                                <i class="ti ti-heart"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0">{{__('Report')}} :</p>
                                                 <p class="mb-0 text-success">{{__('Invoice Summary')}}</p>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -400,12 +398,12 @@
                                         <div class="col-md-3 col-sm-6">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-primary">
-                                                    <i class="ti ti-user"></i>
+                                                    <i class="fa fa-user"></i>
                                                 </div>
                                                 <div class="ms-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Client')}} :</p>
                                                     <p class="mb-0 text-primary">{{$filter['client'] }}</p>
-                                                
+
                                                 </div>
                                             </div>
                                         </div>
@@ -414,12 +412,12 @@
                                         <div class="col-md-3 col-sm-6">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-warning">
-                                                    <i class="ti ti-thumb-up"></i>
+                                                    <i class="fa fa-thumb-up"></i>
                                                 </div>
                                                 <div class="ms-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Status')}} :</p>
                                                     <p class="mb-0 text-warning">{{$filter['status'] }}</p>
-                                                
+
                                                 </div>
                                             </div>
                                         </div>
@@ -427,17 +425,17 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-danger">
-                                                <i class="ti ti-calendar"></i>
+                                                <i class="fa fa-calendar"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0"> {{__('Duration')}} :</p>
                                                 <p class="mb-0 text-danger">{{$filter['startDateRange'].' to '.$filter['endDateRange']}}</p>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -446,7 +444,7 @@
                             <div class="card-header card-body table-border-style">
                                 <!-- <h5> -->
                                 <!-- <div class="card-body table-border-style"> -->
-                                   
+
                                 <!-- </h5>    -->
                                     <div class="table-responsive">
                                         <table class="table pc-dt-export">

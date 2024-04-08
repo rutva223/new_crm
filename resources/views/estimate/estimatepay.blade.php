@@ -9,13 +9,12 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Estimate')}} @if(\Auth::check()) {{ '('. \Auth::user()->estimatenumberFormat($estimate->estimate) .')'}}  @else {{ '('. \App\Models\User::estimatenumberFormat($estimate->estimate) .')'}} @endif</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Estimate')}} @if(\Auth::check()) {{ '('. \Auth::user()->estimatenumberFormat($estimate->estimate) .')'}}  @else {{ '('. \App\Models\User::estimatenumberFormat($estimate->estimate) .')'}} @endif
 @endsection
 
 @section('action-btn')
 <a href="{{route('estimate.pdf',\Crypt::encrypt($estimate->id))}}" target="_blank" class="btn btn-sm btn-primary btn-icon m-1">
-    <span class="btn-inner--icon"><i class="ti ti-printer"></i></span>
+    <span class="btn-inner--icon"><i class="fa fa-printer"></i></span>
     <span class="btn-inner--text">{{__('Print')}}</span>
 </a>
 @endsection
@@ -121,7 +120,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col-sm-12">

@@ -1,5 +1,5 @@
 @php
-    
+
     $setting = App\Models\Utility::color_set();
     //dd($setting['cust_darklayout']);
     $color = isset($setting['color']) ? $setting['color'] : 'theme-3';
@@ -7,19 +7,19 @@
         $cust_darklayout = $setting['cust_darklayout'];
         // $company_logo = $setting['company_logo'];
     }
-    
+
     $SITE_RTL = isset($setting['SITE_RTL']) ? $setting['SITE_RTL'] : '';
-    
+
     $route = \Request::route()->getName();
     $segment = Request::segment(3);
     $id = \Illuminate\Support\Facades\Crypt::decrypt($segment);
     $project = \App\Models\Project::find($id);
     $user = \App\Models\User::find($project->created_by);
-    
+
     $company_favicon = Utility::getValByName('company_favicon');
-    
+
     $logo = asset(Storage::url('uploads/logo/'));
-    
+
 @endphp
 <!DOCTYPE html>
 <html lang="en" dir="{{ $SITE_RTL == 'on' ? 'rtl' : '' }}">
@@ -33,7 +33,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Dashboard Template Description" />
     <meta name="keywords" content="Dashboard Template" />
-    <meta name="author" content="Rajodiya Infotech" />
+    <meta name="author" content="RR Solution" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
 

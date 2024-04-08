@@ -9,9 +9,7 @@
     {{__('Project Reports')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Project Reports')}}</h5>
-    </div>
+     {{__('Project Reports')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -23,7 +21,7 @@
 <style>
 .table.dataTable.no-footer {
     border-bottom: none !important;
-} 
+}
 .display-none {
     display: none !important;
 }
@@ -60,7 +58,7 @@
                                     <option value="finished">{{ __('Finished')}}</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-3">  
+                        <div class="form-group col-md-3">
                                 <div class="input-group date ">
                                 <input class="form-control" type="date" id="start_date" name="start_date" value="" autocomplete="off" required="required"  placeholder="{{ __('Start Date') }}">
                             </div>
@@ -73,14 +71,14 @@
                             <div class="action-btn bg-info mb-3 ms-2">
                             <div class="col-auto">
                                 <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center btn-filter apply" data-bs-toggle="tooltip"
-                                title="{{__('Apply')}}"><i class="ti ti-search text-white"></i></button>
+                                title="{{__('Apply')}}"><i class="fa fa-search text-white"></i></button>
                             </div>
                         </div>
-                
+
                         <div class="action-btn bg-danger mb-3 ms-2">
                             <div class="col-auto">
-                                <a href="{{route('project_report.index')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" 
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                                <a href="{{route('project_report.index')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}"
+                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                             </div>
                         </div>
                     </div>
@@ -178,7 +176,7 @@ $(document).on('click', '#form-comment', function(e) {
                             '                                <div class="col-auto">\n' +
                             '                                    <a href="#" class="action-item  delete-comment" data-url="' +
                             data.deleteUrl + '">\n' +
-                            '                                        <i class="ti ti-trash"></i>\n' +
+                            '                                        <i class="fa fa-trash"></i>\n' +
                             '                                    </a>\n' +
                             '                                </div>\n' +
                             '                            </div>\n' +
@@ -252,7 +250,7 @@ $(document).on('click', '#form-comment', function(e) {
                             start_date: $("#start_date").val(),
                             due_date  : $("#due_date").val(),
                             all_users :$("#all_users").val(),
-                           
+
                         };
                         $.ajaxSetup({
                     headers: {
@@ -263,9 +261,9 @@ $(document).on('click', '#form-comment', function(e) {
                             url: '{{ route('projects.ajax') }}',
                             type: 'POST',
                             data: data,
-                            success: function(data) {  
+                            success: function(data) {
                                 table.rows.add(data.data).draw(true);
-                               
+
                             },
                             error: function(data) {
                                 toastrs('Info', data.error, 'error')

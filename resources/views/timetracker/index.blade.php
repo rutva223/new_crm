@@ -5,8 +5,7 @@
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Time Tracker')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Time Tracker')}}
 @endsection
 
 @section('breadcrumb')
@@ -18,7 +17,7 @@
 
 @push('css-page')
 <link rel="stylesheet" href="{{url('public/custom_assets/libs/swiper/dist/css/swiper.min.css')}}">
-    
+
 
     <style>
         .product-thumbs .swiper-slide img {
@@ -59,7 +58,7 @@
                 <table class="table" id="pc-dt-simple">
                     <thead>
                         <tr>
-                           
+
                             <th> {{__('Description')}}</th>
                             <th> {{__('Task')}}</th>
                              <th> {{__('Project')}}</th>
@@ -70,7 +69,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
+
                         @foreach ($treckers as $trecker)
 
                             @php
@@ -87,19 +86,19 @@
                                 <td>
                                     <div class="action-btn bg-light-dark ms-2">
                                         <a href="#" class="view-images mx-3 btn btn-sm d-inline-flex align-items-center" title="{{__('View Screenshot images')}}" data-id="{{$trecker->id}}" id="track-images-{{$trecker->id}}" data-bs-toggle="tooltip" data-bs-placement="top">
-                                            <span class="text-white"><i class="ti ti-slideshow"></i></span>
+                                            <span class="text-white"><i class="fa fa-slideshow"></i></span>
                                         </a>
                                     </div>
                                     <div class="action-btn bg-danger ms-2">
 
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['timetracker.destroy', $trecker->id]]) !!}
                                         <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                         </a>
                                         {!! Form::close() !!}
                                         </div>
                                     </div>
-                                 
+
                                 </td>
                             </tr>
                         @endforeach
@@ -111,12 +110,12 @@
     </div>
 </div>
 
-   
+
 
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg ss_modale " role="document">
           <div class="modal-content image_sider_div">
-            
+
           </div>
         </div>
     </div>
@@ -159,20 +158,20 @@
 
 
     $(document).on('click', '.view-images', function () {
-         
+
             var p_url = "{{route('tracker.image.view')}}";
             var data = {
                 'id': $(this).attr('data-id')
             };
             postAjax(p_url, data, function (res) {
                 $('.image_sider_div').html(res);
-                $('#exampleModalCenter').modal('show');   
+                $('#exampleModalCenter').modal('show');
                 setTimeout(function(){
                     var total = $('.product-left').find('.product-slider').length
                     if(total > 0){
-                        init_slider(); 
+                        init_slider();
                     }
-                
+
                 },200);
 
             });
@@ -205,7 +204,7 @@
                             }
                         },200);
                     }
-                      
+
                     $('#cModal').modal('hide');
                     toastrs('success',res.msg,'success');
                 });
@@ -218,6 +217,6 @@
             // $('#cModal').modal('show');
         // });
 
-      
+
 </script>
 @endpush

@@ -20,8 +20,8 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
 @section('action-btn')
 @if(\Auth::user()->type=='company')
 <a href="{{ route('estimate.create') }}" class="btn btn-sm btn-primary btn-icon m-1"
-    data-bs-whatever="{{__('Create New Estimate')}}">
-    <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+    data-title="{{__('Create New Estimate')}}">
+    <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
 </a>
 @endif
 @endsection
@@ -51,14 +51,14 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                     <div class="col-auto">
                         <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip"
                             data-title="{{__('Apply')}}"><i data-bs-toggle="tooltip"
-                                data-bs-original-title="{{ __('Apply') }}" class="ti ti-search text-white"></i></button>
+                                data-bs-original-title="{{ __('Apply') }}" class="fa fa-search text-white"></i></button>
                     </div>
                 </div>
                 <div class="action-btn bg-danger ms-2">
                     <div class="col-auto">
                         <a href="{{route('estimate.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}"
                             class="mx-3 btn btn-sm d-flex align-items-center"><i data-bs-toggle="tooltip"
-                                data-bs-original-title="{{ __('reset') }}" class="ti ti-trash-off text-white"></i></a>
+                                data-bs-original-title="{{ __('reset') }}" class="fa fa-trash-off text-white"></i></a>
                     </div>
                 </div>
             </div>
@@ -83,18 +83,18 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                         <div class="actions">
                             <div class="dropdown">
                                 <a href="#" class="action-item" data-bs-toggle="dropdown"><i
-                                        class="ti ti-dots-vertical"></i></a>
+                                        class="fa fa-dots-vertical"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     @if(\Auth::user()->type=='company')
                                     <a href="{{ route('estimate.edit',\Crypt::encrypt($estimate->id)) }}"
                                         class="dropdown-item">
-                                        <i class="ti ti-edit"></i> {{__('Edit')}}
+                                        <i class="fa fa-edit"></i> {{__('Edit')}}
                                     </a>
 
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['estimate.destroy',
                                     $estimate->id]]) !!}
                                     <a href="#!" class="dropdown-item show_confirm ">
-                                        <i class="ti ti-trash"></i> {{__('Delete')}}
+                                        <i class="fa fa-trash"></i> {{__('Delete')}}
                                     </a>
                                     {!! Form::close() !!}
 
@@ -103,13 +103,13 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                     @if(\Auth::user()->type=='company' || \Auth::user()->type=='client')
                                     <a href="{{ route('estimate.show',\Crypt::encrypt($estimate->id)) }}"
                                         class="dropdown-item">
-                                        <i class="ti ti-eye"></i> {{__('View')}}
+                                        <i class="fa fa-eye"></i> {{__('View')}}
                                     </a>
                                     @endif
                                     @if(\Auth::user()->type=='company')
                                     @if($estimate->is_convert==0)
                                     <a href="{{ route('estimate.convert',$estimate->id) }}" class="dropdown-item">
-                                        <i class="ti ti-refresh"></i> {{__('Convert to Invoice')}}
+                                        <i class="fa fa-refresh"></i> {{__('Convert to Invoice')}}
                                     </a>
                                     @endif
                                     @endif

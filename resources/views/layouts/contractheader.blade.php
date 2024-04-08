@@ -52,7 +52,7 @@
             // Button that triggered the modal
             var button = event.relatedTarget
             // Extract info from data-bs-* attributes
-            var recipient = button.getAttribute('data-bs-whatever')
+            var recipient = button.getAttribute('data-title')
             var url = button.getAttribute('data-url')
             var size = button.getAttribute('data-size');
             var modalTitle = exampleModal.querySelector('.modal-title')
@@ -80,7 +80,7 @@
             // Button that triggered the modal
             var button = event.relatedTarget
             // Extract info from data-bs-* attributes
-            var recipient = button.getAttribute('data-bs-whatever')
+            var recipient = button.getAttribute('data-title')
             var url = button.getAttribute('data-url')
             var size = button.getAttribute('data-size');
             var modalTitle = exampleOverModal.querySelector('.modal-title')

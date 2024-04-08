@@ -75,7 +75,7 @@
                                 @if (isset($result->files) && $result->files == 'on') checked="checked" @endif id="copy_link_5"
                                 value="on">
                             <label class="custom-control-label" for="copy_link_5"></label>
-                        </div> 
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -110,7 +110,7 @@
                         </div>
                     </td>
                 </tr>
-              
+
                 <tr>
                     <td>{{ __('Timesheet') }}</td>
                     <td class="action text-right">
@@ -184,17 +184,17 @@
                 data-link="{{ route('project.link', \Illuminate\Support\Facades\Crypt::encrypt($project->id)) }}"
                 data-bs-toggle="tooltip" data-bs-title="{{ __('Copy link') }}">
                 <span class=""></span><span class="btn-inner--text text-white"><i
-                        class="ti ti-link"></i></span></a>
+                        class="fa fa-link"></i></span></a>
             </a> --}}
             <a href="#" class="btn btn-sm btn-primary cp_link cp_link"
             data-link="{{ route('project.link', \Illuminate\Support\Facades\Crypt::encrypt($project->id)) }}"
             data-toggle="tooltip" title="{{ __('copy project') }}"
             data-original-title="{{ __('Click to copy link') }}">
-            <span class="btn-inner--icon"><i class="ti ti-link"></i></span>
+            <span class="btn-inner--icon"><i class="fa fa-link"></i></span>
             <input type="text" id="c_link" class="d-none"
                 value="{{ route('project.link', \Illuminate\Support\Facades\Crypt::encrypt($project->id)) }}">
         </a>
-        
+
         </div>
         {{ Form::close() }}
     </div>
@@ -249,7 +249,7 @@
     // });
 
     $('.cp_link').on('click', function() {
-        
+
         var copyText = document.getElementById("c_link");
         copyText.select();
         copyText.setSelectionRange(0, 99999); // For mobile devices

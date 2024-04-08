@@ -1,6 +1,7 @@
 <!-- Required vendors -->
-<script src="<?php echo e(asset('assets/js/custom.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/vendor/global/global.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/custom.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/js/custom.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/custom.min.js')); ?>"></script>
 

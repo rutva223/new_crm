@@ -8,14 +8,14 @@
     // $logo_path = \App\Models\Utility::get_file('/');
 
     $GetLogo = App\Models\Utility::get_logo();
-    
+
     $currantLang1 = Cookie::get('LANGUAGE');
-    
+
     if (!isset($currantLang1)) {
         $currantLang1 = \App::getLocale();
     }
     \App::setLocale($currantLang1);
-    
+
     $layout_setting = App\Models\Utility::getLayoutsSetting();
     if (!empty($layout_setting['cust_darklayout'])) {
         $cust_darklayout = $layout_setting['cust_darklayout'];
@@ -66,12 +66,12 @@
         $project_last_stage = $project->project_last_stage($project->id) ? $project->project_last_stage($project->id)->id : '';
         $total_task = $project->project_total_task($project->id);
         $completed_task = $project->project_complete_task($project->id, $project_last_stage);
-        
+
         $percentage = 0;
         if ($total_task != 0) {
             $percentage = intval(($completed_task / $total_task) * 100);
         }
-        
+
         $label = '';
         if ($percentage <= 15) {
             $label = 'bg-danger';
@@ -92,82 +92,82 @@
                             @if ($result->basic_details == 'on')
                                 <a href="#basicDeitals"
                                     class="list-group-item list-group-item-action border-0">{{ __('Basic Details') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->task == 'on')
                                 <a href="#task"
                                     class="list-group-item list-group-item-action border-0">{{ __('Task List') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->ganttTasks == 'on')
                                 <a href="#ganttTasks"
                                     class="list-group-item list-group-item-action border-0">{{ __('Gantt Chart') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                             @if ($result->milestone == 'on')
                                 <a href="#milestone"
                                     class="list-group-item list-group-item-action border-0">{{ __('Milestone') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->note == 'on')
                                 <a href="#note"
                                     class="list-group-item list-group-item-action border-0">{{ __('Note') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->files == 'on')
                                 <a href="#files"
                                     class="list-group-item list-group-item-action border-0">{{ __('Files') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->comments == 'on')
                                 <a href="#comments"
                                     class="list-group-item list-group-item-action border-0">{{ __('Comments') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->feedbacks == 'on')
                                 <a href="#feedbacks"
                                     class="list-group-item list-group-item-action border-0">{{ __('Client feedbacks') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                             @if ($result->invoice == 'on')
                                 <a href="#invoice"
                                     class="list-group-item list-group-item-action border-0">{{ __('Invoice') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->timesheet == 'on')
                                 <a href="#timesheet"
                                     class="list-group-item list-group-item-action border-0">{{ __('Timesheet') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->payment == 'on')
                                 <a href="#payment"
                                     class="list-group-item list-group-item-action border-0">{{ __('Payment') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
 
                             @if ($result->expenses == 'on')
                                 <a href="#expenses"
                                     class="list-group-item list-group-item-action border-0">{{ __('Expenses') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                         </div>
@@ -204,7 +204,7 @@
                                                 <div class="col-md-4 col-sm-6">
                                                     <div class="d-flex align-items-start">
                                                         <div class="theme-avtar bg-success">
-                                                            <i class="ti ti-calendar"></i>
+                                                            <i class="fa fa-calendar"></i>
                                                         </div>
                                                         <div class="ms-2">
                                                             <p class="text-muted text-sm mb-0">{{ __('Start Date') }}:
@@ -218,7 +218,7 @@
                                                 <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                                     <div class="d-flex align-items-start">
                                                         <div class="theme-avtar bg-info">
-                                                            <i class="ti ti-calendar-time"></i>
+                                                            <i class="fa fa-calendar-time"></i>
                                                         </div>
                                                         <div class="ms-2">
                                                             <p class="text-muted text-sm mb-0">{{ __('Due Date') }}:</p>
@@ -230,7 +230,7 @@
                                                 <div class="col-md-4 col-sm-6">
                                                     <div class="d-flex align-items-start">
                                                         <div class="theme-avtar bg-danger">
-                                                            <i class="ti ti-brand-hipchat"></i>
+                                                            <i class="fa fa-brand-hipchat"></i>
                                                         </div>
                                                         <div class="ms-2">
                                                             <p class="text-muted text-sm mb-0">{{ __('Comments') }}:</p>
@@ -244,7 +244,7 @@
                                                 <div class="col-md-4 col-sm-6">
                                                     <div class="d-flex align-items-start">
                                                         <div class="theme-avtar bg-warning">
-                                                            <i class="ti ti-user"></i>
+                                                            <i class="fa fa-user"></i>
                                                         </div>
                                                         <div class="ms-2">
                                                             <p class="text-muted text-sm mb-0">{{ __('Members') }}:</p>
@@ -257,7 +257,7 @@
                                                 <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                                     <div class="d-flex align-items-start">
                                                         <div class="theme-avtar bg-dark">
-                                                            <i class="ti ti-calendar-event"></i>
+                                                            <i class="fa fa-calendar-event"></i>
                                                         </div>
                                                         <div class="ms-2">
                                                             <p class="text-muted text-sm mb-0">{{ __('Days Left') }}:
@@ -288,7 +288,7 @@
                                                                     class="avatar rounded-circle user-group1">
                                                                     <img alt="Image placeholder" class="rounded-circle" width="50" height="50"
                                                                         @if (!empty($user->avatar)) src="{{ $profile . '/' . $user->avatar }}" @else avatar="{{ $user->name }}" @endif>
-                                                                </a> 
+                                                                </a>
                                                             </div>
                                                             <div class="col ml-n2">
                                                                 <a href="#!"
@@ -309,7 +309,7 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="theme-avtar bg-success">
-                                                        <i class="ti ti-report-money"></i>
+                                                        <i class="fa fa-report-money"></i>
                                                     </div>
                                                     <h6 class="mb-3 mt-2">{{ __('Budget') }}</h6>
                                                     <h4 class="mb-0">
@@ -321,7 +321,7 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="theme-avtar bg-info">
-                                                        <i class="ti ti-click"></i>
+                                                        <i class="fa fa-click"></i>
                                                     </div>
                                                     <h6 class="mb-3 mt-2">{{ __('Expense') }}</h6>
                                                     <h4 class="mb-0">{{ $objUser->priceFormat($totalExpense) }}
@@ -333,7 +333,7 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="theme-avtar bg-warning">
-                                                        <i class="ti ti-user-plus"></i>
+                                                        <i class="fa fa-user-plus"></i>
                                                     </div>
                                                     <h6 class="mb-3 mt-2">{{ __('Client') }}</h6>
                                                     <h6 class="mb-0">
@@ -398,14 +398,14 @@
                                                             avatar="{{ !empty($task->taskUser) ? $task->taskUser->name : '' }}" @endif
                                                             class="rounded-circle" width="50" height="50">
                                                                 </span>
-  
+
                                                                 <a href="#" data-size="lg"
                                                                     data-url="{{ route('project.task.show', $task->id) }}"
-                                                                    data-ajax-popup="true" data-bs-target="#exampleModal"
-                                                                    data-bs-toggle="modal"
+                                                                    data-ajax-popup="true"
+                                                                    data-ajax-popup="true"
                                                                     data-title="{{ __('Task Detail') }}" class="h6 ms-3"
                                                                     data-toggle="tooltip"
-                                                                    data-bs-whatever="{{ __('View Task') }}">
+                                                                    data-title="{{ __('View Task') }}">
                                                                     {{ $task->title }}
                                                                 </a>
                                                                 <br>
@@ -423,13 +423,13 @@
                                                                 </span>
                                                                 <div class="actions d-inline-block text-end float-sm-none">
                                                                     <div class="action-item ml-4 ms-5 pt-3">
-                                                                        <i class="ti ti-calendar-event"></i>
+                                                                        <i class="fa fa-calendar-event"></i>
                                                                         {{ $objUser->dateFormat($task->start_date) }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="actions d-inline-block text-end float-sm-none">
                                                                     <div class="action-item ml-4 ms-5 pt-3">
-                                                                        <i class="ti ti-calendar-event"></i>
+                                                                        <i class="fa fa-calendar-event"></i>
                                                                         {{ $objUser->dateFormat($task->due_date) }}
                                                                     </div>
                                                                 </div>
@@ -600,7 +600,7 @@
                                                 <tr>
                                                     <th scope="col">{{ __('#') }}</th>
                                                     <th scope="col">{{ __('Title') }}</th>
-                                                    <th scope="col">{{ __('Created Date') }}</th> 
+                                                    <th scope="col">{{ __('Created Date') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -620,7 +620,7 @@
                                                         </th>
                                                         <td>{{ $file->file }}</td>
                                                         <td>{{ $objUser->dateFormat($file->created_at) }}</td>
-                                                        
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -659,7 +659,7 @@
                                                             <a href="#" class="like active"
                                                                 style="margin-bottom: -13px;">
                                                                 <i class="ni ni-cloud-download-95"></i>
-                                                                
+
                                                             </a>
                                                         </div>
                                                     @endif
@@ -683,7 +683,7 @@
 
                                                             @if (!empty($subComment->file))
                                                                 <div class="action-btn bg-warning ms-2">
-                                                                   
+
                                                                 </div>
                                                             @endif
                                                         </div>
@@ -990,12 +990,12 @@ var scrollSpy = new bootstrap.ScrollSpy(document.body, {
             }).parent().removeClass('text-primary');
         });
 
-</script> 
+</script>
 <script src="{{ asset('assets/js/letter.avatar.js') }}"></script>
 
     <script>
         LetterAvatar.transform();
- 
+
 </script>
     <script>
         // For Sidebar Tabs

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@php  
+@php
  $profile = \App\Models\Utility::get_file('uploads/avatar/');
  @endphp
 
@@ -8,8 +8,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Invoice')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Invoice')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -19,15 +18,15 @@
     @if(\Auth::user()->type=='company')
 
         <a href="{{route('invoice.export')}}" class="btn btn-sm btn-primary btn-icon m-1" data-title="{{__('Export invoice CSV file')}}" data-toggle="tooltip">
-            <i class="ti ti-file-export"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Export')}}"></i>
+            <i class="fa fa-file-export"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Export')}}"></i>
         </a>
         <a href="{{ route('invoice.grid') }}" class="btn btn-sm btn-primary btn-icon m-1">
-            <i class="ti ti-layout-grid" data-bs-toggle="tooltip" data-bs-original-title="{{__('Grid View')}}"></i>
+            <i class="fa fa-layout-grid" data-bs-toggle="tooltip" data-bs-original-title="{{__('Grid View')}}"></i>
         </a>
-        
-        <a href="#" data-size="lg" data-url="{{ route('invoice.create') }}" data-bs-toggle="modal" 
-        data-bs-target="#exampleModal" data-bs-whatever="{{ __('Create Invoice') }}" class="btn btn-sm btn-primary btn-icon m-1">
-            <i class="ti ti-plus"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Create')}}"></i>
+
+        <a href="#" data-size="lg" data-url="{{ route('invoice.create') }}" data-ajax-popup="true"
+          data-title="{{ __('Create Invoice') }}" class="btn btn-sm btn-primary btn-icon m-1">
+            <i class="fa fa-plus"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Create')}}"></i>
         </a>
 
     @endif
@@ -89,14 +88,14 @@
                         </div>
                         <div class="action-btn bg-info ms-2">
                             <div class="col-auto">
-                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" 
-                                data-title="{{__('Apply')}}"><i class="ti ti-search text-white" ></i></button>
+                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip"
+                                data-title="{{__('Apply')}}"><i class="fa fa-search text-white" ></i></button>
                             </div>
                         </div>
                         <div class="action-btn bg-danger ms-2">
                             <div class="col-auto">
-                                <a href="{{route('invoice.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" 
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash text-white"></i></a>
+                                <a href="{{route('invoice.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}"
+                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash text-white"></i></a>
                             </div>
                         </div>
                     </div>
@@ -104,8 +103,8 @@
                 </div>
             </div>
         </div>
- 
-       
+
+
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header card-body table-border-style">
@@ -171,30 +170,30 @@
                                                 @if(\Auth::user()->type=='company' || \Auth::user()->type=='client')
                                                     <div class="action-btn bg-warning ms-2">
                                                         <a href="{{route('invoice.show',\Crypt::encrypt($invoice->id))}}" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                        data-bs-whatever="{{__('Edit Invoice')}}"> <span class="text-white"> <i
-                                                                class="ti ti-eye"  data-bs-toggle="tooltip" data-bs-original-title="{{__('View')}}"></i></span></a>
+                                                        data-title="{{__('Edit Invoice')}}"> <span class="text-white"> <i
+                                                                class="fa fa-eye"  data-bs-toggle="tooltip" data-bs-original-title="{{__('View')}}"></i></span></a>
                                                     </div>
                                                 @endif
 
-                                                
+
                                                 @if(\Auth::user()->type=='company')
                                                 <div class="action-btn bg-info ms-2">
-                                                    <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" data-url="{{ route('invoice.edit',$invoice->id) }}"
-                                                    data-bs-whatever="{{__('Edit Invoice')}}"> <span class="text-white"> <i
-                                                            class="ti ti-edit"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Edit')}}"></i></span></a>
+                                                    <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                      data-url="{{ route('invoice.edit',$invoice->id) }}"
+                                                    data-title="{{__('Edit Invoice')}}"> <span class="text-white"> <i
+                                                            class="fa fa-edit"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Edit')}}"></i></span></a>
                                                 </div>
 
                                                 <div class="action-btn bg-danger ms-2">
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['invoice.destroy', $invoice->id]]) !!}
                                                     <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                        <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                        <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                     </a>
                                                     {!! Form::close() !!}
                                                 </div>
-                                                    
 
-                                                
+
+
                                                 @endif
                                             </div>
                                         </td>

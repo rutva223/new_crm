@@ -4,12 +4,10 @@
     {{ $emailTemplate->name }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ $emailTemplate->name }}</h5>
-    </div>
+     {{ $emailTemplate->name }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Email Template') }}</li>
 @endsection
 
@@ -33,7 +31,7 @@
                             href="#" role="button" aria-haspopup="false" aria-expanded="false"
                             id="dropdownLanguage">
                                 <span class="drp-text hide-mob text-primary">{{ ucfirst($currEmailTempLang->lang) }}</span>
-                                <i class="ti ti-chevron-down drp-arrow nocolor"></i>
+                                <i class="fa fa-chevron-down drp-arrow nocolor"></i>
                             </a>
                             <div class="dropdown-menu dash-h-dropdown dropdown-menu-end"
                                 aria-labelledby="dropdownLanguage">
@@ -53,7 +51,7 @@
                             id="dropdownLanguage">
                                 <span
                                     class="drp-text hide-mob text-primary">{{ __('Template: ') }}{{ $emailTemplate->name }}</span>
-                                <i class="ti ti-chevron-down drp-arrow nocolor"></i>
+                                <i class="fa fa-chevron-down drp-arrow nocolor"></i>
                             </a>
                             <div class="dropdown-menu dash-h-dropdown dropdown-menu-end" aria-labelledby="dropdownLanguage">
                                 @foreach ($EmailTemplates as $EmailTemplate)

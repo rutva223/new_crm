@@ -9,9 +9,7 @@
 
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Journal Account')}}</h5>
-    </div>
+     {{__('Journal Account')}}
 @endsection
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>

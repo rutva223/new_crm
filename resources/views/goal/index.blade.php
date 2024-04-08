@@ -6,8 +6,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Goal')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Goal')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -16,16 +15,16 @@
 
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-    
+
     <a href="{{route('goal.export')}}" class="btn btn-sm btn-primary btn-icon m-1" title="{{__('Export goal CSV file')}}" data-bs-toggle="tooltip">
-        <i class="ti ti-file-export"></i>
+        <i class="fa fa-file-export"></i>
     </a>
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('goal.create') }}"
-        data-bs-whatever="{{__('Create New Goal')}}"> <span class="text-white"> 
-            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('goal.create') }}"
+        data-title="{{__('Create New Goal')}}"> <span class="text-white">
+            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
     </a>
-       
+
     @endif
 @endsection
 
@@ -74,15 +73,15 @@
                                     <div class="dropdown action-item" >
                                         <a href="#" class="action-item" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-url="{{ route('goal.edit',$goal->id) }}"
-                                            data-bs-whatever="{{__('Edit Goal')}}" >
-                                            <i class="ti ti-edit"></i>  {{__('Edit')}}</a>
-                                            
+                                            <a href="#" class="dropdown-item" data-ajax-popup="true"
+                                              data-url="{{ route('goal.edit',$goal->id) }}"
+                                            data-title="{{__('Edit Goal')}}" >
+                                            <i class="fa fa-edit"></i>  {{__('Edit')}}</a>
+
 
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['goal.destroy', $goal->id]]) !!}
                                             <a href="#!" class=" show_confirm dropdown-item">
-                                                <i class="ti ti-trash"></i>{{ __('Delete') }}
+                                                <i class="fa fa-trash"></i>{{ __('Delete') }}
                                             </a>
                                             {!! Form::close() !!}
                                         </div>
@@ -96,7 +95,7 @@
         @endforeach
         <div class="card text-center">
             <div class="pt-10 card-body">
-                <span> {{ __('No Entry Found') }} </span> 
+                <span> {{ __('No Entry Found') }} </span>
              </div>
         </div>
     </div>

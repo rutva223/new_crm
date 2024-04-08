@@ -4,9 +4,7 @@
     {{ $form->name.__("'s Response") }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">  {{ $form->name.__("'s Response") }}</h5>
-    </div>
+       {{ $form->name.__("'s Response") }}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -26,7 +24,7 @@
                             </thead>
                             <tbody>
                                 @if($form->response->count() > 0)
-                                    
+
                                         @php
                                             $first = null;
                                             $second = null;
@@ -47,7 +45,7 @@
                                                         $resp[''] = '';
                                                     }
                                                     $firstThreeElements = array_slice($resp, 0, 3);
-                    
+
                                                     $thead= array_keys($firstThreeElements);
                                                     $head1 = ($first != $thead[0]) ? $thead[0] : '';
                                                     $head2 = (!empty($thead[1]) && $second != $thead[1]) ? $thead[1] : '';
@@ -72,18 +70,18 @@
                                                 @endforeach
                                                 <td class="Action">
                                                     <div class="action-btn bg-warning ms-2">
-                                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal" data-url="{{ route('response.detail',$response->id) }}"
-                                                        data-bs-whatever="{{__('Response Detail')}}" data-bs-toggle="tooltip" title="{{ __('Response Detail') }}" 
+                                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                          data-url="{{ route('response.detail',$response->id) }}"
+                                                        data-title="{{__('Response Detail')}}" data-bs-toggle="tooltip" title="{{ __('Response Detail') }}"
                                                         data-bs-original-title="{{__('Response Detail')}}"> <span class="text-white"> <i
-                                                                class="ti ti-eye"></i></span></a>
+                                                                class="fa fa-eye"></i></span></a>
                                                     </div>
 
                                                 </td>
                                             </tr>
                                         @endforeach
-                                    
-                            
+
+
                                 @endif
                             </tbody>
                         </table>
@@ -94,6 +92,6 @@
     </div>
 </div>
 
-    
+
 @endsection
 

@@ -116,9 +116,7 @@
     {{__('Task')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Task')}}</h5>
-    </div>
+     {{__('Task')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -127,23 +125,23 @@
 @section('action-btn')
 
     <a href="{{ route('task.calendar') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="Calendar View" >
-        <i class="ti ti-calendar text-white"></i>
+        <i class="fa fa-calendar text-white"></i>
     </a>
-    
+
     <a href="{{ route('project.all.task.gantt.chart') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Gnatt Chart')}}">
-        <i class="ti ti-chart-line"></i>
+        <i class="fa fa-chart-line"></i>
     </a>
 
 
     <a href="{{ route('project.all.task') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i  data-bs-toggle="tooltip"  data-bs-original-title="{{__('List View')}}" class="ti ti-list"></i>
+        <i  data-bs-toggle="tooltip"  data-bs-original-title="{{__('List View')}}" class="fa fa-list"></i>
     </a>
 
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" 
-    data-bs-target="#exampleModal" data-url="{{ route('project.task.create',0) }}" data-size="lg"
-    data-bs-whatever="{{__('Create New Task')}}" >
-        <i data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}" class="ti ti-plus text-white"></i>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+      data-url="{{ route('project.task.create',0) }}" data-size="lg"
+    data-title="{{__('Create New Task')}}" >
+        <i data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}" class="fa fa-plus text-white"></i>
     </a>
 
 
@@ -180,17 +178,17 @@
                         <div class="col-auto">
                             {{Form::date('due_date',isset($_GET['due_date']) ? $_GET['due_date'] : new \DateTime(),array('class'=>'form-control'))}}                        </div>
                         <div class="action-btn bg-info ms-2 col-auto">
-                            <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip" data-title="{{__('Apply')}}"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Apply')}}" class="ti ti-search text-white"></i></button>
+                            <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip" data-title="{{__('Apply')}}"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Apply')}}" class="fa fa-search text-white"></i></button>
                         </div>
                         <div class="action-btn bg-danger ms-2 col-auto">
-                            <a href="{{route('project.all.task.kanban')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" class="mx-3 btn btn-sm d-flex align-items-center"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}" class="ti ti-trash-off text-white"></i></a>
+                            <a href="{{route('project.all.task.kanban')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" class="mx-3 btn btn-sm d-flex align-items-center"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}" class="fa fa-trash-off text-white"></i></a>
                         </div>
                     </div>
                     {{ Form::close() }}
                 </div>
             </div>
         </div>
-  
+
     <div class="row">
         <div class="col-sm-12">
             @php
@@ -230,34 +228,34 @@
                                                     <div class="badge bg-danger p-1 px-3 rounded"> {{ucfirst($task->priority)  }}</div>
                                                 @endif
                                                 <div class="card-header border-0 pb-0 position-relative">
-                                                    <h5> 
-                                                        <a href="#" data-size="lg" data-url="{{ route('project.task.show',$task->id) }}" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal" data-bs-whatever="{{__('View Task Details')}}" 
+                                                    <h5>
+                                                        <a href="#" data-size="lg" data-url="{{ route('project.task.show',$task->id) }}" data-ajax-popup="true"
+                                                          data-title="{{__('View Task Details')}}"
                                                         data-bs-toggle="tooltip"  title data-bs-original-title="{{__('Task Detail')}}" >{{$task->title}}</a></h5>
                                                         <div class="card-header-right">
                                                             <div class="btn-group card-option">
                                                                 <button type="button" class="btn dropdown-toggle"
                                                                     data-bs-toggle="dropdown" aria-haspopup="true"
                                                                     aria-expanded="false">
-                                                                    <i class="ti ti-dots-vertical"></i>
+                                                                    <i class="fa fa-dots-vertical"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu dropdown-menu-end">
                                                                     @if(\Auth::user()->type=='company')
-                                                                        <a href="#!" class="dropdown-item" data-size="lg" data-url="{{ route('project.task.edit',$task->id) }}" 
-                                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-whatever="{{__('Edit Task')}}">
-                                                                            <i class="ti ti-edit"></i>
+                                                                        <a href="#!" class="dropdown-item" data-size="lg" data-url="{{ route('project.task.edit',$task->id) }}"
+                                                                            data-ajax-popup="true"    data-title="{{__('Edit Task')}}">
+                                                                            <i class="fa fa-edit"></i>
                                                                             <span>{{__('Edit')}}</span>
                                                                         </a>
                                                                     @endif
-                                                                    <a href="#!" class="dropdown-item"  data-size="lg" data-url="{{ route('project.task.show',$task->id) }}" 
-                                                                        data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{__('View Task Details')}}">
-                                                                        <i class="ti ti-eye"></i>
+                                                                    <a href="#!" class="dropdown-item"  data-size="lg" data-url="{{ route('project.task.show',$task->id) }}"
+                                                                        data-ajax-popup="true"   data-title="{{__('View Task Details')}}">
+                                                                        <i class="fa fa-eye"></i>
                                                                         <span>{{__('View')}}</span>
                                                                     </a>
                                                                     <span class="">
                                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['project.task.destroy', $task->id],'id'=>'task-delete-form-'.$task->id]) !!}
                                                                         <a href="#!" class="dropdown-item  show_confirm ">
-                                                                            <i class="ti ti-trash"></i>{{ __('Delete') }}
+                                                                            <i class="fa fa-trash"></i>{{ __('Delete') }}
                                                                         </a>
                                                                         {!! Form::close() !!}
                                                                     </span>
@@ -270,12 +268,12 @@
                                                     <p class="text-muted text-sm">{{$task->taskCompleteCheckListCount()}}/{{$task->taskTotalCheckListCount()}}</p>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <ul class="list-inline mb-0">
-                                                            
+
                                                             <li class="list-inline-item d-inline-flex align-items-center"><i
-                                                                    class="f-16 text-primary ti ti-message-2"></i>{{\Auth::user()->dateFormat($task->start_date)}}</li>
-                                                            
+                                                                    class="f-16 text-primary fa fa-message-2"></i>{{\Auth::user()->dateFormat($task->start_date)}}</li>
+
                                                             <li class="list-inline-item d-inline-flex align-items-center"><i
-                                                                    class="f-16 text-primary ti ti-link"></i>{{\Auth::user()->dateFormat($task->due_date)}}</li>
+                                                                    class="f-16 text-primary fa fa-link"></i>{{\Auth::user()->dateFormat($task->due_date)}}</li>
                                                         </ul>
                                                         <div class="user-group">
                                                             <img alt="image" data-toggle="tooltip" data-original-title="{{!empty($task->taskUser)?$task->taskUser->name:''}}" @if($task->taskUser && !empty($task->taskUser->avatar)) src="{{$profile.'/'.$task->taskUser->avatar}}" @else avatar="{{!empty($task->taskUser)?$task->taskUser->name:''}}" @endif class="">

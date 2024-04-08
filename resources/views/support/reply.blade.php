@@ -72,7 +72,7 @@
                                 <a href="{{asset(Storage::url('uploads/supports')).'/'.$support->attachment}}"
                                     download="" class="bg-secondary d-inline-flex p-2 rounded text-white "
                                     target="_blank">
-                                    <i class="ti ti-download text-white me-2 mt-1" data-bs-toggle="tooltip"></i>
+                                    <i class="fa fa-download text-white me-2 mt-1" data-bs-toggle="tooltip"></i>
 
                                     {{ $support->attachment }}
                                 </a>
@@ -110,7 +110,7 @@
                             <div class="text-end">
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-success w-100"> <i
-                                            class="ti ti-circle-plus me-1 mb-0"></i> {{__('Send')}}</button>
+                                            class="fa fa-circle-plus me-1 mb-0"></i> {{__('Send')}}</button>
                                 </div>
                             </div>
                             {{ Form::close() }}

@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-6 text-right">
                                 <a href="#" class="btn btn-outline-primary btn-sm">
-                                    <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+                                    <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
                                     <span class="btn-inner--text">Add Item</span>
                                 </a>
                             </div>

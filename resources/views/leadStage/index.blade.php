@@ -32,7 +32,7 @@
                 });
             });
         </script>
-        
+
     @endif
 @endpush
 @section('page-title')
@@ -40,8 +40,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Lead Stage')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Lead Stage')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -49,10 +48,10 @@
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('leadStage.create') }}"
-        data-bs-whatever="{{__('Create New Lead Stage')}}"> <span class="text-white"> 
-            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('leadStage.create') }}"
+        data-title="{{__('Create New Lead Stage')}}"> <span class="text-white">
+            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
     @endif
 @endsection
@@ -86,30 +85,30 @@
                                         <li class="d-flex align-items-center justify-content-between list-group-item" data-id="{{$lead_stages->id}}">
                                             <span class="text-xl text-dark">
                                                 <h6 class="mb-0">
-                                                    <i class="me-3 ti ti-arrows-maximize " data-feather="move"></i>
+                                                    <i class="me-3 fa fa-arrows-maximize " data-feather="move"></i>
                                                   {{$lead_stages->name}}
                                                 </h6>
                                                 </span>
                                             @if(\Auth::user()->type=='company')
-                                                <span class="float-end">                                                
+                                                <span class="float-end">
                                                     <div class="action-btn bg-info ms-2">
-                                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" 
+                                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                         data-url="{{ route('leadStage.edit',$lead_stages->id) }}"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-whatever="{{__('Edit Lead Stage')}}" 
+                                                        data-ajax-popup="true"    data-title="{{__('Edit Lead Stage')}}"
                                                         data-size="md">
-                                                            <i class="ti ti-edit text-white"  data-bs-toggle="tooltip" title="{{__('Edit')}}"></i>
+                                                            <i class="fa fa-edit text-white"  data-bs-toggle="tooltip" title="{{__('Edit')}}"></i>
                                                         </a>
                                                     </div>
-                                                
+
                                                     <!-- @if(count($pipeline['lead_stages'])) -->
                                                         <div class="action-btn bg-danger ms-2">
                                                             {!! Form::open(['method' => 'DELETE', 'route' => ['leadStage.destroy', $lead_stages->id]]) !!}
-                                                                <a href="#" class="mx-3 btn btn-sm  align-items-center show_confirm" data-bs-toggle="tooltip" title="{{__('Delete')}}"><i class="ti ti-trash text-white"></i></a>
+                                                                <a href="#" class="mx-3 btn btn-sm  align-items-center show_confirm" data-bs-toggle="tooltip" title="{{__('Delete')}}"><i class="fa fa-trash text-white"></i></a>
                                                             {!! Form::close() !!}
                                                         </div>
                                                     <!-- @endif -->
                                                 </span>
-                                            @endif 
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>

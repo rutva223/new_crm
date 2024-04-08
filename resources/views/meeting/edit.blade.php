@@ -1,6 +1,6 @@
 {{ Form::model($meeting, array('route' => array('meeting.update', $meeting->id), 'method' => 'PUT')) }}
 <div class="row">
-    @php 
+    @php
     $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -12,7 +12,7 @@
             <i class="fas fa-robot"> {{ __('Generate With AI') }}</i>
         </a>
     </div>
-    @endif 
+    @endif
     <div class="form-group col-md-6">
         {{ Form::label('department', __('Department'),['class' => 'col-form-label']) }}
         {{ Form::select('department', $departments,null, array('class' => 'form-control multi-select')) }}
@@ -38,12 +38,12 @@
         <div class="row p-2">
             <div class="col-6">
                 {{Form::label('notes',__('Notes'),['class' => 'col-form-label'])}}
-            </div>    
+            </div>
             @if (App\Models\Utility::is_chatgpt_enable())
             <div class="col-6 text-end">
                 <a data-size="md" class="btn btn-primary btn-icon btn-sm text-white " data-ajax-popup-over="true" id="grammarCheck" data-url="{{ route('grammar',['meeting_edit']) }}"
                     data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-                    <i class="ti ti-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
+                    <i class="fa fa-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
             </div>
             @endif
         </div>

@@ -61,25 +61,23 @@
     {{ __('Zoom Meeting') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Zoom Meeting') }}</h5>
-    </div>
+     {{ __('Zoom Meeting') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Zoom Meeting') }}</li>
 @endsection
 @section('action-btn')
     <a href="{{ route('zoommeeting.index') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
         title="{{ __('List View') }}">
-        <i class="ti ti-list text-white"></i>
+        <i class="fa fa-list text-white"></i>
 
     </a>
     @if (\Auth::user()->type == 'company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
             data-url="{{ route('zoommeeting.create') }}" data-size="lg"
-            data-bs-whatever="{{ __('Create New Zoom Meeting') }}"> <span class="text-white">
-                <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+            data-title="{{ __('Create New Zoom Meeting') }}"> <span class="text-white">
+                <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                     data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
     @endif
@@ -120,7 +118,7 @@
                                         <div class="col-auto mb-3 mb-sm-0">
                                             <div class="d-flex align-items-center">
                                                 <div class="theme-avtar bg-info">
-                                                    <i class="ti ti-arrow-ramp-right"></i>
+                                                    <i class="fa fa-arrow-ramp-right"></i>
                                                 </div>
                                                 <div class="ms-3">
                                                     <h6 class="m-0">{{ $meeting->title }}</h6>

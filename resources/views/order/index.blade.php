@@ -5,12 +5,10 @@
     {{ __('Order') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Order') }}</h5>
-    </div>
+     {{ __('Order') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Order') }}</li>
 @endsection
 @section('action-btn')
@@ -89,11 +87,11 @@
                                                 <div class="action-btn bg-warning ms-2">
                                                     <a href="#"
                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                        data-ajax-popup="true"
                                                         data-url="{{ route('order.action', $order->id) }}"
-                                                        data-bs-whatever="{{ __('Payment Status') }}"> <span
+                                                        data-title="{{ __('Payment Status') }}"> <span
                                                             class="text-white">
-                                                            <i class="ti ti-caret-right" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-caret-right" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('View') }}"></i></span></a>
                                                 </div>
                                             @endif
@@ -104,7 +102,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['order.destroy', $order->id]]) !!}
                                                 <a href="#!"
                                                     class="mx-3 btn d-inline-flex btn-sm d-flex wid-30 hei-30 rounded align-items-center show_confirm">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}

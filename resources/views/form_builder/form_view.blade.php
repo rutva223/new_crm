@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="CRMGo SaaS - Projects, Accounting, Leads, Deals & HRM Tool">
-    <meta name="author" content="Rajodiya Infotech">
+    <meta name="author" content="RR Solution">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ \App\Models\Utility::get_file('uploads/logo/favicon.png') }}" type="image"
         sizes="16x16">

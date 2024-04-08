@@ -4,9 +4,7 @@
     {{ $formBuilder->name.__("'s Form Field") }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0"> {{ $formBuilder->name.__("'s Form Field") }}</h5>
-    </div>
+      {{ $formBuilder->name.__("'s Form Field") }}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -15,11 +13,11 @@
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-size="md"
-        data-bs-target="#exampleModal" data-url="{{ route('form.field.create',$formBuilder->id) }}"
-        data-bs-whatever="{{__('Create New Field')}}"data-bs-toggle="tooltip" title="Create New Field" 
-        data-bs-original-title="{{__('Create New Field')}}"> 
-            <i class="ti ti-plus text-white"></i>
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true" data-size="md"
+          data-url="{{ route('form.field.create',$formBuilder->id) }}"
+        data-title="{{__('Create New Field')}}"data-bs-toggle="tooltip" title="Create New Field"
+        data-bs-original-title="{{__('Create New Field')}}">
+            <i class="fa fa-plus text-white"></i>
         </a>
     @endif
 @endsection
@@ -48,17 +46,17 @@
                                     <td>{{ ucfirst($field->type) }}</td>
                                     <td class="text-right">
                                         <div class="action-btn bg-info ms-2">
-                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-url="{{ route('form.field.edit',[$formBuilder->id,$field->id]) }}"
-                                            data-bs-whatever="{{__('Edit Field')}}" data-bs-toggle="tooltip" title="{{ __('Edit Field') }}" > <span class="text-white"> <i
-                                                    class="ti ti-edit" data-bs-original-title="{{__('Edit Field')}}" data-bs-toggle="tooltip"></i></span></a>
+                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                              data-url="{{ route('form.field.edit',[$formBuilder->id,$field->id]) }}"
+                                            data-title="{{__('Edit Field')}}" data-bs-toggle="tooltip" title="{{ __('Edit Field') }}" > <span class="text-white"> <i
+                                                    class="fa fa-edit" data-bs-original-title="{{__('Edit Field')}}" data-bs-toggle="tooltip"></i></span></a>
                                         </div>
 
                                         <div class="action-btn bg-danger ms-2">
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['form.field.destroy', $formBuilder->id, $field->id]]) !!}
                                             <a href="#!"
                                                 class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                <i class="ti ti-trash text-white" data-bs-original-title="{{__('Delete Field')}}" data-bs-toggle="tooltip"></i>
+                                                <i class="fa fa-trash text-white" data-bs-original-title="{{__('Delete Field')}}" data-bs-toggle="tooltip"></i>
                                             </a>
                                             {!! Form::close() !!}
                                         </div>

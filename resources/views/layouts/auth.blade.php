@@ -14,7 +14,7 @@
 
     $company_favicon = $settings['favicon'];
     $setting = App\Models\Utility::colorset();
-    
+
     $lang = \App::getLocale('lang');
     if ($lang == 'ar' || $lang == 'he') {
         $settings['SITE_RTL'] = 'on';
@@ -40,7 +40,7 @@
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Rajodiya Infotech">
+    <meta name="author" content="RR Solution">
     {{-- <meta name="description" content="CRMGo SaaS - Projects, Accounting, Leads, Deals & HRM Tool"> --}}
     {{-- SEO Module --}}
     <meta name="keyword" content="{{ !empty($settings['meta_keyword']) ? $settings['meta_keyword'] : '' }}">
@@ -83,15 +83,15 @@
     @else
         @if(isset($SITE_RTL) && $SITE_RTL == 'on')
             <link rel="stylesheet" href="{{ asset('assets/css/style-rtl.css')}}" id="main-style-link">
-        @else   
+        @else
             <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}" id="main-style-link">
-        @endif  
+        @endif
     @endif
     @if(isset($SITE_RTL) && $SITE_RTL == 'on')
         <link rel="stylesheet" href="{{ asset('assets/custom/auth/css/custom-auth-rtl.css')}}" id="main-style-link">
     @else
         <link rel="stylesheet" href="{{ asset('assets/custom/auth/css/custom-auth.css')}}" id="main-style-link">
-    @endif  
+    @endif
     @if($setting['cust_darklayout']=='on')
         <link rel="stylesheet" href="{{ asset('assets/custom/auth/css/custom-dark.css')}}" id="main-style-link">
     @endif
@@ -116,7 +116,7 @@
      <link rel="stylesheet" href="{{ asset('css/custom-color.css') }}">
     <style>
         :root {
-            --color-customColor: <?= $color ?>;    
+            --color-customColor: <?= $color ?>;
         }
     </style>
 </head>

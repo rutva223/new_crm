@@ -5,25 +5,23 @@
     {{ __('Asset') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Asset') }}</h5>
-    </div>
+     {{ __('Asset') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Asset') }}</li>
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="{{ route('asset.file.import') }}" data-bs-whatever="{{ __('Import asset CSV file') }}">
-            <i class="ti ti-file-import text-white" data-bs-toggle="tooltip"
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+            data-url="{{ route('asset.file.import') }}" data-title="{{ __('Import asset CSV file') }}">
+            <i class="fa fa-file-import text-white" data-bs-toggle="tooltip"
                 data-bs-original-title="{{ __('Import') }}"></i>
         </a>
 
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="{{ route('account-assets.create') }}" data-bs-whatever="{{ __('Create New Asset') }}">
-            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+            data-url="{{ route('account-assets.create') }}" data-title="{{ __('Create New Asset') }}">
+            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
         </a>
     @endif
 @endsection
@@ -58,10 +56,10 @@
                                         <td class="text-right">
                                             <div class="action-btn bg-info ms-2">
                                                 <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    data-ajax-popup="true"
                                                     data-url="{{ route('account-assets.edit', $asset->id) }}"
-                                                    data-bs-whatever="{{ __('Edit Asset') }}"> <span class="text-white"> <i
-                                                            class="ti ti-edit" data-bs-toggle="tooltip"
+                                                    data-title="{{ __('Edit Asset') }}"> <span class="text-white"> <i
+                                                            class="fa fa-edit" data-bs-toggle="tooltip"
                                                             data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                             </div>
 
@@ -69,7 +67,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['account-assets.destroy', $asset->id]]) !!}
                                                 <a href="#!"
                                                     class=" btn btn-sm d-inline-flex align-items-center show_confirm m-2">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}

@@ -32,20 +32,20 @@
 </div>
 @endsection
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
 <li class="breadcrumb-item active" aria-current="page">{{ __('Credit Notes') }}</li>
 @endsection
 @section('action-btn')
 @if (\Auth::user()->type == 'company')
 <a href="{{ route('creditnote.export') }}" class="btn btn-sm btn-primary btn-icon m-1"
     data-bs-original-title="{{ __('Export credit notes csv file') }}" data-bs-toggle="tooltip">
-    <i class="ti ti-file-export"></i>
+    <i class="fa fa-file-export"></i>
 </a>
 
-<a href="#" data-size="lg" data-url="{{ route('creditNote.create') }}" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-bs-whatever="{{ __('Create Payment') }}"
+<a href="#" data-size="lg" data-url="{{ route('creditNote.create') }}" data-ajax-popup="true"
+      data-title="{{ __('Create Payment') }}"
     class="btn btn-sm btn-primary btn-icon m-1">
-    <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+    <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
 </a>
 @endif
 @endsection
@@ -97,7 +97,7 @@
                                 <div class="action-btn bg-warning ms-2">
                                     <a href="{{ route('invoice.show', Crypt::encrypt($invoice->id)) }}"
                                         class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                        <i class="ti ti-eye text-white" data-bs-toggle="tooltip"
+                                        <i class="fa fa-eye text-white" data-bs-toggle="tooltip"
                                             data-bs-original-title="{{ __('View') }}"></i>
                                     </a>
                                 </div>
@@ -105,10 +105,10 @@
                                 <div class="action-btn bg-info ms-2">
                                     <a href="#" data-size="lg"
                                         data-url="{{ route('creditNote.edit', $creditNote->id) }}"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        data-bs-whatever="{{ __('Edit Credit Note') }}"
+                                        data-ajax-popup="true"
+                                        data-title="{{ __('Edit Credit Note') }}"
                                         class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                        <i class="ti ti-edit text-white" data-bs-toggle="tooltip"
+                                        <i class="fa fa-edit text-white" data-bs-toggle="tooltip"
                                             data-bs-original-title="{{ __('Edit') }}"></i>
                                     </a>
                                 </div>
@@ -116,7 +116,7 @@
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['creditNote.destroy',
                                     $creditNote->id]]) !!}
                                     <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                        <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                        <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                             data-bs-original-title="{{ __('Delete') }}"></i>
                                     </a>
                                     {!! Form::close() !!}

@@ -237,7 +237,7 @@ $(document).ready(function() {
     $('.list-group-item').on('click', function() {
         var href = $(this).attr('data-href');
         $('.tabs-card').addClass('d-none');
-        $(href).removeClass('d-none');  
+        $(href).removeClass('d-none');
         $('#tabs .list-group-item').removeClass('text');
         $(this).addClass('text');
     });
@@ -328,7 +328,7 @@ if ($('#cust-theme-bg').length > 0) {
 }
 </script>
 {{-- theme customizer  --}}
-<script>       
+<script>
     $('.colorPicker').on('click', function(e) {
                $('body').removeClass('custom-color');
                if (/^theme-\d+$/) {
@@ -345,16 +345,16 @@ if ($('#cust-theme-bg').length > 0) {
                 }
                $(`input[name='color_flag`).val('true');
            });
-   
+
            $('.themes-color-change').on('click', function() {
-   
+
            $(`input[name='color_flag`).val('false');
-   
+
                var color_val = $(this).data('value');
                $('body').removeClass('custom-color');
                if(/^theme-\d+$/)
                {
-                   $('body').removeClassRegex(/^theme-\d+$/);                
+                   $('body').removeClassRegex(/^theme-\d+$/);
                }
                $('body').addClass(color_val);
                $('.theme-color').prop('checked', false);
@@ -363,7 +363,7 @@ if ($('#cust-theme-bg').length > 0) {
                $(this).addClass('active_color');
                $(`input[value=${color_val}]`).prop('checked', true);
            });
-           
+
            $.fn.removeClassRegex = function(regex) {
        return $(this).removeClass(function(index, classes) {
            return classes.split(/\s+/).filter(function(c) {
@@ -372,7 +372,7 @@ if ($('#cust-theme-bg').length > 0) {
        });
    };
    </script>
-   
+
 @endpush
 @section('page-title')
 {{ __('Settings') }}
@@ -383,7 +383,7 @@ if ($('#cust-theme-bg').length > 0) {
 </div>
 @endsection
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
 <li class="breadcrumb-item active" aria-current="page">{{ __('Settings') }}</li>
 @endsection
 @section('action-btn')
@@ -400,63 +400,63 @@ if ($('#cust-theme-bg').length > 0) {
                     <div class="list-group list-group-flush" id="useradd-sidenav">
                         <a href="#site-Setting"
                             class="list-group-item list-group-item-action border-0">{{ __('Site Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#company-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Company Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#system-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('System Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#email-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Email Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#estimate-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Estimate Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#invoice-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Invoice Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#payment-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Payment Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#time-tracker-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Time Tracker Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#zoom-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Zoom Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#slack-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Slack Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#telegram-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Telegram Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#twillio-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Twillio Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#email-notification-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Email Notification Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#google-calendar-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Google Calendar Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#webhook-settings" id="webhook-tab"
                             class="list-group-item list-group-item-action border-0"> {{ __('Webhook Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
 
                     </div>
@@ -467,43 +467,43 @@ if ($('#cust-theme-bg').length > 0) {
                     <div class="list-group list-group-flush" id="useradd-sidenav">
                         <a href="#brand-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Brand Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#email-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Email Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#pusher-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Pusher Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#payment-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Payment Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#recaptcha-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('ReCaptcha Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#storage-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Storage Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#cache-settings"
                             class="list-group-item list-group-item-action border-0">{{ __('Cache Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#SEO-settings" id="SEO-tab" class="list-group-item list-group-item-action border-0">
                             {{ __('SEO Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#cookie-settings" id="cookie-settings-tab"
                             class="list-group-item list-group-item-action border-0">{{ __('Cookie Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                         <a href="#pills-chatgpt-settings" id="cookie-settings-tab"
                             class="list-group-item list-group-item-action border-0">{{ __('ChatGpt Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
 
                     </div>
@@ -545,7 +545,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <div class="choose-files mt-4">
                                                     <label for="company_logo_dark">
                                                         <div class=" bg-primary logo m-auto"> <i
-                                                                class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                                class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                         </div>
                                                         <input type="file" class="form-control file"
                                                             name="company_logo_dark" id="company_logo_dark"
@@ -582,7 +582,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <div class="choose-files mt-4">
                                                     <label for="company_logo_light">
                                                         <div class=" bg-primary white_logo m-auto"> <i
-                                                                class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                                class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                         </div>
                                                         <input type="file" class="form-control file"
                                                             name="company_logo_light" id="company_logo_light"
@@ -619,7 +619,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <div class="choose-files mt-4">
                                                     <label for="favicon">
                                                         <div class="bg-primary favicon m-auto"> <i
-                                                                class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                                class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                         </div>
                                                         <input type="file" class="form-control file"
                                                             name="company_favicon" id="favicon"
@@ -728,10 +728,10 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <input type="radio" class="theme_color d-none" name="color" value="theme-10"{{ $color == 'theme-10' ? 'checked' : '' }}>
                                             </div>
                                             <div class="color-picker-wrp ">
-                                                    <input type="color" value="{{ $color ? $color : '' }}" class="colorPicker {{ isset($flag) && $flag == 'true' ? 'active_color' : '' }}" name="custom_color" id="color-picker">                                             
+                                                    <input type="color" value="{{ $color ? $color : '' }}" class="colorPicker {{ isset($flag) && $flag == 'true' ? 'active_color' : '' }}" name="custom_color" id="color-picker">
                                                     <input type='hidden' name="color_flag" value = {{  isset($flag) && $flag == 'true' ? 'true' : 'false' }}>
                                             </div>
-                                        </div>   
+                                        </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 col-md-4">
                                         <h6 class="mt-2">
@@ -1155,8 +1155,8 @@ if ($('#cust-theme-bg').length > 0) {
                         <div
                             class="d-flex justify-content-between justify-content-xs-center align-items-center flex-wrap">
                             <div class="form-group ">
-                                <a href="#" data-url="{{ route('test.mail') }}" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="{{ __('Send Test Mail') }}"
+                                <a href="#" data-url="{{ route('test.mail') }}" data-ajax-popup="true"
+                                      data-title="{{ __('Send Test Mail') }}"
                                     class="btn btn-print-invoice btn-primary send_email">
                                     {{ __('Send Test Mail') }}
                                 </a>
@@ -1217,7 +1217,7 @@ if ($('#cust-theme-bg').length > 0) {
                                             <div class="choose-files">
                                                 <label for="estimation_logo">
                                                     <div class=" bg-primary estimation_logo_update" style="width:180px">
-                                                        <i class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                        <i class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                     </div>
                                                     <input type="file" class="form-control file" name="estimation_logo"
                                                         id="estimation_logo" data-filename="edit-logo"
@@ -1294,7 +1294,7 @@ if ($('#cust-theme-bg').length > 0) {
                                             <div class="choose-files">
                                                 <label for="invoice_logo">
                                                     <div class=" bg-primary invoice_logo_update" style="width:180px"> <i
-                                                            class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                            class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                     </div>
                                                     <input type="file" class="form-control file" name="invoice_logo"
                                                         id="invoice_logo" data-filename="edit-logo"
@@ -3742,11 +3742,11 @@ if ($('#cust-theme-bg').length > 0) {
                                 {{ __('Edit your Webhook Settings') }}
                             </small>
                         </div>
-                        <a href="#" data-url="{{ route('webhook.create') }}" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                        <a href="#" data-url="{{ route('webhook.create') }}" data-ajax-popup="true"
+
                             class="btn btn-sm btn-primary btn-icon wid-30 hei-30 d-inline-flex align-items-center justify-content-center m-1"
-                            data-bs-whatever="{{ __('Create Webhook') }}">
-                            <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                            data-title="{{ __('Create Webhook') }}">
+                            <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                 data-bs-original-title="{{ __('Create') }}"></i>
                         </a>
 
@@ -3775,10 +3775,10 @@ if ($('#cust-theme-bg').length > 0) {
                                             <div class="action-btn  ms-2">
                                                 <a href="#"
                                                     class="mx-3 btn btn-info d-flex btn-sm d-inline-flex align-items-center wid-30 hei-30 rounded"
-                                                    data-size="md" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    data-size="md" data-ajax-popup="true"
                                                     data-url="{{ route('webhook.edit', $wh->id) }}"
-                                                    data-bs-whatever="{{ __('Edit Webhook Settings') }}">
-                                                    <i class="ti ti-edit" data-bs-toggle="tooltip"
+                                                    data-title="{{ __('Edit Webhook Settings') }}">
+                                                    <i class="fa fa-edit" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Edit Webhook Settings') }}"></i>
                                                 </a>
                                             </div>
@@ -3788,7 +3788,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 $wh->id]]) !!}
                                                 <a href="#!"
                                                     class="mx-3 btn bg-danger btn-sm d-flex wid-30 hei-30 rounded align-items-center show_confirm">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}
@@ -3848,7 +3848,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <div class="choose-files mt-5">
                                                     <label for="logo">
                                                         <div class=" bg-primary logo m-auto"> <i
-                                                                class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                                class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                         </div>
                                                         <input type="file" class="form-control file" name="logo"
                                                             id="logo" data-filename="edit-logo" accept=".jpeg,.jpg,.png"
@@ -3883,7 +3883,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <div class="choose-files mt-5">
                                                     <label for="white_logo">
                                                         <div class=" bg-primary white_logo m-auto"> <i
-                                                                class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                                class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                         </div>
                                                         <input type="file" class="form-control file" name="white_logo"
                                                             id="white_logo" data-filename="edit-white_logo"
@@ -3916,7 +3916,7 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <div class="choose-files mt-5">
                                                     <label for="favicon">
                                                         <div class="bg-primary favicon m-auto"> <i
-                                                                class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                                class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                         </div>
                                                         <input type="file" class="form-control file" name="favicon"
                                                             id="favicon" data-filename="edit-favicon"
@@ -4065,10 +4065,10 @@ if ($('#cust-theme-bg').length > 0) {
                                                 <input type="radio" class="theme_color d-none" name="color" value="theme-10"{{ $color == 'theme-10' ? 'checked' : '' }}>
                                             </div>
                                             <div class="color-picker-wrp ">
-                                                    <input type="color" value="{{ $color ? $color : '' }}" class="colorPicker {{ isset($flag) && $flag == 'true' ? 'active_color' : '' }}" name="custom_color" id="color-picker">                                             
+                                                    <input type="color" value="{{ $color ? $color : '' }}" class="colorPicker {{ isset($flag) && $flag == 'true' ? 'active_color' : '' }}" name="custom_color" id="color-picker">
                                                     <input type='hidden' name="color_flag" value = {{  isset($flag) && $flag == 'true' ? 'true' : 'false' }}>
                                             </div>
-                                        </div>   
+                                        </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-4 col-md-4">
                                         <h6 class="mt-2">
@@ -4195,8 +4195,8 @@ if ($('#cust-theme-bg').length > 0) {
                         <div
                             class="d-flex justify-content-between justify-content-xs-center align-items-center flex-wrap">
                             <div class="form-group">
-                                <a href="#" data-url="{{ route('test.mail') }}" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="{{ __('Send Test Mail') }}"
+                                <a href="#" data-url="{{ route('test.mail') }}" data-ajax-popup="true"
+                                      data-title="{{ __('Send Test Mail') }}"
                                     class="btn btn-print-invoice btn-primary send_email">
                                     {{ __('Send Test Mail') }}
                                 </a>
@@ -6231,7 +6231,7 @@ if ($('#cust-theme-bg').length > 0) {
                                     <div class="choose-files mt-4">
                                         <label for="meta_image">
                                             <div class="bg-primary company_favicon_update"> <i
-                                                    class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                    class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                             </div>
                                             <input type="file" class="form-control file" id="meta_image"
                                                 name="meta_image" data-filename="edit-meta_image"
@@ -6364,7 +6364,7 @@ if ($('#cust-theme-bg').length > 0) {
                                 <label for="file" class="form-label">{{ __('Download cookie accepted data') }}</label>
                                 <a href="{{ asset(Storage::url('uploads/sample')) . '/data.csv' }}"
                                     class="btn btn-primary mr-3 mx-3">
-                                    <i class="ti ti-download"></i>
+                                    <i class="fa fa-download"></i>
                                 </a>
                                 @endif
                             </div>

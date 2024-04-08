@@ -7,8 +7,7 @@
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 "> {{ __('Manage Item Stock') }}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 "> {{ __('Manage Item Stock') }}
 @endsection
 
 @section('breadcrumb')
@@ -41,11 +40,11 @@
 
                                         <td class="Action">
                                             <div class="action-btn bg-info ms-2">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-url="{{ route('itemstock.edit', $item->id) }}"
-                                                data-bs-whatever="{{__('Update Quantity')}}" 
+                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                  data-url="{{ route('itemstock.edit', $item->id) }}"
+                                                data-title="{{__('Update Quantity')}}"
                                                 > <span class="text-white"> <i
-                                                        class="ti ti-edit" data-bs-toggle="tooltip" title="{{__('Update Quantity')}}" ></i></span></a>
+                                                        class="fa fa-edit" data-bs-toggle="tooltip" title="{{__('Update Quantity')}}" ></i></span></a>
                                             </div>
 
                                         </td>

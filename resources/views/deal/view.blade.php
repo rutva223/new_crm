@@ -109,9 +109,7 @@
     {{__('Deal Detail')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">   {{$deal->name}}</h5>
-    </div>
+        {{$deal->name}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -123,23 +121,23 @@
         <div class="col-auto">
             <div class="actions">
                 <div class="action-btn bg-warning ms-2">
-                    <a href="#" data-url="{{ route('deal.labels',$deal->id) }}"  data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" data-bs-whatever="{{__('Add Label')}}"  class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                        <i class="ti ti-tag text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Label')}}"></i>
+                    <a href="#" data-url="{{ route('deal.labels',$deal->id) }}"  data-ajax-popup="true"
+                          data-title="{{__('Add Label')}}"  class="mx-3 btn btn-sm d-inline-flex align-items-center">
+                        <i class="fa fa-tag text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Label')}}"></i>
                     </a>
                 </div>
 
                 <div class="action-btn bg-info ms-2">
-                    <a href="#" data-size="lg" data-url="{{ route('deal.edit',$deal->id) }}" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"  data-title="{{__('Create New Deal')}}" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-toggle="tooltip" data-original-title="{{__('Edit')}}">
-                        <i class="ti ti-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
+                    <a href="#" data-size="lg" data-url="{{ route('deal.edit',$deal->id) }}" data-ajax-popup="true"
+                           data-title="{{__('Create New Deal')}}" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-toggle="tooltip" data-original-title="{{__('Edit')}}">
+                        <i class="fa fa-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
                     </a>
                 </div>
                 <div class="action-btn bg-danger ms-2">
                     {!! Form::open(['method' => 'DELETE', 'route' => ['deal.destroy', $deal->id, $deal->id]]) !!}
                     <a href="#!"
                         class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                        <i class="ti ti-trash text-white"
+                        <i class="fa fa-trash text-white"
                             data-bs-toggle="tooltip"
                             data-bs-original-title="{{ __('Delete') }}"></i>
                     </a>
@@ -156,15 +154,15 @@
             <div class="col-xl-3">
                 <div class="card sticky-top" style="top:30px">
                     <div class="list-group list-group-flush" id="useradd-sidenav">
-                        <a href="#useradd-1" class="list-group-item list-group-item-action border-0">{{ __('General') }} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-2" class="list-group-item list-group-item-action border-0">{{ __('Task') }} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-3" class="list-group-item list-group-item-action border-0">{{__('Sources')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-4" class="list-group-item list-group-item-action border-0">{{__('Files')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-5" class="list-group-item list-group-item-action border-0">{{__('Discussion')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-6" class="list-group-item list-group-item-action border-0">{{__('Notes')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-7" class="list-group-item list-group-item-action border-0">{{__('Calls')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-8" class="list-group-item list-group-item-action border-0">{{__('Emails')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
-                        <a href="#useradd-9" class="list-group-item list-group-item-action border-0">{{__('Client')}} <div class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                        <a href="#useradd-1" class="list-group-item list-group-item-action border-0">{{ __('General') }} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-2" class="list-group-item list-group-item-action border-0">{{ __('Task') }} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-3" class="list-group-item list-group-item-action border-0">{{__('Sources')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-4" class="list-group-item list-group-item-action border-0">{{__('Files')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-5" class="list-group-item list-group-item-action border-0">{{__('Discussion')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-6" class="list-group-item list-group-item-action border-0">{{__('Notes')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-7" class="list-group-item list-group-item-action border-0">{{__('Calls')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-8" class="list-group-item list-group-item-action border-0">{{__('Emails')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
+                        <a href="#useradd-9" class="list-group-item list-group-item-action border-0">{{__('Client')}} <div class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                     </div>
                 </div>
             </div>
@@ -185,7 +183,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-primary">
-                                                <i class="ti ti-user-plus"></i>
+                                                <i class="fa fa-user-plus"></i>
                                             </div>
                                             <h6 class="mb-3 mt-2">{{__('Task')}}</h6>
                                             <h3 class="mb-0">{{count($tasks)}} </h3>
@@ -196,7 +194,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-info">
-                                                <i class="ti ti-click"></i>
+                                                <i class="fa fa-click"></i>
                                             </div>
                                             <h6 class="mb-3 mt-2">{{__('Product')}}</h6>
                                             <h3 class="mb-0">{{count($products)}} </h3>
@@ -207,7 +205,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-warning">
-                                                <i class="ti ti-brand-open-source"></i>
+                                                <i class="fa fa-brand-open-source"></i>
                                             </div>
                                             <h6 class="mb-3 mt-2">{{__('Source')}}</h6>
                                             <h3 class="mb-0">{{count($sources)}}</h3>
@@ -218,7 +216,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-secondary">
-                                                <i class="ti ti-file"></i>
+                                                <i class="fa fa-file"></i>
                                             </div>
                                             <h6 class="mb-3 mt-2">{{__('Files')}}</h6>
                                             <h3 class="mb-0">{{count($deal->files)}} </h3>
@@ -231,10 +229,10 @@
                             <div class="card-header">
                                 <div class="float-end">
                                     <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-url="{{ route('deal.users.edit',$deal->id) }}"
-                                            data-bs-whatever="{{__('Create New User')}}"> <span class="text-white">
-                                                <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                              data-url="{{ route('deal.users.edit',$deal->id) }}"
+                                            data-title="{{__('Create New User')}}"> <span class="text-white">
+                                                <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
                                 </div>
@@ -260,7 +258,7 @@
                                                             <div class="action-btn bg-danger ms-2">
                                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['deal.users.destroy',$deal->id,$user->id]]) !!}
                                                                 <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm m-2">
-                                                                    <i class="ti ti-trash text-white"></i>
+                                                                    <i class="fa fa-trash text-white"></i>
                                                                 </a>
                                                                 {!! Form::close() !!}
 
@@ -298,14 +296,14 @@
                                                     </div>
                                                     <div class="col-auto actions">
                                                         <a class="action-item" href="{{$deal_files . '/' .$file->file_path}}" download="" data-toggle="tooltip" data-original-title="{{__('Download')}}">
-                                                            <i class="ti ti-download"></i>
+                                                            <i class="fa fa-download"></i>
                                                         </a>
                                                     </div>
                                                     <div class="action-btn bg-danger ms-2">
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['deal.file.delete', $deal->id, $file->id],'id'=>'general_file_delete_form-'.$file->file_name]) !!}
                                                         <a href="#!"
                                                             class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                            <i class="ti ti-trash text-white"
+                                                            <i class="fa fa-trash text-white"
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                         </a>
@@ -318,7 +316,7 @@
                                                             <button type="submit" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm m-2" data-toggle="tooltip"
                                                             title='{{ __('Delete') }}'>
                                                             <span class="text-white"> <i
-                                                                class="ti ti-trash text-white"></i></span>
+                                                                class="fa fa-trash text-white"></i></span>
                                                             </button>
                                                         </form>
                                                     </div> -->
@@ -352,7 +350,7 @@
                                         <div class="col-md-4 col-sm-6 mt-2">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-success mt-2">
-                                                    <i class="ti ti-calendar-stats "></i>
+                                                    <i class="fa fa-calendar-stats "></i>
                                                 </div>
                                                 <div class="ms-2 mt-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Created')}}</p>
@@ -364,7 +362,7 @@
                                         <div class="col-md-4 col-sm-6 my-3 my-sm-0 mt-4">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-info mt-3">
-                                                    <i class="ti ti-thumb-up"></i>
+                                                    <i class="fa fa-thumb-up"></i>
                                                 </div>
                                                 <div class="ms-2 mt-3">
                                                     <p class="text-muted text-sm mb-0">{{__('Price')}}:</p>
@@ -376,7 +374,7 @@
                                         <div class="col-md-4 col-sm-6 my-3 my-sm-0 mt-4">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-warning mt-3">
-                                                    <i class="ti ti-heart"></i>
+                                                    <i class="fa fa-heart"></i>
                                                 </div>
                                                 <div class="ms-2 mt-3">
                                                     <p class="text-muted text-sm mb-0">{{__('Pipeline')}}:</p>
@@ -394,10 +392,10 @@
                                 <div class="card-header">
                                     <div class="float-end">
                                         <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                            <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-url="{{ route('deal.items.edit',$deal->id) }}"
-                                            data-bs-whatever="{{__('Create New Item')}}"> <span class="text-white">
-                                                <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                            <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                              data-url="{{ route('deal.items.edit',$deal->id) }}"
+                                            data-title="{{__('Create New Item')}}"> <span class="text-white">
+                                                <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
                                     </div>
@@ -422,7 +420,7 @@
                                                         <div class="action-btn bg-danger ms-2">
                                                             {!! Form::open(['method' => 'DELETE', 'route' => ['deal.items.destroy',$deal->id,$product->id]]) !!}
                                                             <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm m-2">
-                                                                <i class="ti ti-trash text-white"></i>
+                                                                <i class="fa fa-trash text-white"></i>
                                                             </a>
                                                             {!! Form::close() !!}
                                                         </div>
@@ -453,7 +451,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
 
                                                                 </div>
@@ -476,7 +474,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -497,7 +495,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -518,7 +516,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -539,7 +537,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -560,7 +558,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -581,7 +579,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -602,7 +600,7 @@
                                                         <div class="col-auto mb-3 mb-sm-0">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="theme-avtar bg-primary">
-                                                                <i class="ti ti-activity text-white"
+                                                                <i class="fa fa-activity text-white"
                                                                                     class="fas {{ $activity->logIcon() }}"></i>
                                                                 </div>
                                                                 <div class="ms-3">
@@ -638,11 +636,11 @@
                         <div class="card-header">
                             <div class="float-end">
                                 <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-url="{{ route('deal.tasks.create',$deal->id) }}"
-                                    data-bs-whatever="{{__('Create New Task')}}"data-bs-toggle="tooltip" title="{{ __('Create') }}"
+                                    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                      data-url="{{ route('deal.tasks.create',$deal->id) }}"
+                                    data-title="{{__('Create New Task')}}"data-bs-toggle="tooltip" title="{{ __('Create') }}"
                                     data-bs-original-title="{{__('Create New Task')}}"> <span class="text-white">
-                                        <i class="ti ti-plus text-white"></i></span>
+                                        <i class="fa fa-plus text-white"></i></span>
                                     </a></p>
                             </div>
                             <h5 class="mb-0">{{ __('Tasks') }}</h5>
@@ -669,16 +667,16 @@
                                         <div class="col-auto card-meta d-inline-flex align-items-center ml-sm-auto">
                                             @if(\Auth::user()->type=='company')
                                                     <div class="action-btn bg-info ms-2 float-end">
-                                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal" data-url="{{route('deal.tasks.edit',[$deal->id,$task->id])}}"
-                                                        data-bs-whatever="{{__('Edit Task')}}"> <span class="text-white">
-                                                            <i class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span>
+                                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                          data-url="{{route('deal.tasks.edit',[$deal->id,$task->id])}}"
+                                                        data-title="{{__('Edit Task')}}"> <span class="text-white">
+                                                            <i class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span>
                                                         </a>
                                                     </div>
                                                     <div class="action-btn bg-danger ms-2">
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['deal.tasks.destroy',$deal->id,$task->id]]) !!}
                                                         <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm m-2">
-                                                            <i data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}" class="ti ti-trash text-white"></i>
+                                                            <i data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}" class="fa fa-trash text-white"></i>
                                                         </a>
                                                         {!! Form::close() !!}
                                                     </div>
@@ -703,10 +701,10 @@
                         <div class="card-header">
                             <div class="float-end">
                                 <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-url="{{ route('deal.sources.edit',$deal->id) }}"
-                                    data-bs-whatever="{{__('Create New Source')}}"> <span class="text-white">
-                                        <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                      data-url="{{ route('deal.sources.edit',$deal->id) }}"
+                                    data-title="{{__('Create New Source')}}"> <span class="text-white">
+                                        <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                     </a></p>
                             </div>
                             <h5 class="mb-0">{{ __('Sources') }}</h5>
@@ -728,7 +726,7 @@
                                                 <div class="action-btn bg-danger ms-2">
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['deal.sources.destroy',$deal->id,$source->id]]) !!}
                                                     <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                        <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                        <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                     </a>
                                                     {!! Form::close() !!}
                                                 </div>
@@ -795,7 +793,7 @@
                                                                 <a href="{{$deal_files . '/' .$file->file_path}}"
                                                                     class="btn btn-sm btn-secondary btn-icon rounded-pill" download=""
                                                                 data-bs-toggle="tooltip" title="Download" > <span class="text-white"> <i
-                                                                        class="ti ti-download"></i></span></a>
+                                                                        class="fa fa-download"></i></span></a>
                                                             </div>
 
                                                             <div class="col-auto actions">
@@ -803,7 +801,7 @@
                                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['deal.file.delete', $deal->id, $file->id],'id'=>'user-delete-form-'.$user->id]) !!}
                                                                     <a href="#!"
                                                                         class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                                        <i class="ti ti-trash text-white"
+                                                                        <i class="fa fa-trash text-white"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-original-title="{{ __('Delete') }}"></i>
                                                                     </a>
@@ -829,10 +827,10 @@
                             <div class="float-end">
                                 @if(\Auth::user()->type=='company' || \Auth::user()->type=='employee')
                                     <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-url="{{ route('deal.discussions.create',$deal->id) }}"
-                                        data-bs-whatever="{{__('Create New Discussion')}}"> <span class="text-white">
-                                            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                          data-url="{{ route('deal.discussions.create',$deal->id) }}"
+                                        data-title="{{__('Create New Discussion')}}"> <span class="text-white">
+                                            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                         </a>
                                     </p>
                                 @endif
@@ -893,10 +891,10 @@
                             <div class="float-end">
                                 @if(\Auth::user()->type=='company' || \Auth::user()->type=='employee')
                                     <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-size="lg"
-                                        data-bs-target="#exampleModal" data-url="{{ route('deal.call.create',$deal->id) }}"
-                                        data-bs-whatever="{{__('Create New Call')}}"> <span class="text-white">
-                                            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true" data-size="lg"
+                                          data-url="{{ route('deal.call.create',$deal->id) }}"
+                                        data-title="{{__('Create New Call')}}"> <span class="text-white">
+                                            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                         </a>
                                     </p>
                                 @endif
@@ -929,17 +927,17 @@
                                         @if(\Auth::user()->type=='company')
                                             <td class="text-end">
                                                 <div class="action-btn bg-warning ms-2">
-                                                    <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" data-url="{{ route('deal.call.edit',[$deal->id,$call->id]) }}"
-                                                    data-bs-whatever="{{__('Edit Call')}}"data-bs-toggle="tooltip" title="{{ __('Edit') }}" data-size="lg"
+                                                    <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                      data-url="{{ route('deal.call.edit',[$deal->id,$call->id]) }}"
+                                                    data-title="{{__('Edit Call')}}"data-bs-toggle="tooltip" title="{{ __('Edit') }}" data-size="lg"
                                                     data-bs-original-title="{{__('Edit Call')}}"> <span class="text-white">
-                                                        <i class="ti ti-edit text-white"></i></span>
+                                                        <i class="fa fa-edit text-white"></i></span>
                                                     </a>
                                                 </div>
                                                 <div class="action-btn bg-danger ms-2">
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['deal.call.destroy',$deal->id ,$call->id]]) !!}
                                                     <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                        <i class="ti ti-trash text-white"></i>
+                                                        <i class="fa fa-trash text-white"></i>
                                                     </a>
                                                     {!! Form::close() !!}
                                                 </div>
@@ -960,10 +958,10 @@
                             <div class="float-end">
                                 @if(\Auth::user()->type=='company' || \Auth::user()->type=='employee')
                                     <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-url="{{ route('deal.email.create',$deal->id) }}"
-                                        data-bs-whatever="{{__('Create New Email')}}"> <span class="text-white">
-                                            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                          data-url="{{ route('deal.email.create',$deal->id) }}"
+                                        data-title="{{__('Create New Email')}}"> <span class="text-white">
+                                            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                         </a>
                                     </p>
                                 @endif
@@ -1000,10 +998,10 @@
                             <div class="float-end">
                                 @if(\Auth::user()->type=='company')
                                     <p class="text-muted d-none d-sm-flex align-items-center mb-0">
-                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-url="{{route('deal.clients.edit',$deal->id)}}"
-                                        data-bs-whatever="{{__('Create New Client')}}"> <span class="text-white">
-                                            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+                                        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+                                          data-url="{{route('deal.clients.edit',$deal->id)}}"
+                                        data-title="{{__('Create New Client')}}"> <span class="text-white">
+                                            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
                                         </a>
                                     </p>
                                 @endif
@@ -1032,7 +1030,7 @@
                                                     <div class="action-btn bg-danger ms-2">
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['deal.clients.destroy',$deal->id,$client->id]]) !!}
                                                         <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm m-2">
-                                                            <i class="ti ti-trash text-white"></i>
+                                                            <i class="fa fa-trash text-white"></i>
                                                         </a>
                                                         {!! Form::close() !!}
                                                     </div>

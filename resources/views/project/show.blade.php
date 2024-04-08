@@ -220,12 +220,10 @@
     </script>
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Project Detail') }}</h5>
-    </div>
+     {{ __('Project Detail') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item"><a href="{{ route('project.index') }}">{{ __('Project') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ $project->title }}</li>
 @endsection
@@ -235,24 +233,24 @@
         @if (\Auth::user()->type == 'company')
             <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                 <a href="#" data-size="md" data-url="{{ route('project.copylink.setting.create', $project->id) }}"
-                    data-bs-target="#exampleModal" data-bs-toggle="modal" data-bs-toggle="tooltip"
+                      data-ajax-popup="true" data-bs-toggle="tooltip"
                     data-bs-title="{{ __('Shared Project Settings') }}" class="btn btn-sm btn-primary btn-icon-only m-1"
-                    data-bs-whatever="{{ __('Shared Project Settings') }}">
-                    <i class="ti ti-share"></i>
+                    data-title="{{ __('Shared Project Settings') }}">
+                    <i class="fa fa-share"></i>
                 </a>
             </p>
         @endif
 
         @if (\Auth::user()->type == 'company')
             <a href="{{ route('project.edit', \Crypt::encrypt($project->id)) }}" class="btn btn-sm btn-info  btn-icon m-1"
-                data-bs-whatever="{{ __('Edit Project') }}" data-bs-toggle="tooltip"
+                data-title="{{ __('Edit Project') }}" data-bs-toggle="tooltip"
                 data-bs-original-title="{{ __('Edit') }}"> <span class="text-white"> <i
-                        class="ti ti-edit"></i></span></a>
+                        class="fa fa-edit"></i></span></a>
 
 
             {!! Form::open(['method' => 'DELETE', 'route' => ['project.destroy', $project->id]]) !!}
             <a href="#!" class="btn btn-sm btn-danger btn-icon m-1 show_confirm">
-                <i class="ti ti-trash text-white"></i>
+                <i class="fa fa-trash text-white"></i>
             </a>
             {!! Form::close() !!}
         @endif
@@ -286,62 +284,62 @@
                         <div class="list-group list-group-flush" id="useradd-sidenav">
                             <a href="#useradd-1"
                                 class="list-group-item list-group-item-action border-0">{{ __('Overview') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i> </div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i> </div>
                             </a>
                             <a href="#useradd-2"
                                 class="list-group-item list-group-item-action border-0">{{ __('Task List') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-3"
                                 class="list-group-item list-group-item-action border-0">{{ __('Task Kanban') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-4"
                                 class="list-group-item list-group-item-action border-0">{{ __('Gantt Chart') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-5"
                                 class="list-group-item list-group-item-action border-0">{{ __('Milestone') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-6"
                                 class="list-group-item list-group-item-action border-0">{{ __('Notes') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-7"
                                 class="list-group-item list-group-item-action border-0">{{ __('Files') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-8"
                                 class="list-group-item list-group-item-action border-0">{{ __('Comments') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             <a href="#useradd-9"
                                 class="list-group-item list-group-item-action border-0">{{ __('Client Feedback') }}
-                                <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                             </a>
                             @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'client')
                                 <a href="#useradd-10"
                                     class="list-group-item list-group-item-action border-0">{{ __('Invoice') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                             @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
                                 <a href="#useradd-11"
                                     class="list-group-item list-group-item-action border-0">{{ __('Timesheets') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                             @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'client')
                                 <a href="#useradd-12"
                                     class="list-group-item list-group-item-action border-0">{{ __('Payment') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                             @if (\Auth::user()->type == 'company')
                                 <a href="#useradd-13"
                                     class="list-group-item list-group-item-action border-0">{{ __('Expense') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             @endif
                         </div>
@@ -386,7 +384,7 @@
                                             <div class="col-md-4 col-sm-6">
                                                 <div class="d-flex align-items-start">
                                                     <div class="theme-avtar bg-success">
-                                                        <i class="ti ti-calendar"></i>
+                                                        <i class="fa fa-calendar"></i>
                                                     </div>
                                                     <div class="ms-2">
                                                         <p class="text-muted text-sm mb-0">{{ __('Start Date') }}:</p>
@@ -398,7 +396,7 @@
                                             <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                                 <div class="d-flex align-items-start">
                                                     <div class="theme-avtar bg-info">
-                                                        <i class="ti ti-calendar-time"></i>
+                                                        <i class="fa fa-calendar-time"></i>
                                                     </div>
                                                     <div class="ms-2">
                                                         <p class="text-muted text-sm mb-0">{{ __('Due Date') }}:</p>
@@ -410,7 +408,7 @@
                                             <div class="col-md-4 col-sm-6">
                                                 <div class="d-flex align-items-start">
                                                     <div class="theme-avtar bg-danger">
-                                                        <i class="ti ti-brand-hipchat"></i>
+                                                        <i class="fa fa-brand-hipchat"></i>
                                                     </div>
                                                     <div class="ms-2">
                                                         <p class="text-muted text-sm mb-0">{{ __('Comments') }}:</p>
@@ -423,7 +421,7 @@
                                             <div class="col-md-4 col-sm-6">
                                                 <div class="d-flex align-items-start">
                                                     <div class="theme-avtar bg-warning">
-                                                        <i class="ti ti-user"></i>
+                                                        <i class="fa fa-user"></i>
                                                     </div>
                                                     <div class="ms-2">
                                                         <p class="text-muted text-sm mb-0">{{ __('Members') }}:</p>
@@ -435,7 +433,7 @@
                                             <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                                 <div class="d-flex align-items-start">
                                                     <div class="theme-avtar bg-dark">
-                                                        <i class="ti ti-calendar-event"></i>
+                                                        <i class="fa fa-calendar-event"></i>
                                                     </div>
                                                     <div class="ms-2">
                                                         <p class="text-muted text-sm mb-0">{{ __('Days Left') }}:</p>
@@ -453,11 +451,11 @@
                                             @if (\Auth::user()->type == 'company')
                                                 <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                                     <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                        data-ajax-popup="true"
                                                         data-url="{{ route('project.user', $project->id) }}"
-                                                        data-bs-whatever="{{ __('Add User') }}"> <span
+                                                        data-title="{{ __('Add User') }}"> <span
                                                             class="text-white">
-                                                            <i class="ti ti-plus" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-plus" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Add') }}"></i></span>
                                                     </a>
                                                 </p>
@@ -488,7 +486,7 @@
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                                     data-toggle="tooltip"
                                                                     data-original-title="{{ __('View') }}">
-                                                                    <i class="ti ti-eye text-white"
+                                                                    <i class="fa fa-eye text-white"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-original-title="{{ __('View') }}"></i>
                                                                 </a>
@@ -498,7 +496,7 @@
                                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['project.user.destroy', $project->id, $user->user_id]]) !!}
                                                                     <a href="#!"
                                                                         class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                                        <i class="ti ti-trash text-white"
+                                                                        <i class="fa fa-trash text-white"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-original-title="{{ __('Delete') }}"></i>
                                                                     </a>
@@ -522,7 +520,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="theme-avtar bg-success">
-                                                    <i class="ti ti-report-money"></i>
+                                                    <i class="fa fa-report-money"></i>
                                                 </div>
                                                 <h6 class="mb-3 mt-2">{{ __('Budget') }}</h6>
                                                 <h4 class="mb-0">
@@ -534,7 +532,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="theme-avtar bg-info">
-                                                    <i class="ti ti-click"></i>
+                                                    <i class="fa fa-click"></i>
                                                 </div>
                                                 <h6 class="mb-3 mt-2">{{ __('Expense') }}</h6>
                                                 <h4 class="mb-0">{{ \Auth::user()->priceFormat($totalExpense) }}
@@ -546,7 +544,7 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="theme-avtar bg-warning">
-                                                    <i class="ti ti-user-plus"></i>
+                                                    <i class="fa fa-user-plus"></i>
                                                 </div>
                                                 <h6 class="mb-3 mt-2">{{ __('Client') }}</h6>
                                                 <h6 class="mb-0">
@@ -570,10 +568,10 @@
                                     @if (\Auth::user()->type == 'company')
                                         <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                             <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                data-bs-toggle="modal" data-size="lg" data-bs-target="#exampleModal"
+                                                data-ajax-popup="true" data-size="lg"
                                                 data-url="{{ route('project.task.create', $project->id) }}"
-                                                data-bs-whatever="{{ __('Create New Task') }}"> <span class="text-white">
-                                                    <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                data-title="{{ __('Create New Task') }}"> <span class="text-white">
+                                                    <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
@@ -627,11 +625,11 @@
                                                             </span>
                                                             <a href="#" data-size="lg"
                                                                 data-url="{{ route('project.task.show', $task->id) }}"
-                                                                data-ajax-popup="true" data-bs-target="#exampleModal"
-                                                                data-bs-toggle="modal"
+                                                                data-ajax-popup="true"
+                                                                data-ajax-popup="true"
                                                                 data-title="{{ __('Task Detail') }}" class="h6 ms-3"
                                                                 data-toggle="tooltip"
-                                                                data-bs-whatever="{{ __('View Task') }}">
+                                                                data-title="{{ __('View Task') }}">
                                                                 {{ $task->title }}
                                                             </a>
                                                             <br>
@@ -649,13 +647,13 @@
                                                             </span>
                                                             <div class="actions d-inline-block text-end float-sm-none">
                                                                 <div class="action-item ml-4 ms-5 pt-3">
-                                                                    <i class="ti ti-calendar-event"></i>
+                                                                    <i class="fa fa-calendar-event"></i>
                                                                     {{ \Auth::user()->dateFormat($task->start_date) }}
                                                                 </div>
                                                             </div>
                                                             <div class="actions d-inline-block text-end float-sm-none">
                                                                 <div class="action-item ml-4 ms-5 pt-3">
-                                                                    <i class="ti ti-calendar-event"></i>
+                                                                    <i class="fa fa-calendar-event"></i>
                                                                     {{ \Auth::user()->dateFormat($task->due_date) }}
                                                                 </div>
                                                             </div>
@@ -665,23 +663,23 @@
                                                                         <a href="#"
                                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                                             data-size="lg"
-                                                                            data-bs-whatever="{{ __('Edit Task') }}"
+                                                                            data-title="{{ __('Edit Task') }}"
                                                                             data-url="{{ route('project.task.edit', $task->id) }}"
-                                                                            data-bs-target="#exampleModal"
-                                                                            data-bs-toggle="modal"> <span
-                                                                                class="text-white"> <i class="ti ti-edit"
+
+                                                                            data-ajax-popup="true"> <span
+                                                                                class="text-white"> <i class="fa fa-edit"
                                                                                     data-bs-toggle="tooltip"
                                                                                     data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                                                     </div>
                                                                 @endif
                                                                 <div class="action-btn bg-warning ms-2">
                                                                     <a href="#"class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                                        data-bs-target="#exampleModal"
-                                                                        data-bs-toggle="modal"
+
+                                                                        data-ajax-popup="true"
                                                                         data-url="{{ route('project.task.show', $task->id) }}"
-                                                                        data-bs-whatever="{{ __('View Task') }}"
+                                                                        data-title="{{ __('View Task') }}"
                                                                         data-size="lg"> <span class="text-white">
-                                                                            <i class="ti ti-eye" data-bs-toggle="tooltip"
+                                                                            <i class="fa fa-eye" data-bs-toggle="tooltip"
                                                                                 data-bs-original-title="{{ __('View') }}">
                                                                             </i>
                                                                         </span>
@@ -693,7 +691,7 @@
                                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['project.task.destroy', $task->id]]) !!}
                                                                         <a href="#!"
                                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm m-2">
-                                                                            <i class="ti ti-trash text-white"
+                                                                            <i class="fa fa-trash text-white"
                                                                                 data-bs-toggle="tooltip"
                                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                                         </a>
@@ -721,11 +719,11 @@
                                     @if (\Auth::user()->type == 'company')
                                         <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                             <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                data-bs-toggle="modal" data-size="lg" data-bs-target="#exampleModal"
+                                                data-ajax-popup="true" data-size="lg"
                                                 data-url="{{ route('project.task.create', $project->id) }}"
-                                                data-bs-whatever="{{ __('Create New Task') }}"> <span
+                                                data-title="{{ __('Create New Task') }}"> <span
                                                     class="text-white">
-                                                    <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
@@ -779,10 +777,10 @@
                                                                             <a href="#"
                                                                                 data-url="{{ route('project.task.show', $task->id) }}"
                                                                                 data-toggle="modal"
-                                                                                data-bs-target="#exampleModal"
+
                                                                                 data-ajax-popup="true"
-                                                                                data-bs-whatever="{{ __('View Task Details') }}"
-                                                                                data-bs-toggle="modal" title
+                                                                                data-title="{{ __('View Task Details') }}"
+                                                                                data-ajax-popup="true" title
                                                                                 data-toggle="tooltip" data-size="lg"
                                                                                 data-bs-original-title="{{ __('Task Detail') }}">{{ $task->title }}</a>
                                                                         </h5>
@@ -796,10 +794,10 @@
                                                                                             class="dropdown-item"
                                                                                             data-size="lg"
                                                                                             data-url="{{ route('project.task.edit', $task->id) }}"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#exampleModal"
-                                                                                            data-bs-whatever="{{ __('Edit Task') }}">
-                                                                                            <i class="ti ti-edit"></i>
+                                                                                            data-ajax-popup="true"
+
+                                                                                            data-title="{{ __('Edit Task') }}">
+                                                                                            <i class="fa fa-edit"></i>
                                                                                             <span>{{ __('Edit') }}</span>
                                                                                         </a>
                                                                                     @endif
@@ -809,10 +807,10 @@
                                                                                             class="dropdown-item"
                                                                                             data-size="lg"
                                                                                             data-url="{{ route('project.task.show', $task->id) }}"
-                                                                                            data-bs-toggle="modal"
-                                                                                            data-bs-target="#exampleModal"
-                                                                                            data-bs-whatever="{{ __('View') }}">
-                                                                                            <i class="ti ti-eye"></i>
+                                                                                            data-ajax-popup="true"
+
+                                                                                            data-title="{{ __('View') }}">
+                                                                                            <i class="fa fa-eye"></i>
                                                                                             <span>{{ __('View') }}</span>
                                                                                         </a>
                                                                                     @endif
@@ -827,7 +825,7 @@
                                                                                             <a href="#!"
                                                                                                 class=" show_confirm">
                                                                                                 <i
-                                                                                                    class="ti ti-trash"></i>{{ __('Delete') }}
+                                                                                                    class="fa fa-trash"></i>{{ __('Delete') }}
                                                                                             </a>
                                                                                             {!! Form::close() !!}
                                                                                         </span>
@@ -845,12 +843,12 @@
                                                                                 <li
                                                                                     class="list-inline-item d-inline-flex align-items-center">
                                                                                     <i
-                                                                                        class="f-16 text-primary ti ti-calendar-stats"></i>{{ \Auth::user()->dateFormat($task->start_date) }}
+                                                                                        class="f-16 text-primary fa fa-calendar-stats"></i>{{ \Auth::user()->dateFormat($task->start_date) }}
                                                                                 </li>
                                                                                 <li
                                                                                     class="list-inline-item d-inline-flex align-items-center">
                                                                                     <i
-                                                                                        class="f-16 text-primary ti ti-calendar-stats ms-2"></i>{{ \Auth::user()->dateFormat($task->due_date) }}
+                                                                                        class="f-16 text-primary fa fa-calendar-stats ms-2"></i>{{ \Auth::user()->dateFormat($task->due_date) }}
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -860,7 +858,7 @@
                                                                                 <li
                                                                                     class="list-inline-item d-inline-flex align-items-center">
                                                                                     <i
-                                                                                        class="f-16 text-primary ti ti-discount"></i>
+                                                                                        class="f-16 text-primary fa fa-discount"></i>
                                                                                     {{ $task->taskCompleteCheckListCount() }}/{{ $task->taskTotalCheckListCount() }}
                                                                                 </li>
                                                                                 <li class="list-inline-item d-inline-flex align-items-center "
@@ -941,11 +939,11 @@
                                     @if (\Auth::user()->type == 'company')
                                         <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                             <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                data-ajax-popup="true"
                                                 data-url="{{ route('project.milestone.create', $project->id) }}"
-                                                data-bs-whatever="{{ __('Create New Milestone') }}"> <span
+                                                data-title="{{ __('Create New Milestone') }}"> <span
                                                     class="text-white">
-                                                    <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
@@ -1011,10 +1009,10 @@
                                                             <div class="action-btn bg-info ms-2">
                                                                 <a href="#"
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                                    data-ajax-popup="true"
                                                                     data-url="{{ route('project.milestone.edit', $milestone->id) }}"
-                                                                    data-bs-whatever="{{ __('Edit Milestone') }}"> <span
-                                                                        class="text-white"> <i class="ti ti-edit"
+                                                                    data-title="{{ __('Edit Milestone') }}"> <span
+                                                                        class="text-white"> <i class="fa fa-edit"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                                             </div>
@@ -1023,7 +1021,7 @@
                                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['project.milestone.destroy', $milestone->id]]) !!}
                                                                 <a href="#!"
                                                                     class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                                    <i class="ti ti-trash text-white"
+                                                                    <i class="fa fa-trash text-white"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                                 </a>
@@ -1050,11 +1048,11 @@
                                     @if (\Auth::user()->type == 'company')
                                         <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                             <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                data-ajax-popup="true"
                                                 data-url="{{ route('project.note.create', $project->id) }}"
-                                                data-bs-whatever="{{ __('Create New Notes') }}"> <span
+                                                data-title="{{ __('Create New Notes') }}"> <span
                                                     class="text-white">
-                                                    <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
@@ -1094,10 +1092,10 @@
                                                             <div class="action-btn bg-info ms-2">
                                                                 <a href="#"
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                                    data-ajax-popup="true"
                                                                     data-url="{{ route('project.note.edit', [$project->id, $note->id]) }}"
-                                                                    data-bs-whatever="{{ __('Edit Notes') }}"> <span
-                                                                        class="text-white"> <i class="ti ti-edit"
+                                                                    data-title="{{ __('Edit Notes') }}"> <span
+                                                                        class="text-white"> <i class="fa fa-edit"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                                             </div>
@@ -1106,7 +1104,7 @@
                                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['project.note.destroy', $project->id, $note->id]]) !!}
                                                                 <a href="#!"
                                                                     class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                                    <i class="ti ti-trash text-white"
+                                                                    <i class="fa fa-trash text-white"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                                 </a>
@@ -1133,11 +1131,11 @@
                                     @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'client')
                                         <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                             <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                data-ajax-popup="true"
                                                 data-url="{{ route('project.file.create', $project->id) }}"
-                                                data-bs-whatever="{{ __('Create New Files') }}"> <span
+                                                data-title="{{ __('Create New Files') }}"> <span
                                                     class="text-white">
-                                                    <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Create') }}"></i></span>
                                             </a>
                                         </p>
@@ -1180,7 +1178,7 @@
                                                                 download="">
                                                                 <i data-bs-toggle="tooltip"
                                                                     data-bs-original-title="{{ __('Download') }}"
-                                                                    class="ti ti-arrow-bar-to-down text-white"></i>
+                                                                    class="fa fa-arrow-bar-to-down text-white"></i>
                                                             </a>
                                                         </div>
                                                         <div class="action-btn bg-secondary ms-2">
@@ -1188,7 +1186,7 @@
                                                                 class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                                 data-bs-toggle="tooltip" target="_blank"
                                                                 data-original-title="{{ __('Preview') }}">
-                                                                <i class="ti ti-crosshair text-white"
+                                                                <i class="fa fa-crosshair text-white"
                                                                     data-bs-toggle="tooltip"
                                                                     data-bs-original-title="{{ __('Preview') }}"></i>
                                                             </a>
@@ -1197,10 +1195,10 @@
                                                             <div class="action-btn bg-info ms-2">
                                                                 <a href="#"
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                                    data-ajax-popup="true"
                                                                     data-url="{{ route('project.file.edit', [$project->id, $file->id]) }}"
-                                                                    data-bs-whatever="{{ __('Edit Files') }}"> <span
-                                                                        class="text-white"> <i class="ti ti-edit"
+                                                                    data-title="{{ __('Edit Files') }}"> <span
+                                                                        class="text-white"> <i class="fa fa-edit"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                                             </div>
@@ -1209,7 +1207,7 @@
                                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['project.file.destroy', $project->id, $file->id]]) !!}
                                                                 <a href="#!"
                                                                     class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                                    <i class="ti ti-trash text-white"
+                                                                    <i class="fa fa-trash text-white"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                                 </a>
@@ -1260,18 +1258,18 @@
                                                                 download=""
                                                                 class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                                 data-bs-toggle="tooltip" title="{{ __('Download') }}">
-                                                                <i class="ti ti-download text-white"></i> </a>
+                                                                <i class="fa fa-download text-white"></i> </a>
                                                         </a>
                                                     </div>
                                                 @endif
                                                 <div class="action-btn bg-info ms-2">
                                                     <a href="#"
                                                         data-url="{{ route('project.comment.reply', [$project->id, $comment->id]) }}"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                        data-bs-whatever="{{ __('Create Comment Reply') }}"
+                                                        data-ajax-popup="true"
+                                                        data-title="{{ __('Create Comment Reply') }}"
                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                         data-bs-toggle="tooltip" title="{{ __('Reply') }}">
-                                                        <i class="ti ti-send text-white"></i>
+                                                        <i class="fa fa-send text-white"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -1297,7 +1295,7 @@
                                                                     download="" data-bs-toggle="tooptip"
                                                                     title="{{ __('Download') }}"
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"><i
-                                                                        class="ti ti-download text-white"></i></a>
+                                                                        class="fa fa-download text-white"></i></a>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -1323,7 +1321,7 @@
                                                     data-url="{{ route('grammar', ['project_comment']) }}"
                                                     data-bs-placement="top"
                                                     data-title="{{ __('Grammar check with AI') }}">
-                                                    <i class="ti ti-rotate"></i>
+                                                    <i class="fa fa-rotate"></i>
                                                     <span>{{ __('Grammar check with AI') }}</span></a>
                                             </div>
                                         @endif
@@ -1365,17 +1363,17 @@
                                                             download=""
                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center like active"
                                                             data-bs-toggle="tooltip" title="{{ __('Download') }}"> <i
-                                                                class="ti ti-download text-white"></i> </a>
+                                                                class="fa fa-download text-white"></i> </a>
 
                                                     </div>
                                                 @endif
                                                 <div class="action-btn bg-info ms-2">
                                                     <a href="#"
                                                         data-url="{{ route('project.client.feedback.reply', [$project->id, $feedback->id]) }}"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                        data-bs-whatever="{{ __('Create feedback Reply') }}"
+                                                        data-ajax-popup="true"
+                                                        data-title="{{ __('Create feedback Reply') }}"
                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                        <i class="ti ti-send text-white" data-bs-toggle="tooltip"
+                                                        <i class="fa fa-send text-white" data-bs-toggle="tooltip"
                                                             data-bs-original-title="{{ __('Reply') }}"></i>
                                                     </a>
                                                 </div>
@@ -1402,7 +1400,7 @@
                                                                     download="" data-bs-toggle="tooptip"
                                                                     title="{{ __('Download') }}"
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center"><i
-                                                                        class="ti ti-download text-white"></i></a>
+                                                                        class="fa fa-download text-white"></i></a>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -1462,7 +1460,7 @@
                                                                                 <a href="{{ route('invoice.show', \Crypt::encrypt($invoice->id)) }}"
                                                                                     class="dropdown-item">
                                                                                     <i
-                                                                                        class="ti ti-eye"></i>{{ __('View') }}
+                                                                                        class="fa fa-eye"></i>{{ __('View') }}
                                                                                 </a>
                                                                             @endif
 
@@ -1472,11 +1470,11 @@
                                                                                     class="dropdown-item"
                                                                                     data-toggle="tooltip"
                                                                                     data-original-title="{{ __('Edit') }}"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#exampleModal"
-                                                                                    data-bs-whatever="{{ __('Edit Invoice') }}">
+                                                                                    data-ajax-popup="true"
+
+                                                                                    data-title="{{ __('Edit Invoice') }}">
                                                                                     <i
-                                                                                        class="ti ti-edit"></i>{{ __('Edit') }}
+                                                                                        class="fa fa-edit"></i>{{ __('Edit') }}
                                                                                 </a>
 
 
@@ -1484,7 +1482,7 @@
                                                                                 <a href="#!"
                                                                                     class=" show_confirm dropdown-item">
                                                                                     <i
-                                                                                        class="ti ti-trash"></i>{{ __('Delete') }}
+                                                                                        class="fa fa-trash"></i>{{ __('Delete') }}
                                                                                 </a>
                                                                                 {!! Form::close() !!}
                                                                             @endif
@@ -1579,11 +1577,11 @@
                                         @if (\Auth::user()->type == 'company')
                                             <p class="text-muted d-none d-sm-flex align-items-center mb-0">
                                                 <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    data-ajax-popup="true"
                                                     data-url="{{ route('project.timesheet.create', $project->id) }}"
-                                                    data-bs-whatever="{{ __('Create New Timesheet') }}"> <span
+                                                    data-title="{{ __('Create New Timesheet') }}"> <span
                                                         class="text-white">
-                                                        <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+                                                        <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                                                             data-bs-original-title="{{ __('Create') }}"></i></span>
                                                 </a>
                                             </p>
@@ -1623,12 +1621,12 @@
                                                             <div class="action-btn bg-warning ms-2">
                                                                 <a href="#"
                                                                     data-url="{{ route('project.timesheet.note', [$project->id, $timesheet->id]) }}"
-                                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                                    data-ajax-popup="true"
                                                                     data-bs-toggle="tooltip"
                                                                     title="{{ __('Timesheet Notes') }}"
-                                                                    data-bs-whatever="{{ __('Timesheet Notes') }}"
+                                                                    data-title="{{ __('Timesheet Notes') }}"
                                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                                    <i class="ti ti-brand-hipchat text-white"></i></a>
+                                                                    <i class="fa fa-brand-hipchat text-white"></i></a>
                                                             </div>
                                                         </td>
                                                         @if (\Auth::user()->type == 'company')
@@ -1636,11 +1634,11 @@
                                                                 <div class="action-btn bg-info ms-2">
                                                                     <a href="#"
                                                                         data-url="{{ route('project.timesheet.edit', [$project->id, $timesheet->id]) }}"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#exampleModal"
+                                                                        data-ajax-popup="true"
+
                                                                         title="{{ __('Edit Timesheet') }}"
                                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                                        <i class="ti ti-edit text-white"
+                                                                        <i class="fa fa-edit text-white"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-original-title="{{ __('Edit') }}"></i>
                                                                     </a>
@@ -1650,7 +1648,7 @@
                                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['project.timesheet.destroy', $project->id, $timesheet->id]]) !!}
                                                                     <a href="#!"
                                                                         class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                                        <i class="ti ti-trash text-white"></i>
+                                                                        <i class="fa fa-trash text-white"></i>
                                                                     </a>
                                                                     {!! Form::close() !!}
 
@@ -1709,7 +1707,7 @@
                                                                         class="mx-3 btn btn-sm d-inline-flex align-items-center"
                                                                         data-bs-toggle="tooltip"
                                                                         title="{{ __('View') }}">
-                                                                        <i class="ti ti-eye text-white"></i>
+                                                                        <i class="fa fa-eye text-white"></i>
                                                                     </a>
                                                                 </div>
                                                             </td>

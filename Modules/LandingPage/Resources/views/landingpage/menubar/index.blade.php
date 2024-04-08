@@ -3,7 +3,7 @@
     {{ __('Landing Page') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -25,7 +25,7 @@
 @endpush
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -73,7 +73,7 @@
                                         <div class="choose-files mt-5">
                                             <label for="site_logo">
                                                 <div class=" bg-primary company_logo_update" style="cursor: pointer;">
-                                                    <i class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                    <i class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                 </div>
                                                 <input type="file" name="site_logo" id="site_logo"
                                                     class="form-control file" data-filename="site_logo">
@@ -123,7 +123,7 @@
                                     <a data-size="lg" data-url="{{ route('custom_page.create') }}" data-ajax-popup="true"
                                         data-title="{{ __('Create Page') }}" data-bs-toggle="tooltip"
                                         title="{{ __('Create') }}" class="btn btn-sm btn-primary">
-                                        <i class="ti ti-plus text-light"></i>
+                                        <i class="fa fa-plus text-light"></i>
                                     </a>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                                                     data-title="{{ __('Edit Custom') }}" data-size="lg"
                                                                     data-bs-toggle="tooltip" title="{{ __('Edit') }}"
                                                                     data-original-title="{{ __('Edit') }}">
-                                                                    <i class="ti ti-pencil text-white"></i>
+                                                                    <i class="fa fa-pencil text-white"></i>
                                                                 </a>
                                                             </div>
 
@@ -171,7 +171,7 @@
                                                                     data-original-title="{{ __('Delete') }}"
                                                                     data-confirm="{{ __('Are You Sure?') . '|' . __('This action can not be undone. Do you want to continue?') }}"
                                                                     data-confirm-yes="document.getElementById('delete-form-{{ $key }}').submit();">
-                                                                    <i class="ti ti-trash text-white"></i>
+                                                                    <i class="fa fa-trash text-white"></i>
                                                                 </a>
                                                                 {!! Form::close() !!}
                                                             </div>
