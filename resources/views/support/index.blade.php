@@ -9,8 +9,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-1 ">{{__('Support')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-1 ">{{__('Support')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -20,13 +19,13 @@
     @if(\Auth::user()->type=='company' || \Auth::user()->type=='client' || \Auth::user()->type=='employee')
 
     <a href="{{ route('support.grid') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-layout-grid text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Grid View') }}"></i>
+        <i class="fa fa-layout-grid text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Grid View') }}"></i>
     </a>
 @if(\Auth::user()->type!=='client')
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('support.create') }}" data-size="lg"
-        data-bs-whatever="{{__('Create New Support')}}"> <span class="text-white"> 
-            <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('support.create') }}" data-size="lg"
+        data-title="{{__('Create New Support')}}"> <span class="text-white">
+            <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
 @endif
     @endif
@@ -58,16 +57,16 @@
                                     <div class="media align-items-center">
                                         <div>
                                             <div class="user-group1">
-                                                <img alt="" class="avatar rounded-circle me-2" 
-                                                @if(!empty($support->createdBy) && !empty($support->createdBy->avatar)) 
-                                                src="{{(\App\Models\Utility::get_file('uploads/avatar')).'/'.$support->createdBy->avatar}}" 
+                                                <img alt="" class="avatar rounded-circle me-2"
+                                                @if(!empty($support->createdBy) && !empty($support->createdBy->avatar))
+                                                src="{{(\App\Models\Utility::get_file('uploads/avatar')).'/'.$support->createdBy->avatar}}"
                                                 @else  avatar="{{!empty($support->createdBy->name)?$support->createdBy->name:''}}" @endif>
                                                 @if($support->replyUnread()>0)
                                                     <span class="avatar-child avatar-badge bg-success"></span>
                                                 @endif
                                             </div>
                                         </div>
-                                        
+
                                         <div class="media-body ml-4">
                                             {{!empty($support->createdBy)?$support->createdBy->name:''}}
                                         </div>
@@ -96,27 +95,27 @@
                                         $x = pathinfo($support->attachment, PATHINFO_FILENAME);
                                         $extension = pathinfo($support->attachment, PATHINFO_EXTENSION);
                                         $result = str_replace(array("#", "'", ";"), '', $support->receipt);
-                                        
+
                                     @endphp
                                         @php
                                         $supports=\App\Models\Utility::get_file('uploads/supports/');
                                         @endphp
-                                
+
                                     <a  href="{{ route('support.receipt' , [$x,"$extension"]) }}"  data-toggle="tooltip" class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                        <i class="ti ti-download" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i>
+                                        <i class="fa fa-download" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i>
                                     </a>
 
                                     <a  href="{{$supports.$x.'.'.$extension}}" target="_blank"  data-toggle="tooltip" class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                                        <i class="ti ti-crosshair" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Preview') }}"></i>
+                                        <i class="fa fa-crosshair" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Preview') }}"></i>
                                     </a>
                                     @else
                                         -
                                     @endif
                                 </td>
-        
+
                                 <td>{{\Auth::user()->dateFormat($support->created_at)}}</td>
-        
-        
+
+
                                 <td class="text-right">
                                     <div class="actions ml-3">
                                         <div class="action-btn bg-warning ms-2">
@@ -127,16 +126,16 @@
                                         </div>
                                         @if(\Auth::user()->id==$support->ticket_created)
                                             <div class="action-btn bg-info ms-2">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-url="{{ route('support.edit',$support->id) }}" data-size="lg"
-                                                data-bs-whatever="{{__('Edit Support')}}"> <span class="text-white"> <i
-                                                        class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
+                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                  data-url="{{ route('support.edit',$support->id) }}" data-size="lg"
+                                                data-title="{{__('Edit Support')}}"> <span class="text-white"> <i
+                                                        class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                             </div>
 
                                             <div class="action-btn bg-danger ms-2">
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['support.destroy', $support->id]]) !!}
                                                 <a href="#!" class="mx-3 btn btn-sm align-items-center show_confirm ">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}
                                             </div>

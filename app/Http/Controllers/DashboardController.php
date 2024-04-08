@@ -34,7 +34,7 @@ class DashboardController extends Controller
     public function index()
     {
         // $getInvoiceProductsData        = Utility::getInvoiceProductsData();
-        
+
         if(\Auth::check())
         {
 
@@ -390,7 +390,7 @@ class DashboardController extends Controller
 
                 $html .= '<li>
                             <span class="list-link">
-                                <i class="ti ti-search"></i>' . __('Deals') . '
+                                <i class="fa fa-search"></i>' . __('Deals') . '
                             </span>
                         </li>';
 
@@ -426,7 +426,7 @@ class DashboardController extends Controller
 
                 $html .= '<li>
                             <span class="list-link">
-                                <i class="ti ti-search"></i>' . __('Deals') . '
+                                <i class="fa fa-search"></i>' . __('Deals') . '
                             </span>
                         </li>';
 
@@ -462,7 +462,7 @@ class DashboardController extends Controller
 
                 $html .= '<li>
                             <span class="list-link">
-                                <i class="ti ti-search"></i>' . __('Tasks') . '
+                                <i class="fa fa-search"></i>' . __('Tasks') . '
                             </span>
                         </li>';
 
@@ -498,7 +498,7 @@ class DashboardController extends Controller
 
                 $html .= '<li>
                             <span class="list-link">
-                                <i class="ti ti-search"></i>' . __('Leads') . '
+                                <i class="fa fa-search"></i>' . __('Leads') . '
                             </span>
                         </li>';
 
@@ -529,7 +529,7 @@ class DashboardController extends Controller
         {
             $html .= '<li>
                         <a class="list-link pl-4" href="#">
-                        <i class="ti ti-search"></i>
+                        <i class="fa fa-search"></i>
                             <span>' . __('Type and search By Deal, Lead and Tasks.') . '</span>
                         </a>
                       </li>';

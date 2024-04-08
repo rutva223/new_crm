@@ -1,8 +1,7 @@
 
 {{-- <div class='row'> --}}
     <div class="col-5  text-end" style="margin-left: 51px;">
-        <h5>{{__('Indicator')}}</h5>
-    </div>
+        <h5>{{__('Indicator')}}
     <div class="col-4  text-end">
        <h5>{{__('Appraisal')}}</h5>
    </div>
@@ -11,7 +10,7 @@
        <h6>{{ $performance_type->name }}</h6>
        <hr class="mt-0">
    </div>
-   
+
    @foreach ($performance_type->types as $types)
        <div class="col-4">
            {{ $types->name }}
@@ -74,6 +73,6 @@
                    title="Sucks big time - 1 star"></label>
            </fieldset>
    </div>
-   
+
    @endforeach
    @endforeach

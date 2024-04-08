@@ -8,12 +8,11 @@
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Zoom Meeting') }}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Zoom Meeting') }}
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Zoom Meeting') }}</li>
 @endsection
 
@@ -25,13 +24,13 @@
     @if (\Auth::user()->type == 'company')
         <a href="{{ route('zoommeeting.calendar') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
             title="Calendar View">
-            <i class="ti ti-calendar text-white"></i>
+            <i class="fa fa-calendar text-white"></i>
         </a>
 
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-size="lg"
-            data-bs-target="#exampleModal" data-url="{{ route('zoommeeting.create') }}"
-            data-bs-whatever="{{ __('Create New Zoom Meeting') }}"> <span class="text-white">
-                <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true" data-size="lg"
+              data-url="{{ route('zoommeeting.create') }}"
+            data-title="{{ __('Create New Zoom Meeting') }}"> <span class="text-white">
+                <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
                     data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
     @endif
@@ -120,7 +119,7 @@
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['zoommeeting.destroy', $item->id]]) !!}
                                                         <a href="#!"
                                                             class="mx-3 btn btn-sm  align-items-center show_confirm">
-                                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                         </a>
                                                         {!! Form::close() !!}

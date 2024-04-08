@@ -13,7 +13,7 @@
     {{ __('Messenger') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Messenger') }}</li>
 @endsection
 @php
@@ -37,7 +37,7 @@
                         <div class="m-header">
                             <nav>
                                 <nav class="m-header-right">
-                                    <a href="#" class="listView-x"><i class="ti ti-times"></i></a>
+                                    <a href="#" class="listView-x"><i class="fa fa-times"></i></a>
                                 </nav>
                             </nav>
                             {{-- Search input --}}
@@ -46,11 +46,11 @@
                             <div class="messenger-listView-tabs">
                                 <a href="#" @if ($route == 'user') class="active-tab" @endif
                                     data-view="users">
-                                    <span class="ti ti-clock" title="{{ __('Recent') }}"></span>
+                                    <span class="fa fa-clock" title="{{ __('Recent') }}"></span>
                                 </a>
                                 <a href="#" @if ($route == 'group') class="active-tab" @endif
                                     data-view="groups">
-                                    <span class="ti ti-users" title="{{ __('Members') }}"></span></a>
+                                    <span class="fa fa-users" title="{{ __('Members') }}"></span></a>
                             </div>
                         </div>
                         {{-- tabs and lists --}}
@@ -93,7 +93,7 @@
                             <nav>
                                 {{-- header back button, avatar and user name --}}
                                 <div style="display: inline-flex;">
-                                    <a href="#" class="show-listView"><i class="ti ti-arrow-left"></i></a>
+                                    <a href="#" class="show-listView"><i class="fa fa-arrow-left"></i></a>
                                     @if (!empty(Auth::user()->avatar))
                                         <div class="avatar av-s header-avatar"
                                             style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px; background-image: url('{{ $profile . '/' . Auth::user()->avatar }}');">

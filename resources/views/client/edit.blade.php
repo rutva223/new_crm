@@ -16,13 +16,11 @@
     {{ __('Client Edit') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0"> {{ \Auth::user()->clientIdFormat($client->client_id) }}
-            {{ __('Edit') }}</h5>
-    </div>
+      {{ \Auth::user()->clientIdFormat($client->client_id) }}
+            {{ __('Edit') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item"><a href="{{ route('client.index') }}">{{ __('Client') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ $user->name }}</li>
 @endsection
@@ -38,10 +36,10 @@
                         <div class="list-group list-group-flush" id="useradd-sidenav">
                             <a href="#useradd-1"
                                 class="list-group-item list-group-item-action border-0">{{ __('Personal Info') }} <div
-                                    class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                    class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                             <a href="#useradd-2"
                                 class="list-group-item list-group-item-action border-0">{{ __('Company Info') }} <div
-                                    class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                    class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                         </div>
                     </div>
                 </div>
@@ -227,7 +225,7 @@
                                             {{ Form::text('tax_number', $client->tax_number, ['class' => 'form-control', 'placeholder' => 'Enter Tax Number']) }}
                                             @error('tax_number')
                                                 <span class="invalid-tax_number" role="alert">
-                                                    <strong class="text-danger">{{ $message }}</strong> 
+                                                    <strong class="text-danger">{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>

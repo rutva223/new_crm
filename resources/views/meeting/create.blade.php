@@ -1,6 +1,6 @@
 {{ Form::open(array('url' => 'meeting')) }}
 <div class="row">
-    @php 
+    @php
     $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -37,12 +37,12 @@
         <div class="row p-2">
             <div class="col-6">
                 {{Form::label('notes',__('Notes'),['class' => 'col-form-label'])}}
-            </div>    
+            </div>
             @if (App\Models\Utility::is_chatgpt_enable())
             <div class="col-6 text-end">
                 <a data-size="md" class="btn btn-primary btn-icon btn-sm text-white " data-ajax-popup-over="true" id="grammarCheck" data-url="{{ route('grammar',['meeting_create']) }}"
                     data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-                    <i class="ti ti-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
+                    <i class="fa fa-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
             </div>
             @endif
         </div>
@@ -59,7 +59,7 @@
                 <label class="form-check-label" for="switch-shadow"></label>
             </div>
         </div>
-    @endif 
+    @endif
 </div>
 <div class="modal-footer">
     <button type="button" class="btn  btn-light" data-bs-dismiss="modal">{{ __('Close') }}</button>

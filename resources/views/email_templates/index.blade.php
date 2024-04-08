@@ -87,7 +87,7 @@
                                         <div class="text-end">
                                         <div class="action-btn bg-warning ms-2">
                                             <a href="{{ route('manage.email.language',[$EmailTemplate->id,\Auth::user()->lang]) }}" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-toggle="tooltip" title="{{__('View')}}">
-                                                <i class="ti ti-eye text-white"></i>
+                                                <i class="fa fa-eye text-white"></i>
                                             </a>
                                         </div>
                                         </div>

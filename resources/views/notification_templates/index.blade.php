@@ -8,7 +8,7 @@
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Notification Template') }}</li>
 @endsection
 
@@ -54,7 +54,7 @@
                                         <span class="drp-text hide-mob text-primary">{{ Str::upper($lang) }}</span>
                                     @endif
                                 @endforeach
-                                <i class="ti ti-chevron-down drp-arrow nocolor"></i>
+                                <i class="fa fa-chevron-down drp-arrow nocolor"></i>
                             </a>
                             <div class="dropdown-menu dash-h-dropdown dropdown-menu-end" aria-labelledby="dropdownLanguage">
                                 @foreach ($languages as $code => $lang)
@@ -71,7 +71,7 @@
                                 id="dropdownLanguage">
                                 <span
                                     class="drp-text hide-mob text-primary">{{ __('Template: ') }}{{ $notification_template->name }}</span>
-                                <i class="ti ti-chevron-down drp-arrow nocolor"></i>
+                                <i class="fa fa-chevron-down drp-arrow nocolor"></i>
                             </a>
                             <div class="dropdown-menu dash-h-dropdown dropdown-menu-end" aria-labelledby="dropdownLanguage">
                                 @foreach ($notification_templates as $notification_template)
@@ -100,7 +100,7 @@
                                     <h6 class="font-weight-bold mb-4">{{ __('Variables') }}</h6>
                                     @php
                                         $variables = json_decode($curr_noti_tempLang->variables);
-                                        
+
                                     @endphp
 
                                     @if (!empty($variables) > 0)

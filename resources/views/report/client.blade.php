@@ -59,9 +59,7 @@
     {{__('Client Report')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Client Report')}}</h5>
-    </div>
+     {{__('Client Report')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -69,10 +67,10 @@
 @endsection
 @section('action-btn')
 <a href="{{route('client_report.export')}}" data-bs-toggle="tooltip" title="{{ __('Export') }}" class="btn btn-sm btn-primary">
-    <i class="ti ti-file-export"></i>
+    <i class="fa fa-file-export"></i>
 </a>
     <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{__('Download')}}" id="download-buttons">
-        <i class="ti ti-download"></i>
+        <i class="fa fa-download"></i>
     </a>
 @endsection
 
@@ -94,14 +92,14 @@
                         </div>
                         <div class="action-btn bg-info ms-2">
                             <div class="col-auto">
-                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" 
-                                title="{{__('Apply')}}"><i class="ti ti-search text-white"></i></button>
+                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip"
+                                title="{{__('Apply')}}"><i class="fa fa-search text-white"></i></button>
                             </div>
                         </div>
                         <div class="action-btn bg-danger ms-2">
                             <div class="col-auto">
-                                <a href="{{route('report.client')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" 
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                                <a href="{{route('report.client')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}"
+                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                             </div>
                         </div>
                     </div>
@@ -124,12 +122,12 @@
                                     <div class="col-md-2 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-primary">
-                                                <i class="ti ti-heart"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                             <div class="ms-2 ">
                                                 <p class="text-muted text-sm mb-0">{{__('Report')}} :</p>
                                                 <p class="mb-0 text-primary">{{__('Client Summary')}}</p>
-                                            
+
                                             </div>
                                         </div>
                                     </div>
@@ -137,12 +135,12 @@
                                         <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-warning">
-                                                    <i class="ti ti-users"></i>
+                                                    <i class="fa fa-users"></i>
                                                 </div>
                                                 <div class="ms-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Client')}} : </p>
                                                     <p class="mb-0 text-warning">{{$filter['client'] }}</p>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +148,7 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-danger">
-                                                <i class="ti ti-calendar"></i>
+                                                <i class="fa fa-calendar"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0">{{__('Duration')}} :</p>
@@ -162,18 +160,18 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xl-12">
                         <div class="row">
                             <div class="col-lg-2 col-6">
                                 <div class="card">
                                     <div class="card-body min-vh-90">
                                         <div class="theme-avtar bg-primary">
-                                            <i class="ti ti-file-invoice"></i>
+                                            <i class="fa fa-file-invoice"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Invoice')}}</h6>
                                         <h6 class="mb-3">{{\Auth::user()->priceFormat($clientTotalInvoice)}}</h6>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -181,11 +179,11 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-dark">
-                                            <i class="ti ti-report-money"></i>
+                                            <i class="fa fa-report-money"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Amount')}}</h6>
                                         <h6 class="mb-3">{{\Auth::user()->priceFormat($clientTotalAmount)}}</h6>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +191,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-warning">
-                                            <i class="ti ti-receipt-tax"></i>
+                                            <i class="fa fa-receipt-tax"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Tax')}}</h6>
                                         <h6 class="mb-3">{{\Auth::user()->priceFormat($clientTotalTax)}}</h6>
@@ -204,7 +202,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-danger">
-                                            <i class="ti ti-discount-2"></i>
+                                            <i class="fa fa-discount-2"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Discount')}}</h6>
                                         <h6 class="mb-3">{{\Auth::user()->priceFormat($clientTotalDiscount)}}</h6>
@@ -215,11 +213,11 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-info">
-                                            <i class="ti ti-click"></i>
+                                            <i class="fa fa-click"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Paid')}}</h6>
                                         <h6 class="mb-3">{{\Auth::user()->priceFormat($clientTotalPaid)}}</h6>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -227,18 +225,18 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-secondary">
-                                            <i class="ti ti-calendar-time"></i>
+                                            <i class="fa fa-calendar-time"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Due')}}</h6>
                                         <h6 class="mb-3">{{\Auth::user()->priceFormat($clientTotalDue)}}</h6>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-               
+
                 </div>
                 <!-- [ sample-page ] end -->
             </div>
@@ -250,7 +248,7 @@
                             <div class="card-header card-body table-border-style">
                                 <!-- <h5>
                                 <div class="card-body table-border-style">
-                                   
+
                                 </h5>    -->
                                     <div class="table-responsive">
                                         <table class="table pc-dt-export">

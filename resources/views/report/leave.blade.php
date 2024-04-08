@@ -86,17 +86,17 @@ $profile = asset(Storage::url('uploads/avatar'));
 </div>
 @endsection
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
 <li class="breadcrumb-item active" aria-current="page">{{ __('Leave Report') }}</li>
 @endsection
 @section('action-btn')
 
 <a href="{{ route('leave_report.export') }}" data-bs-toggle="tooltip" title="{{ __('Export') }}" class="btn btn-sm btn-primary">
-    <i class="ti ti-file-export"></i>
+    <i class="fa fa-file-export"></i>
 </a>
 
 <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Download') }}" id="download-buttons">
-    <i class="ti ti-download"></i>
+    <i class="fa fa-download"></i>
 </a>
 @endsection
 
@@ -139,12 +139,12 @@ $profile = asset(Storage::url('uploads/avatar'));
                 </div>
                 <div class="action-btn bg-info ms-2">
                     <div class="col-auto">
-                        <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i class="ti ti-search text-white"></i></button>
+                        <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i class="fa fa-search text-white"></i></button>
                     </div>
                 </div>
                 <div class="action-btn bg-danger ms-2">
                     <div class="col-auto">
-                        <a href="{{ route('report.leave') }}" data-bs-toggle="tooltip" title="{{ __('Reset') }}" class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                        <a href="{{ route('report.leave') }}" data-bs-toggle="tooltip" title="{{ __('Reset') }}" class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                             <div class="card">
                                 <div class="card-body">
                                     <div class="theme-avtar bg-primary">
-                                        <i class="ti ti-user-plus"></i>
+                                        <i class="fa fa-user-plus"></i>
                                     </div>
                                     <h6 class="mb-3 mt-4">{{ __('Approves Leaves') }}</h6>
                                     <h3 class="mb-0">{{ $filter['totalApproved'] }} </h3>
@@ -176,7 +176,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                             <div class="card">
                                 <div class="card-body">
                                     <div class="theme-avtar bg-info">
-                                        <i class="ti ti-click"></i>
+                                        <i class="fa fa-click"></i>
                                     </div>
                                     <h6 class="mb-3 mt-4">{{ __('Rejected Leaves') }}</h6>
                                     <h3 class="mb-0">{{ $filter['totalReject'] }}</h3>
@@ -187,7 +187,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                             <div class="card">
                                 <div class="card-body">
                                     <div class="theme-avtar bg-warning">
-                                        <i class="ti ti-report-money"></i>
+                                        <i class="fa fa-report-money"></i>
                                     </div>
                                     <h6 class="mb-3 mt-4">{{ __('Pending Leaves') }}</h6>
                                     <h3 class="mb-0">{{ $filter['totalPending'] }} </h3>
@@ -205,7 +205,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                                 <div class="col-md-4 col-sm-6">
                                     <div class="d-flex align-items-start">
                                         <div class="theme-avtar bg-success">
-                                            <i class="ti ti-heart"></i>
+                                            <i class="fa fa-heart"></i>
                                         </div>
                                         <div class="ms-2">
                                             <p class="text-muted text-sm mb-0">{{ __('Report') }} :</p>
@@ -218,7 +218,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                                 <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                     <div class="d-flex align-items-start">
                                         <div class="theme-avtar bg-primary">
-                                            <i class="ti ti-thumb-up"></i>
+                                            <i class="fa fa-thumb-up"></i>
                                         </div>
                                         <div class="ms-2">
                                             <p class="text-muted text-sm mb-0">{{ __('Department') }} :</p>
@@ -231,7 +231,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                                 <div class="col-md-4 col-sm-6">
                                     <div class="d-flex align-items-start">
                                         <div class="theme-avtar bg-danger">
-                                            <i class="ti ti-calendar"></i>
+                                            <i class="fa fa-calendar"></i>
                                         </div>
                                         <div class="ms-2">
                                             <p class="text-muted text-sm mb-0"> {{ __('Duration') }} :</p>
@@ -245,7 +245,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                         </div>
                     </div>
                 </div>
-         
+
             </div>
         </div>
         <!-- [ sample-page ] end -->
@@ -280,21 +280,21 @@ $profile = asset(Storage::url('uploads/avatar'));
                                             <td>{{ $leave['employee'] }}</td>
 
                                             <td>
-                                                <a href="#!" data-url="{{ route('report.employee.leave', [$leave['id'],'Approve',isset($_GET['type']) ? $_GET['type'] : 'no',isset($_GET['month']) ? $_GET['month'] : date('Y-m'),isset($_GET['year']) ? $_GET['year'] : date('Y')]) }}" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ __('Approved Leave Detail') }}" data-title="{{ __('Approved Leave Detail') }}" data-size='lg' data-toggle="tooltip" data-original-title="{{ __('View') }}">
+                                                <a href="#!" data-url="{{ route('report.employee.leave', [$leave['id'],'Approve',isset($_GET['type']) ? $_GET['type'] : 'no',isset($_GET['month']) ? $_GET['month'] : date('Y-m'),isset($_GET['year']) ? $_GET['year'] : date('Y')]) }}" data-ajax-popup="true"   data-title="{{ __('Approved Leave Detail') }}" data-title="{{ __('Approved Leave Detail') }}" data-size='lg' data-toggle="tooltip" data-original-title="{{ __('View') }}">
                                                     <span class="badge bg-success p-2 px-3 rounded">{{ $leave['approved'] }}</span>
-                                                    <i class="ti ti-eye"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#!" data-url="{{ route('report.employee.leave', [$leave['id'],'Reject',isset($_GET['type']) ? $_GET['type'] : 'no',isset($_GET['month']) ? $_GET['month'] : date('Y-m'),isset($_GET['year']) ? $_GET['year'] : date('Y')]) }}" class="table-action table-action-delete" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ __('Rejected Leave Detail') }}" data-size='lg' data-toggle="tooltip" data-original-title="{{ __('View') }}">
+                                                <a href="#!" data-url="{{ route('report.employee.leave', [$leave['id'],'Reject',isset($_GET['type']) ? $_GET['type'] : 'no',isset($_GET['month']) ? $_GET['month'] : date('Y-m'),isset($_GET['year']) ? $_GET['year'] : date('Y')]) }}" class="table-action table-action-delete" data-ajax-popup="true"   data-title="{{ __('Rejected Leave Detail') }}" data-size='lg' data-toggle="tooltip" data-original-title="{{ __('View') }}">
                                                     <span class="badge bg-danger p-2 px-3 rounded">{{ $leave['reject'] }}</span>
-                                                    <i class="ti ti-eye"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#!" data-url="{{ route('report.employee.leave', [$leave['id'],'Pending',isset($_GET['type']) ? $_GET['type'] : 'no',isset($_GET['month']) ? $_GET['month'] : date('Y-m'),isset($_GET['year']) ? $_GET['year'] : date('Y')]) }}" class="table-action table-action-delete" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ __('ending Leave Detail') }}" data-size='lg' data-toggle="tooltip" data-original-title="{{ __('View') }}">
+                                                <a href="#!" data-url="{{ route('report.employee.leave', [$leave['id'],'Pending',isset($_GET['type']) ? $_GET['type'] : 'no',isset($_GET['month']) ? $_GET['month'] : date('Y-m'),isset($_GET['year']) ? $_GET['year'] : date('Y')]) }}" class="table-action table-action-delete" data-ajax-popup="true"   data-title="{{ __('ending Leave Detail') }}" data-size='lg' data-toggle="tooltip" data-original-title="{{ __('View') }}">
                                                     <span class="badge bg-warning p-2 px-3 rounded">{{ $leave['pending'] }}</span>
-                                                    <i class="ti ti-eye"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>

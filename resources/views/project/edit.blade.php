@@ -7,9 +7,7 @@
 @push('script-page')
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Project Edit')}}</h5>
-    </div>
+     {{__('Project Edit')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -19,8 +17,8 @@
 @section('content')
     {{ Form::model($project, array('route' => array('project.update', $project->id), 'method' => 'PUT','class'=>'mt-4')) }}
     <div class="card">
-        <div class="card-body">    
-            @php 
+        <div class="card-body">
+            @php
             $plansettings = App\Models\Utility::plansettings();
         @endphp
         <div class="row">
@@ -31,7 +29,7 @@
             </a>
              </div>
              @endif
-             
+
             <div class="form-group col-md-4">
                     {{ Form::label('title', __('Project Title'),['class'=>'form-label']) }}
                     {{ Form::text('title', null, array('class' => 'form-control','required'=>'required')) }}

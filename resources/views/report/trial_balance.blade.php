@@ -22,9 +22,7 @@
     </script>
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Trial Balance')}}</h5>
-    </div>
+     {{__('Trial Balance')}}
 @endsection
 
 @section('breadcrumb')
@@ -58,17 +56,17 @@
             <div class="col-auto mt-4">
                 <div class="action-btn bg-info ms-2">
                     <a href="#" class="btn btn-sm btn-white btn-icon-only rounded-circle" onclick="document.getElementById('report_trial_balance').submit(); return false;" data-toggle="tooltip" data-original-title="{{__('apply')}}">
-                        <span class="btn-inner--icon"><i class="ti ti-search text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('apply')}}"></i></span>
+                        <span class="btn-inner--icon"><i class="fa fa-search text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('apply')}}"></i></span>
                     </a>
                 </div>
                 <div class="action-btn bg-danger ms-2">
                     <a href="{{route('trial.balance')}}" class="btn btn-sm btn-white btn-icon-only rounded-circle" data-toggle="tooltip" data-original-title="{{__('Reset')}}">
-                        <span class="btn-inner--icon"><i class="ti ti-trash-off text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}"></i></span>
+                        <span class="btn-inner--icon"><i class="fa fa-trash-off text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}"></i></span>
                     </a>
                 </div>
                 <div class="action-btn bg-secondary ms-2">
                     <a href="#" class="btn btn-sm btn-white btn-icon-only rounded-circle" onclick="saveAsPDF()" data-toggle="tooltip" data-original-title="{{__('Download')}}">
-                        <span class="btn-inner--icon"><i class="ti ti-download text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}"></i></span>
+                        <span class="btn-inner--icon"><i class="fa fa-download text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}"></i></span>
                     </a>
                 </div>
             </div>

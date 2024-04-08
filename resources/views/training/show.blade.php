@@ -6,8 +6,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-nline-block font-weight-400 mb-0">{{__('Training Detail')}}</h5>
-    </div>
+        <h5 class="h4 d-nline-block font-weight-400 mb-0">{{__('Training Detail')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>

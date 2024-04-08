@@ -3,7 +3,7 @@
     {{ __('Landing Page') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -18,7 +18,7 @@
 @endpush
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -129,7 +129,7 @@
                                     <a data-size="lg" data-url="{{ route('discover_create') }}" data-ajax-popup="true"
                                         data-bs-toggle="tooltip" title="{{ __('Create') }}"
                                         data-title="{{ __('Create Discover') }}" class="btn btn-sm btn-primary">
-                                        <i class="ti ti-plus text-light"></i>
+                                        <i class="fa fa-plus text-light"></i>
                                     </a>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                                                     data-title="{{ __('Edit Discover') }}" data-size="lg"
                                                                     data-bs-toggle="tooltip" title="{{ __('Edit') }}"
                                                                     data-original-title="{{ __('Edit') }}">
-                                                                    <i class="ti ti-pencil text-white"></i>
+                                                                    <i class="fa fa-pencil text-white"></i>
                                                                 </a>
                                                             </div>
 
@@ -176,7 +176,7 @@
                                                                     data-original-title="{{ __('Delete') }}"
                                                                     data-confirm="{{ __('Are You Sure?') . '|' . __('This action can not be undone. Do you want to continue?') }}"
                                                                     data-confirm-yes="document.getElementById('delete-form-{{ $key }}').submit();">
-                                                                    <i class="ti ti-trash text-white"></i>
+                                                                    <i class="fa fa-trash text-white"></i>
                                                                 </a>
                                                                 {!! Form::close() !!}
                                                             </div>

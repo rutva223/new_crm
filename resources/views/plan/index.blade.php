@@ -9,20 +9,18 @@
     {{ __('Plan') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Plan') }}</h5>
-    </div>
+     {{ __('Plan') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Plan') }}</li>
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'super admin')
-        <a href="#" data-url="{{ route('plan.create') }}" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-bs-whatever="{{ __('Create New Plan') }}" data-size="lg" class="btn btn-sm btn-primary btn-icon m-1"
+        <a href="#" data-url="{{ route('plan.create') }}" data-ajax-popup="true"
+            data-title="{{ __('Create New Plan') }}" data-size="lg" class="btn btn-sm btn-primary btn-icon m-1"
             data-bs-toggle="tooltip" title="{{ __('Create New Plan') }}">
-            <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+            <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
         </a>
     @endif
 @endsection
@@ -50,10 +48,10 @@
                                 <div class="action-btn bg-primary ms-2">
                                     <a title="Edit Plan" data-size="lg" href="#"
                                         class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                        data-url="{{ route('plan.edit', $plan->id) }}" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal" data-bs-whatever="{{ __('Edit Plan') }}"
+                                        data-url="{{ route('plan.edit', $plan->id) }}" data-ajax-popup="true"
+                                          data-title="{{ __('Edit Plan') }}"
                                         data-size="lg" data-original-title="{{ __('Edit') }}">
-                                        <i class="ti ti-edit text-white" data-bs-title="{{ __('Edit Plan') }}"
+                                        <i class="fa fa-edit text-white" data-bs-title="{{ __('Edit Plan') }}"
                                             data-bs-toggle="tooltip">
                                         </i>
                                     </a>
@@ -62,7 +60,7 @@
                                     <div class="action-btn bg-danger ms-2">
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['plan.destroy', $plan->id]]) !!}
                                         <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                 data-bs-original-title="{{ __('delete') }}"></i>
                                         </a>
                                         {!! Form::close() !!}
@@ -93,22 +91,22 @@
                     <ul class="list-unstyled my-3">
                         <li>
                             <span class="theme-avtar">
-                                <i class="text-primary ti ti-circle-plus"></i></span>
+                                <i class="text-primary fa fa-circle-plus"></i></span>
                             {{ $plan->max_employee == '-1' ? __('Unlimited') : $plan->max_employee }} {{ __('Employee') }}
                         </li>
                         <li>
                             <span class="theme-avtar">
-                                <i class="text-primary ti ti-circle-plus"></i></span>
+                                <i class="text-primary fa fa-circle-plus"></i></span>
                             {{ $plan->max_client == '-1' ? __('Unlimited') : $plan->max_client }} {{ __('Clients') }}
                         </li>
                         <li>
                             <span class="theme-avtar">
-                                <i class="text-primary ti ti-circle-plus"></i></span>
+                                <i class="text-primary fa fa-circle-plus"></i></span>
                             {{ $plan->storage_limit ? $plan->storage_limit : 0 }} {{ __('MB') }} {{ __('Storage') }}
                         </li>
                         <li>
                             <span class="theme-avtar">
-                                <i class="text-primary ti ti-circle-plus"></i></span>
+                                <i class="text-primary fa fa-circle-plus"></i></span>
                             @if ($plan->enable_chatgpt == 'on')
                                 {{ 'Enable Chat GPT' }}
                             @else
@@ -160,13 +158,13 @@
                                                     class="btn btn-primary btn-icon m-1"
                                                     data-title="{{ __('Send Request') }}" data-toggle="tooltip">
                                                     <span class="btn-inner--icon"><i
-                                                            class="ti ti-arrow-forward-up"></i></span>
+                                                            class="fa fa-arrow-forward-up"></i></span>
                                                 </a>
                                             @else
                                                 <a href="{{ route('request.cancel', \Auth::user()->id) }}"
                                                     class="btn btn-icon m-1 btn-danger"
                                                     data-title="{{ __('Cancel Request') }}" data-toggle="tooltip">
-                                                    <span class="btn-inner-icon"><i class="ti ti-trash"></i></span>
+                                                    <span class="btn-inner-icon"><i class="fa fa-trash"></i></span>
                                                 </a>
                                             @endif
                                         @endif

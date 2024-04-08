@@ -40,8 +40,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{\Auth::user()->estimatenumberFormat($estimate->estimate).' '.__('Details')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{\Auth::user()->estimatenumberFormat($estimate->estimate).' '.__('Details')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -50,12 +49,12 @@
 @endsection
 @section('action-btn')
      <a href="#" class="btn btn-sm btn-primary btn-icon m-1 cp_link" data-link="{{route('pay.estimate',\Illuminate\Support\Facades\Crypt::encrypt($estimate->id))}}" data-toggle="tooltip" data-original-title="{{__('Click to copy invoice link')}}">
-        <span class="btn-inner--icon"><i class="ti ti-copy"></i></span>
+        <span class="btn-inner--icon"><i class="fa fa-copy"></i></span>
         <span class="btn-inner--text">{{__('Copy')}}</span>
     </a>
     @if($estimate->status==0)
      <a href="{{route('estimate.send',$estimate->id)}}" class="btn btn-sm btn-primary btn-icon m-1">
-            <span class="btn-inner--icon"><i class="ti ti-send"></i></span>
+            <span class="btn-inner--icon"><i class="fa fa-send"></i></span>
             <span class="btn-inner--text">{{__('Send')}}</span>
         </a>
     @else
@@ -65,7 +64,7 @@
         </a>
     @endif
     <a href="{{route('estimate.pdf',\Crypt::encrypt($estimate->id))}}" target="_blank" class="btn btn-sm btn-primary btn-icon m-1">
-        <span class="btn-inner--icon"><i class="ti ti-printer"></i></span>
+        <span class="btn-inner--icon"><i class="fa fa-printer"></i></span>
         <span class="btn-inner--text">{{__('Print')}}</span>
     </a>
 @endsection

@@ -14,8 +14,7 @@
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Manage Goal Tracking')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Manage Goal Tracking')}}
 @endsection
 @push('script-page')
     <script src="{{ asset('js/bootstrap-toggle.js') }}"></script>
@@ -32,10 +31,10 @@
 @endpush
 @section('action-btn')
 @if(\Auth::user()->type == 'company')
-<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-url="{{ route('goaltracking.create') }}" data-size="lg"
-    data-bs-whatever="{{__('Create New Goal Tracking')}}"> <span class="text-white">
-        <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+      data-url="{{ route('goaltracking.create') }}" data-size="lg"
+    data-title="{{__('Create New Goal Tracking')}}"> <span class="text-white">
+        <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
     </a>
 @endif
 @endsection
@@ -91,16 +90,16 @@
                                     </td>
                                     <td>
                                         <div class="action-btn bg-info ms-2">
-                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-size="lg"
-                                            data-bs-target="#exampleModal" data-url="{{ route('goaltracking.edit',$goalTracking->id) }}"
-                                            data-bs-whatever="{{__('Edit Goal Tracking')}}"> <span class="text-white"> <i
-                                                    class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
+                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true" data-size="lg"
+                                              data-url="{{ route('goaltracking.edit',$goalTracking->id) }}"
+                                            data-title="{{__('Edit Goal Tracking')}}"> <span class="text-white"> <i
+                                                    class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                         </div>
 
                                         <div class="action-btn bg-danger ms-2">
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['goaltracking.destroy', $goalTracking->id]]) !!}
                                             <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('delete') }}"></i>
+                                                <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('delete') }}"></i>
                                             </a>
                                             {!! Form::close() !!}
 

@@ -44,17 +44,17 @@ $settings = \App\Models\Utility::settings(1);
 
                                 <a href="#guideline" data-target="guideline"
                                     class="list-group-item list-group-item-action border-0 menu-btn active">{{ __('GuideLine') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
 
                                 <a href="#ref_transaction" data-target="ref_transaction"
                                     class="list-group-item list-group-item-action border-0 menu-btn">{{ __('Referral Transaction') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
 
                                 <a href="#payout" data-target="payout"
                                     class="list-group-item list-group-item-action border-0 menu-btn">{{ __('Payout') }}
-                                    <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                    <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                 </a>
                             </div>
                         </div>
@@ -101,7 +101,7 @@ $settings = \App\Models\Utility::settings(1);
                                                                data-bs-original-title="Click to copy business link">
                                                                 {{ route('register', ['ref' => \Auth::user()->referral_code]) }}
 
-                                                                <i class="ti ti-copy"></i>
+                                                                <i class="fa fa-copy"></i>
 
                                                                 {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -201,10 +201,10 @@ $settings = \App\Models\Utility::settings(1);
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-2 text-end">
                                             <a href="#" class="btn btn-sm btn-primary btn-icon m-1"
-                                                data-bs-toggle="modal"data-bs-target="#bonus" data-size="lg"
-                                                data-bs-whatever="Amount PayOut">
+                                                data-ajax-popup="true"data-bs-target="#bonus" data-size="lg"
+                                                data-title="Amount PayOut">
                                                 <span class="text-white">
-                                                    <i class="ti ti-arrow-forward-up text-end" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-arrow-forward-up text-end" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Amount PayOut') }}"></i>
                                                 </span>
                                             </a>
@@ -216,7 +216,7 @@ $settings = \App\Models\Utility::settings(1);
                                         <div class="col-lg-6">
                                             <div class="d-flex border p-3">
                                                 <div class="theme-avtar bg-primary">
-                                                    <i class="ti ti-report-money"></i>
+                                                    <i class="fa fa-report-money"></i>
                                                 </div>
                                                 <div style="margin-left: 3%">
                                                     <small>{{ __('Total') }}</small>
@@ -228,7 +228,7 @@ $settings = \App\Models\Utility::settings(1);
                                         <div class="col-lg-6">
                                             <div class="d-flex border p-3">
                                                 <div class="theme-avtar bg-primary">
-                                                    <i class="ti ti-report-money"></i>
+                                                    <i class="fa fa-report-money"></i>
                                                 </div>
                                                 <div style="margin-left: 3%">
                                                     <small>{{ __('Paid') }}</small>

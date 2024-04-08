@@ -25,7 +25,7 @@ $profile = asset(Storage::url('uploads/avatar'));
     <script>
 
 
-      
+
 
         $(document).on('change', '#project', function() {
             var project_id = $(this).val();
@@ -71,30 +71,28 @@ $profile = asset(Storage::url('uploads/avatar'));
     {{ __('Task') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Task') }}</h5>
-    </div>
+     {{ __('Task') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Task') }}</li>
 @endsection
 @section('action-btn')
 
     <a href="{{ route('task.calendar') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="Calendar View" >
-        <i class="ti ti-calendar text-white"></i>
+        <i class="fa fa-calendar text-white"></i>
     </a>
 
     <a href="{{ route('project.all.task.gantt.chart') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Gantt Chart') }}">
-        <i class="ti ti-chart-bar text-white"></i>
+        <i class="fa fa-chart-bar text-white"></i>
     </a>
 
     <a href="{{ route('project.all.task.kanban') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{ __('Task Kanban') }}">
-        <i class="ti ti-layout-kanban text-white"></i>
+        <i class="fa fa-layout-kanban text-white"></i>
     </a>
-    <a href="#" data-size="lg" data-url="{{ route('project.task.create', 0) }}" data-bs-toggle="modal" data-bs-whatever="{{__('Create New Task')}}"
-    data-bs-target="#exampleModal" title="{{ __('Create New Task') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
+    <a href="#" data-size="lg" data-url="{{ route('project.task.create', 0) }}" data-ajax-popup="true" data-title="{{__('Create New Task')}}"
+      title="{{ __('Create New Task') }}" class="btn btn-sm btn-primary btn-icon m-1">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
     </a>
 @endsection
 
@@ -136,13 +134,13 @@ $profile = asset(Storage::url('uploads/avatar'));
                 <div class="action-btn bg-info ms-2 col-auto">
                     <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center"
                     data-bs-toggle="tooltip" data-title="{{ __('Apply') }}"><i
-                            class="ti ti-search text-white"></i></button>
+                            class="fa fa-search text-white"></i></button>
                 </div>
                 <div class="action-btn bg-danger ms-2 col-auto">
                     <a href="{{ route('project.all.task') }}" data-toggle="tooltip"
                         data-title="{{ __('Reset') }}"
                         class="mx-3 btn btn-sm d-flex align-items-center"><i
-                            class="ti ti-trash-off text-white"></i></a>
+                            class="fa fa-trash-off text-white"></i></a>
                 </div>
             </div>
             {{ Form::close() }}
@@ -177,7 +175,7 @@ $profile = asset(Storage::url('uploads/avatar'));
                                     } else {
                                         $tasks = $project->taskFilter($_GET['status'], $_GET['priority'], $_GET['due_date']);
                                     }
-                                    
+
                                 @endphp
 
                                 @foreach ($tasks as $task)
@@ -201,20 +199,20 @@ $profile = asset(Storage::url('uploads/avatar'));
                                             @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
                                             <div class="action-btn bg-warning ms-2">
                                                 <a href="#" data-size="lg" data-url="{{ route('project.task.show', $task->id) }}"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('Task Detail') }}"
+                                                    data-ajax-popup="true"   title="{{ __('Task Detail') }}"
                                                     class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="tooltip"
-                                                    data-bs-whatever="{{__('View Task')}}">
-                                                    <i class="ti ti-eye text-white"></i>
+                                                    data-title="{{__('View Task')}}">
+                                                    <i class="fa fa-eye text-white"></i>
                                                 </a>
                                             </div>
                                             @endif
                                             @if (\Auth::user()->type == 'company')
                                             <div class="action-btn bg-info ms-2">
                                                 <a href="#" data-size="lg" data-url="{{ route('project.task.edit', $task->id) }}"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('Edit Task') }}"
-                                                    class="mx-3 btn btn-sm d-inline-flex align-items-center" data-toggle="tooltip" data-bs-whatever="{{__('Edit Task')}}"
+                                                    data-ajax-popup="true"   title="{{ __('Edit Task') }}"
+                                                    class="mx-3 btn btn-sm d-inline-flex align-items-center" data-toggle="tooltip" data-title="{{__('Edit Task')}}"
                                                     data-original-title="{{ __('Edit') }}">
-                                                    <i class="ti ti-edit text-white"></i>
+                                                    <i class="fa fa-edit text-white"></i>
                                                 </a>
                                             </div>
                                             <div class="action-btn bg-danger ms-2">
@@ -222,11 +220,11 @@ $profile = asset(Storage::url('uploads/avatar'));
                                                     {!! Form::open(['method' => 'POST', 'route' => ['project.task.destroy', $task->id],'id'=>'task-delete-form-'.$task->id]) !!}
                                                     @method('DELETE')
                                                     <a href="#!" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm" data-toggle="tooltip" title='Delete'>
-                                                        <span class="text-white"> <i class="ti ti-trash"></i></span>
+                                                        <span class="text-white"> <i class="fa fa-trash"></i></span>
                                                     </a>
                                                     {!! Form::close() !!}
                                                 </span>
-                   
+
                                             </div>
                                             @endif
                                         </td>

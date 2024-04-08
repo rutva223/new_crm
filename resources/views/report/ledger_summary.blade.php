@@ -22,9 +22,7 @@
     </script>
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Ledger Summary')}}</h5>
-    </div>
+     {{__('Ledger Summary')}}
 @endsection
 
 @section('breadcrumb')
@@ -61,26 +59,26 @@
                     <div class="action-btn bg-info ms-2">
                         <div class="col-auto">
                             <a href="#" class="mx-3 btn btn-sm d-flex align-items-center" onclick="document.getElementById('report_ledger').submit(); return false;" data-toggle="tooltip" data-original-title="{{__('apply')}}">
-                                <span class="btn-inner--icon"><i class="ti ti-search text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('apply')}}" ></i></span>
+                                <span class="btn-inner--icon"><i class="fa fa-search text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('apply')}}" ></i></span>
                             </a>
                         </div>
                     </div>
                     <div class="action-btn bg-danger ms-2">
                         <div class="col-auto">
                             <a href="{{route('report.ledger')}}" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip" data-original-title="{{__('Reset')}}">
-                                <span class="btn-inner--icon"><i class="ti ti-trash-off text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}"></i></span>
+                                <span class="btn-inner--icon"><i class="fa fa-trash-off text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}"></i></span>
                             </a>
                         </div>
                     </div>
                     <div class="action-btn bg-secondary ms-2">
                         <div class="col-auto">
                             <a href="#" class="mx-3 btn btn-sm d-flex align-items-center" onclick="saveAsPDF()" data-toggle="tooltip" data-original-title="{{__('Download')}}">
-                                <span class="btn-inner--icon"><i class="ti ti-download text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}"></i></span>
+                                <span class="btn-inner--icon"><i class="fa fa-download text-white" data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}"></i></span>
                             </a>
                         </div>
                     </div>
                 </div>
- 
+
             </div>
 {{ Form::close() }}
                 </div>
@@ -88,7 +86,7 @@
         </div>
 
 
-  
+
     <div class="col-xl-12">
             <!-- [ Main Content ] start -->
             <div class="row">
@@ -101,7 +99,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-primary">
-                                                <i class="ti ti-home"></i>
+                                                <i class="fa fa-home"></i>
                                             </div>
                                             <!-- <p class="text-muted text-sm mt-4 mb-2">Statistics</p> -->
                                             <h6 class="mb-3">{{__('Account Name')}} :</h6>
@@ -113,7 +111,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-info">
-                                                <i class="ti ti-code"></i>
+                                                <i class="fa fa-code"></i>
                                             </div>
                                             <!-- <p class="text-muted text-sm mt-4 mb-2">Statistics</p> -->
                                             <h6 class="mb-3">{{__('Account Code')}} :</h6>
@@ -125,7 +123,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-secondary">
-                                                <i class="ti ti-click"></i>
+                                                <i class="fa fa-click"></i>
                                             </div>
                                             <!-- <p class="text-muted text-sm mt-4 mb-2">Statistics</p> -->
                                             <h6 class="mb-3">{{__('Total Debit')}} :</h6>
@@ -138,7 +136,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="theme-avtar bg-warning">
-                                                <i class="ti ti-report-money"></i>
+                                                <i class="fa fa-report-money"></i>
                                             </div>
                                             <!-- <p class="text-muted text-sm mt-4 mb-2">Statistics</p> -->
                                             <h6 class="mb-3">{{__('Total Credit')}} :</h6>

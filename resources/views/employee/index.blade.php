@@ -9,32 +9,29 @@
     {{ __('Employee') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Employee') }}</h5>
-    </div>
+     {{ __('Employee') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Employee') }}</li>
+    {{ __('Employee') }}
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'company')
         <a href="{{ route('user.userlog') }}" class="btn btn-primary btn-sm {{ Request::segment(1) == 'user' }}"
             data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Employee Logs History') }}">
-            <i class="ti ti-user-check"></i>
+            <i class="fa fa-user-check"></i>
         </a>
     @endif
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        data-url="{{ route('employee.file.import') }}" data-bs-whatever="{{ __('Import CSV file') }}"> <span
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+        data-url="{{ route('employee.file.import') }}" data-title="{{ __('Import CSV file') }}"> <span
             class="text-white">
-            <i class="ti ti-file-import" data-bs-toggle="tooltip"
+            <i class="fa fa-file-import" data-bs-toggle="tooltip"
                 data-bs-original-title="{{ __('Import item CSV file') }}"></i>
     </a>
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        data-url="{{ route('employee.create') }}" data-bs-whatever="{{ __('Create New Employee') }}">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+    <a href="#" class="btn btn-sm btn-primary " data-ajax-popup="true"
+        data-url="{{ route('employee.create') }}" data-title="{{ __('Create New Employee') }}">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
     </a>
 @endsection
 
@@ -60,11 +57,11 @@
                         <div class="col-auto">
                             <button type="submit" class="btn btn-xs btn-primary btn-icon-only rounded-circle"
                                 data-toggle="tooltip" data-title="{{ __('Apply') }}"><i
-                                    class="ti ti-search"></i></button>
+                                    class="fa fa-search"></i></button>
                         </div>
                         <div class="col-auto">
                             <a href="{{ route('employee.index') }}" data-toggle="tooltip" data-title="{{ __('Reset') }}"
-                                class="btn btn-xs btn-danger btn-icon-only rounded-circle"><i class="ti ti-trash"></i></a>
+                                class="btn btn-xs btn-danger btn-icon-only rounded-circle"><i class="fa fa-trash"></i></a>
                         </div>
                     </div>
                     {{ Form::close() }}
@@ -90,35 +87,35 @@
                                         @if ($employee->is_active == 1 && (\Auth::user()->id == $employee->id || \Auth::user()->type == 'company'))
                                             <div class="dropdown action-item">
                                                 <a href="#" class="action-item " data-bs-toggle="dropdown">
-                                                    <i class="ti ti-dots-vertical"></i></a>
+                                                    <i class="fa fa-dots-vertical"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
 
                                                     <a href="{{ route('employee.edit', \Crypt::encrypt($employee->id)) }}"
-                                                        class="dropdown-item" data-bs-whatever="{{ __('Edit Employee') }}">
-                                                        <i class="ti ti-edit"> </i> {{ __('Edit') }}</a>
+                                                        class="dropdown-item" data-title="{{ __('Edit Employee') }}">
+                                                        <i class="fa fa-edit"> </i> {{ __('Edit') }}</a>
 
 
                                                     <a href="{{ route('employee.show', \Crypt::encrypt($employee->id)) }}"
-                                                        class="dropdown-item" data-bs-whatever="{{ __('View Employee') }}">
-                                                        <i class="ti ti-eye"></i> {{ __('View') }}</a>
+                                                        class="dropdown-item" data-title="{{ __('View Employee') }}">
+                                                        <i class="fa fa-eye"></i> {{ __('View') }}</a>
 
 
                                                     <a href="#"
                                                         data-url="{{ route('employee.reset', \Crypt::encrypt($employee->id)) }}"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                        data-ajax-popup="true"
                                                         class="dropdown-item"
-                                                        data-bs-whatever="{{ __('Reset Password') }}">
-                                                        <i class="ti ti-lock"> </i> {{ __('Reset Password') }}
+                                                        data-title="{{ __('Reset Password') }}">
+                                                        <i class="fa fa-lock"> </i> {{ __('Reset Password') }}
                                                     </a>
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['employee.destroy', $employee->id]]) !!}
                                                     <a href="#!" class=" show_confirm dropdown-item">
-                                                        <i class="ti ti-trash"></i>{{ __('Delete') }}
+                                                        <i class="fa fa-trash"></i>{{ __('Delete') }}
                                                     </a>
                                                     {!! Form::close() !!}
                                                     @if ($employee->is_enable_login == 1)
                                                         <a href="{{ route('employee.login', \Crypt::encrypt($employee->id)) }}"
                                                             class="dropdown-item">
-                                                            <i class="ti ti-road-sign"></i>
+                                                            <i class="fa fa-road-sign"></i>
                                                             <span class="text-danger"> {{ __('Login Disable') }}</span>
                                                         </a>
                                                     @elseif ($employee->is_enable_login == 0 && $employee->password == null)
@@ -127,13 +124,13 @@
                                                             data-ajax-popup="true" data-size="md"
                                                             class="dropdown-item login_enable"
                                                             data-title="{{ __('New Password') }}" class="dropdown-item">
-                                                            <i class="ti ti-road-sign"></i>
+                                                            <i class="fa fa-road-sign"></i>
                                                             <span class="text-success"> {{ __('Login Enable') }}</span>
                                                         </a>
                                                     @else
                                                         <a href="{{ route('employee.login', \Crypt::encrypt($employee->id)) }}"
                                                             class="dropdown-item">
-                                                            <i class="ti ti-road-sign"></i>
+                                                            <i class="fa fa-road-sign"></i>
                                                             <span class="text-success"> {{ __('Login Enable') }}</span>
                                                         </a>
                                                     @endif
@@ -150,7 +147,7 @@
                                         @endif
                                     @else
                                         <div>
-                                            <i class="ti ti-lock"></i>
+                                            <i class="fa fa-lock"></i>
                                         </div>
                                     @endif
                                 </div>
@@ -219,11 +216,11 @@
             </div>
         @endforeach
         <div class="col-xl-3 col-lg-4 col-sm-6">
-            <a href="#" class="btn-addnew-project " data-bs-toggle="modal" data-bs-target="#exampleModal"
+            <a href="#" class="btn-addnew-project " data-ajax-popup="true"
                 data-url="{{ route('employee.create') }}" data-size="lg"
-                data-bs-whatever="{{ __('Create New Employee') }}">
+                data-title="{{ __('Create New Employee') }}">
                 <div class="bg-primary proj-add-icon">
-                    <i class="ti ti-plus"></i>
+                    <i class="fa fa-plus"></i>
                 </div>
                 <h6 class="mt-4 mb-2">{{ __('New Employee') }}</h6>
                 <p class="text-muted text-center">{{ __('Click here to add new employee') }}</p>

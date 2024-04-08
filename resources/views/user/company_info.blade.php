@@ -18,7 +18,7 @@
                                     </p>
                                     <p class="text-sm mb-0" data-toggle="tooltip"
                                         data-bs-original-title="{{ __('Total Users') }}"><i
-                                            class="ti ti-users text-warning card-icon-text-space fs-5 mx-1"></i><span
+                                            class="fa fa-users text-warning card-icon-text-space fs-5 mx-1"></i><span
                                             class="total_users fs-5">{{ $userData['total_users'] }}</span>
 
                                     </p>
@@ -29,7 +29,7 @@
                                     </p>
                                     <p class="text-sm mb-0" data-toggle="tooltip"
                                         data-bs-original-title="{{ __('Active Users') }}"><i
-                                            class="ti ti-users text-primary card-icon-text-space fs-5 mx-1"></i><span
+                                            class="fa fa-users text-primary card-icon-text-space fs-5 mx-1"></i><span
                                             class="active_users fs-5">{{ $userData['active_users'] }}</span>
                                     </p>
                                 </div>
@@ -39,7 +39,7 @@
                                     </p>
                                     <p class="text-sm mb-0" data-toggle="tooltip"
                                         data-bs-original-title="{{ __('Disable Users') }}"><i
-                                            class="ti ti-users text-danger card-icon-text-space fs-5 mx-1"></i><span
+                                            class="fa fa-users text-danger card-icon-text-space fs-5 mx-1"></i><span
                                             class="disable_users fs-5">{{ $userData['disable_users'] }}</span>
                                     </p>
                                 </div>

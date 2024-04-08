@@ -341,9 +341,7 @@
     {{__('Estimation')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{\Auth::user()->estimatenumberFormat($estimate->estimate).' '.__('Edit')}}</h5>
-    </div>
+     {{\Auth::user()->estimatenumberFormat($estimate->estimate).' '.__('Edit')}}
 
 @endsection
 @section('breadcrumb')
@@ -355,7 +353,7 @@
 @endsection
 @section('filter')
 @endsection
-@section('content')    @php 
+@section('content')    @php
 $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -405,7 +403,7 @@ $plansettings = App\Models\Utility::plansettings();
                                 </div>
                                 <div class="col-6 text-end">
                                     <a href="#" class="btn btn-sm btn-primary btn-icon m-1 pb-2" data-repeater-create="" data-toggle="modal" data-target="#add-bank">
-                                        <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+                                        <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
                                     </a>
                                 </div>
                             </div>

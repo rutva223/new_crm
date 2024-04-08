@@ -10,13 +10,11 @@
     {{ __('Employee Detail') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">
-            {{ \Auth::user()->employeeIdFormat($employee->employee_id) . ' ' . __('Details') }}</h5>
-    </div>
+
+            {{ \Auth::user()->employeeIdFormat($employee->employee_id) . ' ' . __('Details') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item"><a href="{{ route('employee.index') }}">{{ __('Employee') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ $user->name }}</li>
 @endsection

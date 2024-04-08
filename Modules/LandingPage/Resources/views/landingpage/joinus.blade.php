@@ -3,7 +3,7 @@
     {{ __('Landing Page') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -30,7 +30,7 @@
 @endpush
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -148,7 +148,7 @@
                                                                         data-original-title="{{ __('Delete') }}"
                                                                         data-confirm="{{ __('Are You Sure?') . '|' . __('This action can not be undone. Do you want to continue?') }}"
                                                                         data-confirm-yes="document.getElementById('delete-form-{{ $key }}').submit();">
-                                                                        <i class="ti ti-trash text-white"></i>
+                                                                        <i class="fa fa-trash text-white"></i>
                                                                     </a>
                                                                     {!! Form::close() !!}
 

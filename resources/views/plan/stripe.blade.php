@@ -287,12 +287,10 @@
     {{ __('Order Summary') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Order Summary') }}</h5>
-    </div>
+     {{ __('Order Summary') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item"><a href="{{ route('plan.index') }}">{{ __('Plan') }}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ __('Order Summary') }}</li>
 @endsection
@@ -312,7 +310,7 @@
                                     <a href="#manually_payment" class="list-group-item list-group-item-action border-0"
                                         data-toggle="tab" role="tab" aria-controls="manually"
                                         aria-selected="true">{{ __('Manually') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
                                 @if (isset($admin_payment_setting['is_bank_transfer_enabled']) &&
@@ -320,7 +318,7 @@
                                     <a href="#bank_transfer" class="list-group-item list-group-item-action border-0"
                                         data-toggle="tab" role="tab" aria-controls="bank_transfer" aria-selected="true">
                                         {{ 'Bank Transfer' }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
@@ -330,7 +328,7 @@
                                         !empty($admin_payment_setting['stripe_secret']))
                                     <a href="#stripe_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Stripe') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
@@ -340,7 +338,7 @@
                                         !empty($admin_payment_setting['paypal_secret_key']))
                                     <a href="#paypal_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Paypal') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
@@ -350,132 +348,132 @@
                                         !empty($admin_payment_setting['paystack_secret_key']))
                                     <a href="#paystack_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Paystack') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_flutterwave_enabled']) && $admin_payment_setting['is_flutterwave_enabled'] == 'on')
                                     <a href="#flutterwave_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Flutterwave') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_razorpay_enabled']) && $admin_payment_setting['is_razorpay_enabled'] == 'on')
                                     <a href="#razorpay_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Razorpay') }} <div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_mercado_enabled']) && $admin_payment_setting['is_mercado_enabled'] == 'on')
                                     <a href="#mercado_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Mercado Pago') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_paytm_enabled']) && $admin_payment_setting['is_paytm_enabled'] == 'on')
                                     <a href="#paytm_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Paytm') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_mollie_enabled']) && $admin_payment_setting['is_mollie_enabled'] == 'on')
                                     <a href="#mollie_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Mollie') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_skrill_enabled']) && $admin_payment_setting['is_skrill_enabled'] == 'on')
                                     <a href="#skrill_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Skrill') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_coingate_enabled']) && $admin_payment_setting['is_coingate_enabled'] == 'on')
                                     <a href="#coingate_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Coingate') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_paymentwall_enabled']) && $admin_payment_setting['is_paymentwall_enabled'] == 'on')
                                     <a href="#paymentwall_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Paymentwall') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_toyyibpay_enabled']) && $admin_payment_setting['is_toyyibpay_enabled'] == 'on')
                                     <a href="#toyyibpay_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Toyyibpay') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_payfast_enabled']) && $admin_payment_setting['is_payfast_enabled'] == 'on')
                                     <a href="#payfast-payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Payfast') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_iyzipay_enabled']) && $admin_payment_setting['is_iyzipay_enabled'] == 'on')
                                     <a href="#iyzipay-payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Iyzipay') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_sspay_enabled']) && $admin_payment_setting['is_sspay_enabled'] == 'on')
                                     <a href="#sspay_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Sspay') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_paytab_enabled']) && $admin_payment_setting['is_paytab_enabled'] == 'on')
                                     <a href="#paytab_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Paytab') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_benefit_enabled']) && $admin_payment_setting['is_benefit_enabled'] == 'on')
                                     <a href="#benefit_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Benefit') }}
-                                        <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                                        <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                                     </a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_cashfree_enabled']) && $admin_payment_setting['is_cashfree_enabled'] == 'on')
                                     <a href="#cashfree_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Cashfree') }} <div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_aamarpay_enabled']) && $admin_payment_setting['is_aamarpay_enabled'] == 'on')
                                     <a href="#aamarpay_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('Aamarpay') }} <div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                                 @if (isset($admin_payment_setting['is_paytr_enabled']) && $admin_payment_setting['is_paytr_enabled'] == 'on')
                                     <a href="#paytr_payment"
                                         class="list-group-item list-group-item-action border-0">{{ __('PayTr') }} <div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
                                 @if(isset($admin_payment_setting['is_yookassa_enabled']) && $admin_payment_setting['is_yookassa_enabled'] == 'on')
                                     <a href="#yookassa_payment"
                                        class="list-group-item list-group-item-action border-0">{{ __('Yookassa') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
                                 @if(isset($admin_payment_setting['is_midtrans_enabled']) && $admin_payment_setting['is_midtrans_enabled'] == 'on')
                                     <a href="#midtrans_payment"
                                        class="list-group-item list-group-item-action border-0">{{ __('Midtrans') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
                                 @if(isset($admin_payment_setting['is_xendit_enabled']) && $admin_payment_setting['is_xendit_enabled'] == 'on')
                                     <a href="#xendit_payment"
                                        class="list-group-item list-group-item-action border-0">{{ __('Xendit') }}<div
-                                            class="float-end"><i class="ti ti-chevron-right"></i></div></a>
+                                            class="float-end"><i class="fa fa-chevron-right"></i></div></a>
                                 @endif
 
                             </div>
@@ -521,13 +519,13 @@
                                     <ul class="list-unstyled my-5">
                                         <li>
                                             <span class="theme-avtar">
-                                                <i class="text-primary ti ti-circle-plus"></i></span>
+                                                <i class="text-primary fa fa-circle-plus"></i></span>
                                             {{ $plan->max_employee == '-1' ? __('Unlimited') : $plan->max_employee }}
                                             {{ __('Employee') }}
                                         </li>
                                         <li>
                                             <span class="theme-avtar">
-                                                <i class="text-primary ti ti-circle-plus"></i></span>
+                                                <i class="text-primary fa fa-circle-plus"></i></span>
                                             {{ $plan->max_client == '-1' ? __('Unlimited') : $plan->max_client }}
                                             {{ __('Clients') }}
                                         </li>
@@ -604,7 +602,7 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <div class="form-group apply-banktransfer-btn-coupon">
-                                                    {{-- <a data-from="banktransfer" class="btn btn-sm btn-primary apply-coupon"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Apply') }}"><i class="ti ti-device-floppy"></i></a> --}}
+                                                    {{-- <a data-from="banktransfer" class="btn btn-sm btn-primary apply-coupon"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Apply') }}"><i class="fa fa-device-floppy"></i></a> --}}
                                                     <a data-from="banktransfer"
                                                         class="btn btn-primary align-items-center apply-coupon text-white">{{ __('Apply') }}</a>
                                                 </div>
@@ -1476,7 +1474,7 @@
                                                             <div class="form-group">
                                                                 <a class="btn btn-primary align-items-center apply-coupon text-white"
                                                                     data-from="payfast">{{ __('Apply') }}</a>
-                                                                {{-- <a href="#" data-from="payfast" data-from="payfast" class="btn btn-sm btn-primary apply-coupon"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Apply') }}"><i class="ti ti-device-floppy"></i></a> --}}
+                                                                {{-- <a href="#" data-from="payfast" data-from="payfast" class="btn btn-sm btn-primary apply-coupon"  data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Apply') }}"><i class="fa fa-device-floppy"></i></a> --}}
                                                             </div>
                                                         </div>
                                                         <div class="col-12 text-right payfast-coupon-tr"

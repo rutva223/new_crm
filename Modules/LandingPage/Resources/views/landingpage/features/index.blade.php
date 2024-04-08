@@ -3,7 +3,7 @@
     {{ __('Landing Page') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -24,7 +24,7 @@
 @endpush
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -143,7 +143,7 @@
                                     <a data-size="lg" data-url="{{ route('feature_create') }}" data-ajax-popup="true"
                                         data-bs-toggle="tooltip" data-title="{{ __('Create Features') }}"
                                         title="{{ __('Create') }}" class="btn btn-sm btn-primary">
-                                        <i class="ti ti-plus text-light"></i>
+                                        <i class="fa fa-plus text-light"></i>
                                     </a>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                                                     data-title="{{ __('Edit Features') }}" data-size="lg"
                                                                     data-bs-toggle="tooltip" title="{{ __('Edit') }}"
                                                                     data-original-title="{{ __('Edit') }}">
-                                                                    <i class="ti ti-pencil text-white"></i>
+                                                                    <i class="fa fa-pencil text-white"></i>
                                                                 </a>
                                                             </div>
 
@@ -190,7 +190,7 @@
                                                                     data-original-title="{{ __('Delete') }}"
                                                                     data-confirm="{{ __('Are You Sure?') . '|' . __('This action can not be undone. Do you want to continue?') }}"
                                                                     data-confirm-yes="document.getElementById('delete-form-{{ $key }}').submit();">
-                                                                    <i class="ti ti-trash text-white"></i>
+                                                                    <i class="fa fa-trash text-white"></i>
                                                                 </a>
                                                                 {!! Form::close() !!}
                                                             </div>
@@ -239,7 +239,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="form-group">
@@ -252,7 +252,7 @@
                                         <div class="choose-files mt-5">
                                             <label for="highlight_feature_image">
                                                 <div class=" bg-primary dark_logo_update" style="cursor: pointer;"> <i
-                                                        class="ti ti-upload px-1">
+                                                        class="fa fa-upload px-1">
                                                     </i>{{ __('Choose file here') }}
                                                 </div>
                                                 <input type="file" name="highlight_feature_image"
@@ -294,7 +294,7 @@
                                     <a data-size="lg" data-url="{{ route('features_create') }}" data-ajax-popup="true"
                                         data-bs-toggle="tooltip" data-title="{{ __('Create Features Block') }}"
                                         title="{{ __('Create') }}" class="btn btn-sm btn-primary">
-                                        <i class="ti ti-plus text-light"></i>
+                                        <i class="fa fa-plus text-light"></i>
                                     </a>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@
                             <!-- {{-- <div class="justify-content-end d-flex">
 
                                     <a data-size="lg" data-url="{{ route('users.create') }}" data-ajax-popup="true"  data-bs-toggle="tooltip" title="{{__('Create')}}"  class="btn btn-sm btn-primary">
-                                        <i class="ti ti-plus text-light"></i>
+                                        <i class="fa fa-plus text-light"></i>
                                     </a>
                                 </div> --}} -->
 
@@ -337,7 +337,7 @@
                                                                     data-size="lg" data-bs-toggle="tooltip"
                                                                     title="{{ __('Edit') }}"
                                                                     data-original-title="{{ __('Edit') }}">
-                                                                    <i class="ti ti-pencil text-white"></i>
+                                                                    <i class="fa fa-pencil text-white"></i>
                                                                 </a>
                                                             </div>
 
@@ -350,7 +350,7 @@
                                                                     data-original-title="{{ __('Delete') }}"
                                                                     data-confirm="{{ __('Are You Sure?') . '|' . __('This action can not be undone. Do you want to continue?') }}"
                                                                     data-confirm-yes="document.getElementById('delete-form-{{ $key }}').submit();">
-                                                                    <i class="ti ti-trash text-white"></i>
+                                                                    <i class="fa fa-trash text-white"></i>
                                                                 </a>
                                                                 {!! Form::close() !!}
                                                             </div>

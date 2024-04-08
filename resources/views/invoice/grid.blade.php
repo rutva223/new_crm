@@ -43,8 +43,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Invoice')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Invoice')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -54,26 +53,26 @@
     @if(\Auth::user()->type=='company')
 
         <a href="{{route('invoice.export')}}" class="btn btn-sm btn-primary btn-icon m-1" data-title="{{__('Export invoice CSV file')}}" data-toggle="tooltip">
-            <i class="ti ti-file-export"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Export')}}"></i>
+            <i class="fa fa-file-export"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Export')}}"></i>
         </a>
 
         <a href="{{ route('invoice.index') }}" class="btn btn-sm btn-primary btn-icon m-1">
-            <i class="ti ti-list" data-bs-toggle="tooltip" data-bs-original-title="{{__('List View')}}"></i>
+            <i class="fa fa-list" data-bs-toggle="tooltip" data-bs-original-title="{{__('List View')}}"></i>
         </a>
-        
 
 
-        <a href="#" data-size="lg" data-url="{{ route('invoice.create') }}" data-toggle="tooltip" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-bs-whatever="{{ __('Create Invoice') }}"
+
+        <a href="#" data-size="lg" data-url="{{ route('invoice.create') }}" data-toggle="tooltip" data-ajax-popup="true"
+          data-title="{{ __('Create Invoice') }}"
         class="btn btn-sm btn-primary btn-icon m-1">
-            <i class="ti ti-plus"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Create')}}"></i>
+            <i class="fa fa-plus"  data-bs-toggle="tooltip" data-bs-original-title="{{__('Create')}}"></i>
         </a>
 
     @endif
 @endsection
 
 @section('content')
-  
+
         <div class="col-12">
             <div class=" {{isset($_GET['status'])?'show':''}}" >
                 <div class="card card-body">
@@ -95,14 +94,14 @@
                         </div>
                         <div class="action-btn bg-info ms-2">
                         <div class="col-auto">
-                            <button type="submit" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="tooltip" 
-                            data-title="{{__('Apply')}}"><i class="ti ti-search text-white" ></i></button>
+                            <button type="submit" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="tooltip"
+                            data-title="{{__('Apply')}}"><i class="fa fa-search text-white" ></i></button>
                         </div>
                     </div>
                     <div class="action-btn bg-danger ms-2">
                         <div class="col-auto">
-                            <a href="{{route('invoice.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" 
-                            class="mx-3 btn btn-sm d-inline-flex align-items-center"><i class="ti ti-trash text-white"></i></a>
+                            <a href="{{route('invoice.index')}}" data-toggle="tooltip" data-title="{{__('Reset')}}"
+                            class="mx-3 btn btn-sm d-inline-flex align-items-center"><i class="fa fa-trash text-white"></i></a>
                         </div>
                     </div>
                     </div>
@@ -125,26 +124,26 @@
                             <div class="col-2 text-right">
                                 <div class="actions">
                                     <div class="dropdown">
-                                        <a href="#" class="action-item" data-bs-toggle="dropdown"><i class="ti ti-dots-vertical"></i></a>
+                                        <a href="#" class="action-item" data-bs-toggle="dropdown"><i class="fa fa-dots-vertical"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             @if(\Auth::user()->type=='company')
-                                                <a href="#" data-size="lg" data-url="{{ route('invoice.edit',$invoice->id) }}" 
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                    data-bs-whatever="{{__('Edit Invoice')}}" class="dropdown-item" >
-                                                    <i class="ti ti-edit"></i> {{__('Edit')}}
-                                                   
+                                                <a href="#" data-size="lg" data-url="{{ route('invoice.edit',$invoice->id) }}"
+                                                    data-ajax-popup="true"
+                                                    data-title="{{__('Edit Invoice')}}" class="dropdown-item" >
+                                                    <i class="fa fa-edit"></i> {{__('Edit')}}
+
                                                 </a>
 
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['invoice.destroy', $invoice->id]]) !!}
                                                     <a href="#!" class="show_confirm dropdown-item">
-                                                        <i class="ti ti-trash"></i> {{ __('Delete') }}
+                                                        <i class="fa fa-trash"></i> {{ __('Delete') }}
                                                     </a>
                                                 {!! Form::close() !!}
 
                                             @endif
                                             @if(\Auth::user()->type=='company' || \Auth::user()->type=='client')
                                                 <a href="{{route('invoice.show',\Crypt::encrypt($invoice->id))}}" class="dropdown-item" data-toggle="tooltip" data-original-title="{{__('View')}}">
-                                                   <i class="ti ti-eye"></i> {{__('View')}}
+                                                   <i class="fa fa-eye"></i> {{__('View')}}
                                                 </a>
                                             @endif
 

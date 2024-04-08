@@ -7,9 +7,7 @@
     {{__('Language')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">   {{__('Language')}}</h5>
-    </div>
+        {{__('Language')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -30,7 +28,7 @@
         <div class="action-btn bg-danger ms-2">
             {!! Form::open(['method' => 'DELETE', 'route' => ['lang.destroy', $currantLang]]) !!}
             <a href="#!" class="btn btn-sm btn-danger btn-icon m-1 show_confirm">
-                <i class="ti ti-trash text-white"data-bs-toggle="tooltip"
+                <i class="fa fa-trash text-white"data-bs-toggle="tooltip"
                 data-bs-original-title="{{__('Delete')}}"></i>
             </a>
             {!! Form::close() !!}

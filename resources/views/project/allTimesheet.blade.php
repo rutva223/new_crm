@@ -93,18 +93,16 @@
     {{__('Timesheet')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Timesheet')}}</h5>
-    </div>
+     {{__('Timesheet')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{__('Timesheet')}}</li>
 @endsection
 @section('action-btn')
-    <a href="#" data-size="lg" data-url="{{ route('project.timesheet.create',0) }}" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-bs-whatever="{{__('Create New Timesheet')}}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-plus" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
+    <a href="#" data-size="lg" data-url="{{ route('project.timesheet.create',0) }}" data-ajax-popup="true"
+      data-title="{{__('Create New Timesheet')}}" class="btn btn-sm btn-primary btn-icon m-1">
+        <i class="fa fa-plus" data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}"></i>
     </a>
 @endsection
 
@@ -135,10 +133,10 @@
                             {{Form::date('end_date',isset($_GET['end_date'])?$_GET['end_date']:'',array('class'=>'form-control'))}}
                         </div>
                         <div class="action-btn bg-info ms-2 col-auto mt-2">
-                            <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip" data-title="{{__('Apply')}}"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Apply')}}" class="ti ti-search text-white"></i></button>
+                            <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip" data-title="{{__('Apply')}}"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Apply')}}" class="fa fa-search text-white"></i></button>
                         </div>
                         <div class="action-btn bg-danger ms-2 col-auto mt-2">
-                            <a href="{{route('project.all.timesheet')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" class="mx-3 btn btn-sm d-flex align-items-center"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}" class="ti ti-trash-off text-white"></i></a>
+                            <a href="{{route('project.all.timesheet')}}" data-toggle="tooltip" data-title="{{__('Reset')}}" class="mx-3 btn btn-sm d-flex align-items-center"><i data-bs-toggle="tooltip" data-bs-original-title="{{__('Reset')}}" class="fa fa-trash-off text-white"></i></a>
                         </div>
                     </div>
                     {{ Form::close() }}

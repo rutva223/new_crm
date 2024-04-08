@@ -59,9 +59,7 @@
     {{__('Estimate Report')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Estimate Report')}}</h5>
-    </div>
+     {{__('Estimate Report')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -69,10 +67,10 @@
 @endsection
 @section('action-btn')
 <a href="{{route('estimate_report.export')}}" data-bs-toggle="tooltip" title="{{ __('Export') }}" class="btn btn-sm btn-primary">
-    <i class="ti ti-file-export"></i>
+    <i class="fa fa-file-export"></i>
 </a>
     <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{__('Download')}}" id="download-buttons">
-        <i class="ti ti-download"></i>
+        <i class="fa fa-download"></i>
     </a>
 @endsection
 
@@ -104,13 +102,13 @@
                         <div class="action-btn bg-info ms-2">
                             <div class="col-auto">
                                 <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip"
-                                title="{{__('Apply')}}"><i class="ti ti-search text-white"></i></button>
+                                title="{{__('Apply')}}"><i class="fa fa-search text-white"></i></button>
                             </div>
                         </div>
                         <div class="action-btn bg-danger ms-2">
                             <div class="col-auto">
-                                <a href="{{route('report.estimate')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" 
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                                <a href="{{route('report.estimate')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}"
+                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                             </div>
                         </div>
                     </div>
@@ -131,7 +129,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-primary">
-                                            <i class="ti ti-user-plus"></i>
+                                            <i class="fa fa-user-plus"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Estimation')}}</h6>
                                         <h3 class="mb-0">{{\Auth::user()->priceFormat($totalEstimation)}} </h3>
@@ -142,7 +140,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-info">
-                                            <i class="ti ti-receipt-tax"></i>
+                                            <i class="fa fa-receipt-tax"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Tax')}}</h6>
                                         <h3 class="mb-0">{{\Auth::user()->priceFormat($totalTax)}}</h3>
@@ -153,7 +151,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-warning">
-                                            <i class="ti ti-discount-2"></i>
+                                            <i class="fa fa-discount-2"></i>
                                         </div>
                                         <h6 class="mb-3 mt-4">{{__('Total Discount')}}</h6>
                                         <h3 class="mb-0">{{\Auth::user()->priceFormat($totalDiscount)}} </h3>
@@ -171,12 +169,12 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-success">
-                                                <i class="ti ti-heart"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0">{{__('Report')}} :</p>
                                                 <p class="mb-0 text-success">{{__('Estimation Summary')}}</p>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -184,12 +182,12 @@
                                         <div class="col-md-3 col-sm-6">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-primary">
-                                                    <i class="ti ti-user"></i>
+                                                    <i class="fa fa-user"></i>
                                                 </div>
                                                 <div class="ms-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Client')}} :</p>
                                                     <p class="mb-0 text-primary">{{$filter['client'] }}</p>
-                                                
+
                                                 </div>
                                             </div>
                                         </div>
@@ -198,12 +196,12 @@
                                         <div class="col-md-3 col-sm-6">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-primary">
-                                                    <i class="ti ti-thumb-up"></i>
+                                                    <i class="fa fa-thumb-up"></i>
                                                 </div>
                                                 <div class="ms-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Status')}} :</p>
                                                     <p class="mb-0 text-primary">{{$filter['status'] }}</p>
-                                                
+
                                                 </div>
                                             </div>
                                         </div>
@@ -211,21 +209,21 @@
                                     <div class="col-md-5 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-danger">
-                                                <i class="ti ti-calendar"></i>
+                                                <i class="fa fa-calendar"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0"> {{__('Duration')}} :</p>
                                                 <p class="mb-0 text-danger">{{$filter['startDateRange'].' to '.$filter['endDateRange']}}</p>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <!-- [ sample-page ] end -->
             </div>
@@ -237,7 +235,7 @@
                             <div class="card-header card-body table-border-style">
                                 <!-- <h5> -->
                                 <!-- <div class="card-body table-border-style"> -->
-                                 
+
                                 <!-- </h5>    -->
                                     <div class="table-responsive">
                                         <table class="table pc-dt-export">

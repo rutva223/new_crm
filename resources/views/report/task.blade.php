@@ -75,12 +75,12 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
 
 
 <a href="{{ route('task_report.export') }}" data-bs-toggle="tooltip" title="{{ __('Export') }}" class="btn btn-sm btn-primary">
-    <i class="ti ti-file-export"></i>
+    <i class="fa fa-file-export"></i>
 </a>
 
 
 <a href="#" onclick="saveAsPDF();" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="{{__('Download')}}" id="download-buttons">
-    <i class="ti ti-download"></i>
+    <i class="fa fa-download"></i>
 </a>
 @endsection
 
@@ -106,12 +106,12 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                 </div>
                 <div class="action-btn bg-info ms-2">
                     <div class="col-auto">
-                        <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" title="{{__('Apply')}}"><i class="ti ti-search text-white"></i></button>
+                        <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" title="{{__('Apply')}}"><i class="fa fa-search text-white"></i></button>
                     </div>
                 </div>
                 <div class="action-btn bg-danger ms-2">
                     <div class="col-auto">
-                        <a href="{{route('report.task')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                        <a href="{{route('report.task')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                     </div>
                 </div>
                 {{ Form::close() }}
@@ -133,7 +133,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-success">
-                                                <i class="ti ti-heart"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <h6 class="text-muted text-sm mb-0"> {{__('Report')}} :</h6>
@@ -146,7 +146,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-warning">
-                                                <i class="ti ti-triangle-square-circle"></i>
+                                                <i class="fa fa-triangle-square-circle"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <h6 class="text-muted text-sm mb-0">{{__('Project')}} :</h6>
@@ -159,7 +159,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                     <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-primary">
-                                                <i class="ti ti-thumb-up"></i>
+                                                <i class="fa fa-thumb-up"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <h6 class="text-muted text-sm mb-0">{{__('Employee')}} :</h6>
@@ -171,7 +171,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                     <div class="col-md-4 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-danger">
-                                                <i class="ti ti-thumb-down"></i>
+                                                <i class="fa fa-thumb-down"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <h6 class="text-muted text-sm mb-0"> {{__('Duration')}} :</h6>

@@ -56,8 +56,8 @@
     </div>
     @if(\Auth::user()->type == 'company')
     <div class="modal-footer">
-        <a href="#" class="btn btn-sm btn-primary m-1" data-bs-toggle="modal" data-bs-target="#exampleOverModal"
-            data-url="{{ route('event.edit',$event->id) }}" data-bs-whatever="{{__('Edit Event')}}">
+        <a href="#" class="btn btn-sm btn-primary m-1" data-ajax-popup="true" data-bs-target="#exampleOverModal"
+            data-url="{{ route('event.edit',$event->id) }}" data-title="{{__('Edit Event')}}">
             <i class="text-white"></i>{{__('Edit')}}
         </a>
     </div>

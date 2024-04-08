@@ -70,22 +70,22 @@ function get_data() {
 </div>
 @endsection
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
 <li class="breadcrumb-item active" aria-current="page">{{ __('Holiday') }}</li>
 @endsection
 @section('action-btn')
 
 @if (\Auth::user()->type == 'company')
-<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    data-url="{{ route('holiday.file.import') }}" data-bs-whatever="{{ __('Import holiday CSV file') }}"><span
-        class="text-white"> <i class="ti ti-file-import " data-bs-toggle="tooltip"
+<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+    data-url="{{ route('holiday.file.import') }}" data-title="{{ __('Import holiday CSV file') }}"><span
+        class="text-white"> <i class="fa fa-file-import " data-bs-toggle="tooltip"
             data-bs-original-title="{{ __('Import holiday CSV file') }}"></i> </span></a>
 
 
-<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    data-url="{{ route('holiday.create') }}" data-bs-whatever="{{ __('Create New Holiday') }}"> <span
+<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+    data-url="{{ route('holiday.create') }}" data-title="{{ __('Create New Holiday') }}"> <span
         class="text-white">
-        <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+        <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
 </a>
 @endif
 @endsection
@@ -127,7 +127,7 @@ function get_data() {
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
                                     <div class="theme-avtar bg-info">
-                                        <i class="ti ti-arrow-ramp-right"></i>
+                                        <i class="fa fa-arrow-ramp-right"></i>
                                     </div>
                                     <div class="ms-3">
                                         <h6 class="m-0">{{ $holiday->occasion }}</h6>
@@ -144,7 +144,7 @@ function get_data() {
                                     {!! Form::open(['method' => 'DELETE', 'route' => ['holiday.destroy', $holiday->id]])
                                     !!}
                                     <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                        <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                        <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                             data-bs-original-title="{{ __('Delete') }}"></i>
                                     </a>
                                     {!! Form::close() !!}

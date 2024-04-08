@@ -5,18 +5,16 @@
     {{ __('Attendance') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Attendance') }}</h5>
-    </div>
+     {{ __('Attendance') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Attendance') }}</li>
 @endsection
 @section('action-btn')
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        data-url="{{ route('attendance.file.import') }}" data-bs-whatever="{{ __('Import attendance CSV file') }}">
-        <span class="text-white"> <i class="ti ti-file-import " data-bs-toggle="tooltip"
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+        data-url="{{ route('attendance.file.import') }}" data-title="{{ __('Import attendance CSV file') }}">
+        <span class="text-white"> <i class="fa fa-file-import " data-bs-toggle="tooltip"
                 data-bs-original-title="{{ __('Import attendance CSV file') }}"></i> </span></a>
 @endsection
 
@@ -41,14 +39,14 @@
                                 <div class="col-auto my-1">
                                     <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center"
                                         data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i
-                                            class="ti ti-search text-white"></i></button>
+                                            class="fa fa-search text-white"></i></button>
                                 </div>
                             </div>
                             <div class="action-btn bg-danger ms-2">
                                 <div class="col-auto my-1">
                                     <a href="{{ route('attendance.index') }}" data-bs-toggle="tooltip"
                                         title="{{ __('Reset') }}" class="mx-3 btn btn-sm d-flex align-items-center"><i
-                                            class="ti ti-trash-off text-white"></i></a>
+                                            class="fa fa-trash-off text-white"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -108,10 +106,10 @@
                                         <td class="text-right">
                                             <div class="action-btn bg-info ms-2">
                                                 <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                    data-ajax-popup="true"
                                                     data-url="{{ route('attendance.edit', $attendance->id) }}"
-                                                    data-bs-whatever="{{ __('Edit Attendance') }}" title="Edit Attendance">
-                                                    <span class="text-white"> <i class="ti ti-edit" data-bs-toggle="tooltip"
+                                                    data-title="{{ __('Edit Attendance') }}" title="Edit Attendance">
+                                                    <span class="text-white"> <i class="fa fa-edit" data-bs-toggle="tooltip"
                                                             data-bs-original-title="{{ __('Edit Attendance') }}"></i></span></a>
                                             </div>
 
@@ -119,7 +117,7 @@
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['attendance.destroy', $attendance->id]]) !!}
                                                 <a href="#!"
                                                     class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}

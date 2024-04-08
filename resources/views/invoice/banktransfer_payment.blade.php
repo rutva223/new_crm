@@ -63,7 +63,7 @@
             </div>
             <div class="col-md-6 form-group">
                 <a href="{{ asset('storage/invoice_payment_receipt/'.$invoice_banktransfer->receipt) }}" class="btn btn-primary btn-sm" download>
-                    <i class="ti ti-download text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i></a>
+                    <i class="fa fa-download text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i></a>
                 {{-- {!! $order->receipt !!} --}}
             </div>
         </div>

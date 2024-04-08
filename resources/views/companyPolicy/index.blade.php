@@ -5,9 +5,7 @@
     {{__('Company Policy')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Company Policy')}}</h5>
-    </div>
+     {{__('Company Policy')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -16,10 +14,10 @@
 @section('action-btn')
     @if(\Auth::user()->type=='company')
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-url="{{ route('company-policy.create') }}"
-    data-bs-whatever="{{__('Create New Company Policy')}}">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+      data-url="{{ route('company-policy.create') }}"
+    data-title="{{__('Create New Company Policy')}}">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
     </a>
 
     @endif
@@ -54,10 +52,10 @@
                                 <td>
                                     @if(!empty($policy->attachment))
                                         <a class="btn btn-sm btn-primary btn-icon rounded-pill" href="{{$policyPath.'/'.$policy->attachment}}" target="_blank" download="">
-                                            <i data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}" class="ti ti-download"></i>
+                                            <i data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}" class="fa fa-download"></i>
                                         </a>
                                         <a class="btn btn-sm btn-secondary btn-icon rounded-pill" href="{{$policyPath.'/'.$policy->attachment}}" target="_blank" >
-                                            <i data-bs-toggle="tooltip" data-bs-original-title="{{__('preview')}}" class="ti ti-crosshair"></i>
+                                            <i data-bs-toggle="tooltip" data-bs-original-title="{{__('preview')}}" class="fa fa-crosshair"></i>
                                         </a>
 
                                     @else
@@ -67,17 +65,17 @@
                                 @if(\Auth::user()->type=='company')
                                     <td class="text-right">
                                         <div class="action-btn bg-info ms-2">
-                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal" data-url="{{ route('company-policy.edit',$policy->id) }}"
-                                                data-bs-whatever="{{__('Edit Company Policy')}}"> <i
-                                                        class="ti ti-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
+                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                  data-url="{{ route('company-policy.edit',$policy->id) }}"
+                                                data-title="{{__('Edit Company Policy')}}"> <i
+                                                        class="fa fa-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
                                             </a>
                                         </div>
 
                                         <div class="action-btn bg-danger ms-2">
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['company-policy.destroy', $policy->id]]) !!}
                                                 <a href="#!" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm m-2">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                             {!! Form::close() !!}
                                         </div>

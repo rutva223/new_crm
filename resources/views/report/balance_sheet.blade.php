@@ -22,9 +22,7 @@
     </script>
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Balance Sheet')}}</h5>
-    </div>
+     {{__('Balance Sheet')}}
 @endsection
 
 @section('breadcrumb')
@@ -35,7 +33,7 @@
 @section('action-btn')
     <div class="float-end">
         <a href="#" class="btn btn-sm btn-primary" onclick="saveAsPDF()" data-bs-toggle="tooltip" title="{{__('Download')}}" data-original-title="{{__('Download')}}">
-            <span class="btn-inner--icon"><i class="ti ti-download"></i></span>
+            <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
         </a>
     </div>
 @endsection
@@ -164,7 +162,7 @@
                                         <h4>{{$account['subType']}}</h4>
                                         <div class="data-body bg-white list-group">
                                             <div class="list-group-item list-head d-flex justify-content-between p-b-0 ps-0 pe-0">
-                                                <span class="f-w-900 border-bottom border-dark ps-3 pe-3 pb-2">{{__('Account')}} <i class="ti ti-arrows-up-down"></i></span>
+                                                <span class="f-w-900 border-bottom border-dark ps-3 pe-3 pb-2">{{__('Account')}} <i class="fa fa-arrows-up-down"></i></span>
                                                 <span class="text-muted  ps-3 pe-3 pb-2">{{__('Amount')}}</span>
                                             </div>
                                             @php

@@ -5,24 +5,22 @@
     {{ __('Lead') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Lead') }}</h5>
-    </div>
+     {{ __('Lead') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Lead') }}</li>
 @endsection
 @section('action-btn')
     <a href="{{ route('lead.index') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
         data-bs-original-title="{{ __('Kanban View') }}">
-        <i class="ti ti-layout-kanban text-white"></i>
+        <i class="fa fa-layout-kanban text-white"></i>
     </a>
     @if (\Auth::user()->type == 'company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            data-url="{{ route('lead.create') }}" data-bs-whatever="{{ __('Create New Lead') }}"
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+            data-url="{{ route('lead.create') }}" data-title="{{ __('Create New Lead') }}"
             data-bs-original-title="{{ __('Create New Lead') }}">
-            <i data-bs-toggle="tooltip" title="{{ __('Create') }}" class="ti ti-plus text-white"></i>
+            <i data-bs-toggle="tooltip" title="{{ __('Create') }}" class="fa fa-plus text-white"></i>
         </a>
     @endif
 @endsection
@@ -66,22 +64,22 @@
                                                     <div class="action-btn bg-warning ms-2">
                                                         <a href="{{ route('lead.show', \Crypt::encrypt($lead->id)) }}"
                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                            data-url="#" data-bs-whatever="{{ __('View Lead') }}"
+                                                            data-url="#" data-title="{{ __('View Lead') }}"
                                                             data-bs-toggle="tooltip" title="View Lead"
                                                             data-bs-original-title="{{ __('View Lead') }}"> <span
-                                                                class="text-white"> <i class="ti ti-eye"></i></span></a>
+                                                                class="text-white"> <i class="fa fa-eye"></i></span></a>
                                                     </div>
                                                 @endif
                                                 @if (\Auth::user()->type == 'company')
                                                     <div class="action-btn bg-info ms-2">
                                                         <a href="#"
                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                            data-ajax-popup="true"
                                                             data-url="{{ route('lead.edit', $lead->id) }}"
-                                                            data-bs-whatever="{{ __('Edit Lead') }}"
+                                                            data-title="{{ __('Edit Lead') }}"
                                                             data-bs-toggle="tooltip" title="Edit Lead"
                                                             data-bs-original-title="{{ __('Edit Lead') }}" data-size="lg">
-                                                            <span class="text-white"> <i class="ti ti-edit"></i></span></a>
+                                                            <span class="text-white"> <i class="fa fa-edit"></i></span></a>
                                                     </div>
 
                                                     <div class="action-btn bg-danger ms-2">
@@ -92,7 +90,7 @@
                                                         ]) !!}
                                                         <a href="#!"
                                                             class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm m-2">
-                                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                         </a>
                                                         {!! Form::close() !!}

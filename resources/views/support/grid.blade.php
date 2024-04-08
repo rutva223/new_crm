@@ -20,14 +20,14 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
 @if(\Auth::user()->type=='company' || \Auth::user()->type=='client' || \Auth::user()->type=='employee')
 <a href="{{ route('support.index') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
     title="{{ __('List View') }}">
-    <i class="ti ti-list text-white"></i>
+    <i class="fa fa-list text-white"></i>
 </a>
 @if(\Auth::user()->type!=='client')
-<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    data-url="{{ route('support.create') }}" data-bs-whatever="{{__('Create New Support')}}" data-bs-toggle="tooltip"
+<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+    data-url="{{ route('support.create') }}" data-title="{{__('Create New Support')}}" data-bs-toggle="tooltip"
     title="{{ __('Create New Support') }}" data-bs-original-title="{{__('Create New Support')}}"> <span
         class="text-white">
-        <i class="ti ti-plus text-white"></i></span>
+        <i class="fa fa-plus text-white"></i></span>
 </a>
 @endif
 @endif
@@ -96,12 +96,12 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                             @endphp
                             <a href="{{ route('support.receipt' , [$x,"$extension"]) }}" data-toggle="tooltip"
                                 class="btn btn-sm mb-2 btn-primary btn-icon rounded-pill">
-                                <i class="ti ti-download" data-bs-toggle="tooltip"
+                                <i class="fa fa-download" data-bs-toggle="tooltip"
                                     data-bs-original-title="{{ __('Download') }}"></i>
                             </a>
                             <a href="{{asset(Storage::url('uploads/supports/'.$x.'.'.$extension))}}" target="_blank"
                                 data-toggle="tooltip" class="btn btn-sm mb-2 btn-secondary ms btn-icon rounded-pill">
-                                <i class="ti ti-crosshair" data-bs-toggle="tooltip"
+                                <i class="fa fa-crosshair" data-bs-toggle="tooltip"
                                     data-bs-original-title="{{ __('Preview') }}"></i>
                             </a>
                             @else
@@ -125,11 +125,11 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                     </div>
                     @if(\Auth::user()->id==$support->ticket_created)
                     <div class="action-btn bg-info ms-2">
-                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal" data-url="{{ route('support.edit',$support->id) }}"
-                            data-bs-whatever="{{__('Edit Support')}}" data-bs-toggle="tooltip"
+                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                              data-url="{{ route('support.edit',$support->id) }}"
+                            data-title="{{__('Edit Support')}}" data-bs-toggle="tooltip"
                             title="{{ __('Edit Support') }}" data-bs-original-title="{{__('Edit Support')}}"> <span
-                                class="text-white"> <i class="ti ti-edit"></i></span></a>
+                                class="text-white"> <i class="fa fa-edit"></i></span></a>
                     </div>
 
                     <div class="action-btn bg-danger ms-2">
@@ -139,13 +139,13 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                                         <button type="submit" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm" data-toggle="tooltip"
                                         title='Delete'>
                                         <span class="text-white"> <i
-                                            class="ti ti-trash"></i></span>
+                                            class="fa fa-trash"></i></span>
                                         </button>
                                     </form> -->
                         {!! Form::open(['method' => 'DELETE', 'route' => ['support.destroy', $support->id]]) !!}
                         <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
                             <i data-bs-toggle="tooltip" data-bs-original-title="{{__('Delete')}}"
-                                class="ti ti-trash text-white"></i>
+                                class="fa fa-trash text-white"></i>
                         </a>
                         {!! Form::close() !!}
                     </div>

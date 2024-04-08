@@ -5,10 +5,10 @@
 @endsection
 
 @section('action-btn')
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-    data-bs-target="#exampleModal" data-url="{{ route('goaltype.create') }}"
-    data-bs-whatever="{{__('Create New Goal Type')}}"> <span class="text-white"> 
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+      data-url="{{ route('goaltype.create') }}"
+    data-title="{{__('Create New Goal Type')}}"> <span class="text-white">
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
     </a>
 
 @endsection
@@ -16,8 +16,7 @@
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="titleIn h4 d-inline-block font-weight-400 mb-0 ">{{__('Manage Goal Type')}}</h5>
-    </div>
+        <h5 class="titleIn h4 d-inline-block font-weight-400 mb-0 ">{{__('Manage Goal Type')}}
 @endsection
 
 @section('breadcrumb')
@@ -46,21 +45,21 @@
                                 <td>
 
                                     <div class="action-btn bg-info ms-2">
-                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" data-url="{{  route('goaltype.edit',$goaltype->id)}}"
-                                            data-bs-whatever="{{__('Edit Goal Type')}}" > <span class="text-white"> <i
-                                                    class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
+                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                              data-url="{{  route('goaltype.edit',$goaltype->id)}}"
+                                            data-title="{{__('Edit Goal Type')}}" > <span class="text-white"> <i
+                                                    class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                     </div>
 
                                     <div class="action-btn bg-danger ms-2">
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['goaltype.destroy', $goaltype->id]]) !!}
                                         <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                            <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                         </a>
                                         {!! Form::close() !!}
 
-                                        
-                                    </div>          
+
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

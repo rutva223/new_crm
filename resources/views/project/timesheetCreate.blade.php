@@ -3,7 +3,7 @@
 @else
     {{ Form::open(array('route' => array('project.timesheet.store',$project_id))) }}
 @endif
-@php 
+@php
 $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -81,16 +81,16 @@ $plansettings = App\Models\Utility::plansettings();
         <div class="row p-2">
             <div class="col-6">
                 {{ Form::label('notes', __('Notes')) }}
-            </div>    
+            </div>
             @if (App\Models\Utility::is_chatgpt_enable())
             <div class="col-6 text-end">
                 <a data-size="md" class="btn btn-primary btn-icon btn-sm text-white " data-ajax-popup-over="true" id="grammarCheck" data-url="{{ route('grammar',['timesheet_create']) }}"
                     data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-                    <i class="ti ti-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
+                    <i class="fa fa-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
             </div>
             @endif
         </div>
- 
+
 
         <textarea rows="2" class="form-control timesheet_create" name="notes" data-toggle="autosize" placeholder="{{__('Add a Notes...')}}" required></textarea>
 

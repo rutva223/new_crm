@@ -38,18 +38,18 @@
 
                         <a href="#transaction" data-target="transaction"
                             class="list-group-item list-group-item-action border-0 menu-btn active">{{ __('Transaction') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
 
                         <a href="#payout_req" data-target="payout_req"
                             class="list-group-item list-group-item-action border-0 menu-btn">{{ __('Payout Request') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
 
                         {{-- <a href="{{ route('referral.setting') }}" --}}
                         <a href="#setting" data-target="setting"
                             class="list-group-item list-group-item-action border-0 menu-btn">{{ __('Settings') }}
-                            <div class="float-end"><i class="ti ti-chevron-right"></i></div>
+                            <div class="float-end"><i class="fa fa-chevron-right"></i></div>
                         </a>
                     </div>
                 </div>
@@ -151,11 +151,11 @@
                                                             <form action="{{ route('referral_store.status') }}" method="POST">
                                                                 @csrf
                                                                 <input type="hidden" name="id" value="{{$payouts->id}}">
-                                                                <button type="submit" class="btn btn-sm btn-success" name="status" value="accept"><i class="ti ti-check" data-bs-toggle="tooltip"
+                                                                <button type="submit" class="btn btn-sm btn-success" name="status" value="accept"><i class="fa fa-check" data-bs-toggle="tooltip"
                                                                     data-bs-original-title="{{ __('Accept') }}">
                                                                 </i></button>
 
-                                                                <button type="submit" class="btn btn-sm btn-danger" name="status" value="reject"><i class="ti ti-x" data-bs-toggle="tooltip"
+                                                                <button type="submit" class="btn btn-sm btn-danger" name="status" value="reject"><i class="fa fa-x" data-bs-toggle="tooltip"
                                                                     data-bs-original-title="{{ __('Reject') }}">
                                                                 </i></button>
                                                             </form>

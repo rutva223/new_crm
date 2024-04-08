@@ -21,11 +21,11 @@ $settings = Utility::settings();
 @section('action-btn')
 <a href="{{ route('invoice.pdf', \Crypt::encrypt($invoice->id)) }}" target="_blank"
     class="btn btn-sm btn-primary btn-icon m-1">
-    <span class="btn-inner--icon"><i class="ti ti-printer"></i></span>
+    <span class="btn-inner--icon"><i class="fa fa-printer"></i></span>
     <span class="btn-inner--text">{{ __('Print') }}</span>
 </a>
 @if ($invoice->getDue() > 0)
-<a href="#" data-bs-toggle="modal" data-bs-target="#paymentModal" class="btn btn-sm btn-primary btn-icon m-1">
+<a href="#" data-ajax-popup="true" data-bs-target="#paymentModal" class="btn btn-sm btn-primary btn-icon m-1">
     <span class="btn-inner--icon text-white"><i class="fa fa-credit-card"></i></span>
     <span class="btn-inner--text text-white">{{ __(' Pay Now') }}</span>
 </a>
@@ -447,13 +447,13 @@ $settings = Utility::settings();
                             @endphp
                             <a href="{{ route('invoice.receipt', [$x, "$extension"]) }}" data-toggle="tooltip"
                                 class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                <i class="ti ti-download" data-bs-toggle="tooltip"
+                                <i class="fa fa-download" data-bs-toggle="tooltip"
                                     data-bs-original-title="{{ __('Download') }}"></i>
                             </a>
                             <a href="{{ asset(Storage::url('uploads/attachment/' . $x . '.' . $extension)) }}"
                                 target="_blank" data-toggle="tooltip"
                                 class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                                <i class="ti ti-crosshair" data-bs-toggle="tooltip"
+                                <i class="fa fa-crosshair" data-bs-toggle="tooltip"
                                     data-bs-original-title="{{ __('Preview') }}"></i>
                             </a>
                             @else
@@ -980,7 +980,7 @@ $settings = Utility::settings();
                                 class="require-validation" id="flaterwave-payment-form">
                                 @csrf
                                 <div class="row">
-                                    
+
                                     <div class="form-group col-md-12">
                                         <label for="amount" class="form-control-label">{{ __('Amount') }}</label>
                                         <span>{{ isset($payment_setting['currency_symbol']) ? $payment_setting['currency_symbol'] : '$' }}</span>

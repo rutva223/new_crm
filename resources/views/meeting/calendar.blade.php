@@ -70,21 +70,21 @@
 </div>
 @endsection
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
 <li class="breadcrumb-item active" aria-current="page">{{ __('HR') }}</li>
 <li class="breadcrumb-item active" aria-current="page">{{ __('Meeting') }}</li>
 @endsection
 @section('action-btn')
 <a href="{{ route('meeting.index') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
     data-bs-placement="top" title="List View"> <span class="text-white">
-        <i class="ti ti-list text-white"></i></span>
+        <i class="fa fa-list text-white"></i></span>
 </a>
 
 @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
-<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    data-url="{{ route('meeting.create') }}" data-bs-whatever="{{ __('Create New Meeting') }}"> <span
+<a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+    data-url="{{ route('meeting.create') }}" data-title="{{ __('Create New Meeting') }}"> <span
         class="text-white">
-        <i class="ti ti-plus text-white" data-bs-toggle="tooltip"
+        <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
             data-bs-original-title="{{ __('Create') }}"></i></span>
 </a>
 @endif
@@ -113,7 +113,7 @@
                     @endif
                 </h5>
             </div>
-      
+
             <div class="card-body">
                 <div id='calendar' class='calendar local_calender'></div>
             </div>
@@ -127,13 +127,13 @@
                 <ul class="event-cards list-group list-group-flush mt-3 w-100">
 
                     @foreach ($meeting_current_month as $meeting)
-                    
+
                     <li class="list-group-item card mb-3">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
                                     <div class="theme-avtar bg-info">
-                                        <i class="ti ti-arrow-ramp-right"></i>
+                                        <i class="fa fa-arrow-ramp-right"></i>
                                     </div>
                                     <div class="ms-3">
                                         <h6 class="m-0">{{ $meeting->title }}</h6>

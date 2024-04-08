@@ -100,9 +100,7 @@
     {{__('Task Gantt Chart')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Task Gantt Chart')}}</h5>
-    </div>
+     {{__('Task Gantt Chart')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -111,19 +109,19 @@
 @endsection
 @section('action-btn')
     <a href="{{ route('task.calendar') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="Calendar View" >
-        <i class="ti ti-calendar text-white"></i>
+        <i class="fa fa-calendar text-white"></i>
     </a>
     <a href="{{ route('project.all.task.kanban') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i  data-bs-toggle="tooltip"  data-bs-original-title="{{__('Kanban View')}}" class="ti ti-layout-kanban"></i>
+        <i  data-bs-toggle="tooltip"  data-bs-original-title="{{__('Kanban View')}}" class="fa fa-layout-kanban"></i>
     </a>
     <a href="{{ route('project.all.task') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i  data-bs-toggle="tooltip"  data-bs-original-title="{{__('List View')}}" class="ti ti-list"></i>
+        <i  data-bs-toggle="tooltip"  data-bs-original-title="{{__('List View')}}" class="fa fa-list"></i>
     </a>
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" 
-    data-bs-target="#exampleModal" data-url="{{ route('project.task.create',0) }}" data-size="lg"
-    data-bs-whatever="{{__('Create New Task')}}" >
-        <i data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}" class="ti ti-plus text-white"></i>
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+      data-url="{{ route('project.task.create',0) }}" data-size="lg"
+    data-title="{{__('Create New Task')}}" >
+        <i data-bs-toggle="tooltip"  data-bs-original-title="{{__('Create')}}" class="fa fa-plus text-white"></i>
     </a>
 @endsection
 

@@ -3,7 +3,7 @@
      $profile = \App\Models\Utility::get_file('uploads/avatar/');
      $attachment = \App\Models\Utility::get_file('uploads/attachment/');
      // $profile=asset(Storage::url('uploads/avatar'));
-     $logo = Utility::GetLogo();    
+     $logo = Utility::GetLogo();
 
  @endphp
  @push('script-page')
@@ -306,66 +306,66 @@
      </div>
  @endsection
  @section('breadcrumb')
-     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
      <li class="breadcrumb-item"><a href="{{ route('invoice.index') }}">{{ __('Invoice') }}</a></li>
      <li class="breadcrumb-item active" aria-current="page">{{ \Auth::user()->invoicenumberFormat($invoice->invoice_id) }}
      </li>
  @endsection
  @section('action-btn')
-     <a href="#" data-size="lg" data-url="{{ route('creditNote.create') }}" data-bs-toggle="modal"
-         data-bs-target="#exampleModal" data-bs-whatever="{{ __('Create Payment') }}"
+     <a href="#" data-size="lg" data-url="{{ route('creditNote.create') }}" data-ajax-popup="true"
+           data-title="{{ __('Create Payment') }}"
          class="btn btn-sm btn-primary btn-icon m-1">
          <span class="btn-inner--icon" data-bs-toggle="tooltip" data-bs-title="{{ __('Add Credit Note') }}"><i
-                 class="ti ti-plus"></i></span>
+                 class="fa fa-plus"></i></span>
          <span class="btn-inner--text">{{ __('Add Credit Note') }}</span>
      </a>
 
      <a href="#" class="btn btn-sm btn-primary btn-icon m-1 cp_link"
          data-link="{{ route('pay.invoice', \Illuminate\Support\Facades\Crypt::encrypt($invoice->id)) }}"
          data-toggle="tooltip" data-original-title="{{ __('Click to copy invoice link') }}">
-         <span class="btn-inner--icon"><i class="ti ti-copy"data-bs-toggle="tooltip"
+         <span class="btn-inner--icon"><i class="fa fa-copy"data-bs-toggle="tooltip"
                  data-bs-original-title="{{ __('Copy') }}"></i></span>
          <span class="btn-inner--text">{{ __('Copy') }}</span>
 
      </a>
      @if (\Auth::user()->type == 'company')
          <a href="#" data-size="lg" data-url="{{ route('invoice.create.item', $invoice->id) }}"
-             data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ __('Add Item') }}"
+             data-ajax-popup="true"   data-title="{{ __('Add Item') }}"
              class="btn btn-sm btn-primary btn-icon m-1">
-             <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+             <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
              <span class="btn-inner--text">{{ __('Add Item') }}</span>
          </a>
 
 
          @if ($invoice->status != 0 && $invoice->status != 5)
              <a href="{{ route('invoice.send', $invoice->id) }}" class="btn btn-sm btn-primary btn-icon m-1">
-                 <span class="btn-inner--icon"><i class="ti ti-send"></i></span>
+                 <span class="btn-inner--icon"><i class="fa fa-send"></i></span>
                  <span class="btn-inner--text">{{ __('Resend') }}</span>
              </a>
          @else
              @if (!empty($invoice->items))
                  <a href="{{ route('invoice.send', $invoice->id) }}" class="btn btn-sm btn-primary btn-icon m-1">
-                     <span class="btn-inner--icon"><i class="ti ti-send"></i></span>
+                     <span class="btn-inner--icon"><i class="fa fa-send"></i></span>
                      <span class="btn-inner--text">{{ __('Send') }}</span>
                  </a>
              @endif
          @endif
          <a href="#" data-size="lg" data-url="{{ route('invoice.create.receipt', $invoice->id) }}"
-             data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ __('Add Receipt') }}"
+             data-ajax-popup="true"   data-title="{{ __('Add Receipt') }}"
              class="btn btn-sm btn-primary btn-icon m-1">
-             <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+             <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
              <span class="btn-inner--text">{{ __('Add Receipt') }}</span>
          </a>
 
          <a href="{{ route('invoice.send', $invoice->id) }}" class="btn btn-sm btn-primary btn-icon m-1 ">
-             <span class="btn-inner--icon"><i class="ti ti-report-money"></i></span>
+             <span class="btn-inner--icon"><i class="fa fa-report-money"></i></span>
              <span class="btn-inner--text">{{ __('Payment Reminder') }}</span>
          </a>
      @endif
 
      <a href="{{ route('invoice.pdf', \Crypt::encrypt($invoice->id)) }}" target="_blank"
          class="btn btn-sm btn-primary btn-icon m-1">
-         <span class="btn-inner--icon"><i class="ti ti-printer"></i></span>
+         <span class="btn-inner--icon"><i class="fa fa-printer"></i></span>
          <span class="btn-inner--text">{{ __('Print') }}</span>
      </a>
 
@@ -395,7 +395,7 @@
                      $company_payment_setting['is_aamarpay_enabled'] == 'on' ||
                      $company_payment_setting['is_paytr_enabled'] == 'on'
                     ))
-             <a href="#" data-bs-toggle="modal" data-bs-target="#paymentModal"
+             <a href="#" data-ajax-popup="true" data-bs-target="#paymentModal"
                  class="btn btn-sm btn-primary btn-icon m-1" type="button">
                  <i class="fas fa-coins mr-1"></i> {{ __('Pay Now') }}
              </a>
@@ -519,7 +519,7 @@
                                              @endif
                                          </td>
                                      </tr>
-                                     
+
                                  </tbody>
                              </table>
                          </div>
@@ -691,12 +691,12 @@
                                              <a href="{{ route('invoice.receipt', [$x, "$extension"]) }}"
                                                  data-toggle="tooltip"
                                                  class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                                 <i class="ti ti-download"></i>
+                                                 <i class="fa fa-download"></i>
                                              </a>
                                              <a href="{{ $attachment . $x . '.' . $extension }}" target="_blank"
                                                  data-toggle="tooltip"
                                                  class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                                                 <i class="ti ti-crosshair" data-bs-toggle="tooltip"
+                                                 <i class="fa fa-crosshair" data-bs-toggle="tooltip"
                                                      data-bs-original-title="{{ __('Preview') }}"></i>
                                              </a>
                                          @else
@@ -706,7 +706,7 @@
                                          <div class="action-btn bg-danger ms-2">
                                              {!! Form::open(['method' => 'DELETE', 'route' => ['invoice.payment.delete', $invoice->id, $payment->id]]) !!}
                                              <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                 <i class="ti ti-trash text-white"></i>
+                                                 <i class="fa fa-trash text-white"></i>
                                              </a>
                                              {!! Form::close() !!}
                                          </div>
@@ -733,11 +733,11 @@
                                      @if ($bank_payment->status == 'Pending' && \Auth::user()->type == 'company')
                                          <div class="action-btn bg-warning ms-2">
                                              <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                 data-ajax-popup="true"
                                                  data-url="{{ route('banktransfer.show', $bank_payment->id) }}"
-                                                 data-bs-whatever="{{ __('Invoice Bank Transfer') }}"> <span
+                                                 data-title="{{ __('Invoice Bank Transfer') }}"> <span
                                                      class="text-white">
-                                                     <i class="ti ti-caret-right" data-bs-toggle="tooltip"
+                                                     <i class="fa fa-caret-right" data-bs-toggle="tooltip"
                                                          data-bs-original-title="{{ __('Invoice Bank Transfer') }}"></i></span></a>
                                          </div>
                                      @endif
@@ -748,7 +748,7 @@
                                                  'route' => ['invoice.bankpayment.delete', $invoice->id, $bank_payment->id],
                                              ]) !!}
                                              <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                 <i class="ti ti-trash text-white"></i>
+                                                 <i class="fa fa-trash text-white"></i>
                                              </a>
                                              {!! Form::close() !!}
                                          </div>
@@ -756,7 +756,7 @@
                                          <div class="action-btn bg-danger ms-2">
                                              {!! Form::open(['method' => 'DELETE', 'route' => ['invoice.payment.delete', $invoice->id, $payment->id]]) !!}
                                              <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                 <i class="ti ti-trash text-white"></i>
+                                                 <i class="fa fa-trash text-white"></i>
                                              </a>
                                              {!! Form::close() !!}
                                          </div>
@@ -815,10 +815,10 @@
                                                          <div class="action-btn bg-info ms-2">
                                                              <a href="#" data-size="lg"
                                                                  data-url="{{ route('creditNote.edit', $creditNote->id) }}"
-                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                                 data-bs-whatever="{{ __('Edit Credit Note') }}"
+                                                                 data-ajax-popup="true"
+                                                                 data-title="{{ __('Edit Credit Note') }}"
                                                                  class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                                 <i class="ti ti-edit text-white" data-bs-toggle="tooltip"
+                                                                 <i class="fa fa-edit text-white" data-bs-toggle="tooltip"
                                                                      data-bs-original-title="{{ __('Edit') }}"></i>
                                                              </a>
                                                          </div>
@@ -826,7 +826,7 @@
                                                              {!! Form::open(['method' => 'DELETE', 'route' => ['creditNote.destroy', $creditNote->id]]) !!}
                                                              <a href="#!"
                                                                  class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                                 <i class="ti ti-trash text-white"
+                                                                 <i class="fa fa-trash text-white"
                                                                      data-bs-toggle="tooltip"
                                                                      data-bs-original-title="{{ __('Delete') }}"></i>
                                                              </a>
@@ -1781,7 +1781,7 @@
                                     </div>
                                 @endif
                             @endif
-                         
+
                             {{-- benefit --}}
 
                             @if (isset($company_payment_setting['is_benefit_enabled']) && $company_payment_setting['is_benefit_enabled'] == 'on')
@@ -1818,7 +1818,7 @@
                                                 <div class="col-12 form-group mt-3 text-right">
                                                     <input type="submit" value="{{ __('Make Payment') }}"
                                                         class="btn btn-sm btn-primary rounded-pill">
-                                                        
+
                                                 </div>
                                             </div>
                                         </form>
@@ -2083,7 +2083,7 @@
                          </div>
                      </div>
                  </div>
-             </div> 
+             </div>
          @endif
      @endif
 

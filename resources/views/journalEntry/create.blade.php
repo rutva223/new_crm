@@ -106,13 +106,12 @@
         })
 
 
-    </script>    
+    </script>
 @endpush
 
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 pb-2">{{__('Manage Journal Entry')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 pb-2">{{__('Manage Journal Entry')}}
 @endsection
 
 @section('breadcrumb')
@@ -168,9 +167,9 @@
                 <div class="item-section py-4">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-md-12 d-flex align-items-center justify-content-between justify-content-md-end">
-                            <a href="#"  data-repeater-create=""  title="{{ __('Create New Journal') }}" 
+                            <a href="#"  data-repeater-create=""  title="{{ __('Create New Journal') }}"
                              class="btn btn-sm btn-primary btn-icon m-1 pb-2">
-                                <span class="btn-inner--icon"><i class="ti ti-plus"></i></span>
+                                <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
                             </a>
                         </div>
                     </div>

@@ -12,17 +12,17 @@
 <div class="response" >
 
     <a class="btn btn-primary btn-sm float-left" href="#!" id="regenerate">{{ __('Re Generate') }}</a>
-    <a href="#!" onclick="copyGrammerText()" class="btn btn-primary btn-sm float-end "><i class="ti ti-copy"></i> {{ __('Copy Text') }}</a>
+    <a href="#!" onclick="copyGrammerText()" class="btn btn-primary btn-sm float-end "><i class="fa fa-copy"></i> {{ __('Copy Text') }}</a>
     <div class="form-group mt-3" >
         {{ Form::textarea('description', null, ['class' => 'form-control','rows' => 5,'placeholder' => __('Description'),'id'=>'ai-description']) }}
     </div>
 </div>
 
-   
+
 <script>
     $('body').ready(function(){
 
-        var temp = "{{ $moduleName }}"; 
+        var temp = "{{ $moduleName }}";
         if($('.grammer_textarea').length>0){
             var summernoteValue = $('.grammer_textarea').val();
         }
@@ -70,11 +70,11 @@
             },
         });
     });
-    
+
     function copyGrammerText() {
 
         var copied = $("#ai-description").val();
-        var temp = "{{ $moduleName }}"; 
+        var temp = "{{ $moduleName }}";
 
         if($('.grammer_textarea').length>0){
 

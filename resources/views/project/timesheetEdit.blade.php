@@ -1,5 +1,5 @@
 {{ Form::model($timesheet, array('route' => array('project.timesheet.update', [$project->id,$timesheet->id]), 'method' => 'post')) }}
-@php 
+@php
 $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
@@ -10,7 +10,7 @@ $plansettings = App\Models\Utility::plansettings();
     </a>
  </div>
  @endif
- 
+
     <div class="form-group  col-md-12">
         {{ Form::label('employee', __('User'),['class' => 'col-form-label']) }}
         <select class="form-control" required="required" name="employee" data-toggle="select">
@@ -56,12 +56,12 @@ $plansettings = App\Models\Utility::plansettings();
         <div class="row p-2">
             <div class="col-6">
                 {{ Form::label('notes', __('Notes'),['class' => 'col-form-label']) }}
-            </div>    
+            </div>
             @if (App\Models\Utility::is_chatgpt_enable())
             <div class="col-6 text-end">
                 <a data-size="md" class="btn btn-primary btn-icon btn-sm text-white " data-ajax-popup-over="true" id="grammarCheck" data-url="{{ route('grammar',['timesheet_edit']) }}"
                     data-bs-placement="top" data-title="{{ __('Grammar check with AI') }}">
-                    <i class="ti ti-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
+                    <i class="fa fa-rotate"></i> <span>{{__('Grammar check with AI')}}</span></a>
             </div>
             @endif
         </div>

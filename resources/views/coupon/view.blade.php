@@ -5,9 +5,7 @@
     {{__('Coupon Detail')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Coupon')}}</h5>
-    </div>
+     {{__('Coupon')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -18,7 +16,7 @@
 
 @endsection
 @section('content')
-    
+
     <div class="col-md-12">
     <div class="card">
         <div class="card-body table-border-style">

@@ -9,7 +9,7 @@
         request()->segment(1) == 'join_us' ||
         request()->segment(1) == 'testimonials') active @endif">
     <a href="{{ route('landingpage.index') }}" class="dash-link">
-        <span class="dash-micon"><i class="ti ti-license"></i></span><span
+        <span class="dash-micon"><i class="fa fa-license"></i></span><span
             class="dash-mtext">{{ __('Landing Page') }}</span>
     </a>
 </li>

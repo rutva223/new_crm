@@ -100,13 +100,11 @@
 @endsection
 
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Deal') }}</h5>
-    </div>
+     {{ __('Deal') }}
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item active" aria-current="page">{{ __('Deal') }}</li>
 @endsection
 
@@ -128,24 +126,24 @@
         @endif
     @endif
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
-    data-url="{{ route('deal.file.import') }}" data-bs-whatever="{{ __('Import CSV file') }}"> <span
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+    data-url="{{ route('deal.file.import') }}" data-title="{{ __('Import CSV file') }}"> <span
         class="text-white">
-        <i class="ti ti-file-import" data-bs-toggle="tooltip"
+        <i class="fa fa-file-import" data-bs-toggle="tooltip"
             data-bs-original-title="{{ __('Import item CSV file') }}"></i>
     </a>
 
-  
+
 
     <a href="{{ route('deal.list') }}" class="btn btn-sm btn-primary btn-icon m-1">
-        <i class="ti ti-list" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}"></i>
+        <i class="fa fa-list" data-bs-toggle="tooltip" data-bs-original-title="{{ __('List View') }}"></i>
     </a>
 
     @if (\Auth::user()->type == 'ompany')
-        <a href="#" data-url="{{ croute('deal.create') }}" data-size="lg" data-bs-toggle="modal"
-            data-bs-target="#exampleModal" class="btn btn-sm btn-primary btn-icon m-1"
-            data-bs-whatever="{{ __('Create New Deal') }}">
-            <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+        <a href="#" data-url="{{ croute('deal.create') }}" data-size="lg" data-ajax-popup="true"
+              class="btn btn-sm btn-primary btn-icon m-1"
+            data-title="{{ __('Create New Deal') }}">
+            <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
         </a>
     @endif
 @endsection
@@ -158,7 +156,7 @@
                     <div class="col-auto mb-3 mb-sm-0">
                         <div class="d-flex align-items-center">
                             <div class="theme-avtar bg-warning">
-                                <i class="ti ti-shopping-cart"></i>
+                                <i class="fa fa-shopping-cart"></i>
                             </div>
                             <div class="ms-3">
                                 <!-- <small class="text-muted">{{ __('Statistics') }}</small> -->
@@ -179,7 +177,7 @@
                     <div class="col-auto mb-3 mb-sm-0">
                         <div class="d-flex align-items-center">
                             <div class="theme-avtar bg-success">
-                                <i class="ti ti-users"></i>
+                                <i class="fa fa-users"></i>
                             </div>
                             <div class="ms-3">
                                 <!-- <small class="text-muted">{{ __('Statistics') }}</small> -->
@@ -200,7 +198,7 @@
                     <div class="col-auto mb-3 mb-sm-0">
                         <div class="d-flex align-items-center">
                             <div class="theme-avtar bg-danger">
-                                <i class="ti ti-report-money"></i>
+                                <i class="fa fa-report-money"></i>
                             </div>
                             <div class="ms-3">
                                 <!-- <small class="text-muted">{{ __('Statistics') }}</small> -->
@@ -221,7 +219,7 @@
                     <div class="col-auto mb-3 mb-sm-0">
                         <div class="d-flex align-items-center">
                             <div class="theme-avtar bg-info">
-                                <i class="ti ti-report-money"></i>
+                                <i class="fa fa-report-money"></i>
                             </div>
                             <div class="ms-3">
                                 <!-- <small class="text-muted">{{ __('Statistics') }}</small> -->
@@ -277,7 +275,7 @@
                                                 <div class="card-header border-0 pb-0 position-relative">
                                                     <h5>
                                                         <a href="{{ route('deal.show', \Crypt::encrypt($deal->id)) }}"
-                                                            data-bs-whatever="{{ __('View Deal Details') }}"
+                                                            data-title="{{ __('View Deal Details') }}"
                                                             data-bs-toggle="tooltip" title
                                                             data-bs-original-title="{{ __('Deal Detail') }}">
                                                             {{ $deal->name }}</a>
@@ -289,7 +287,7 @@
                                                                 <button type="button" class="btn dropdown-toggle"
                                                                     data-bs-toggle="dropdown" aria-haspopup="true"
                                                                     aria-expanded="false">
-                                                                    <i class="ti ti-dots-vertical"></i>
+                                                                    <i class="fa fa-dots-vertical"></i>
                                                                 </button>
 
                                                                 <div class="dropdown-menu dropdown-menu-end">
@@ -298,10 +296,10 @@
                                                                         <a href="#!" class="dropdown-item"
                                                                             data-size="lg"
                                                                             data-url="{{ route('deal.edit', $deal->id) }}"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#exampleModal"
-                                                                            data-bs-whatever="{{ __('Edit Deal') }}"> <i
-                                                                                class="ti ti-edit"></i>
+                                                                            data-ajax-popup="true"
+
+                                                                            data-title="{{ __('Edit Deal') }}"> <i
+                                                                                class="fa fa-edit"></i>
                                                                             <span>{{ __('Edit') }}</span>
                                                                         </a>
                                                                     @endif
@@ -315,7 +313,7 @@
                                                                             ]) !!}
                                                                             <a href="#!"
                                                                                 class=" dropdown-item show_confirm ">
-                                                                                <i class="ti ti-trash"></i>
+                                                                                <i class="fa fa-trash"></i>
                                                                                 <span>{{ __('Delete') }}</span>
                                                                             </a>
                                                                             {!! Form::close() !!}
@@ -334,7 +332,7 @@
                                                         <ul class="list-inline mb-0">
                                                             <li class="list-inline-item d-inline-flex align-items-center">
                                                                 <i
-                                                                    class="f-16 text-primary ti ti-report-money"></i>{{ \Auth::user()->priceFormat($deal->price) }}
+                                                                    class="f-16 text-primary fa fa-report-money"></i>{{ \Auth::user()->priceFormat($deal->price) }}
                                                             </li>
                                                         </ul>
                                                         <div class="user-group">

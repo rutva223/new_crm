@@ -28,9 +28,7 @@
     {{__('Attendance Report')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Attendance Report')}}</h5>
-    </div>
+     {{__('Attendance Report')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -40,7 +38,7 @@
 
 
     <a href="{{route('report.attendance.monthly',[isset($_GET['month'])?$_GET['month']:date('Y-m'),isset($_GET['department'])?$_GET['department']:0])}}" class="btn btn-sm btn-primary btn-icon m-1" >
-        <span class="btn-inner--icon"><i class="ti ti-download" data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}"></i></span>
+        <span class="btn-inner--icon"><i class="fa fa-download" data-bs-toggle="tooltip" data-bs-original-title="{{__('Download')}}"></i></span>
     </a>
 @endsection
 
@@ -60,14 +58,14 @@
                         </div>
                         <div class="action-btn bg-info ms-2">
                             <div class="col-auto">
-                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" 
-                                title="{{__('Apply')}}"><i class="ti ti-search text-white"></i></button>
+                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip"
+                                title="{{__('Apply')}}"><i class="fa fa-search text-white"></i></button>
                             </div>
                         </div>
                         <div class="action-btn bg-danger ms-2">
                             <div class="col-auto">
-                                <a href="{{route('report.attendance')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}" 
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="ti ti-trash-off text-white"></i></a>
+                                <a href="{{route('report.attendance')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}"
+                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white"></i></a>
                             </div>
                         </div>
                     </div>
@@ -75,8 +73,8 @@
                 </div>
             </div>
         </div>
-  
-    
+
+
     <div id="printableArea" >
         <div class="row">
             <!-- [ sample-page ] start -->
@@ -88,7 +86,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-primary">
-                                            <i class="ti ti-bookmarks"></i>
+                                            <i class="fa fa-bookmarks"></i>
                                         </div>
                                         <p class="text-muted text-sm mt-4 mb-2">{{__('Attendance')}}</p>
                                         <h6 class="mb-1">{{__('Total Present')}} : {{$data['totalPresent']}}</h6>
@@ -100,11 +98,11 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-info">
-                                            <i class="ti ti-click"></i>
+                                            <i class="fa fa-click"></i>
                                         </div>
                                         <p class="text-muted text-sm mt-4 mb-2">{{__('Overtime')}}</p>
                                         <h6 class="mb-3">{{__('Total overtime in hours')}} : {{number_format($data['totalOvertime'],2)}}</h6>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +110,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-warning">
-                                            <i class="ti ti-report-money"></i>
+                                            <i class="fa fa-report-money"></i>
                                         </div>
                                         <p class="text-muted text-sm mt-4 mb-2">{{__('Early Leave')}}</p>
                                         <h6 class="mb-3">{{__('Total early leave in hours')}} : {{number_format($data['totalEarlyLeave'],2)}}</h6>
@@ -123,7 +121,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="theme-avtar bg-danger">
-                                            <i class="ti ti-thumb-down"></i>
+                                            <i class="fa fa-thumb-down"></i>
                                         </div>
                                         <p class="text-muted text-sm mt-4 mb-2">{{__('Employee Late')}}</p>
                                         <h6 class="mb-3">{{__('Total late in hours')}} : {{number_format($data['totalLate'],2)}}</h6>
@@ -140,12 +138,12 @@
                                     <div class="col-md-5 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-primary">
-                                                <i class="ti ti-heart"></i>
+                                                <i class="fa fa-heart"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0">{{__('Report')}} :</p>
                                                 <p class="mb-0 text-primary">{{__('Attendance Summary')}}</p>
-                                            
+
                                             </div>
                                         </div>
                                     </div>
@@ -153,12 +151,12 @@
                                         <div class="col-md-4 col-sm-6 my-3 my-sm-0">
                                             <div class="d-flex align-items-start">
                                                 <div class="theme-avtar bg-warning">
-                                                    <i class="ti ti-thumb-up"></i>
+                                                    <i class="fa fa-thumb-up"></i>
                                                 </div>
                                                 <div class="ms-2">
                                                     <p class="text-muted text-sm mb-0">{{__('Department')}} :</p>
                                                     <p class="mb-0 text-warning">{{$data['department'] }}</p>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -166,7 +164,7 @@
                                     <div class="col-md-5 col-sm-6">
                                         <div class="d-flex align-items-start">
                                             <div class="theme-avtar bg-danger">
-                                                <i class="ti ti-calendar"></i>
+                                                <i class="fa fa-calendar"></i>
                                             </div>
                                             <div class="ms-2">
                                                 <p class="text-muted text-sm mb-0">{{__('Duration')}} :</p>

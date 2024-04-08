@@ -4,7 +4,7 @@
 @endsection
 @section('breadcrumb')
     {{-- <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li> --}}
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -83,7 +83,7 @@
 @endpush
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Landing Page') }}</li>
 @endsection
 
@@ -209,9 +209,9 @@
                                         <div class="choose-files mt-5">
                                             <label for="home_banner">
                                                 <div class=" bg-primary company_logo_update" style="cursor: pointer;">
-                                                    <i class="ti ti-upload px-1"></i>{{ __('Choose file here') }}
+                                                    <i class="fa fa-upload px-1"></i>{{ __('Choose file here') }}
                                                 </div>
-                                                
+
                                                 <input type="file" name="home_banner" id="home_banner"
                                                     class="form-control file" data-filename="home_banner">
                                             </label>
@@ -237,7 +237,7 @@
                                         <div class="choose-files mt-5">
                                             <label for="home_logo">
                                                 <div class=" bg-primary dark_logo_update" style="cursor: pointer;"> <i
-                                                        class="ti ti-upload px-1">
+                                                        class="fa fa-upload px-1">
                                                     </i>{{ __('Choose file here') }}
                                                 </div>
                                                 <input type="file" name="home_logo" id="home_logo"
@@ -257,7 +257,7 @@
                                             <h6>{{ __('Logo') }}</h6>
                                         </div>
                                         <div class="col-auto text-end">
-                                            <button class="btn btn-sm btn-primary btn-icon m-1 " data-repeater-create type="button"><i class="ti ti-plus"></i></button>
+                                            <button class="btn btn-sm btn-primary btn-icon m-1 " data-repeater-create type="button"><i class="fa fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div data-repeater-list="home_logo">
@@ -276,7 +276,7 @@
                                                         </div>
                                                         <!-- <div class="col-auto actions">
                                                             <a data-repeater-delete href="javascript:void(0)" class="action-item btn btn-sm btn-icon btn-light-secondary  ms-2">
-                                                                <i class="ti ti-trash"></i>
+                                                                <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div> -->
                                                     </div>
@@ -297,12 +297,12 @@
                                                         </div>
                                                         <div class="col-auto actions">
                                                             <a class="action-item btn btn-sm btn-icon btn-light-secondary" href="{{ $logo.'/'.$home_logo }}" download="" data-toggle="tooltip" data-original-title="Download">
-                                                                <i class="ti ti-download"></i>
+                                                                <i class="fa fa-download"></i>
                                                             </a>
                                                         </div>
                                                         <div class="col-auto actions">
                                                             <a class="action-item btn btn-sm btn-icon btn-light-secondary delete-button" data-image="{{ $home_logo }}">
-                                                                <i class="ti ti-trash"></i>
+                                                                <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>
                                                     </div>

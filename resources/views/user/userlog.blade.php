@@ -9,12 +9,10 @@
 @push('script-page')
 @endpush
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Employee') }}</h5>
-    </div>
+     {{ __('Employee') }}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a></li>
+
     <li class="breadcrumb-item">{{ __('Employee Log') }}</li>
 @endsection
 
@@ -52,12 +50,12 @@
                                         onclick="document.getElementById('user_userlog').submit(); return false;"
                                         data-bs-toggle="tooltip" title="{{ __('Apply') }}"
                                         data-original-title="{{ __('apply') }}">
-                                        <span class="btn-inner--icon"><i class="ti ti-search"></i></span>
+                                        <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
                                     </a>
                                     <a href="{{ route('user.userlog') }}" class="btn btn-sm btn-danger "
                                         data-bs-toggle="tooltip" title="{{ __('Reset') }}"
                                         data-original-title="{{ __('Reset') }}">
-                                        <span class="btn-inner--icon"><i class="ti ti-trash-off text-white-off "></i></span>
+                                        <span class="btn-inner--icon"><i class="fa fa-trash-off text-white-off "></i></span>
                                     </a>
                                 </div>
                             </div>
@@ -106,11 +104,11 @@
                                     <td>
                                         <div class="action-btn bg-warning ms-2">
                                             <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal" data-size="md"
+                                                data-ajax-popup="true"   data-size="md"
                                                 data-url="{{ route('user.userlogview', [$user->id]) }}"
-                                                data-bs-whatever="{{ __('View Employee Log') }}">
+                                                data-title="{{ __('View Employee Log') }}">
                                                 <span class="text-white">
-                                                    <i class="ti ti-eye" data-bs-toggle="tooltip"
+                                                    <i class="fa fa-eye" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('View') }}"></i>
                                                 </span>
                                             </a>
@@ -118,7 +116,7 @@
                                         <div class="action-btn bg-danger ms-2">
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['user.userlogdestroy', $user->user_id]]) !!}
                                             <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                <i class="ti ti-trash text-white" data-bs-toggle="tooltip"
+                                                <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                     data-bs-original-title="{{ __('Delete') }}"></i>
                                             </a>
                                             {!! Form::close() !!}

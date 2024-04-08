@@ -20,10 +20,10 @@ class ProjectReportController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */   
+     */
      public function index()
     {
-      
+
             $user = \Auth::user();
             if(\Auth::user()->type == 'super admin')
             {
@@ -33,27 +33,27 @@ class ProjectReportController extends Controller
             {
                 $users = User::where('created_by', '=', $user->creatorId())->where('type', '!=', 'client')->get();
             }
-            
+
             if($user->type == 'client')
             {
                 $projects = Project::where('client', '=', $user->id)->get();
-     
+
             }
             elseif(\Auth::user()->type == 'employee')
-            { 
+            {
                 $projects = Project::select('projects.*')->leftjoin('project_users', 'project_users.project_id', 'projects.id')->where('project_users.user_id', '=', $user->id)->first();
             }
             else
             {
                 $projects = $user->project;
-               
-            } 
-            
+
+            }
+
             return view('project_report.index', compact('projects','users'));
     }
-       
-    
-   
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -83,7 +83,7 @@ class ProjectReportController extends Controller
      */
     public function show($id)
     {
-        
+
         $user = \Auth::user();
 
         if(\Auth::user()->type == 'super admin')
@@ -93,16 +93,16 @@ class ProjectReportController extends Controller
         else
         {
             $users = User::where('created_by', '=', $user->creatorId())->where('type', '!=', 'client')->get();
-          
+
         }
-       
+
         if($user->type == 'client')
         {
             $project = Project::where('client', '=', $user->id)->where('id',$id)->first();
         }
         elseif(\Auth::user()->type == 'employee')
         {
-            
+
             $project = Project::select('projects.*')->leftjoin('project_users', 'project_users.project_id', 'projects.id')->where('project_users.user_id', '=', $user->id)->first();
 
             // dd($project);
@@ -110,27 +110,27 @@ class ProjectReportController extends Controller
         else
         {
             $project = Project::where('created_by', '=', $user->id)->where('id',$id)->first();
-        } 
-        
+        }
+
         if ($user) {
             $chartData = $this->getProjectChart(
-                [    
+                [
                     'project_id' => $id,
                     'duration' => 'week',
                     ]
                 );
                 $daysleft = round((((strtotime($user->end_date) - strtotime(date('Y-m-d'))) / 24) / 60) / 60);
-              
+
                 // $project_status_task = Project::where('client', '=', $user->id)->where('id',$id)->get();
 
 
-            
+
 
                 $project_status_task = Projectstage::join("project_tasks", "project_tasks.stage", "=", "project_stages.id")->where('project_tasks.project_id', '=', $id)->groupBy('name')->selectRaw('count(project_tasks.stage) as count, name')->pluck('count', 'name');
-            
+
                 $totaltask = ProjectTask::where('project_id',$id)->count();
-   
-      
+
+
 
                 $arrProcessPer_status_task = [];
                 $arrProcess_Label_status_tasks = [];
@@ -143,7 +143,7 @@ class ProjectReportController extends Controller
                     }
                 }
 
-                
+
                 $project_priority_task = ProjectTask::where('project_id',$id)->groupBy('priority')->selectRaw('count(id) as count, priority')->pluck('count', 'priority');
 
                 $arrProcessPer_priority = [];
@@ -161,33 +161,33 @@ class ProjectReportController extends Controller
                     'text-primary',
                     'text-danger',
                 ];
-                
+
                   $chartData = app('App\Http\Controllers\ProjectController')->getProjectChart([
                     'created_by' =>$id,
                     'duration' => 'week',
                 ]);
-          
+
                 // $stages = ProjectStage::all();
                 $stages = ProjectStage::where('created_by', '=', $user->id)->get();
                 // dd($stages);
                 $milestones = ProjectMilestone::where('project_id' ,$id)->get();
-                
-   
-   
+
+
+
                 $logged_hour_chart = 0;
                 $total_hour = 0;
                 $logged_hour = 0;
-       
+
                $tasks = ProjectTask::where('project_id',$id)->get();
-       
+
                $data = [];
                foreach ($tasks as $task) {
 
-        
-               $timesheets_task = Timesheet::where('task_id',$task->id)->where('project_id',$id)->get(); 
+
+               $timesheets_task = Timesheet::where('task_id',$task->id)->where('project_id',$id)->get();
                foreach($timesheets_task as $timesheet){
-                
-                               
+
+
                  $start_time = $timesheet->start_time;
                  $end_time = $timesheet->end_time;
                  $secs = strtotime($start_time);
@@ -197,14 +197,14 @@ class ProjectReportController extends Controller
                 $total_hour = $hours + ($minutes/60) ;
                 $logged_hour += $total_hour ;
                 $logged_hour_chart = number_format($logged_hour, 2, '.', '');
-               }   
+               }
            }
 
 
             //Estimated Hours
             $esti_logged_hour_chart = ProjectTask::where('project_id',$id)->sum('hours');
         return view('project_report.show', compact('user','users', 'arrProcessPer_status_task','arrProcess_Label_priority','esti_logged_hour_chart','logged_hour_chart','arrProcessPer_priority','arrProcess_Label_status_tasks','project','milestones', 'daysleft','chartData','arrProcessClass','stages'));
-    
+
      }
     }
     /**
@@ -240,27 +240,27 @@ class ProjectReportController extends Controller
         //
     }
     public function ajax_data(Request $request)
-    {  
-     
+    {
+
         $user = \Auth::user();
 
         if($user->type == 'client')
         {
             $projects = Project::where('client', '=', $user->id);
-            
+
         }
         elseif(\Auth::user()->type == 'employee')
         {
             $projects = Project::select('projects.*')->leftjoin('project_users', 'project_users.project_id', 'projects.id')->where('project_users.user_id', '=', $user->id);
-  
+
         }
         else
         {
             $projects =  Project::where('created_by', $user->id);
-        }           
+        }
 
         if ($request->all_users) {
-    
+
             unset($projects);
             $UserEmailTemp = ProjectUser::where('user_id',$request->all_users)->pluck('project_id');
             $projects = Project::whereIn('id',$UserEmailTemp);
@@ -275,12 +275,12 @@ class ProjectReportController extends Controller
         if ($request->due_date) {
             $projects->where('due_date', '=', $request->due_date);
         }
-        
+
         $projects = $projects->get();
 
         $data = [];
         foreach($projects as $project) {
-       
+
             $tmp = [];
             // $tmp['id'] = $project->id;
             $tmp['title'] = $project->title;
@@ -291,37 +291,37 @@ class ProjectReportController extends Controller
             foreach($project->users as $projectUser){
                 $avatar = $projectUser->avatar ? 'src="'.\App\Models\Utility::get_file('uploads/avatar/'). $projectUser->avatar.'"':'src="'.asset(\Storage::url('avatar/avatar.png')).'"';
              if($user->is_active){
-                                $tmp['members'] .= 
+                                $tmp['members'] .=
                                '
-                              
+
                                       <a href="#" class="img_group" data-toggle="tooltip" data-placement="top" title=" '.$projectUser->name.'">
-                                         <img alt="'.$projectUser->name.'" '.$avatar.'/>  
+                                         <img alt="'.$projectUser->name.'" '.$avatar.'/>
                                      </a> ';
-                                   
+
                                  }
                              }
             $tmp['members'] .=   '</div>';
-            $percentage = $project->project_progress();           
+            $percentage = $project->project_progress();
             // dd($percentage);
-            $tmp['Progress'] = 
+            $tmp['Progress'] =
                 '<div class="progress_wrapper">
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" 
+                        <div class="progress-bar" role="progressbar"
                         style="width:'.$percentage["percentage"].'"
                             aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
                             </div>
                     </div>
                     <div class="progress_labels">
                         <div class="total_progress">
-                        
+
                             <strong>'.$percentage["percentage"].'</strong>
                         </div>
-                    
+
                     </div>
                 </div>';
             if ($project->status == 'not_started') {
                 $tmp['status'] = '<span class="badge rounded-pill p-2 px-3  bg-success">' .'Not Started' . '</span>';
-            } 
+            }
             elseif($project->status == 'in_progress') {
                 $tmp['status'] = '<span class="badge rounded-pill p-2 px-3  bg-secondary">' . 'In Progress' . '</span>';
             }
@@ -339,20 +339,20 @@ class ProjectReportController extends Controller
                 <a  class="action-btn btn-warning  btn btn-sm d-inline-flex align-items-center" data-toggle="popover"  title="' . __('view Project Report') . '" data-size="lg" data-title="' . __('show') . '" href="' . route('project_report.show',[
                         $project->id,
                     ]
-                ) . '"><i class="ti ti-eye"></i></a>
+                ) . '"><i class="fa fa-eye"></i></a>
 
 
-                <a href="' . route('project.edit',\Crypt::encrypt($project->id)) . '" class="action-btn btn-info  btn btn-sm d-inline-flex align-items-center" data-toggle="popover"  title="' . __('Edit Project') . '" data-ajax-popup="true" data-size="lg" data-title="' . __('Edit') . '" data-url=""><i class="ti ti-pencil"></i></a>';
+                <a href="' . route('project.edit',\Crypt::encrypt($project->id)) . '" class="action-btn btn-info  btn btn-sm d-inline-flex align-items-center" data-toggle="popover"  title="' . __('Edit Project') . '" data-ajax-popup="true" data-size="lg" data-title="' . __('Edit') . '" data-url=""><i class="fa fa-pencil"></i></a>';
             }else
             {
                 $tmp['action'] = '
                 <a  class="action-btn btn-warning  btn btn-sm d-inline-flex align-items-center" data-toggle="popover"  title="' . __('view Project') . '" data-size="lg" data-title="' . __('show') . '" href="' . route('project_report.show', [
                         $project->id,
                     ]
-                ) . '"><i class="ti ti-eye"></i></a>';
+                ) . '"><i class="fa fa-eye"></i></a>';
 
             }
-            
+
             $data[] = array_values($tmp);
         }
 
@@ -372,7 +372,7 @@ public function getProjectChart($arrParam)
         'label' => [],
         'color' => [],
     ];
-    
+
 
     foreach ($arrDuration as $date => $label) {
         $objProject = ProjectTask::select('status', \DB::raw('count(*) as total'))->whereDate('updated_at', '=', $date)->groupBy('status');
@@ -389,9 +389,9 @@ public function getProjectChart($arrParam)
         }
         $data = $objProject->pluck('total', 'status')->all();
 
-  
+
         $arrTask['label'][] = __($label);
-   
+
     return $arrTask;
     }
 }
@@ -400,7 +400,7 @@ public function ajax_tasks_report(Request $request,$id)
     // dd('d');
     $userObj = \Auth::user();
     $tasks = ProjectTask::where('project_id','=',$id);
-   
+
     if ($request->assign_to) {
         $tasks->whereRaw("find_in_set('" . $request->assign_to . "',assign_to)");
     }
@@ -427,11 +427,11 @@ public function ajax_tasks_report(Request $request,$id)
     $tasks = $tasks->get();
 
 
-      
+
 
         $data = [];
         foreach ($tasks as $task) {
-            $timesheets_task = Timesheet::where('project_id',$id)->where('task_id' ,$task->id)->get(); 
+            $timesheets_task = Timesheet::where('project_id',$id)->where('task_id' ,$task->id)->get();
              $total_hour = 0;
              $logged_hour = 0;
             $hour_format_number = 0;
@@ -445,19 +445,19 @@ public function ajax_tasks_report(Request $request,$id)
                 $minutes =  date('i', strtotime($hourdiff));
                 $total_hour = $hours + ($minutes/60) ;
                 $logged_hour += $total_hour ;
-              
+
                 $hour_format_number = number_format($logged_hour, 2, '.', '');
-                
-            }              
+
+            }
 
             $tmp = [];
             $tmp = [];
             // $tmp['title'] =  $task->title;
-            $tmp['title'] = '<a href="#" data-bs-whatever="View Task" data-size="lg" data-url="'.route("project.task.show",$task->id).'"  data-bs-toggle="modal" . data-bs-target="#exampleModal"> ' . $task->title .'</a>';
+            $tmp['title'] = '<a href="#" data-title="View Task" data-size="lg" data-url="'.route("project.task.show",$task->id).'"  data-ajax-popup="true" .  > ' . $task->title .'</a>';
 
-           
+
             $tmp['milestone'] = ($milestone = $task->milestones()) ? $milestone->title : '';
-        
+
 
             $start_date = '<span class="text-body">' . date('Y-m-d', strtotime($task->start_date)) . '</span> ';
 
@@ -465,17 +465,17 @@ public function ajax_tasks_report(Request $request,$id)
             $tmp['start_date'] = $start_date;
             $tmp['due_date'] = $due_date;
 
-            
+
                 $tmp['user_name'] = "";
                 foreach ($task->users() as $user) {
                     if (isset($user) && $user) {
                         $tmp['user_name'] .= '<span class="badge bg-secondary p-2 px-3 rounded">' . $user->name . '</span> ';
                     }
                 }
-           
+
             $tmp['logged_hours'] = $hour_format_number;
 
-           
+
             if ($task->priority == "high") {
                 $tmp['priority'] = '<span class="priority_badge badge bg-danger p-2 px-3 rounded" style="width: 77px;">' . __('High') . '</span>';
             } elseif ($task->priority == "medium") {
@@ -483,16 +483,16 @@ public function ajax_tasks_report(Request $request,$id)
             } else {
                 $tmp['priority'] = '<span class="priority_badge badge bg-success p-2 px-3 rounded" style="width: 77px;">' . __('Low') . '</span>';
             }
-            
+
             if ($task->complete == 1) {
             $tmp['stage'] = '<span class="status_badge badge bg-success p-2 px-3 rounded" style="width: 87px;">' . __($task->stages->name) . '</span>';
             } else {
                 $tmp['stage'] = '<span class="status_badge badge bg-primary p-2 px-3 rounded" style="width: 87px;">' . __($task->stages->name) . '</span>';
-            } 
+            }
             $data[] = array_values($tmp);
             unset($hour_format_number);
         }
-       
+
         return response()->json(['data' => $data], 200);
         }
         public function export($id)

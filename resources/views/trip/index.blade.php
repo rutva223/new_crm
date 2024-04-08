@@ -5,9 +5,7 @@
     {{__('Trip')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Trip')}}</h5>
-    </div>
+     {{__('Trip')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -15,10 +13,10 @@
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('trip.create') }}"
-        data-bs-whatever="{{__('Create New Trip')}}"> <span class="text-white">
-            <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
+        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('trip.create') }}"
+        data-title="{{__('Create New Trip')}}"> <span class="text-white">
+            <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i></span>
         </a>
     @endif
 @endsection
@@ -58,16 +56,16 @@
                                     @if(\Auth::user()->type=='company')
                                         <td class="text-right">
                                             <div class="action-btn bg-info ms-2">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" data-url="{{ route('trip.edit',$trip->id) }}"
-                                                    data-bs-whatever="{{__('Edit Trip')}}"> <span class="text-white"> <i
-                                                            class="ti ti-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
+                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
+                                                      data-url="{{ route('trip.edit',$trip->id) }}"
+                                                    data-title="{{__('Edit Trip')}}"> <span class="text-white"> <i
+                                                            class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
                                             </div>
 
                                             <div class="action-btn bg-danger ms-2">
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['trip.destroy', $trip->id]]) !!}
                                                 <a href="#!" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm  m-2">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}
                                             </div>

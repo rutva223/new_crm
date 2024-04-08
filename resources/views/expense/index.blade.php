@@ -9,8 +9,7 @@
 @endsection
 @section('title')
     <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Expense')}}</h5>
-    </div>
+        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{__('Expense')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -18,10 +17,10 @@
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-        <a href="#" data-size="lg" data-url="{{ route('expense.create') }}"data-bs-toggle="modal" data-bs-target="#exampleModal" 
-         data-bs-whatever="{{__('Create New Expense')}}"
+        <a href="#" data-size="lg" data-url="{{ route('expense.create') }}"data-bs-toggle="modal"
+         data-title="{{__('Create New Expense')}}"
          class="btn btn-sm btn-primary btn-icon m-1">
-            <i class="ti ti-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+            <i class="fa fa-plus" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
         </a>
     @endif
 @endsection
@@ -56,13 +55,13 @@
                                             $x = pathinfo($expense->attachment, PATHINFO_FILENAME);
                                             $extension = pathinfo($expense->attachment, PATHINFO_EXTENSION);
                                             $result = str_replace(array("#", "'", ";"), '', $expense->attachment);
-                                        
+
                                         @endphp
                                         <a  href="{{route('expense.receipt' , [$x,"$extension"]) }}"  data-toggle="tooltip" class="btn btn-sm btn-primary btn-icon rounded-pill">
-                                            <i class="ti ti-download" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i>
+                                            <i class="fa fa-download" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i>
                                         </a>
                                         <a  href="{{$attachment.$x.'.'.$extension}}" target="_blank" data-toggle="tooltip" class="btn btn-sm btn-secondary btn-icon rounded-pill">
-                                            <i class="ti ti-crosshair" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Preview') }}"></i>
+                                            <i class="fa fa-crosshair" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Preview') }}"></i>
                                         </a>
                                         @else
                                         -
@@ -79,18 +78,18 @@
                                         <td class="action text-right">
                                             <div class="action-btn bg-info ms-2">
                                                 <a href="#" data-size="lg" data-url="{{ route('expense.edit',$expense->id) }}"
-                                                    class="mx-3 btn btn-sm d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal"  data-bs-whatever="{{__('Edit Expense')}}">
-                                                    <i class="ti ti-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
+                                                    class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"    data-title="{{__('Edit Expense')}}">
+                                                    <i class="fa fa-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
                                                 </a>
                                             </div>
                                             <div class="action-btn bg-danger ms-2">
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['expense.destroy', $expense->id]]) !!}
                                                 <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                    <i class="ti ti-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
+                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                                 </a>
                                                 {!! Form::close() !!}
                                             </div>
-                                        
+
                                         </td>
                                     @endif
                                 </tr>

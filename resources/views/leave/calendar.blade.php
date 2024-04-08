@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @push('script-page')
-    
+
     <script type="text/javascript">
         $(document).ready(function() {
             get_data();
@@ -64,9 +64,7 @@
     {{__('Leave Calendar')}}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0">{{__('Leave')}}</h5>
-    </div>
+     {{__('Leave')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
@@ -77,13 +75,13 @@
     @if(\Auth::user()->type=='company' || \Auth::user()->type=='employee')
 
     <a href="{{ route('leave.index') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip" title="List View" >
-        <i class="ti ti-list text-white"></i>
+        <i class="fa fa-list text-white"></i>
     </a>
-    
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-url="{{ route('leave.create') }}"
-        data-bs-whatever="{{__('Create New Leave')}}" data-size="lg"
-        > <i class="ti ti-plus text-white"  data-bs-toggle="tooltip"
+
+    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
+          data-url="{{ route('leave.create') }}"
+        data-title="{{__('Create New Leave')}}" data-size="lg"
+        > <i class="fa fa-plus text-white"  data-bs-toggle="tooltip"
         data-bs-original-title="{{__('Create')}}" ></i></a>
     @endif
 @endsection
