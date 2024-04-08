@@ -10,7 +10,7 @@ use App\Models\Plan;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
- 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -40,107 +40,104 @@ class AuthenticatedSessionController extends Controller
 
     public function store(LoginRequest $request)
     {
-<<<<<<< Updated upstream
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('email', $request->email)->first();
         Session()->put('crm_theme_setting', $user->dark_mode);
         setcookie('ThemeSetting', $user->dark_mode);
-        if($user != null)
-        {
-            $companyUser = User::where('id' , $user->created_by)->first();
-=======
-        $user = User::where('email', $request->email)->first();
-
         if ($user != null) {
             $companyUser = User::where('id', $user->created_by)->first();
->>>>>>> Stashed changes
-        }
+            $user = User::where('email', $request->email)->first();
 
-        if (($user != null && $user->is_enable_login == 0 || (isset($companyUser) && $companyUser != null) && $companyUser->is_enable_login == 0)  && $user->type != 'super admin') {
-            return redirect()->back()->with('error', __('Your Account is disable from company.'));
-        }
+            if ($user != null) {
+                $companyUser = User::where('id', $user->created_by)->first();
+            }
 
-        $request->authenticate();
-        $request->session()->regenerate();
-        $user = Auth::user();
-        if ($user->is_active == 0) {
-            auth()->logout();
-        }
+            if (($user != null && $user->is_enable_login == 0 || (isset($companyUser) && $companyUser != null) && $companyUser->is_enable_login == 0)  && $user->type != 'super admin') {
+                return redirect()->back()->with('error', __('Your Account is disable from company.'));
+            }
 
-        if ($user->is_active == 1) {
-            $user->active_status = 1;
-            // $user->save();
-        }
+            $request->authenticate();
+            $request->session()->regenerate();
+            $user = Auth::user();
+            if ($user->is_active == 0) {
+                auth()->logout();
+            }
 
-        if ($user->type == 'company') {
-            $free_plan = Plan::where('price', '=', '0.0')->first();
-            $plan      = Plan::find($user->plan);
+            if ($user->is_active == 1) {
+                $user->active_status = 1;
+                // $user->save();
+            }
 
-            if ($user->plan != $free_plan->id) {
-                if (date('Y-m-d') > $user->plan_expire_date && ucfirst($plan->duration) != 'Lifetime') {
-                    $user->plan             = $free_plan->id;
-                    $user->plan_expire_date = null;
-                    $user->save();
+            if ($user->type == 'company') {
+                $free_plan = Plan::where('price', '=', '0.0')->first();
+                $plan      = Plan::find($user->plan);
 
-                    $clients   = User::where('type', 'client')->where('created_by', '=', \Auth::user()->creatorId())->get();
-                    $employees = User::where('type', 'employee')->where('created_by', '=', \Auth::user()->creatorId())->get();
+                if ($user->plan != $free_plan->id) {
+                    if (date('Y-m-d') > $user->plan_expire_date && ucfirst($plan->duration) != 'Lifetime') {
+                        $user->plan             = $free_plan->id;
+                        $user->plan_expire_date = null;
+                        $user->save();
 
-                    if ($free_plan->max_client == -1) {
-                        foreach ($clients as $client) {
-                            $client->is_active = 1;
-                            $client->save();
-                        }
-                    } else {
-                        $clientCount = 0;
-                        foreach ($clients as $client) {
-                            $clientCount++;
-                            if ($clientCount <= $free_plan->max_client) {
+                        $clients   = User::where('type', 'client')->where('created_by', '=', \Auth::user()->creatorId())->get();
+                        $employees = User::where('type', 'employee')->where('created_by', '=', \Auth::user()->creatorId())->get();
+
+                        if ($free_plan->max_client == -1) {
+                            foreach ($clients as $client) {
                                 $client->is_active = 1;
                                 $client->save();
-                            } else {
-                                $client->is_active = 0;
-                                $client->save();
+                            }
+                        } else {
+                            $clientCount = 0;
+                            foreach ($clients as $client) {
+                                $clientCount++;
+                                if ($clientCount <= $free_plan->max_client) {
+                                    $client->is_active = 1;
+                                    $client->save();
+                                } else {
+                                    $client->is_active = 0;
+                                    $client->save();
+                                }
                             }
                         }
-                    }
 
 
-                    if ($free_plan->max_employee == -1) {
-                        foreach ($employees as $employee) {
-                            $employee->is_active = 1;
-                            $employee->save();
-                        }
-                    } else {
-                        $employeeCount = 0;
-                        foreach ($employees as $employee) {
-                            $employeeCount++;
-                            if ($employeeCount <= $free_plan->max_employee) {
+                        if ($free_plan->max_employee == -1) {
+                            foreach ($employees as $employee) {
                                 $employee->is_active = 1;
                                 $employee->save();
-                            } else {
-                                $employee->is_active = 0;
-                                $employee->save();
+                            }
+                        } else {
+                            $employeeCount = 0;
+                            foreach ($employees as $employee) {
+                                $employeeCount++;
+                                if ($employeeCount <= $free_plan->max_employee) {
+                                    $employee->is_active = 1;
+                                    $employee->save();
+                                } else {
+                                    $employee->is_active = 0;
+                                    $employee->save();
+                                }
                             }
                         }
-                    }
-                    if ($user->trial_expire_date != null) {
-                        if (Auth::user()->trial_expire_date > date('Y-m-d')) {
-                            $user->assignPlan(1);
+                        if ($user->trial_expire_date != null) {
+                            if (Auth::user()->trial_expire_date > date('Y-m-d')) {
+                                $user->assignPlan(1);
 
-                            return redirect()->intended(RouteServiceProvider::HOME)->with('error', __('Your Trial plan Expired.'));
+                                return redirect()->intended(RouteServiceProvider::HOME)->with('error', __('Your Trial plan Expired.'));
+                            }
                         }
+                        return redirect()->route('dashboard')->with('error', 'Your plan expired limit is over, please upgrade your plan');
                     }
-                    return redirect()->route('dashboard')->with('error', 'Your plan expired limit is over, please upgrade your plan');
                 }
             }
-        }
 
-        // Update Last Login Time
-        $user->update(
-            [
-                'last_login_at' => Carbon::now()->toDateTimeString(),
-            ]
-        );
-        return redirect()->intended(RouteServiceProvider::HOME);
+            // Update Last Login Time
+            $user->update(
+                [
+                    'last_login_at' => Carbon::now()->toDateTimeString(),
+                ]
+            );
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**
@@ -163,7 +160,6 @@ class AuthenticatedSessionController extends Controller
         return redirect()->route('login');
     }
 }
-<<<<<<< Updated upstream
 //for user log
 if (!function_exists('get_device_type')) {
     function get_device_type($user_agent)
@@ -181,5 +177,3 @@ if (!function_exists('get_device_type')) {
         }
     }
 }
-=======
->>>>>>> Stashed changes
