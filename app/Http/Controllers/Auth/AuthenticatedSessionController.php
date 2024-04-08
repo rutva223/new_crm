@@ -3,19 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\LoginDetail;
 use Carbon\Carbon;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\Utility;
 use App\Models\User;
 use App\Models\Plan;
-use App\Models\Plan as ModelsPlan;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-
-
+ 
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -43,37 +38,26 @@ class AuthenticatedSessionController extends Controller
         }
     }
 
-    /*protected function authenticated(Request $request, $user)
-    {
-        if($user->delete_status == 1)
-        {
-            auth()->logout();
-        }
-
-        return redirect('/check');
-    }*/
-
     public function store(LoginRequest $request)
     {
+<<<<<<< Updated upstream
         $user = User::where('email',$request->email)->first();
         Session()->put('crm_theme_setting', $user->dark_mode);
         setcookie('ThemeSetting', $user->dark_mode);
         if($user != null)
         {
             $companyUser = User::where('id' , $user->created_by)->first();
+=======
+        $user = User::where('email', $request->email)->first();
+
+        if ($user != null) {
+            $companyUser = User::where('id', $user->created_by)->first();
+>>>>>>> Stashed changes
         }
 
-        if(($user != null && $user->is_enable_login == 0 || (isset($companyUser) && $companyUser != null) && $companyUser->is_enable_login == 0)  && $user->type != 'super admin')
-        {
+        if (($user != null && $user->is_enable_login == 0 || (isset($companyUser) && $companyUser != null) && $companyUser->is_enable_login == 0)  && $user->type != 'super admin') {
             return redirect()->back()->with('error', __('Your Account is disable from company.'));
         }
-
-        if (Utility::getValByName('recaptcha_module') == 'yes') {
-            $validation['g-recaptcha-response'] = 'required|captcha';
-        } else {
-            $validation = [];
-        }
-        $this->validate($request, $validation);
 
         $request->authenticate();
         $request->session()->regenerate();
@@ -85,11 +69,6 @@ class AuthenticatedSessionController extends Controller
         if ($user->is_active == 1) {
             $user->active_status = 1;
             // $user->save();
-        }
-
-        if($user->is_disable == 0 && \Auth::user()->type != 'super admin'){
-            auth()->logout();
-            return redirect()->route('login')->with('error', 'Your Account is disable, please contact your Administrator.');
         }
 
         if ($user->type == 'company') {
@@ -144,7 +123,7 @@ class AuthenticatedSessionController extends Controller
                         }
                     }
                     if ($user->trial_expire_date != null) {
-                        if (\Auth::user()->trial_expire_date > date('Y-m-d')) {
+                        if (Auth::user()->trial_expire_date > date('Y-m-d')) {
                             $user->assignPlan(1);
 
                             return redirect()->intended(RouteServiceProvider::HOME)->with('error', __('Your Trial plan Expired.'));
@@ -161,71 +140,7 @@ class AuthenticatedSessionController extends Controller
                 'last_login_at' => Carbon::now()->toDateTimeString(),
             ]
         );
-
-        //start for user log
-        if ($user->type != 'company' && $user->type != 'super admin') {
-
-
-            $ip = '49.36.83.154'; // This is static ip address
-            // $ip = $_SERVER['REMOTE_ADDR']; // your ip address here
-
-
-            $query = @unserialize(file_get_contents('http://ip-api.com/php/' . $ip));
-            $whichbrowser = new \WhichBrowser\Parser($_SERVER['HTTP_USER_AGENT']);
-            if ($whichbrowser->device->type == 'bot') {
-                return;
-            }
-            $referrer = isset($_SERVER['HTTP_REFERER']) ? parse_url($_SERVER['HTTP_REFERER']) : null;
-            /* Detect extra details about the user */
-            $query['browser_name'] = $whichbrowser->browser->name ?? null;
-            $query['os_name'] = $whichbrowser->os->name ?? null;
-            $query['browser_language'] = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? mb_substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) : null;
-            $query['device_type'] = get_device_type($_SERVER['HTTP_USER_AGENT']);
-            $query['referrer_host'] = !empty($referrer['host']);
-            $query['referrer_path'] = !empty($referrer['path']);
-
-
-            isset($query['timezone']) ? date_default_timezone_set($query['timezone']) : '';
-
-
-            $json = json_encode($query);
-
-            $login_detail = new LoginDetail();
-            $login_detail->user_id = Auth::user()->id;
-            $login_detail->ip = $ip;
-            $login_detail->date = date('Y-m-d H:i:s');
-            $login_detail->Details = $json;
-            $login_detail->created_by = \Auth::user()->creatorId();
-            $login_detail->save();
-        }
-        //end for user log
-
         return redirect()->intended(RouteServiceProvider::HOME);
-    }
-
-    public function showLoginForm($lang = '')
-    {
-        if (empty($lang)) {
-            $lang = Utility::getValByName('default_language');
-        }
-
-        \App::setLocale($lang);
-
-        return view('auth.login', compact('lang'));
-    }
-
-
-
-    public function showLinkRequestForm($lang = '')
-    {
-        if (empty($lang)) {
-            $lang = Utility::getValByName('default_language');
-        }
-
-        \App::setLocale($lang);
-
-        return view('auth.passwords.email', compact('lang'));
-        /*return view('auth.passwords.email', compact('lang'));*/
     }
 
     /**
@@ -236,7 +151,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $usr = \Auth::user();
+        $usr = Auth::user();
         $usr->active_status = 0;
         $usr->save();
         Auth::guard('web')->logout();
@@ -245,9 +160,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 }
+<<<<<<< Updated upstream
 //for user log
 if (!function_exists('get_device_type')) {
     function get_device_type($user_agent)
@@ -265,3 +181,5 @@ if (!function_exists('get_device_type')) {
         }
     }
 }
+=======
+>>>>>>> Stashed changes

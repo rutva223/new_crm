@@ -123,7 +123,7 @@ use App\Http\Controllers\YooKassaController;
 */
 //Auth::routes();
 
-// Route::get('/register/{lang?}', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::get('/register/{lang?}', 'Auth\RegisterController@showRegistrationForm')->name('register');
 // Route::post('register', 'Auth\RegisterController@register')->name('register');
 // Route::get('/login/{lang?}', 'Auth\LoginController@showLoginForm')->name('login');
 // Route::get('/password/resets/{lang?}', 'Auth\Au@showLinkRequestForm')->name('change.langPass');
@@ -131,7 +131,8 @@ use App\Http\Controllers\YooKassaController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return route('login');
+    // return view('welcome');
 })->name('frist_page');
 
 Route::get('/dashboard', function () {
@@ -153,7 +154,7 @@ Route::post('project/{id}/client/{cid}/permission/store', [ProjectController::cl
 Route::get('project/taskboard/{id}/show', [ProjectController::class, 'taskShows'])->name('task.shows');
 
 
-Route::get('register/{lang?}', [RegisteredUserController::class, 'showemailform'])->name('register');
+// Route::get('register/{lang?}', [RegisteredUserController::class, 'showemailform'])->name('register');
 Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
 
 Route::get('/verify-email/{lang?}', [EmailVerificationPromptController::class, 'showVerifcation'])->name('verification.notice')->middleware(['auth','XSS']);

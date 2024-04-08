@@ -1,13 +1,14 @@
-@extends('layouts.auth')
-@section('page-title')
-    {{ __('Login') }}
-@endsection
+<?php $__env->startSection('page-title'); ?>
+    <?php echo e(__('Login')); ?>
 
-@section('content')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
     <div class="forms-container">
         <div class="signin-signup">
-            {{ Form::open(['route' => 'login', 'method' => 'post', 'id' => 'loginForm', 'class' => 'sign-in-form']) }}
-                @csrf
+            <?php echo e(Form::open(['route' => 'login', 'method' => 'post', 'id' => 'loginForm', 'class' => 'sign-in-form'])); ?>
+
+                <?php echo csrf_field(); ?>
                 <h2 class="title">Sign in</h2>
                 <div class="input-field">
                     <i class="fas fa-envelope"></i>
@@ -22,7 +23,7 @@
                     </span>
                 </div>
                 <p class="social-text" style="margin-left: 200px;">
-                    <a href="{{ route('password.request')}}">Forgot Your Password</a>
+                    <a href="<?php echo e(route('password.request')); ?>">Forgot Your Password</a>
                 </p>
 
                 <input type="submit" value="Login" class="btn solid" />
@@ -32,10 +33,12 @@
                         <i class="fab fa-google"></i>
                     </a>
                 </div>
-            {!! Form::close() !!}
+            <?php echo Form::close(); ?>
 
-            {{ Form::open(['route' => 'register', 'method' => 'post', 'id' => 'loginForm', 'class' => 'sign-up-form']) }}
-                @csrf
+
+            <?php echo e(Form::open(['route' => 'register', 'method' => 'post', 'id' => 'loginForm', 'class' => 'sign-up-form'])); ?>
+
+                <?php echo csrf_field(); ?>
                 <h2 class="title">Sign up</h2>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
@@ -56,7 +59,8 @@
                         <i class="fab fa-google"></i>
                     </a>
                 </div>
-            {!! Form::close() !!}
+            <?php echo Form::close(); ?>
+
         </div>
     </div>
 
@@ -86,4 +90,6 @@
             <img src="img/register.svg" class="image" alt="" />
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.auth', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\new_crm\resources\views/auth/login.blade.php ENDPATH**/ ?>

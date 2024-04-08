@@ -78,4 +78,4 @@
         }
     }
 </style>
-<?php /**PATH C:\xampp\htdocs\new_crm\resources\views/partials/admin/head.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\new_crm\resources\views/partials/admin/head.blade.php ENDPATH**/ ?>

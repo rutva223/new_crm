@@ -10,11 +10,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-/*Route::get('/register/{lang?}', 'Auth\RegisteredUserController@showRegistrationForm')->name('register');
-Route::get('/login/{lang?}', 'Auth\AuthenticatedSessionController@showLoginForm')->name('login');
-Route::get('/reset/password/{lang?}', 'Auth\AuthenticatedSessionController@showLinkRequestForm')->name('password.request');*/
-
-
 Route::get('/register/{lang?}', [RegisteredUserController::class, 'showRegistrationForm'])
     ->middleware('guest')
     ->name('register');
@@ -22,16 +17,13 @@ Route::get('/register/{lang?}', [RegisteredUserController::class, 'showRegistrat
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
-Route::get('/login/{lang?}', [AuthenticatedSessionController::class, 'showLoginForm'])
-    ->middleware('guest')
-    ->name('login');
+Route::get('login', [AuthenticatedSessionController::class, 'create'])
+                ->name('login');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware('guest');
+Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
 
-Route::get('/forgot-password/{lang?}', [AuthenticatedSessionController::class, 'showLinkRequestForm'])
-    ->middleware('guest')
-    ->name('password.request');
+Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+                ->name('password.request');
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
     ->middleware('guest')
