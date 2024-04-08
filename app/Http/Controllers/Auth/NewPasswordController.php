@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use App\Models\Utility;
 
 class NewPasswordController extends Controller
@@ -19,13 +20,7 @@ class NewPasswordController extends Controller
      */
     public function create(Request $request , $lang=null)
     {
-        if (empty($lang)) {
-            $lang = Utility::getValByName('default_language');
-        }
-        // dd($lang);
-        \App::setLocale($lang);
-
-        return view('auth.passwords.reset', ['request' => $request,'lang' => $lang]);
+        return view('auth.reset-password', ['request' => $request]);
     }
     /**
      * Handle an incoming new password request.
@@ -48,11 +43,11 @@ class NewPasswordController extends Controller
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
-               
                 $user->forceFill([
                     'password' => Hash::make($request->password),
                     'remember_token' => Str::random(60),
                 ])->save();
+
                 event(new PasswordReset($user));
             }
         );

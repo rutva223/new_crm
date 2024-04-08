@@ -16,7 +16,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create()
     {
-        
+
         return view('auth.forgot-password');
     }
 
@@ -34,19 +34,8 @@ class PasswordResetLinkController extends Controller
             'email' => 'required|email',
         ]);
 
-        Utility::getSMTPDetails(1);
+        // Utility::getSMTPDetails(1);
 
-        if(Utility::getValByName('recaptcha_module') == 'yes')
-        {
-            $validation['g-recaptcha-response'] = 'required|captcha';
-        }else{
-            $validation = [];
-        }
-        $this->validate($request, $validation);
-
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
         try{
             $status = Password::sendResetLink(
                 $request->only('email')
@@ -59,6 +48,7 @@ class PasswordResetLinkController extends Controller
         }
         catch(\Exception $e)
         {
+            dd($e);
             return redirect()->back()->withErrors('E-Mail has been not sent due to SMTP configuration');
         }
     }

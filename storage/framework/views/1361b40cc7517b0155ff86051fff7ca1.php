@@ -188,4 +188,4 @@
         </div>
     </nav>
 </div>
-<?php /**PATH C:\xampp\htdocs\new_crm\resources\views/partials/admin/header.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\new_crm\resources\views/partials/admin/header.blade.php ENDPATH**/ ?>

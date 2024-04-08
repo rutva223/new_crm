@@ -319,13 +319,14 @@ class DashboardController extends Controller
             }
             else
             {
-                $settings = Utility::settings();
+                return redirect('login');
+                // $settings = Utility::settings();
 
-                if ($settings['display_landing_page'] == 'on' && \Schema::hasTable('landing_page_settings')) {
-                    return view('landingpage::layouts.landingpage');
-                } else {
-                    return redirect('login');
-                }
+                // if ($settings['display_landing_page'] == 'on' && \Schema::hasTable('landing_page_settings')) {
+                //     return view('landingpage::layouts.landingpage');
+                // } else {
+                //     return redirect('login');
+                // }
             }
 
 
