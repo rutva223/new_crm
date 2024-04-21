@@ -24,6 +24,11 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown notification_dropdown">
+                    <a class="nav-link bell-link" href="{{ route('note.index') }}">
+                        <i class="fas fa-sticky-note"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown notification_dropdown">
                     <a class="nav-link " href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
                         <svg width="23" height="23" viewBox="0 0 26 26" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

@@ -10,18 +10,18 @@
         <title>New York - Estimate</title>
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
             rel="stylesheet">
-       
+
         <style type="text/css">
             :root {
                 --theme-color: #003580;
                 --white: #ffffff;
                 --black: #000000;
             }
-    
+
             body {
                 font-family: 'Lato', sans-serif;
             }
-    
+
             p,
             li,
             ul,
@@ -31,33 +31,33 @@
                 list-style: none;
                 line-height: 1.5;
             }
-    
+
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
             }
-    
+
             table {
                 width: 100%;
                 border-collapse: collapse;
             }
-    
+
             table tr th {
                 padding: 0.75rem;
                 text-align: left;
             }
-    
+
             table tr td {
                 padding: 0.75rem;
                 text-align: left;
             }
-    
+
             table th small {
                 display: block;
                 font-size: 12px;
             }
-    
+
             .estimate-preview-main {
                 max-width: 700px;
                 width: 100%;
@@ -65,28 +65,28 @@
                 background: #ffff;
                 box-shadow: 0 0 10px #ddd;
             }
-    
+
             .estimate-logo {
                 max-width: 200px;
                 width: 100%;
             }
-    
+
             .estimate-header table td {
                 padding: 15px 30px;
             }
-    
+
             .text-right {
                 text-align: right;
             }
-    
+
             .no-space tr td {
                 padding: 0;
             }
-    
+
             .vertical-align-top td {
                 vertical-align: top;
             }
-    
+
             .view-qrcode {
                 max-width: 114px;
                 height: 114px;
@@ -94,55 +94,55 @@
                 margin-top: 15px;
                 background: var(--white);
             }
-    
+
             .view-qrcode img {
                 width: 100%;
                 height: 100%;
             }
-    
+
             .estimate-body {
                 padding: 30px 25px 0;
             }
-    
+
             table.add-border tr {
                 border-top: 1px solid var(--theme-color);
             }
-    
+
             tfoot tr:first-of-type {
                 border-bottom: 1px solid var(--theme-color);
             }
-    
+
             .total-table tr:first-of-type td {
                 padding-top: 0;
             }
-    
+
             .total-table tr:first-of-type {
                 border-top: 0;
             }
-    
+
             .sub-total {
                 padding-right: 0;
                 padding-left: 0;
             }
-    
+
             .border-0 {
                 border: none !important;
             }
-    
+
             .estimate-summary td,
             .estimate-summary th {
                 font-size: 13px;
                 font-weight: 600;
             }
-    
+
             .total-table td:last-of-type {
                 width: 146px;
             }
-    
+
             .estimate-footer {
                 padding: 15px 20px;
             }
-    
+
             .itm-description td {
                 padding-top: 0;
             }
@@ -165,7 +165,7 @@
             }
         </style>
     </head>
-    
+
     <body>
         <div class="estimate-preview-main">
             <div class="estimate-header" style="background: {{$color}};color:{{$font_color}}">
@@ -196,7 +196,7 @@
                                 </p>
                                 <p data-v-f2a183a6="">
                                     {{__('Registration Number')}} : {{$settings['registration_number']}} <br>
-                                    {{__('VAT Number')}} : {{$settings['vat_number']}} <br>
+                                    {{-- {{__('VAT Number')}} : {{$settings['vat_number']}} <br> --}}
                                 </p>
                             </td>
                             <td>
@@ -292,7 +292,7 @@
                                 @endif
                             </td>
                             <td>{{\App\Models\Utility::priceFormat($settings,$item->price * $item->quantity)}}</td>
-                        </tr>  
+                        </tr>
                         @endforeach
                         @endif
                     </tbody>
@@ -358,6 +358,6 @@
                 </div>
             </div>
         </div>
-   
+
     </body>
 </html>

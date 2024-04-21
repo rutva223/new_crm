@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@push('script-page')
+@push('after-scripts')
     <script>
         $(document).on('click', '.type', function() {
             var type = $(this).val();
@@ -13,126 +13,104 @@
         });
     </script>
 @endpush
-@section('page-title')
+@section('title')
     {{ __('Notice Board') }}
 @endsection
-@section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Notice Board') }}
-@endsection
-@section('breadcrumb')
 
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Notice Board') }}</li>
+@section('breadcrumb')
+    {{ __('Notice Board') }}
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'company')
-        <a href="{{ route('noticeBoard.grid') }}" class="btn btn-sm btn-primary btn-icon m-1">
+        {{-- <a href="{{ route('noticeBoard.grid') }}" class="btn btn-sm btn-primary btn-icon m-1">
             <i class="fa fa-layout-grid text-white" data-bs-toggle="tooltip"
                 data-bs-original-title="{{ __('Grid VIew') }}"></i>
-        </a>
+        </a> --}}
 
         <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
-            data-url="{{ route('noticeBoard.create') }}" data-title="{{ __('Create New Notice Board') }}"> <span
-                class="text-white">
-                <i class="fa fa-plus text-white" data-bs-toggle="tooltip"
-                    data-bs-original-title="{{ __('Create') }}"></i></span>
+            data-url="{{ route('noticeBoard.create') }}" data-title="{{ __('Create Notice Board') }}">
+            <span class="text-white">
+                <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
+            </span>
         </a>
     @endif
 @endsection
 
 @section('content')
-    <div class="col-xl-12">
-        <div class=" {{ isset($_GET['type']) ? 'show' : '' }}">
-            <div class="card card-body">
-                {{ Form::open(['url' => 'noticeBoard', 'method' => 'get']) }}
-                <div class="row filter-css">
-                    <div class="col-md-2">
-                        <select class="form-control" data-toggle="select" name="type">
-                            <option value="0">{{ __('Select Type') }}</option>
-                            <option value="{{ __('Employee') }}"
-                                {{ isset($_GET['type']) && $_GET['type'] == 'Employee' ? 'selected' : '' }}>{{ __('Employee') }}
-                            </option>
-                            <option value="{{ __('Client') }}"
-                                {{ isset($_GET['type']) && $_GET['type'] == 'Client' ? 'selected' : '' }}>{{ __('Client') }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="action-btn bg-info ms-2">
-                        <div class="col-auto">
-                            <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-toggle="tooltip"
-                                data-title="{{ __('Apply') }}"><i class="fa fa-search text-white"
-                                    data-bs-toggle="tooltip" data-bs-original-title="{{ __('Apply') }}"></i></button>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="row notes-list">
+                @forelse ($noticeBoards as $noticeBoard)
+                    <div class="col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">{{ $noticeBoard->heading }}</h6>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="actions">
+                                            <div class="dropdown action-item">
+                                                <div class="btn sharp btn-primary tp-btn sharp-sm"
+                                                    data-bs-toggle="dropdown">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="18px"
+                                                        height="18px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                            fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"></rect>
+                                                            <circle fill="#000000" cx="12" cy="5" r="2">
+                                                            </circle>
+                                                            <circle fill="#000000" cx="12" cy="12" r="2">
+                                                            </circle>
+                                                            <circle fill="#000000" cx="12" cy="19" r="2">
+                                                            </circle>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a href="#" class="dropdown-item" data-ajax-popup="true"
+                                                        data-url="{{ route('note.edit', $noticeBoard->id) }}"
+                                                        data-title="{{ __('Edit Note') }}">
+                                                        <i class="fa fa-edit"> </i>{{ __('Edit') }}</a>
+
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['note.destroy', $noticeBoard->id]]) !!}
+                                                    <a href="#!" class="js-sweetalert dropdown-item">
+                                                        <i class="fa fa-trash"></i>{{ __('Delete') }}
+                                                    </a>
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-justify">{{ $noticeBoard->description }}</p>
+                                <div class="media align-items-center mt-2">
+                                    <div class="media-body">
+                                        <span class="h6 mb-0">{{ __('Created Date') }}</span><br>
+                                        <span
+                                            class="text-sm text-muted">{{ Auth::user()->dateFormat($noticeBoard->created_at) }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="action-btn bg-danger ms-2">
-                        <div class="col-auto">
-                            <a href="{{ route('noticeBoard.index') }}" data-toggle="tooltip"
-                                data-title="{{ __('Reset') }}" class="mx-3 btn btn-sm d-flex align-items-center"><i
-                                    class="fa fa-trash-off text-white" data-bs-toggle="tooltip"
-                                    data-bs-original-title="{{ __('Reset') }}"></i></a>
-                        </div>
-                    </div>
-                </div>
-                {{ Form::close() }}
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-header card-body table-border-style">
-                <!-- <h5></h5> -->
-                <div class="table-responsive">
-                    <table class="table" id="pc-dt-simple">
-                        <thead>
-                            <tr>
-                                <th scope="col">{{ __('Notice') }}</th>
-                                <th scope="col">{{ __('Date') }}</th>
-                                <th scope="col">{{ __('To') }}</th>
-                                <th scope="col">{{ __('Department') }}</th>
-                                <th scope="col">{{ __('Descrition') }}</th>
-                                @if (\Auth::user()->type == 'company')
-                                    <th scope="col" class="text-right">{{ __('Action') }}</th>
-                                @endif
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($noticeBoards as $noticeBoard)
-                                <tr>
-                                    <td>{{ $noticeBoard->heading }}</td>
-                                    <td>{{ \Auth::user()->dateFormat($noticeBoard->created_at) }}</td>
-                                    <td>{{ $noticeBoard->type }}</td>
-                                    <td>{{ $noticeBoard->type != 'Client' ? ($noticeBoard->type == 'Employee' && !empty($noticeBoard->departments) ? $noticeBoard->departments->name : __('All')) : '-' }}
-                                    </td>
-                                    <td style="white-space: inherit">{{ $noticeBoard->notice_detail }}</td>
-                                    @if (\Auth::user()->type == 'company')
-                                        <td class="text-right">
-                                            <div class="action-btn bg-info ms-2">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                    data-ajax-popup="true"
-                                                    data-url="{{ route('noticeBoard.edit', $noticeBoard->id) }}"
-                                                    data-title="{{ __('Edit Notice Board') }}"> <span
-                                                        class="text-white"> <i class="fa fa-edit" data-bs-toggle="tooltip"
-                                                            data-bs-original-title="{{ __('Edit') }}"></i></span></a>
-                                            </div>
-
-                                            <div class="action-btn bg-danger ms-2">
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['noticeBoard.destroy', $noticeBoard->id]]) !!}
-                                                <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
-                                                        data-bs-original-title="{{ __('Delete') }}"></i>
-                                                </a>
-                                                {!! Form::close() !!}
-                                            </div>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                @empty
+                    @include('layouts.nodatafound')
+                @endforelse
             </div>
         </div>
     </div>
 @endsection
+
+<script>
+    function openAnswer(answer) {
+        const detailsHtml = `<span style="font-weight: 800;"></span> ${answer} <br>`;
+        Swal.fire({
+            title: "<h5>Description :</h5>",
+            html: detailsHtml,
+            type: "warning",
+            confirmButtonText: "Ok",
+        });
+    }
+</script>

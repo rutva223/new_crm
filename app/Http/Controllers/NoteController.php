@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Utility  ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -13,15 +14,15 @@ class NoteController extends Controller
 
     public function index()
     {
-        if(\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
+        if(Auth::user()->type == 'company' || Auth::user()->type == 'employee' || Auth::user()->type == 'client')
         {
-            if(\Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
+            if(Auth::user()->type == 'employee' || Auth::user()->type == 'client')
             {
-                $notes = Note::where('created_by', \Auth::user()->id)->get();
+                $notes = Note::where('created_by', Auth::user()->id)->get();
             }
             else
             {
-                $notes = Note::where('created_by', \Auth::user()->creatorId())->get();
+                $notes = Note::where('created_by', Auth::user()->creatorId())->get();
             }
 
             return view('note.index', compact('notes'));
@@ -41,7 +42,7 @@ class NoteController extends Controller
 
     public function store(Request $request)
     {
-        if(\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
+        if(Auth::user()->type == 'company' || Auth::user()->type == 'employee' || Auth::user()->type == 'client')
         {
 
             $validator = \Validator::make(
@@ -79,18 +80,18 @@ class NoteController extends Controller
                     if($path['flag'] == 1){
                         $url = $path['url'];
                         $note->file = $fileNameToStore;
-                    
+
                     }else{
-                        return redirect()->route('note.index', \Auth::user()->id)->with('error', __($path['msg']));
+                        return redirect()->route('note.index', Auth::user()->id)->with('error', __($path['msg']));
                     }
             }
-            if(\Auth::user()->type == 'employee' || \Auth::user()->type == 'client')    
+            if(Auth::user()->type == 'employee' || Auth::user()->type == 'client')
             {
-                $note->created_by = \Auth::user()->id;
+                $note->created_by = Auth::user()->id;
             }
             else
             {
-                $note->created_by = \Auth::user()->creatorId();
+                $note->created_by = Auth::user()->creatorId();
             }
 
             $note->save();
@@ -118,7 +119,7 @@ class NoteController extends Controller
 
     public function update(Request $request, Note $note)
     {
-        if(\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
+        if(Auth::user()->type == 'company' || Auth::user()->type == 'employee' || Auth::user()->type == 'client')
         {
             $validator = \Validator::make(
                 $request->all(), [
@@ -137,12 +138,12 @@ class NoteController extends Controller
             $note->description = $request->description;
             if(!empty($request->file))
             {
-                
+
 
                 $filenameWithExt = $request->file('file')->getClientOriginalName();
                 $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension       = $request->file('file')->getClientOriginalExtension();
-              
+
                 $fileNameToStore = $filename . '_' . date('m') . '.' . $extension;
                 $settings = Utility::getStorageSetting();
                 if($note->file)
@@ -156,9 +157,9 @@ class NoteController extends Controller
                 if($path['flag'] == 1){
                     $url = $path['url'];
                     $note->file = $fileNameToStore;
-                   
+
                 }else{
-                    return redirect()->route('note.index', \Auth::user()->id)->with('error', __($path['msg']));
+                    return redirect()->route('note.index', Auth::user()->id)->with('error', __($path['msg']));
                 }
             }
 
@@ -175,7 +176,7 @@ class NoteController extends Controller
 
     public function destroy(Note $note)
     {
-        if(\Auth::user()->type == 'company' || \Auth::user()->type == 'employee' || \Auth::user()->type == 'client')
+        if(Auth::user()->type == 'company' || Auth::user()->type == 'employee' || Auth::user()->type == 'client')
         {
             $note->delete();
             if($note->file)
@@ -191,10 +192,10 @@ class NoteController extends Controller
         }
 
     }
-    
+
     public function download($image,$extension)
     {
         return Storage::download('uploads/notes/'.$image.'.'.$extension);
-        
+
     }
 }

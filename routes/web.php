@@ -99,6 +99,8 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BenefitPaymentController;
 use App\Http\Controllers\CashfreeController;
+use App\Http\Controllers\ContractTypeController;
+use App\Http\Controllers\ItemStockController;
 use App\Http\Controllers\ToyyibpayController;
 use App\Http\Controllers\PayfastController;
 use App\Http\Controllers\NotificationTemplatesController;
@@ -110,6 +112,7 @@ use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\referralController;
 use App\Http\Controllers\XenditPaymentController;
 use App\Http\Controllers\YooKassaController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -621,7 +624,7 @@ Route::group(['middleware' => ['verified']], function () {
         }
     );
     Route::get('estimate/preview/{template}/{color}', [EstimateController::class, 'previewEstimate'])->name('estimate.preview');
-    Route::post('estimate/template/setting', [EstimateController::class, 'saveEstimateTemplateSettings'])->name('estimate.template.setting');
+    // Route::post('estimate/template/setting', [EstimateController::class, 'saveEstimateTemplateSettings'])->name('estimate.template.setting');
 
 
     Route::group(
@@ -977,40 +980,34 @@ Route::group(['middleware' => ['verified']], function () {
         ],
         function () {
             Route::resource('plan', PlanController::class);
-            Route::get('plan/plan-trial/{id}', [PlanController::class, 'PlanTrial'])->name('plan.trial');
+            // Route::get('plan/plan-trial/{id}', [PlanController::class, 'PlanTrial'])->name('plan.trial');
             Route::post('plan/plan-active', [PlanController::class, 'planActive'])->name('plan.enable')->middleware(['auth', 'XSS']);
         }
     );
 
-    Route::group(
-        ['middleware' => ['auth', 'XSS', 'revalidate',],],
-        function () {
-            Route::resource('plan_request', PlanRequestController::class);
-        }
-    );
-    Route::get('/apply-coupon', [CouponController::class, 'applyCoupon'])->name('apply.coupon')->middleware(['auth', 'XSS', 'revalidate',]);
+    // Route::group(
+    //     ['middleware' => ['auth', 'XSS', 'revalidate',],],
+    //     function () {
+    //         Route::resource('plan_request', PlanRequestController::class);
+    //     }
+    // );
+    // Route::get('/apply-coupon', [CouponController::class, 'applyCoupon'])->name('apply.coupon')->middleware(['auth', 'XSS', 'revalidate',]);
 
-
-
-
-    Route::group(
-        [
-            'middleware' => [
-                'auth',
-                'XSS',
-                'revalidate',
-            ],
-        ],
-        function () {
-            Route::resource('coupon', CouponController::class);
-        }
-    );
-    Route::get('/apply-coupon', [CouponController::class, 'applyCoupon'])->name('apply.coupon')->middleware(['auth', 'XSS', 'revalidate',]);
+    // Route::group(
+    //     [
+    //         'middleware' => [
+    //             'auth',
+    //             'XSS',
+    //             'revalidate',
+    //         ],
+    //     ],
+    //     function () {
+    //         Route::resource('coupon', CouponController::class);
+    //     }
+    // );
+    // Route::get('/apply-coupon', [CouponController::class, 'applyCoupon'])->name('apply.coupon')->middleware(['auth', 'XSS', 'revalidate',]);
     Route::post('change-password', [UserController::class, 'updatePassword'])->name('update.password');
     Route::get('/change/mode', [UserController::class, 'changeMode'])->name('change.mode');
-
-
-
 
 
     //========================================HR===============================
@@ -1246,7 +1243,7 @@ Route::group(['middleware' => ['verified']], function () {
         }
     );
     Route::get('invoice/preview/{template}/{color}', [InvoiceController::class, 'previewInvoice'])->name('invoice.preview');
-    Route::post('invoice/template/setting', [InvoiceController::class, 'saveInvoiceTemplateSettings'])->name('invoice.template.setting');
+    // Route::post('invoice/template/setting', [InvoiceController::class, 'saveInvoiceTemplateSettings'])->name('invoice.template.setting');
     // Route::get('invoice/pdf/{id}', [InvoiceController::class, 'pdf'])->name('invoice.pdf')>middleware(['XSS']);
     // Route::get('invoice/pdf/{id}', 'InvoiceController@pdf')->name('invoice.pdf')->middleware(['XSS']);
 
@@ -1430,7 +1427,7 @@ Route::group(['middleware' => ['verified']], function () {
 
 
     //================================= Custom Landing Page ====================================//
-    Route::get('/landingpage', [LandingPageSectionController::class, 'index'])->name('custom_landing_page.index')->middleware(['auth', 'XSS',]);
+    // Route::get('/landingpage', [LandingPageSectionController::class, 'index'])->name('custom_landing_page.index')->middleware(['auth', 'XSS',]);
 
     // Route::get('/LandingPage/show/{id}', 'LandingPageSectionController@show');
     // Route::post('/LandingPage/setConetent', 'LandingPageSectionController@setConetent')->middleware(['auth','XSS']);
@@ -1504,7 +1501,7 @@ Route::get('/referral-program/company/guideline', [referralController::class, 'g
             ],
         ],
         function () {
-            Route::get('order/index', [StripePaymentController::class, 'index'])->name('order.index');
+            // Route::get('order/index', [StripePaymentController::class, 'index'])->name('order.index');
             Route::get('/stripe/{code}', [StripePaymentController::class, 'stripe'])->name('stripe');
             Route::post('/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
 	        Route::any('/stripe-payment-status', [StripePaymentController::class, 'planGetStripePaymentStatus'])->name('stripe.payment.status')->middleware(['XSS']);
@@ -1612,7 +1609,7 @@ Route::get('/referral-program/company/guideline', [referralController::class, 'g
     );
 
     // Plan Request Module
-    Route::get('plan_request', [PlanRequestController::class, 'index'])->name('plan_request.index')->middleware(['auth', 'XSS',]);
+    // Route::get('plan_request', [PlanRequestController::class, 'index'])->name('plan_request.index')->middleware(['auth', 'XSS',]);
     Route::get('request_frequency/{id}', [PlanRequestController::class, 'requestView'])->name('request.view')->middleware(['auth', 'XSS',]);
     Route::get('request_send/{id}', [PlanRequestController::class, 'userRequest'])->name('send.request')->middleware(['auth', 'XSS',]);
     Route::get('request_response/{id}/{response}', [PlanRequestController::class, 'acceptRequest'])->name('response.request')->middleware(['auth', 'XSS',]);
@@ -1785,11 +1782,11 @@ Route::get('/referral-program/company/guideline', [referralController::class, 'g
     Route::resource('itemstock', ItemStockController::class)->middleware(['auth', 'XSS']);
     //Clear Config cache:
     Route::get('/config-cache', function () {
-        $exitCode = \Artisan::call('config:cache');
+        $exitCode = Artisan::call('config:cache');
         return '<h1>Clear Config cleared</h1>';
     });
     Route::get('/config-clear', function () {
-        $exitCode = \Artisan::call('config:clear');
+        $exitCode = Artisan::call('config:clear');
         return '<h1>Clear Config cleared</h1>';
     });
 });
@@ -1801,10 +1798,10 @@ Route::post('/appraisals1', [AppraisalController::class, 'empByStar1'])->name('e
 Route::post('/getemployee', [AppraisalController::class, 'getemployee'])->name('getemployee');
 // cache clear
 Route::get('/config-cache', function () {
-    \Artisan::call('cache:clear');
-    \Artisan::call('route:clear');
-    \Artisan::call('view:clear');
-    \Artisan::call('optimize:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
     return redirect()->back()->with('success', 'Clear Cache successfully.');
 });
 

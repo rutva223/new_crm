@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -175,8 +176,8 @@ class User extends Authenticatable implements MustVerifyEmail
                 }
                 $this->save();
 
-                $employees = User::where('created_by', '=', \Auth::user()->creatorId())->where('type', 'employee')->get();
-                $clients   = User::where('created_by', '=', \Auth::user()->creatorId())->where('type', 'client')->get();
+                $employees = User::where('created_by', '=', Auth::user()->creatorId())->where('type', 'employee')->get();
+                $clients   = User::where('created_by', '=', Auth::user()->creatorId())->where('type', 'client')->get();
 
 
                 if ($plan->max_employee == -1) {
