@@ -4,22 +4,12 @@
         $plansettings = App\Models\Utility::plansettings();
     @endphp
     <div class="row">
-        @if (isset($plansettings['enable_chatgpt']) && $plansettings['enable_chatgpt'] == 'on')
-            <div class="text-end">
-                <a href="#" data-size="md" class="btn btn-sm btn-primary" data-ajax-popup-over="true" data-size="md"
-                    data-title="{{ __('Generate Content Width Ai') }}"
-                    data-url="{{ route('generate', ['account asset']) }}" data-toggle="tooltip"
-                    title="{{ __('Generate') }}">
-                    <i class="fas fa-robot"> {{ __('Generate With AI') }}</i>
-                </a>
-            </div>
-        @endif
         <div class="form-group col-md-6">
-            {{ Form::label('name', __('Name'), ['class' => 'col-form-label']) }}
+            {{ Form::label('name', __('Name'), ['class' => 'col-form-label required']) }}
             {{ Form::text('name', '', ['class' => 'form-control', 'required' => 'required']) }}
         </div>
         <div class="form-group col-md-6">
-            {{ Form::label('amount', __('Amount'), ['class' => 'col-form-label']) }}
+            {{ Form::label('amount', __('Amount'), ['class' => 'col-form-label required']) }}
             {{ Form::number('amount', '', ['class' => 'form-control', 'required' => 'required', 'step' => '0.01']) }}
         </div>
         <div class="form-group  col-md-6">
@@ -36,7 +26,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn  btn-light" data-bs-dismiss="modal">{{ __('Close') }}</button>
-            {{ Form::submit(__('Create'), ['class' => 'btn  btn-primary']) }}
+            <input type="submit" value="{{__('Create')}}" class="btn btn-primary" id="createButton" disabled>
+
         </div>
     </div>
     {{ Form::close() }}
+    <script src="{{ asset('assets/js/required.js') }}"></script>

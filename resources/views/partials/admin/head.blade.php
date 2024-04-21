@@ -9,6 +9,8 @@
 <!--swiper-slider-->
 <link rel="stylesheet" href="{{ asset('assets/vendor/swiper/css/swiper-bundle.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/metismenu/css/metisMenu.min.css') }}">
+<link href="{{ asset('assets/vendor/fullcalendar/css/main.min.css') }}" rel="stylesheet">
+
 <!-- Style css -->
  <!-- Datatable -->
  <link href="{{ asset('assets/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">

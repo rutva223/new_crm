@@ -13,8 +13,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
        {{\Auth::user()->clientIdFormat($client->client_id)}} {{__('Details')}}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{$user->name}}</li>
+    {{$user->name}}
 @endsection
 @section('action-btn')
 @endsection
@@ -26,7 +25,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                     <h5 class="mb-0">{{__($user->name)}}</h5>
                 </div>
 
-                <div class="card-footer py-0">
+                <div class="card-footer ">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item px-0">
                             <div class="row align-items-center">
@@ -145,7 +144,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                     <h5 class="mb-0">{{__('Company Detail')}}</h5>
                 </div>
 
-                <div class="card-footer py-0">
+                <div class="card-footer ">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item px-0">
                             <div class="row align-items-center">

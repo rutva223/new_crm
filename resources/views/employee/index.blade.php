@@ -22,13 +22,6 @@
         </a>
     @endif
 
-    <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
-        data-url="{{ route('employee.file.import') }}" data-title="{{ __('Import CSV file') }}"> <span
-            class="text-white">
-            <i class="fa fa-file-import" data-bs-toggle="tooltip"
-                data-bs-original-title="{{ __('Import item CSV file') }}"></i>
-    </a>
-
     <a href="#" class="btn btn-sm btn-primary " data-ajax-popup="true"
         data-url="{{ route('employee.create') }}" data-title="{{ __('Create New Employee') }}">
         <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
@@ -69,165 +62,88 @@
             </div>
         </div>
     </div>
-    <div class="row">
-
-        @foreach ($employees as $employee)
-            <div class="col-lg-3 col-sm-6">
-                <div class="card hover-shadow-lg">
-                    <div class="card-header border-0 pb-0 pt-2 px-3">
-                        <div class="row">
-                            <div class="col-6 text-right">
-                                <span class="badge bg-primary p-2 px-3 rounded">
-                                    {{ \Auth::user()->employeeIdFormat(!empty($employee->employeeDetail) ? $employee->employeeDetail->employee_id : '') }}
-                                </span>
+    <div class="col-xl-12">
+        <div class="row">
+            @forelse ($employees as $employee)
+            <div class="col-xl-4 col-md-6">
+                <div class="card contact_list ">
+                    <div class="card-body">
+                        <div class="user-content">
+                            <div class="user-info">
+                                <div class="user-img position-relative">
+                                    <img  @if (!empty($employee->avatar)) src="{{ $profile . '/' . $employee->avatar }}" @else
+                                avatar="{{ $employee->name }}" @endif class="avatar avatar-lg me-3" alt="">
+                                </div>
+                                <div class="user-details">
+                                    <h5 class="mb-0">{{ $employee->name }}</h5>
+                                    <p class="mb-0 text-primary">{{ $employee->email }}</p>
+                                    <p class="mb-0">{{ $employee->created_at }}</p>
+                                </div>
                             </div>
-                            <div class="col-6  text-end">
-                                <div class="actions">
-                                    @if ($employee->is_disable == 1)
-                                        @if ($employee->is_active == 1 && (\Auth::user()->id == $employee->id || \Auth::user()->type == 'company'))
-                                            <div class="dropdown action-item">
-                                                <a href="#" class="action-item " data-bs-toggle="dropdown">
-                                                    <i class="fa fa-dots-vertical"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-
-                                                    <a href="{{ route('employee.edit', \Crypt::encrypt($employee->id)) }}"
-                                                        class="dropdown-item" data-title="{{ __('Edit Employee') }}">
-                                                        <i class="fa fa-edit"> </i> {{ __('Edit') }}</a>
-
-
-                                                    <a href="{{ route('employee.show', \Crypt::encrypt($employee->id)) }}"
-                                                        class="dropdown-item" data-title="{{ __('View Employee') }}">
-                                                        <i class="fa fa-eye"></i> {{ __('View') }}</a>
+                            <div class="dropdown ">
+                                <div class="btn sharp btn-primary tp-btn sharp-sm" data-bs-toggle="dropdown">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="12" cy="5" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="19" r="2"></circle></g></svg>
+                                </div>
+                                @if ($employee->is_disable == 1)
+                                    @if ($employee->is_active == 1 && (\Auth::user()->id == $employee->id || \Auth::user()->type == 'company'))
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="{{ route('employee.edit', \Crypt::encrypt($employee->id)) }}" class="dropdown-item">
+                                                <i class="ti ti-pencil"></i>
+                                                <span>{{ __('Edit') }}</span>
+                                            </a>
+                                            <a href="{{ route('employee.show', \Crypt::encrypt($employee->id)) }}"
+                                                class="dropdown-item" data-title="{{ __('View Employee') }}">
+                                                <i class="fa fa-eye"></i> {{ __('View') }}</a>
 
 
-                                                    <a href="#"
-                                                        data-url="{{ route('employee.reset', \Crypt::encrypt($employee->id)) }}"
-                                                        data-ajax-popup="true"
-                                                        class="dropdown-item"
-                                                        data-title="{{ __('Reset Password') }}">
-                                                        <i class="fa fa-lock"> </i> {{ __('Reset Password') }}
-                                                    </a>
-                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['employee.destroy', $employee->id]]) !!}
-                                                    <a href="#!" class=" show_confirm dropdown-item">
-                                                        <i class="fa fa-trash"></i>{{ __('Delete') }}
-                                                    </a>
-                                                    {!! Form::close() !!}
-                                                    @if ($employee->is_enable_login == 1)
-                                                        <a href="{{ route('employee.login', \Crypt::encrypt($employee->id)) }}"
-                                                            class="dropdown-item">
-                                                            <i class="fa fa-road-sign"></i>
-                                                            <span class="text-danger"> {{ __('Login Disable') }}</span>
-                                                        </a>
-                                                    @elseif ($employee->is_enable_login == 0 && $employee->password == null)
-                                                        <a href="#"
-                                                            data-url="{{ route('employee.reset', \Crypt::encrypt($employee->id)) }}"
-                                                            data-ajax-popup="true" data-size="md"
-                                                            class="dropdown-item login_enable"
-                                                            data-title="{{ __('New Password') }}" class="dropdown-item">
-                                                            <i class="fa fa-road-sign"></i>
-                                                            <span class="text-success"> {{ __('Login Enable') }}</span>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('employee.login', \Crypt::encrypt($employee->id)) }}"
-                                                            class="dropdown-item">
-                                                            <i class="fa fa-road-sign"></i>
-                                                            <span class="text-success"> {{ __('Login Enable') }}</span>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        @else
-                                            <div class="actions d-flex justify-content-between px-4">
-                                                <a href="#" data-toggle="tooltip"
-                                                    data-original-title="{{ __('Lock') }}"
-                                                    class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                                                    <i class="fas fa-lock"></i>
+                                            <a href="#"
+                                                data-url="{{ route('employee.reset', \Crypt::encrypt($employee->id)) }}"
+                                                data-ajax-popup="true"
+                                                class="dropdown-item"
+                                                data-title="{{ __('Reset Password') }}">
+                                                <i class="fa fa-lock"> </i> {{ __('Reset Password') }}
+                                            </a>
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['employee.destroy', $employee->id]]) !!}
+                                            <a href="#!" class=" js-sweetalert dropdown-item">
+                                                <i class="fa fa-trash"></i>{{ __('Delete') }}
+                                            </a>
+                                            {!! Form::close() !!}
+                                            @if ($employee->is_enable_login == 1)
+                                                <a href="{{ route('employee.login', \Crypt::encrypt($employee->id)) }}"
+                                                    class="dropdown-item">
+                                                    <i class="fa fa-road-sign"></i>
+                                                    <span class="text-danger"> {{ __('Login Disable') }}</span>
                                                 </a>
-                                            </div>
-                                        @endif
-                                    @else
-                                        <div>
-                                            <i class="fa fa-lock"></i>
+                                            @elseif ($employee->is_enable_login == 0 && $employee->password == null)
+                                                <a href="#"
+                                                    data-url="{{ route('employee.reset', \Crypt::encrypt($employee->id)) }}"
+                                                    data-ajax-popup="true" data-size="md"
+                                                    class="dropdown-item login_enable"
+                                                    data-title="{{ __('New Password') }}" class="dropdown-item">
+                                                    <i class="fa fa-road-sign"></i>
+                                                    <span class="text-success"> {{ __('Login Enable') }}</span>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('employee.login', \Crypt::encrypt($employee->id)) }}"
+                                                    class="dropdown-item">
+                                                    <i class="fa fa-road-sign"></i>
+                                                    <span class="text-success"> {{ __('Login Enable') }}</span>
+                                                </a>
+                                            @endif
                                         </div>
                                     @endif
-                                </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body text-center client-box">
-                        <div class="avatar-parent-child">
-                            <img @if (!empty($employee->avatar)) src="{{ $profile . '/' . $employee->avatar }}" @else
-                    avatar="{{ $employee->name }}" @endif
-                                class="avatar rounded-circle avatar-lg" style="width:80px;">
-                            <!-- <img @if (!empty($employee->avatar)) src="{{ $profile . '/' . $employee->avatar }}" @else
-                        avatar="{{ $employee->name }}" @endif class="avatar rounded-circle avatar-lg" width="130px"> -->
-                        </div>
-                        <h5 class="h6 mt-4 mb-0">{{ $employee->name }}</h5>
-                        <a href="#" class="text-sm text-muted mb-3">{{ $employee->email }}</a>
-                    </div>
-
-                    <div class="card-footer">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col text-center">
-                                <span
-                                    class="d-block h6 mb-0">{{ !empty($employee->department_name) ? $employee->department_name : '-' }}</span>
-                                <span class="d-block text-sm text-muted">{{ __('Department') }}</span>
-                            </div>
-                            <div class="col text-center">
-                                <span
-                                    class="d-block h6 mb-0">{{ !empty($employee->designation_name) ? $employee->designation_name : '-' }}</span>
-                                <span class="d-block text-sm text-muted">{{ __('Designation') }}</span>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-between align-items-center mt-3">
-                            <div class="col text-center">
-                                <span
-                                    class="d-block h6 mb-0">{{ !empty($employee->employeeDetail) && !empty($employee->employeeDetail->joining_date)
-                                        ? \Auth::user()->dateFormat($employee->employeeDetail->joining_date)
-                                        : '-' }}</span>
-                                <span class="d-block text-sm text-muted">{{ __('Date of Joining') }}</span>
-                            </div>
-                            <div class="col text-center">
-                                <span
-                                    class="d-block h6 mb-0">{{ !empty($employee->employeeDetail) ? \Auth::user()->priceFormat($employee->employeeDetail->salary) : '-' }}</span>
-                                <span class="d-block text-sm text-muted">{{ __('Salary') }}</span>
-                            </div>
-                        </div>
-
-                        @if ($employee->lastlogin)
-                            <div class="row justify-content-between align-items-center mt-3">
-                                <div class="col text-center">
-                                    <span class="d-block h6 mb-0" data-bs-toggle="tooltip"
-                                        data-bs-original-title="{{ __('Last Login') }}">{{ $employee->lastlogin }}</span>
-
-                                </div>
-                            </div>
-                        @else
-                            <div class="row justify-content-between align-items-center mt-4">
-                                <div class="col text-center">
-                                    <span class="d-block h6 mb-2" data-bs-toggle="tooltip"
-                                        data-bs-original-title="{{ __('Last Login') }}">{{ $employee->lastlogin }}</span>
-                                </div>
-                            </div>
-                        @endif
                     </div>
                 </div>
             </div>
-        @endforeach
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-            <a href="#" class="btn-addnew-project " data-ajax-popup="true"
-                data-url="{{ route('employee.create') }}" data-size="lg"
-                data-title="{{ __('Create New Employee') }}">
-                <div class="bg-primary proj-add-icon">
-                    <i class="fa fa-plus"></i>
-                </div>
-                <h6 class="mt-4 mb-2">{{ __('New Employee') }}</h6>
-                <p class="text-muted text-center">{{ __('Click here to add new employee') }}</p>
-            </a>
+            @empty
+                @include('layouts.nodatafound')
+            @endforelse
         </div>
-
     </div>
+
 @endsection
 @push('script-page')
     <script>

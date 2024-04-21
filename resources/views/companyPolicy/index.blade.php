@@ -8,8 +8,7 @@
      {{__('Company Policy')}}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{__('Company Policy')}}</li>
+{{__('Company Policy')}}
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
@@ -26,10 +25,10 @@
 @section('content')
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header card-body table-border-style">
+            <div class=" card-body table-border-style">
                 <!-- <h5></h5> -->
                 <div class="table-responsive">
-                    <table class="table" id="pc-dt-simple">
+                    <table class="display" id="example" >
                         <thead>
                             <tr>
                                 <th>{{__('Title')}}</th>
@@ -63,22 +62,18 @@
                                     @endif
                                 </td>
                                 @if(\Auth::user()->type=='company')
-                                    <td class="text-right">
-                                        <div class="action-btn bg-info ms-2">
-                                            <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
-                                                  data-url="{{ route('company-policy.edit',$policy->id) }}"
-                                                data-title="{{__('Edit Company Policy')}}"> <i
-                                                        class="fa fa-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
+                                    <td class="">
+                                        <div></div>
+                                        <a href="#" class="btn btn-primary shadow btn-sm sharp me-1 text-white" data-ajax-popup="true"
+                                                data-url="{{ route('company-policy.edit',$policy->id) }}"
+                                            data-title="{{__('Edit Company Policy')}}"> <i
+                                                    class="fa fa-edit text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i>
+                                        </a>
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['company-policy.destroy', $policy->id]]) !!}
+                                            <a href="#!" class="btn btn-danger shadow btn-sm sharp text-white js-sweetalert">
+                                                <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                             </a>
-                                        </div>
-
-                                        <div class="action-btn bg-danger ms-2">
-                                            {!! Form::open(['method' => 'DELETE', 'route' => ['company-policy.destroy', $policy->id]]) !!}
-                                                <a href="#!" class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm m-2">
-                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
-                                                </a>
-                                            {!! Form::close() !!}
-                                        </div>
+                                        {!! Form::close() !!}
                                     </td>
                                 @endif
                             </tr>

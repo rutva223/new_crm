@@ -45,6 +45,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
         </div>
     @endif
 
+    
     <div class="row">
         <!-- [ sample-page ] start -->
         @if(\Auth::user()->type=='company')
@@ -54,7 +55,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
-                                    <div class="theme-avtar bg-warning">
+                                    <div class="card-box-icon ">
                                         <i class="fa fa-click"></i>
                                     </div>
                                     <div class="ms-3">
@@ -78,8 +79,8 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-auto mb-3 mb-sm-0">
                                     <div class="d-flex align-items-center">
-                                        <div class="theme-avtar bg-success">
-                                            <i class="fa fa-users"></i>
+                                        <div class="card-box-icon ">
+                                            <i class="fa fa-users "></i>
                                         </div>
                                         <div class="ms-3">
                                             <small class="text-muted">{{ __('Total') }}</small>
@@ -103,7 +104,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
-                                    <div class="theme-avtar bg-danger">
+                                    <div class="card-box-icon ">
                                         <i class="fa fa-list-check"></i>
                                     </div>
                                     <div class="ms-3">
@@ -127,7 +128,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
-                                    <div class="theme-avtar bg-secondary">
+                                    <div class="card-box-icon ">
                                         <i class="fa fa-layout-2"></i>
                                     </div>
                                     <div class="ms-3">
@@ -151,7 +152,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto mb-3 mb-sm-0">
                                 <div class="d-flex align-items-center">
-                                    <div class="theme-avtar bg-info">
+                                    <div class="card-box-icon ">
                                         <i class="fa fa-file-invoice"></i>
                                     </div>
                                     <div class="ms-3">
@@ -176,7 +177,7 @@ $profile=\App\Models\Utility::get_file('uploads/avatar/');
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto mb-3 mb-sm-0">
                             <div class="d-flex align-items-center">
-                                <div class="theme-avtar bg-dark">
+                                <div class="card-box-icon ">
                                     <i class="fa fa-report-money"></i>
                                 </div>
                                 <div class="ms-3">

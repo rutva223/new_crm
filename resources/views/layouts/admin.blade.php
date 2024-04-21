@@ -192,6 +192,7 @@
         @stack('before-scripts')
         <!-- Javascript -->
         @include('partials.admin.footer')
+        @stack('script-page')
 
         @stack('after-scripts')
     </div>

@@ -1,17 +1,10 @@
 {{ Form::open(['url' => 'appraisal', 'method' => 'post']) }}
-@php 
+@php
 $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
-@if (isset($plansettings['enable_chatgpt']) && $plansettings['enable_chatgpt'] == 'on')
- <div class="text-end">
 
-        <a href="#" data-size="lg" data-ajax-popup-over="true" data-url="{{ route('generate','appraisal') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Generate') }}" data-title="{{ __('Generate') }}" float-end>
-            <span class="btn btn-primary btn-sm"> <i class="fas fa-robot">  {{ __('Generate With AI') }}</span></i>
-        </a>
- </div>
- @endif
- 
+
  <div class="col-md-12">
             <div class="form-group">
                 {{ Form::label('branch', __('Branch*'), ['class' => 'col-form-label']) }}
@@ -27,15 +20,15 @@ $plansettings = App\Models\Utility::plansettings();
         <div class="col-md-6 mt-2">
             <div class="form-group">
                 {{ Form::label('employee', __('Employee*'), ['class' => 'form-label']) }}
-              
+
                 <div class="employee_div">
-                   
+
                     <select name="employee" id="employee" class="form-control " required>
                     </select>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6">
             <div class="form-group">
                 {{ Form::label('appraisal_date', __('Select Month*'), ['class' => 'col-form-label']) }}
@@ -58,7 +51,7 @@ $plansettings = App\Models\Utility::plansettings();
     <input type="submit" value="{{ __('Create') }}" class="btn btn-primary">
 </div>
 {{ Form::close() }}
-  
+
 <script>
     $(document).on( "change", "#employee", function() {
 //$('#employee').change(function(){
@@ -76,11 +69,11 @@ $plansettings = App\Models\Utility::plansettings();
             }
         })
     });
-    
-//-----------Get Employee--------------------------------------- 
+
+//-----------Get Employee---------------------------------------
   $(document).on( "change", "#branches", function() {
      var branch_id = this.value;
-      
+
     $.ajax({
             url: "{{ route('getemployee') }}",
             type: "post",
@@ -99,10 +92,9 @@ $plansettings = App\Models\Utility::plansettings();
             }
         })
     });
-    
+
  </script>
 
 <script>
 document.getElementById('current_month').valueAsDate = new Date();
 </script>
- 
