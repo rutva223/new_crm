@@ -471,69 +471,69 @@ class EstimateController extends Controller
         return view('estimate.templates.' . $template, compact('estimate', 'preview', 'color', 'img', 'settings', 'client', 'font_color'));
     }
 
-    public function saveEstimateTemplateSettings(Request $request)
-    {
-        if(\Auth::user()->type == 'company')
-        {
-            $post = $request->all();
-            unset($post['_token']);
+    // public function saveEstimateTemplateSettings(Request $request)
+    // {
+    //     if(\Auth::user()->type == 'company')
+    //     {
+    //         $post = $request->all();
+    //         unset($post['_token']);
 
-            if(isset($post['estimate_template']) && (!isset($post['estimate_color']) || empty($post['estimate_color'])))
-            {
-                $post['estimate_color'] = "ffffff";
-            }
+    //         if(isset($post['estimate_template']) && (!isset($post['estimate_color']) || empty($post['estimate_color'])))
+    //         {
+    //             $post['estimate_color'] = "ffffff";
+    //         }
 
-            if ($request->estimation_logo) {
+    //         if ($request->estimation_logo) {
 
-                $validator = \Validator::make(
-                    $request->all(),
-                    [
-                        'estimation_logo' => 'image',
-                    ]
-                );
+    //             $validator = \Validator::make(
+    //                 $request->all(),
+    //                 [
+    //                     'estimation_logo' => 'image',
+    //                 ]
+    //             );
 
-                if ($validator->fails()) {
-                    $messages = $validator->getMessageBag();
+    //             if ($validator->fails()) {
+    //                 $messages = $validator->getMessageBag();
 
-                    return redirect()->back()->with('error', $messages->first());
-                }
+    //                 return redirect()->back()->with('error', $messages->first());
+    //             }
 
-                $user = \Auth::user();
-                $estimation_logo         = "$user->id" . '_estimation_logo.png';
-                $dir = 'uploads/estimation_logo/';
+    //             $user = \Auth::user();
+    //             $estimation_logo         = "$user->id" . '_estimation_logo.png';
+    //             $dir = 'uploads/estimation_logo/';
 
-                $validation = [
-                    'mimes:' . 'png',
-                    'max:' . '20480',
-                ];
+    //             $validation = [
+    //                 'mimes:' . 'png',
+    //                 'max:' . '20480',
+    //             ];
 
-                $path = Utility::upload_file($request, 'estimation_logo', $estimation_logo, $dir, $validation);
-                if ($path['flag'] == 1) {
-                    $estimation_logo = $path['url'];
-                } else {
-                    return redirect()->back()->with('error', __($path['msg']));
-                }
+    //             $path = Utility::upload_file($request, 'estimation_logo', $estimation_logo, $dir, $validation);
+    //             if ($path['flag'] == 1) {
+    //                 $estimation_logo = $path['url'];
+    //             } else {
+    //                 return redirect()->back()->with('error', __($path['msg']));
+    //             }
 
-                $post['estimation_logo'] = $estimation_logo;
-                // dd($post);
+    //             $post['estimation_logo'] = $estimation_logo;
+    //             // dd($post);
 
-            }
+    //         }
 
-            foreach($post as $key => $data)
-            {
-                \DB::insert(
-                    'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ', [
-                                                                                                                                                 $data,
-                                                                                                                                                 $key,
-                                                                                                                                                 \Auth::user()->creatorId(),
-                                                                                                                                             ]
-                );
-            }
+    //         foreach($post as $key => $data)
+    //         {
+    //             \DB::insert(
+    //                 'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ', [
+    //                                                                                                                                              $data,
+    //                                                                                                                                              $key,
+    //                                                                                                                                              \Auth::user()->creatorId(),
+    //                                                                                                                                          ]
+    //             );
+    //         }
 
 
-            return redirect()->back()->with('success', __('Estimate Setting updated successfully'));
-        }
-    }
+    //         return redirect()->back()->with('success', __('Estimate Setting updated successfully'));
+    //     }
+    // }
 
     public function pdf($id)
     {

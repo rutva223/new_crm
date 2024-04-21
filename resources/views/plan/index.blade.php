@@ -1,183 +1,175 @@
 @extends('layouts.admin')
 @php
-    $dir = asset(Storage::url('uploads/plan'));
-    $admin_payment_setting = Utility::payment_settings();
+    $admin_payment_setting = Utility::settings();
 @endphp
-@push('script-page')
-@endpush
-@section('page-title')
+@section('breadcrumb')
     {{ __('Plan') }}
 @endsection
 @section('title')
-     {{ __('Plan') }}
-@endsection
-@section('breadcrumb')
-
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Plan') }}</li>
+    {{ __('Plan') }}
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'super admin')
-        <a href="#" data-url="{{ route('plan.create') }}" data-ajax-popup="true"
-            data-title="{{ __('Create New Plan') }}" data-size="lg" class="btn btn-sm btn-primary btn-icon m-1"
-            data-bs-toggle="tooltip" title="{{ __('Create New Plan') }}">
+        <a href="#" data-url="{{ route('plan.create') }}" data-ajax-popup="true" data-title="{{ __('Create New Plan') }}"
+            data-size="lg" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
+            title="{{ __('Create New Plan') }}">
             <span class="btn-inner--icon"><i class="fa fa-plus"></i></span>
         </a>
     @endif
 @endsection
 @section('content')
-    @foreach ($plans as $plan)
-        <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6">
-            <div class="card price-card price-1 wow animate__fadeInUp " data-wow-delay="0.2s"
-                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                <div class="card-body">
-                    <span class="price-badge bg-primary">{{ $plan->name }}</span>
-                    @if (\Auth::user()->type == 'super admin')
-                        <div class="row d-flex">
-                            <div class="col-6">
-                                @if ($plan->price > 0)
-                                    <div class="form-check form-switch custom-switch-v1 float-left">
-                                        <input type="checkbox" name="plan_active"
-                                            class="form-check-input input-primary is_active" value="1"
-                                            data-id='{{ $plan->id }}' data-name="{{ __('plan') }}"
-                                            {{ $plan->is_active == 1 ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="plan_active"></label>
-                                    </div>
-                                @endif
+    <div class="row">
+        @foreach ($plans as $plan)
+            <div class="col-xl-4 wow fadeInUp" data-wow-delay="1s"
+                style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h2 class="card-title">{{ $plan->name }} </h2>
+                        @if (\Auth::user()->type == 'company' && \Auth::user()->plan == $plan->id)
+                            <div class="d-flex flex-row-reverse m-0 p-0 ">
+                                <span class="d-flex align-items-center ">
+                                    <i class="f-10 lh-1 fas fa-circle text-success"></i>
+                                    <span class="ms-2">{{ __('Active') }}</span>
+                                </span>
                             </div>
-                            <div class="d-flex col-6 flex-row-reverse m-0 p-0">
-                                <div class="action-btn bg-primary ms-2">
-                                    <a title="Edit Plan" data-size="lg" href="#"
-                                        class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                        data-url="{{ route('plan.edit', $plan->id) }}" data-ajax-popup="true"
-                                          data-title="{{ __('Edit Plan') }}"
-                                        data-size="lg" data-original-title="{{ __('Edit') }}">
-                                        <i class="fa fa-edit text-white" data-bs-title="{{ __('Edit Plan') }}"
-                                            data-bs-toggle="tooltip">
-                                        </i>
+                        @endif
+                        @if ($plan->is_free_plan == 0)
+                            @if (\Auth::user()->type == 'super admin')
+                                <div>
+                                    <a href="#" data-size="lg" data-url="{{ route('plan.edit', $plan->id) }}"
+                                        data-ajax-popup="true" data-bs-toggle="tooltip" data-title="Plan Update"
+                                        class="btn-link btn sharp tp-btn btn-primary">
+                                        <i class="fa fa-edit"></i>
                                     </a>
                                 </div>
-                                @if ($plan->price > 0)
-                                    <div class="action-btn bg-danger ms-2">
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['plan.destroy', $plan->id]]) !!}
-                                        <a href="#!" class="mx-3 btn btn-sm d-flex align-items-center show_confirm">
-                                            <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
-                                                data-bs-original-title="{{ __('delete') }}"></i>
-                                        </a>
-                                        {!! Form::close() !!}
-                                    </div>
-                                @endif
+                            @endif
+                        @endif
+                    </div>
+                    <div class="card-body text-center pt-0 pb-2">
+                        <div class="">
+                            <div class="author-profile">
+                                <div class="author-info">
+                                    <h1 class=" f-w-600 ">
+                                        {{ isset($admin_payment_setting['currency_symbol']) ? $admin_payment_setting['currency_symbol'] : '$' }}{{ $plan->price }}
+                                    </h1>
+                                    <span>
+                                        <h6>{{ $plan->duration }}</h6>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    @endif
-                    @if (\Auth::user()->type == 'company' && \Auth::user()->plan == $plan->id)
-                        <div class="d-flex flex-row-reverse m-0 p-0 ">
-                            <span class="d-flex align-items-center ">
-                                <i class="f-10 lh-1 fas fa-circle text-success"></i>
-                                <span class="ms-2">{{ __('Active') }}</span>
-                            </span>
-                        </div>
-                    @endif
-                    <h3 class=" f-w-600 ">
-                        {{ isset($admin_payment_setting['currency_symbol']) ? $admin_payment_setting['currency_symbol'] : '$' }}{{ $plan->price }}<small
-                            class="text-sm">{{ \App\Models\Plan::$arrDuration[$plan->duration] }}</small></h3>
-                    @if ($plan->description)
-                        <p class="mb-0">
-                            {{ $plan->description }}<br />
-                        </p>
-                    @endif
-                    <p class="mb-0">
-                        {{ __('Free Trial Days:') }} {{ $plan->trial_days ? $plan->trial_days : 0 }}<br />
-                    </p>
-                    <ul class="list-unstyled my-3">
-                        <li>
-                            <span class="theme-avtar">
-                                <i class="text-primary fa fa-circle-plus"></i></span>
-                            {{ $plan->max_employee == '-1' ? __('Unlimited') : $plan->max_employee }} {{ __('Employee') }}
-                        </li>
-                        <li>
-                            <span class="theme-avtar">
-                                <i class="text-primary fa fa-circle-plus"></i></span>
-                            {{ $plan->max_client == '-1' ? __('Unlimited') : $plan->max_client }} {{ __('Clients') }}
-                        </li>
-                        <li>
-                            <span class="theme-avtar">
-                                <i class="text-primary fa fa-circle-plus"></i></span>
-                            {{ $plan->storage_limit ? $plan->storage_limit : 0 }} {{ __('MB') }} {{ __('Storage') }}
-                        </li>
-                        <li>
-                            <span class="theme-avtar">
-                                <i class="text-primary fa fa-circle-plus"></i></span>
-                            @if ($plan->enable_chatgpt == 'on')
-                                {{ 'Enable Chat GPT' }}
-                            @else
-                                <span style="color: red;"> {{ __('Disable Chat GPT') }} </span>
-                            @endif
-                        </li>
-                    </ul>
-                    <div class="row">
-                        <div class="col-12">
-                            @if (\Auth::user()->type == 'company' && \Auth::user()->trial_plan == $plan->id && \Auth::user()->trial_expire_date)
-                                <p class="display-total-time mb-0">
-                                    {{ __('Plan Trial Expired : ') }}
-                                    {{ !empty(\Auth::user()->trial_expire_date) ? \Auth::user()->trial_expire_date : 'lifetime' }}
-                                </p>
-                            @endif
-                            @if (
-                                \Auth::user()->plan == $plan->id &&
-                                    date('Y-m-d') < \Auth::user()->plan_expire_date &&
-                                    \Auth::user()->trial_expire_date == null)
-                                <p class="server-plan font-weight-bold text-center mx-sm-5">
-                                    {{ __('Expire on ') }}
-                                    {{ date('d M Y', strtotime(\Auth::user()->plan_expire_date)) }}
-                                </p>
-                            @elseif(
-                                \Auth::user()->plan == $plan->id &&
-                                    !empty(\Auth::user()->plan_expire_date) &&
-                                    \Auth::user()->plan_expire_date < date('Y-m-d'))
-                                <p class="server-plan font-weight-bold text-center">
-                                    {{ __('Expired') }}
-                                </p>
-                            @elseif(\Auth::user()->plan == $plan->id && !empty(\Auth::user()->plan_expire_date) && \Auth::user()->is_trial_done == 1)
-                                <p class="server-plan font-weight-bold text-center mx-sm-5">
-                                    {{ __('Current Trial Expire on ') . date('d M Y', strtotime(\Auth::user()->plan_expire_date)) }}
-                                </p>
-                            @else
-                                @if ($plan->id != \Auth::user()->plan && \Auth::user()->type != 'super admin')
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        @if ($plan->price > 0 && \Auth::user()->trial_plan == 0 && \Auth::user()->plan != $plan->id && $plan->trial == 1)
-                                            <a href="{{ route('plan.trial', \Illuminate\Support\Facades\Crypt::encrypt($plan->id)) }}"
-                                                class="btn btn-lg btn-primary btn-icon m-1">{{ __('Free Trial') }}</a>
-                                        @endif
-                                        @if ($plan->price > 0)
-                                            <a href="{{ route('stripe', \Illuminate\Support\Facades\Crypt::encrypt($plan->id)) }}"
-                                                class="btn btn-primary btn-icon m-1">{{ __('Subscribe') }}</a>
-                                        @endif
-                                        @if ($plan->id != 1 && \Auth::user()->plan != $plan->id && \Auth::user()->type == 'company')
-                                            @if (\Auth::user()->requested_plan != $plan->id)
-                                                <a href="{{ route('send.request', [\Illuminate\Support\Facades\Crypt::encrypt($plan->id)]) }}"
-                                                    class="btn btn-primary btn-icon m-1"
-                                                    data-title="{{ __('Send Request') }}" data-toggle="tooltip">
-                                                    <span class="btn-inner--icon"><i
-                                                            class="fa fa-arrow-forward-up"></i></span>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('request.cancel', \Auth::user()->id) }}"
-                                                    class="btn btn-icon m-1 btn-danger"
-                                                    data-title="{{ __('Cancel Request') }}" data-toggle="tooltip">
-                                                    <span class="btn-inner-icon"><i class="fa fa-trash"></i></span>
-                                                </a>
-                                            @endif
-                                        @endif
+                        <div class="chart-items">
+                            <div class="row">
+                                <div class=" col-xl-12 col-sm-12 mb-3">
+                                    <div class="text-start mt-2">
+                                        <div class="color-picker">
+                                            <p class="mb-0  text-gray ">
+                                                <i class="fa fa-user me-2"></i>
+                                                Maximum Employee
+                                            </p>
+                                            <h6 class="mb-0">
+                                                {{ $plan->max_employee == '-1' ? __('Unlimited') : $plan->max_employee }}
+                                            </h6>
+                                        </div>
                                     </div>
-                                @endif
-                            @endif
+                                    <div class="text-start mt-2">
+                                        <div class="color-picker">
+                                            <p class="mb-0  text-gray ">
+                                                <i class="fa fa-user me-2"></i>
+                                                Maximum Client
+                                            </p>
+                                            <h6 class="mb-0">
+                                                {{ $plan->max_client == '-1' ? __('Unlimited') : $plan->max_client }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-xl-12 col-sm-12 mb-3">
+                                    <div class="text-center mt-2">
+                                        @can('subscribe plan')
+                                            <div class="card-footer">
+                                                @if (Auth::user()->plan == $plan->id)
+                                                    <div class="input-group">
+                                                        <a
+                                                            class="form-control text-primary rounded text-center">{{ $plan->duration == 'Lifetime' ? 'Unlimited' : Auth::user()->plan_expire_date ?? '' }}</a>
+                                                    </div>
+                                                @else
+                                                    @if ($plan->id != \Auth::user()->plan && \Auth::user()->type != 'super admin')
+                                                        <div class="d-flex justify-content-center align-items-center">
+                                                            @if ($plan->price > 0)
+                                                                <form role="form" action="{{ route('stripe.post') }}"
+                                                                    method="post" id="stripe-payment-form">
+                                                                    @csrf
+                                                                    <input type="hidden" name="plan_id" id="plan_id"
+                                                                        value="{{ \Illuminate\Support\Facades\Crypt::encrypt($plan->id) }}">
+                                                                    <button
+                                                                        class="form-control text-primary rounded text-center"
+                                                                        type="submit">
+                                                                        {{ __('Subscribe') }}
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+                                                        </div>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        @endcan
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
+    @if (Auth::user()->type == 'super admin')
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"><i class="fa-solid fa-file-lines me-1"></i>Order History</h4>
+            </div>
+            <div class="card-body pb-4">
+                <div class="table-responsive">
+                    <table class="display" id="example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>User Name</th>
+                                <th>Plan Name</th>
+                                <th>Payment Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $index => $order)
+                                <tr>
+                                    <td>{{ ++$index }}</td>
+                                    <td>{{ $order->order_id }}</td>
+                                    <td>{{ $order->created_at->format('d M Y') }}</td>
+                                    <td>{{ $order->user_name }}</td>
+                                    <td>{{ $order->plan_name }}</td>
+                                    <td>{{ $order->payment_type }}</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['order.destroy', $order->id]]) !!}
+                                            <a href="javascript:;"
+                                                class="btn btn-danger shadow btn-sm sharp text-white js-sweetalert"
+                                                title="Delete data">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    @endforeach
+    @endif
 @endsection
 @push('script-page')
     <script>

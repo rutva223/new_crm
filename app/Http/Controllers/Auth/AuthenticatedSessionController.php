@@ -42,7 +42,11 @@ class AuthenticatedSessionController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         Session()->put('crm_theme_setting', $user->dark_mode);
+        Session()->put('user_name', $user->name);
+        Session()->put('user_id', $user->id);
+        Session()->put('user_type', $user->type);
         setcookie('ThemeSetting', $user->dark_mode);
+
         if ($user != null) {
             $companyUser = User::where('id', $user->created_by)->first();
             $user = User::where('email', $request->email)->first();

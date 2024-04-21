@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@push('script-page')
+@push('after-scripts')
     <script>
         $(document).on('change', '.department', function() {
             var department_id = $(this).val();
@@ -45,9 +45,9 @@
             $('#calendar').removeClass('local_calender');
             $('#calendar').removeClass('google_calender');
             $('#calendar').addClass(calender_type);
-            if(calender_type == undefined){
-                    calender_type = 'local_calender';
-                }
+            if (calender_type == undefined) {
+                calender_type = 'local_calender';
+            }
             $.ajax({
                 // url: $("#path_admin").val() + "/event/get_event_data",
                 url: "{{ url('/') }}" + "/event/get_event_data",
@@ -92,26 +92,11 @@
         }
     </script>
 @endpush
-@section('page-title')
+@section('title')
     {{ __('Event') }}
 @endsection
-@section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Event') }}
-@endsection
 @section('breadcrumb')
-
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Event') }}</li>
-@endsection
-@section('action-btn')
-    @if (\Auth::user()->type == 'company')
-        <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
-            data-url="{{ route('event.create') }}" data-size="lg" data-title="{{ __('Create New Event') }}"> <span
-                class="text-white"><i class="fa fa-plus text-white" data-bs-toggle="tooltip"
-                    data-bs-original-title="{{ __('Create') }}"></i></span></a>
-    @endif
-@endsection
-@section('filter')
+    {{ __('Event') }}
 @endsection
 @section('content')
     <div class="row">

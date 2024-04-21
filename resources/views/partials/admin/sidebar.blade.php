@@ -317,8 +317,10 @@
 
 @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'client' || \Auth::user()->type == 'employee')
     <li class="dash-item {{ request()->is('note*') ? 'active' : '' }}">
-        <a href="{{ route('note.index') }}" ><i
-                    class="fa fa-note"></i><span class="nav-text">{{ __('Note') }}</span></a>
+        <a href="{{ route('note.index') }}" >
+            <i class="fas fa-sticky-note"></i>
+            <span class="nav-text">{{ __('Note') }}</span>
+        </a>
     </li>
 @endif
 
@@ -378,13 +380,13 @@
 @endif
 
 
-@if (\Auth::user()->type == 'super admin')
+{{-- @if (\Auth::user()->type == 'super admin')
     <li class="dash-item">
         <a href="{{ route('plan_request.index') }}" ><i
                     class="fa fa-git-pull-request"></i><span
                 class="nav-text">{{ __('Plan Request') }}</span></a>
     </li>
-@endif
+@endif --}}
 @if (\Auth::user()->type == 'super admin')
     <li class="dash-item {{ Request::segment(1) == 'referral-program' ? 'active' : '' }}">
         <a href="{{ route('referral.index') }}" ><i
@@ -397,28 +399,28 @@
                     class="fa fa-trophy"></i><span class="nav-text">{{ __('Referral Program') }}</span></a>
     </li>
 @endif
-@if (\Auth::user()->type == 'super admin')
+{{-- @if (\Auth::user()->type == 'super admin')
     <li class="dash-item {{ Request::segment(1) == 'coupon' ? 'active' : '' }}">
         <a href="{{ route('coupon.index') }}" ><i
                     class="fa fa-clipboard-check"></i><span class="nav-text">{{ __('Coupon') }}</span></a>
     </li>
-@endif
+@endif --}}
 
-@if (\Auth::user()->type == 'super admin' || \Auth::user()->type == 'company')
+{{-- @if (\Auth::user()->type == 'super admin' || \Auth::user()->type == 'company')
     <li class="dash-item">
         <a href="{{ route('order.index') }}" ><i
                     class="fa fa-shopping-cart"></i><span class="nav-text">{{ __('Order') }}</span></a>
     </li>
-@endif
+@endif --}}
 
-@if (\Auth::user()->type == 'super admin')
+{{-- @if (\Auth::user()->type == 'super admin')
     <li
         class="dash-item {{ request()->is('email_template*') || request()->is('emailtemplate_lang*') ? 'active' : '' }}">
         <a href="{{ route('manage.email.language', [$emailTemplate->id, \Auth::user()->lang]) }}"
             ><i class="fa fa-template"></i><span
                 class="nav-text">{{ __('Email Template') }}</span></a>
     </li>
-@endif
+@endif --}}
 
 
 @if (\Auth::user()->type == 'company')
@@ -509,7 +511,7 @@
     </li>
 @endif
 
-@if (\Auth::user()->type == 'company')
+{{-- @if (\Auth::user()->type == 'company')
     <li class="dash-item @if (str_contains(request()->url(), 'notification-templates')) active @endif">
         <a href="{{ url('notification-templates') }}" class="">
             <span class="nav-text">
@@ -517,13 +519,13 @@
             </span>
             <span class="nav-text">{{ __('Notification Templates') }}</span></a>
     </li>
-@endif
+@endif --}}
 
 
 @if (\Auth::user()->type == 'super admin' || \Auth::user()->type == 'company')
     <li class="dash-item">
         <a href="{{ route('settings') }}" class=""><i
-                    class="fa fa-settings"></i><span class="nav-text">{{ __('Settings') }}</span></a>
+                    class="fa fa-cog"></i><span class="nav-text">{{ __('Settings') }}</span></a>
     </li>
 @endif
 @can('manage roles')
@@ -572,7 +574,7 @@
         </ul>
     </li>
 @endcan
-<li
+{{-- <li
     class="{{ Request::route()->getName() == 'branch.index' || Request::route()->getName() == 'branch.index' || Request::route()->getName() == 'department.index' || Request::route()->getName() == 'designation.index' ? ' active mm-active' : '' }}">
     <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
         <i class="fa fa-store"></i>
@@ -592,7 +594,7 @@
             <li>~~<a href="{{ route('department.index') }}">Department</a></li>
         @endcan
     </ul>
-</li>
+</li> --}}
 {{-- @if (Auth::user()->type == 'super admin')
     @can('manage coupon')
         <li class="{{ request()->is('coupons') ? 'active' : '' }}">

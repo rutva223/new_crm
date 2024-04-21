@@ -911,63 +911,63 @@ class InvoiceController extends Controller
         return view('invoice.templates.' . $template, compact('invoice', 'user', 'preview', 'color', 'img', 'settings', 'client', 'font_color'));
     }
 
-    public function saveInvoiceTemplateSettings(Request $request)
-    {
-        $post = $request->all();
-        unset($post['_token']);
+    // public function saveInvoiceTemplateSettings(Request $request)
+    // {
+    //     $post = $request->all();
+    //     unset($post['_token']);
 
-        if(isset($post['invoice_template']) && (!isset($post['invoice_color']) || empty($post['invoice_color'])))
-        {
-            $post['invoice_color'] = "ffffff";
-        }
-        // For Logo
-        if ($request->invoice_logo) {
+    //     if(isset($post['invoice_template']) && (!isset($post['invoice_color']) || empty($post['invoice_color'])))
+    //     {
+    //         $post['invoice_color'] = "ffffff";
+    //     }
+    //     // For Logo
+    //     if ($request->invoice_logo) {
 
-            $validator = \Validator::make(
-                $request->all(),
-                [
-                    'invoice_logo' => 'image',
-                    ]
-                );
+    //         $validator = \Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'invoice_logo' => 'image',
+    //                 ]
+    //             );
 
-                if ($validator->fails()) {
-                    $messages = $validator->getMessageBag();
+    //             if ($validator->fails()) {
+    //                 $messages = $validator->getMessageBag();
 
-                    return redirect()->back()->with('error', $messages->first());
-            }
+    //                 return redirect()->back()->with('error', $messages->first());
+    //         }
 
-            $user = \Auth::user();
-            $invoice_logo         = "$user->id" . '_invoice_logo.png';
-            $dir = 'uploads/invoice_logo/';
+    //         $user = \Auth::user();
+    //         $invoice_logo         = "$user->id" . '_invoice_logo.png';
+    //         $dir = 'uploads/invoice_logo/';
 
-            $validation = [
-                'mimes:' . 'png',
-                'max:' . '20480',
-            ];
+    //         $validation = [
+    //             'mimes:' . 'png',
+    //             'max:' . '20480',
+    //         ];
 
-            $path = Utility::upload_file($request, 'invoice_logo', $invoice_logo, $dir, $validation);
-            if ($path['flag'] == 1) {
-                $invoice_logo = $path['url'];
-            } else {
-                return redirect()->back()->with('error', __($path['msg']));
-            }
-            $post['invoice_logo'] = $invoice_logo;
-        }
+    //         $path = Utility::upload_file($request, 'invoice_logo', $invoice_logo, $dir, $validation);
+    //         if ($path['flag'] == 1) {
+    //             $invoice_logo = $path['url'];
+    //         } else {
+    //             return redirect()->back()->with('error', __($path['msg']));
+    //         }
+    //         $post['invoice_logo'] = $invoice_logo;
+    //     }
 
-        foreach ($post as $key => $data)
-        {
-            \DB::insert(
-                'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
-                [
-                    $data,
-                    $key,
-                    \Auth::user()->creatorId(),
-                ]
-            );
-        }
+    //     foreach ($post as $key => $data)
+    //     {
+    //         \DB::insert(
+    //             'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+    //             [
+    //                 $data,
+    //                 $key,
+    //                 \Auth::user()->creatorId(),
+    //             ]
+    //         );
+    //     }
 
-        return redirect()->back()->with('success', __('Invoice Setting successfully updated.'));
-    }
+    //     return redirect()->back()->with('success', __('Invoice Setting successfully updated.'));
+    // }
 
     public function grid(Request $request)
     {

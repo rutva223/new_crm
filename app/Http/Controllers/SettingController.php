@@ -133,12 +133,9 @@ class SettingController extends Controller
                     $post['cust_darklayout'] = 'off';
                 }
 
-                if(isset($request->color) && $request->color_flag == 'false')
-                {
+                if (isset($request->color) && $request->color_flag == 'false') {
                     $post['color'] = $request->color;
-                }
-                else
-                {
+                } else {
                     $post['color'] = $request->custom_color;
                 }
 
@@ -277,12 +274,9 @@ class SettingController extends Controller
                     $post['cust_darklayout'] = 'off';
                 }
 
-                if(isset($request->color) && $request->color_flag == 'false')
-                {
+                if (isset($request->color) && $request->color_flag == 'false') {
                     $post['color'] = $request->color;
-                }
-                else
-                {
+                } else {
                     $post['color'] = $request->custom_color;
                 }
 
@@ -309,8 +303,6 @@ class SettingController extends Controller
 
     public function saveCompanySettings(Request $request)
     {
-
-
         if (Auth::user()->type == 'company') {
 
             $request->validate(
@@ -324,7 +316,7 @@ class SettingController extends Controller
                     'company_zipcode' => 'required',
                     'company_country' => 'required',
                     'company_telephone' => 'required',
-                    'timezone' => 'required',
+                    // 'timezone' => 'required',
                     'registration_number' => 'required|string',
                 ]
             );
@@ -335,7 +327,7 @@ class SettingController extends Controller
 
             foreach ($post as $key => $data) {
                 if (in_array($key, array_keys($settings)) && $data !== null) {
-                    \DB::insert(
+                    DB::insert(
                         'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
                         [
                             $data,
@@ -346,18 +338,7 @@ class SettingController extends Controller
                 }
             }
 
-
-
-            // $arrEnv = [
-            //     'TIMEZONE' => $request->timezone,
-            // ];
-
-            // $request->user = Auth::user()->id;
-            // Artisan::call('config:cache');
-            // Artisan::call('config:clear');
-
-            // Utility::setEnvironmentValue($arrEnv);
-
+            session()->put('active_tab', 'company_setting');
             return redirect()->back()->with('success', __('Setting successfully updated.'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -373,7 +354,7 @@ class SettingController extends Controller
                 'mail_port'             => 'required|string|max:50',
                 'mail_username'         => 'required|string|max:50',
                 'mail_password'         => 'required|string|max:50',
-                'mail_encryption'       => 'required|string|max:50',
+                // 'mail_encryption'       => 'required|string|max:50',
                 'mail_from_address'     => 'required|string|max:50',
                 'mail_from_name'        => 'required|string|max:50',
             ]
@@ -384,7 +365,7 @@ class SettingController extends Controller
 
         foreach ($post as $key => $data) {
             if (in_array($key, array_keys($settings)) && $data !== null) {
-                \DB::insert(
+                DB::insert(
                     'insert into settings (`value`, `name`,`created_by`,`created_at`,`updated_at`) values (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
                     [
                         $data,
@@ -396,13 +377,9 @@ class SettingController extends Controller
                 );
             }
         }
+        session()->put('active_tab', 'email_setting');
         return redirect()->back()->with('success', __('Setting successfully updated.'));
     }
-
-
-
-
-
 
     public function saveSystemSettings(Request $request)
     {
@@ -482,7 +459,7 @@ class SettingController extends Controller
                 ]
             );
 
-            try{
+            try {
 
                 $post = $request->all();
                 unset($post['_token']);
@@ -503,9 +480,7 @@ class SettingController extends Controller
                 }
 
                 return redirect()->back()->with('success', __('Pusher successfully updated.'));
-            }
-            catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Something went wrong.');
             }
         } else {
@@ -516,38 +491,32 @@ class SettingController extends Controller
     public function savePaymentSettings(Request $request)
     {
 
-        if (Auth::user()->type == 'super admin') {
-            $validator = \Validator::make(
-                $request->all(),
-                [
-                    'currency' => 'required|string|max:255',
-                    'currency_symbol' => 'required|string|max:255',
-                ]
-            );
+        // if (Auth::user()->type == 'super admin') {
+            $request->validate([
+                'stripe_currency' => 'required',
+                'stripe_key' => 'required',
+                'stripe_secret_key' => 'required',
+            ]);
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
-
-                return redirect()->back()->with('error', $messages->first());
+            $settings = $request->all();
+            unset($settings['_token']);
+            foreach ($settings as $key => $data) {
+                if (!empty($data)) {
+                    Setting::updateOrCreate(
+                        ['name' => $key, 'created_by' => Session()->get('user_id')],
+                        ['value' => $data]
+                    );
+                }
             }
 
-            // $arrEnv = [
-            //     'CURRENCY_SYMBOL' => $request->currency_symbol,
-            //     'CURRENCY' => $request->currency,
-            // ];
+            session()->flash('active_tab', 'payment_setting');
+            return redirect()->back()->with('success', __('Save Payment Setting successfully.'));
 
+            // self::adminPaymentSettings($request);
 
-            // Utility::setEnvironmentValue($arrEnv);
-
-            self::adminPaymentSettings($request);
-
-            // Artisan::call('config:cache');
-            // Artisan::call('config:clear');
-
-            return redirect()->back()->with('success', __('Payment setting successfully saved.'));
-        } else {
-            return redirect()->back()->with('error', __('Permission denied.'));
-        }
+        // } else {
+        //     return redirect()->back()->with('error', __('Permission denied.'));
+        // }
     }
 
     public function saveCompanyPaymentSettings(Request $request)
@@ -948,7 +917,7 @@ class SettingController extends Controller
             $post['is_paytr_enabled'] = 'off';
         }
 
-        if(isset($request->is_yookassa_enabled) && $request->is_yookassa_enabled == 'on'){
+        if (isset($request->is_yookassa_enabled) && $request->is_yookassa_enabled == 'on') {
             $validator = Validator::make(
                 $request->all(),
                 [
@@ -970,7 +939,7 @@ class SettingController extends Controller
             $post['is_yookassa_enabled'] = 'off';
         }
 
-        if(isset($request->is_midtrans_enabled) && $request->is_midtrans_enabled == 'on'){
+        if (isset($request->is_midtrans_enabled) && $request->is_midtrans_enabled == 'on') {
             $validator = Validator::make(
                 $request->all(),
                 [
@@ -990,7 +959,7 @@ class SettingController extends Controller
             $post['is_midtrans_enabled'] = 'off';
         }
 
-        if(isset($request->is_xendit_enabled) && $request->is_xendit_enabled == 'on'){
+        if (isset($request->is_xendit_enabled) && $request->is_xendit_enabled == 'on') {
             $validator = Validator::make(
                 $request->all(),
                 [
@@ -1101,498 +1070,499 @@ class SettingController extends Controller
             ]
         );
     }
-    public function adminPaymentSettings($request)
-    {
 
-        $post['currency_symbol']    = $request->currency_symbol;
-        $post['currency']           = $request->currency;
+    // public function adminPaymentSettings($request)
+    // {
 
-        //stripe
-        if (isset($request->is_stripe_enabled) && $request->is_stripe_enabled == 'on') {
-            $request->validate(
-                [
-                    'stripe_key' => 'required|string|max:255',
-                    'stripe_secret' => 'required|string|max:255',
-                ]
-            );
-            $post['is_stripe_enabled'] = $request->is_stripe_enabled;
-            $post['stripe_secret']     = $request->stripe_secret;
-            $post['stripe_key']        = $request->stripe_key;
-        } else {
-            $post['is_stripe_enabled'] = 'off';
-        }
+    //     $post['currency_symbol']    = $request->currency_symbol;
+    //     $post['currency']           = $request->currency;
 
-        //paypal
-        if (isset($request->is_paypal_enabled) && $request->is_paypal_enabled == 'on') {
-            $request->validate(
-                [
-                    'paypal_mode' => 'required',
-                    'paypal_client_id' => 'required',
-                    'paypal_secret_key' => 'required',
-                ]
-            );
-            $post['is_paypal_enabled'] = $request->is_paypal_enabled;
-            $post['paypal_mode']       = $request->paypal_mode;
-            $post['paypal_client_id']  = $request->paypal_client_id;
-            $post['paypal_secret_key'] = $request->paypal_secret_key;
-        } else {
-            $post['is_paypal_enabled'] = 'off';
-        }
+    //     //stripe
+    //     if (isset($request->is_stripe_enabled) && $request->is_stripe_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'stripe_key' => 'required|string|max:255',
+    //                 'stripe_secret' => 'required|string|max:255',
+    //             ]
+    //         );
+    //         $post['is_stripe_enabled'] = $request->is_stripe_enabled;
+    //         $post['stripe_secret']     = $request->stripe_secret;
+    //         $post['stripe_key']        = $request->stripe_key;
+    //     } else {
+    //         $post['is_stripe_enabled'] = 'off';
+    //     }
 
-        //paystack
-        if (isset($request->is_paystack_enabled) && $request->is_paystack_enabled == 'on') {
-            $request->validate(
-                [
-                    'paystack_public_key' => 'required|string',
-                    'paystack_secret_key' => 'required|string',
-                ]
-            );
-            $post['is_paystack_enabled'] = $request->is_paystack_enabled;
-            $post['paystack_public_key'] = $request->paystack_public_key;
-            $post['paystack_secret_key'] = $request->paystack_secret_key;
-        } else {
-            $post['is_paystack_enabled'] = 'off';
-        }
+    //     //paypal
+    //     if (isset($request->is_paypal_enabled) && $request->is_paypal_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'paypal_mode' => 'required',
+    //                 'paypal_client_id' => 'required',
+    //                 'paypal_secret_key' => 'required',
+    //             ]
+    //         );
+    //         $post['is_paypal_enabled'] = $request->is_paypal_enabled;
+    //         $post['paypal_mode']       = $request->paypal_mode;
+    //         $post['paypal_client_id']  = $request->paypal_client_id;
+    //         $post['paypal_secret_key'] = $request->paypal_secret_key;
+    //     } else {
+    //         $post['is_paypal_enabled'] = 'off';
+    //     }
 
-        //flutterwave
-        if (isset($request->is_flutterwave_enabled) && $request->is_flutterwave_enabled == 'on') {
-            $request->validate(
-                [
-                    'flutterwave_public_key' => 'required|string',
-                    'flutterwave_secret_key' => 'required|string',
-                ]
-            );
-            $post['is_flutterwave_enabled'] = $request->is_flutterwave_enabled;
-            $post['flutterwave_public_key'] = $request->flutterwave_public_key;
-            $post['flutterwave_secret_key'] = $request->flutterwave_secret_key;
-        } else {
-            $post['is_flutterwave_enabled'] = 'off';
-        }
+    //     //paystack
+    //     if (isset($request->is_paystack_enabled) && $request->is_paystack_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'paystack_public_key' => 'required|string',
+    //                 'paystack_secret_key' => 'required|string',
+    //             ]
+    //         );
+    //         $post['is_paystack_enabled'] = $request->is_paystack_enabled;
+    //         $post['paystack_public_key'] = $request->paystack_public_key;
+    //         $post['paystack_secret_key'] = $request->paystack_secret_key;
+    //     } else {
+    //         $post['is_paystack_enabled'] = 'off';
+    //     }
 
-        //razorpay
-        if (isset($request->is_razorpay_enabled) && $request->is_razorpay_enabled == 'on') {
-            $request->validate(
-                [
-                    'razorpay_public_key' => 'required|string',
-                    'razorpay_secret_key' => 'required|string',
-                ]
-            );
-            $post['is_razorpay_enabled'] = $request->is_razorpay_enabled;
-            $post['razorpay_public_key'] = $request->razorpay_public_key;
-            $post['razorpay_secret_key'] = $request->razorpay_secret_key;
-        } else {
-            $post['is_razorpay_enabled'] = 'off';
-        }
+    //     //flutterwave
+    //     if (isset($request->is_flutterwave_enabled) && $request->is_flutterwave_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'flutterwave_public_key' => 'required|string',
+    //                 'flutterwave_secret_key' => 'required|string',
+    //             ]
+    //         );
+    //         $post['is_flutterwave_enabled'] = $request->is_flutterwave_enabled;
+    //         $post['flutterwave_public_key'] = $request->flutterwave_public_key;
+    //         $post['flutterwave_secret_key'] = $request->flutterwave_secret_key;
+    //     } else {
+    //         $post['is_flutterwave_enabled'] = 'off';
+    //     }
 
-        //mercado
-        if (isset($request->is_mercado_enabled) && $request->is_mercado_enabled == 'on') {
-            $request->validate(
-                [
-                    'mercado_access_token' => 'required|string',
-                ]
-            );
-            $post['is_mercado_enabled'] = $request->is_mercado_enabled;
-            $post['mercado_access_token']     = $request->mercado_access_token;
-            $post['mercado_mode'] = $request->mercado_mode;
-        } else {
-            $post['is_mercado_enabled'] = 'off';
-        }
+    //     //razorpay
+    //     if (isset($request->is_razorpay_enabled) && $request->is_razorpay_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'razorpay_public_key' => 'required|string',
+    //                 'razorpay_secret_key' => 'required|string',
+    //             ]
+    //         );
+    //         $post['is_razorpay_enabled'] = $request->is_razorpay_enabled;
+    //         $post['razorpay_public_key'] = $request->razorpay_public_key;
+    //         $post['razorpay_secret_key'] = $request->razorpay_secret_key;
+    //     } else {
+    //         $post['is_razorpay_enabled'] = 'off';
+    //     }
 
-        //paytm
-        if (isset($request->is_paytm_enabled) && $request->is_paytm_enabled == 'on') {
-            $request->validate(
-                [
-                    'paytm_mode' => 'required',
-                    'paytm_merchant_id' => 'required|string',
-                    'paytm_merchant_key' => 'required|string',
-                    'paytm_industry_type' => 'required|string',
-                ]
-            );
-            $post['is_paytm_enabled']    = $request->is_paytm_enabled;
-            $post['paytm_mode']          = $request->paytm_mode;
-            $post['paytm_merchant_id']   = $request->paytm_merchant_id;
-            $post['paytm_merchant_key']  = $request->paytm_merchant_key;
-            $post['paytm_industry_type'] = $request->paytm_industry_type;
-        } else {
-            $post['is_paytm_enabled'] = 'off';
-        }
+    //     //mercado
+    //     if (isset($request->is_mercado_enabled) && $request->is_mercado_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'mercado_access_token' => 'required|string',
+    //             ]
+    //         );
+    //         $post['is_mercado_enabled'] = $request->is_mercado_enabled;
+    //         $post['mercado_access_token']     = $request->mercado_access_token;
+    //         $post['mercado_mode'] = $request->mercado_mode;
+    //     } else {
+    //         $post['is_mercado_enabled'] = 'off';
+    //     }
 
-        //mollie
-        if (isset($request->is_mollie_enabled) && $request->is_mollie_enabled == 'on') {
-            $request->validate(
-                [
-                    'mollie_api_key' => 'required|string',
-                    'mollie_profile_id' => 'required|string',
-                    'mollie_partner_id' => 'required',
-                ]
-            );
-            $post['is_mollie_enabled'] = $request->is_mollie_enabled;
-            $post['mollie_api_key']    = $request->mollie_api_key;
-            $post['mollie_profile_id'] = $request->mollie_profile_id;
-            $post['mollie_partner_id'] = $request->mollie_partner_id;
-        } else {
-            $post['is_mollie_enabled'] = 'off';
-        }
-        //skrill
-        if (isset($request->is_skrill_enabled) && $request->is_skrill_enabled == 'on') {
-            $request->validate(
-                [
-                    'skrill_email' => 'required|email',
-                ]
-            );
-            $post['is_skrill_enabled'] = $request->is_skrill_enabled;
-            $post['skrill_email']      = $request->skrill_email;
-        } else {
-            $post['is_skrill_enabled'] = 'off';
-        }
+    //     //paytm
+    //     if (isset($request->is_paytm_enabled) && $request->is_paytm_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'paytm_mode' => 'required',
+    //                 'paytm_merchant_id' => 'required|string',
+    //                 'paytm_merchant_key' => 'required|string',
+    //                 'paytm_industry_type' => 'required|string',
+    //             ]
+    //         );
+    //         $post['is_paytm_enabled']    = $request->is_paytm_enabled;
+    //         $post['paytm_mode']          = $request->paytm_mode;
+    //         $post['paytm_merchant_id']   = $request->paytm_merchant_id;
+    //         $post['paytm_merchant_key']  = $request->paytm_merchant_key;
+    //         $post['paytm_industry_type'] = $request->paytm_industry_type;
+    //     } else {
+    //         $post['is_paytm_enabled'] = 'off';
+    //     }
 
-        //coingate
-        if (isset($request->is_coingate_enabled) && $request->is_coingate_enabled == 'on') {
-            $request->validate(
-                [
-                    'coingate_mode' => 'required|string',
-                    'coingate_auth_token' => 'required|string',
-                ]
-            );
+    //     //mollie
+    //     if (isset($request->is_mollie_enabled) && $request->is_mollie_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'mollie_api_key' => 'required|string',
+    //                 'mollie_profile_id' => 'required|string',
+    //                 'mollie_partner_id' => 'required',
+    //             ]
+    //         );
+    //         $post['is_mollie_enabled'] = $request->is_mollie_enabled;
+    //         $post['mollie_api_key']    = $request->mollie_api_key;
+    //         $post['mollie_profile_id'] = $request->mollie_profile_id;
+    //         $post['mollie_partner_id'] = $request->mollie_partner_id;
+    //     } else {
+    //         $post['is_mollie_enabled'] = 'off';
+    //     }
+    //     //skrill
+    //     if (isset($request->is_skrill_enabled) && $request->is_skrill_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'skrill_email' => 'required|email',
+    //             ]
+    //         );
+    //         $post['is_skrill_enabled'] = $request->is_skrill_enabled;
+    //         $post['skrill_email']      = $request->skrill_email;
+    //     } else {
+    //         $post['is_skrill_enabled'] = 'off';
+    //     }
 
-            $post['is_coingate_enabled'] = $request->is_coingate_enabled;
-            $post['coingate_mode']       = $request->coingate_mode;
-            $post['coingate_auth_token'] = $request->coingate_auth_token;
-        } else {
-            $post['is_coingate_enabled'] = 'off';
-        }
+    //     //coingate
+    //     if (isset($request->is_coingate_enabled) && $request->is_coingate_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'coingate_mode' => 'required|string',
+    //                 'coingate_auth_token' => 'required|string',
+    //             ]
+    //         );
 
-        //paymentwall
-        if (isset($request->is_paymentwall_enabled) && $request->is_paymentwall_enabled == 'on') {
-            $request->validate(
-                [
-                    'paymentwall_public_key' => 'required|string',
-                    'paymentwall_private_key' => 'required|string',
-                ]
-            );
-            $post['is_paymentwall_enabled'] = $request->is_paymentwall_enabled;
-            $post['paymentwall_public_key'] = $request->paymentwall_public_key;
-            $post['paymentwall_private_key'] = $request->paymentwall_private_key;
-        } else {
-            $post['is_paymentwall_enabled'] = 'off';
-        }
-        //toyyibpay
-        if (isset($request->is_toyyibpay_enabled) && $request->is_toyyibpay_enabled == 'on') {
-            $request->validate(
-                [
-                    'toyyibpay_secret_key' => 'required|string|max:255',
-                    'category_code' => 'required|string|max:255',
-                ]
-            );
+    //         $post['is_coingate_enabled'] = $request->is_coingate_enabled;
+    //         $post['coingate_mode']       = $request->coingate_mode;
+    //         $post['coingate_auth_token'] = $request->coingate_auth_token;
+    //     } else {
+    //         $post['is_coingate_enabled'] = 'off';
+    //     }
 
-            $post['is_toyyibpay_enabled'] = $request->is_toyyibpay_enabled;
-            $post['category_code']     = $request->category_code;
-            $post['toyyibpay_secret_key']        = $request->toyyibpay_secret_key;
-        } else {
-            $post['is_toyyibpay_enabled'] = 'off';
-        }
-        //payfast
-        if (isset($request->is_payfast_enabled) && $request->is_payfast_enabled == 'on') {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'payfast_mode' => 'required',
-                    'payfast_merchant_id' => 'required|string',
-                    'payfast_merchant_key' => 'required|string',
-                    'payfast_signature' => 'required|string',
-                ]
-            );
+    //     //paymentwall
+    //     if (isset($request->is_paymentwall_enabled) && $request->is_paymentwall_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'paymentwall_public_key' => 'required|string',
+    //                 'paymentwall_private_key' => 'required|string',
+    //             ]
+    //         );
+    //         $post['is_paymentwall_enabled'] = $request->is_paymentwall_enabled;
+    //         $post['paymentwall_public_key'] = $request->paymentwall_public_key;
+    //         $post['paymentwall_private_key'] = $request->paymentwall_private_key;
+    //     } else {
+    //         $post['is_paymentwall_enabled'] = 'off';
+    //     }
+    //     //toyyibpay
+    //     if (isset($request->is_toyyibpay_enabled) && $request->is_toyyibpay_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'toyyibpay_secret_key' => 'required|string|max:255',
+    //                 'category_code' => 'required|string|max:255',
+    //             ]
+    //         );
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //         $post['is_toyyibpay_enabled'] = $request->is_toyyibpay_enabled;
+    //         $post['category_code']     = $request->category_code;
+    //         $post['toyyibpay_secret_key']        = $request->toyyibpay_secret_key;
+    //     } else {
+    //         $post['is_toyyibpay_enabled'] = 'off';
+    //     }
+    //     //payfast
+    //     if (isset($request->is_payfast_enabled) && $request->is_payfast_enabled == 'on') {
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'payfast_mode' => 'required',
+    //                 'payfast_merchant_id' => 'required|string',
+    //                 'payfast_merchant_key' => 'required|string',
+    //                 'payfast_signature' => 'required|string',
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            // dd($request->is_payfast_enabled);
-            $post['is_payfast_enabled'] = $request->is_payfast_enabled;
-            $post['payfast_mode'] = $request->payfast_mode;
-            $post['payfast_merchant_id'] = $request->payfast_merchant_id;
-            $post['payfast_merchant_key'] = $request->payfast_merchant_key;
-            $post['payfast_signature'] = $request->payfast_signature;
-        } else {
-            $post['is_payfast_enabled'] = 'off';
-        }
-        //Bank Transfer
-        if (isset($request->is_bank_transfer_enabled) && $request->is_bank_transfer_enabled == 'on') {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'bank_details' => 'required',
-                ]
-            );
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //         // dd($request->is_payfast_enabled);
+    //         $post['is_payfast_enabled'] = $request->is_payfast_enabled;
+    //         $post['payfast_mode'] = $request->payfast_mode;
+    //         $post['payfast_merchant_id'] = $request->payfast_merchant_id;
+    //         $post['payfast_merchant_key'] = $request->payfast_merchant_key;
+    //         $post['payfast_signature'] = $request->payfast_signature;
+    //     } else {
+    //         $post['is_payfast_enabled'] = 'off';
+    //     }
+    //     //Bank Transfer
+    //     if (isset($request->is_bank_transfer_enabled) && $request->is_bank_transfer_enabled == 'on') {
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'bank_details' => 'required',
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            // dd($request->is_bank_transfer_enabled);
-            $post['is_bank_transfer_enabled'] = $request->is_bank_transfer_enabled;
-            $post['bank_details'] = $request->bank_details;
-        } else {
-            $post['is_bank_transfer_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //Manually
-        if (isset($request->is_manually_enabled) && $request->is_manually_enabled == 'on') {
-            // dd($request->is_manually_enabled);
-            $post['is_manually_enabled'] = $request->is_manually_enabled;
-        } else {
-            $post['is_manually_enabled'] = 'off';
-        }
-        //Iyzipay
-        if (isset($request->is_iyzipay_enabled) && $request->is_iyzipay_enabled == 'on') {
-            $request->validate(
-                [
-                    'iyzipay_mode' => 'required',
-                    'iyzipay_public_key' => 'required|string',
-                    'iyzipay_secret_key' => 'required|string',
-                ]
-            );
+    //         // dd($request->is_bank_transfer_enabled);
+    //         $post['is_bank_transfer_enabled'] = $request->is_bank_transfer_enabled;
+    //         $post['bank_details'] = $request->bank_details;
+    //     } else {
+    //         $post['is_bank_transfer_enabled'] = 'off';
+    //     }
 
-            $post['is_iyzipay_enabled']      = $request->is_iyzipay_enabled;
-            $post['iyzipay_mode']            = $request->iyzipay_mode;
-            $post['iyzipay_public_key']     = $request->iyzipay_public_key;
-            $post['iyzipay_secret_key']    = $request->iyzipay_secret_key;
-        } else {
-            $post['is_iyzipay_enabled'] = 'off';
-        }
+    //     //Manually
+    //     if (isset($request->is_manually_enabled) && $request->is_manually_enabled == 'on') {
+    //         // dd($request->is_manually_enabled);
+    //         $post['is_manually_enabled'] = $request->is_manually_enabled;
+    //     } else {
+    //         $post['is_manually_enabled'] = 'off';
+    //     }
+    //     //Iyzipay
+    //     if (isset($request->is_iyzipay_enabled) && $request->is_iyzipay_enabled == 'on') {
+    //         $request->validate(
+    //             [
+    //                 'iyzipay_mode' => 'required',
+    //                 'iyzipay_public_key' => 'required|string',
+    //                 'iyzipay_secret_key' => 'required|string',
+    //             ]
+    //         );
 
-        //sspay
-        if (isset($request->is_sspay_enabled) && $request->is_sspay_enabled == 'on') {
+    //         $post['is_iyzipay_enabled']      = $request->is_iyzipay_enabled;
+    //         $post['iyzipay_mode']            = $request->iyzipay_mode;
+    //         $post['iyzipay_public_key']     = $request->iyzipay_public_key;
+    //         $post['iyzipay_secret_key']    = $request->iyzipay_secret_key;
+    //     } else {
+    //         $post['is_iyzipay_enabled'] = 'off';
+    //     }
 
-            $request->validate(
-                [
-                    'sspay_secret_key' => 'required|string|max:255',
-                    'sspay_category_code' => 'required|string|max:255',
-                ]
-            );
+    //     //sspay
+    //     if (isset($request->is_sspay_enabled) && $request->is_sspay_enabled == 'on') {
 
-            $post['is_sspay_enabled'] = $request->is_sspay_enabled;
-            $post['sspay_category_code']     = $request->sspay_category_code;
-            $post['sspay_secret_key']        = $request->sspay_secret_key;
-        } else {
-            $post['is_sspay_enabled'] = 'off';
-        }
+    //         $request->validate(
+    //             [
+    //                 'sspay_secret_key' => 'required|string|max:255',
+    //                 'sspay_category_code' => 'required|string|max:255',
+    //             ]
+    //         );
 
-        //paytab
-        if (isset($request->is_paytab_enabled) && $request->is_paytab_enabled == 'on') {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'is_paytab_enabled' => 'required',
-                    'paytab_profile_id' => 'required|string',
-                    'paytab_server_key' => 'required|string',
-                    'paytab_region' => 'required|string',
-                ]
-            );
+    //         $post['is_sspay_enabled'] = $request->is_sspay_enabled;
+    //         $post['sspay_category_code']     = $request->sspay_category_code;
+    //         $post['sspay_secret_key']        = $request->sspay_secret_key;
+    //     } else {
+    //         $post['is_sspay_enabled'] = 'off';
+    //     }
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //     //paytab
+    //     if (isset($request->is_paytab_enabled) && $request->is_paytab_enabled == 'on') {
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'is_paytab_enabled' => 'required',
+    //                 'paytab_profile_id' => 'required|string',
+    //                 'paytab_server_key' => 'required|string',
+    //                 'paytab_region' => 'required|string',
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_paytab_enabled'] = $request->is_paytab_enabled;
-            $post['paytab_profile_id'] = $request->paytab_profile_id;
-            $post['paytab_server_key'] = $request->paytab_server_key;
-            $post['paytab_region'] = $request->paytab_region;
-        } else {
-            $post['is_paytab_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //banefit
-        if (isset($request->is_benefit_enabled) && $request->is_benefit_enabled == 'on') {
+    //         $post['is_paytab_enabled'] = $request->is_paytab_enabled;
+    //         $post['paytab_profile_id'] = $request->paytab_profile_id;
+    //         $post['paytab_server_key'] = $request->paytab_server_key;
+    //         $post['paytab_region'] = $request->paytab_region;
+    //     } else {
+    //         $post['is_paytab_enabled'] = 'off';
+    //     }
 
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'is_benefit_enabled' => 'required',
-                    'benefit_api_key' => 'required|string',
-                    'benefit_secret_key' => 'required|string',
+    //     //banefit
+    //     if (isset($request->is_benefit_enabled) && $request->is_benefit_enabled == 'on') {
 
-                ]
-            );
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'is_benefit_enabled' => 'required',
+    //                 'benefit_api_key' => 'required|string',
+    //                 'benefit_secret_key' => 'required|string',
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_benefit_enabled'] = $request->is_benefit_enabled;
-            $post['benefit_api_key'] = $request->benefit_api_key;
-            $post['benefit_secret_key'] = $request->benefit_secret_key;
-        } else {
-            $post['is_benefit_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //cashfree
-        if (isset($request->is_cashfree_enabled) && $request->is_cashfree_enabled == 'on') {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'is_cashfree_enabled' => 'required',
-                    'cashfree_api_key' => 'required|string',
-                    'cashfree_secret_key' => 'required|string',
+    //         $post['is_benefit_enabled'] = $request->is_benefit_enabled;
+    //         $post['benefit_api_key'] = $request->benefit_api_key;
+    //         $post['benefit_secret_key'] = $request->benefit_secret_key;
+    //     } else {
+    //         $post['is_benefit_enabled'] = 'off';
+    //     }
 
-                ]
-            );
+    //     //cashfree
+    //     if (isset($request->is_cashfree_enabled) && $request->is_cashfree_enabled == 'on') {
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'is_cashfree_enabled' => 'required',
+    //                 'cashfree_api_key' => 'required|string',
+    //                 'cashfree_secret_key' => 'required|string',
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_cashfree_enabled'] = $request->is_cashfree_enabled;
-            $post['cashfree_api_key'] = $request->cashfree_api_key;
-            $post['cashfree_secret_key'] = $request->cashfree_secret_key;
-        } else {
-            $post['is_cashfree_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //aamarpay
-        if (isset($request->is_aamarpay_enabled) && $request->is_aamarpay_enabled == 'on') {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'is_aamarpay_enabled' => 'required',
-                    'aamarpay_store_id' => 'required|string',
-                    'aamarpay_signature_key' => 'required|string',
-                    'aamarpay_description' => 'required|string',
+    //         $post['is_cashfree_enabled'] = $request->is_cashfree_enabled;
+    //         $post['cashfree_api_key'] = $request->cashfree_api_key;
+    //         $post['cashfree_secret_key'] = $request->cashfree_secret_key;
+    //     } else {
+    //         $post['is_cashfree_enabled'] = 'off';
+    //     }
 
-                ]
-            );
+    //     //aamarpay
+    //     if (isset($request->is_aamarpay_enabled) && $request->is_aamarpay_enabled == 'on') {
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'is_aamarpay_enabled' => 'required',
+    //                 'aamarpay_store_id' => 'required|string',
+    //                 'aamarpay_signature_key' => 'required|string',
+    //                 'aamarpay_description' => 'required|string',
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_aamarpay_enabled'] = $request->is_aamarpay_enabled;
-            $post['aamarpay_store_id'] = $request->aamarpay_store_id;
-            $post['aamarpay_signature_key'] = $request->aamarpay_signature_key;
-            $post['aamarpay_description'] = $request->aamarpay_description;
-        } else {
-            $post['is_aamarpay_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //paytr
-        if (isset($request->is_paytr_enabled) && $request->is_paytr_enabled == 'on') {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'is_paytr_enabled' => 'required',
-                    'paytr_merchant_id' => 'required|string',
-                    'paytr_merchant_key' => 'required|string',
-                    'paytr_merchant_salt' => 'required|string',
+    //         $post['is_aamarpay_enabled'] = $request->is_aamarpay_enabled;
+    //         $post['aamarpay_store_id'] = $request->aamarpay_store_id;
+    //         $post['aamarpay_signature_key'] = $request->aamarpay_signature_key;
+    //         $post['aamarpay_description'] = $request->aamarpay_description;
+    //     } else {
+    //         $post['is_aamarpay_enabled'] = 'off';
+    //     }
 
-                ]
-            );
+    //     //paytr
+    //     if (isset($request->is_paytr_enabled) && $request->is_paytr_enabled == 'on') {
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'is_paytr_enabled' => 'required',
+    //                 'paytr_merchant_id' => 'required|string',
+    //                 'paytr_merchant_key' => 'required|string',
+    //                 'paytr_merchant_salt' => 'required|string',
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_paytr_enabled'] = $request->is_paytr_enabled;
-            $post['paytr_merchant_id'] = $request->paytr_merchant_id;
-            $post['paytr_merchant_key'] = $request->paytr_merchant_key;
-            $post['paytr_merchant_salt'] = $request->paytr_merchant_salt;
-        } else {
-            $post['is_paytr_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //yookassa
-        if(isset($request->is_yookassa_enabled) && $request->is_yookassa_enabled == 'on'){
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'yookassa_shop_id'      => 'required|string',
-                    'yookassa_secret_key'  => 'required|string',
-                ]
-            );
+    //         $post['is_paytr_enabled'] = $request->is_paytr_enabled;
+    //         $post['paytr_merchant_id'] = $request->paytr_merchant_id;
+    //         $post['paytr_merchant_key'] = $request->paytr_merchant_key;
+    //         $post['paytr_merchant_salt'] = $request->paytr_merchant_salt;
+    //     } else {
+    //         $post['is_paytr_enabled'] = 'off';
+    //     }
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //     //yookassa
+    //     if(isset($request->is_yookassa_enabled) && $request->is_yookassa_enabled == 'on'){
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'yookassa_shop_id'      => 'required|string',
+    //                 'yookassa_secret_key'  => 'required|string',
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_yookassa_enabled']    = $request->is_yookassa_enabled;
-            $post['yookassa_shop_id']       = $request->yookassa_shop_id;
-            $post['yookassa_secret_key']   = $request->yookassa_secret_key;
-        } else {
-            $post['is_yookassa_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        //midtrans
-        if(isset($request->is_midtrans_enabled) && $request->is_midtrans_enabled == 'on'){
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'midtrans_secret' => 'required|string',
-                ]
-            );
+    //         $post['is_yookassa_enabled']    = $request->is_yookassa_enabled;
+    //         $post['yookassa_shop_id']       = $request->yookassa_shop_id;
+    //         $post['yookassa_secret_key']   = $request->yookassa_secret_key;
+    //     } else {
+    //         $post['is_yookassa_enabled'] = 'off';
+    //     }
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //     //midtrans
+    //     if(isset($request->is_midtrans_enabled) && $request->is_midtrans_enabled == 'on'){
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'midtrans_secret' => 'required|string',
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
-            $post['midtrans_mode']           = $request->midtrans_mode;
-            $post['is_midtrans_enabled']    = $request->is_midtrans_enabled;
-            $post['midtrans_secret']        = $request->midtrans_secret;
-        } else {
-            $post['is_midtrans_enabled'] = 'off';
-        }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-        //xendit
-        if(isset($request->is_xendit_enabled) && $request->is_xendit_enabled == 'on'){
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'xendit_api_key'    => 'required|string',
-                    'xendit_token'      => 'required|string',
-                ]
-            );
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
+    //         $post['midtrans_mode']           = $request->midtrans_mode;
+    //         $post['is_midtrans_enabled']    = $request->is_midtrans_enabled;
+    //         $post['midtrans_secret']        = $request->midtrans_secret;
+    //     } else {
+    //         $post['is_midtrans_enabled'] = 'off';
+    //     }
 
-            if ($validator->fails()) {
-                $messages = $validator->getMessageBag();
+    //     //xendit
+    //     if(isset($request->is_xendit_enabled) && $request->is_xendit_enabled == 'on'){
+    //         $validator = Validator::make(
+    //             $request->all(),
+    //             [
+    //                 'xendit_api_key'    => 'required|string',
+    //                 'xendit_token'      => 'required|string',
+    //             ]
+    //         );
 
-                return redirect()->back()->with('error', $messages->first());
-            }
+    //         if ($validator->fails()) {
+    //             $messages = $validator->getMessageBag();
 
-            $post['is_xendit_enabled']  = $request->is_xendit_enabled;
-            $post['xendit_api_key']     = $request->xendit_api_key;
-            $post['xendit_token']       = $request->xendit_token;
-        } else {
-            $post['is_xendit_enabled'] = 'off';
-        }
+    //             return redirect()->back()->with('error', $messages->first());
+    //         }
 
-        foreach ($post as $key => $data) {
-            $arr = [
-                $data,
-                $key,
-                Auth::user()->id,
-            ];
-            \DB::insert(
-                'insert into admin_payment_settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
-                $arr
-            );
-        }
-        return redirect()->back()->with('success', __('Payment setting successfully updated.'));
-    }
+    //         $post['is_xendit_enabled']  = $request->is_xendit_enabled;
+    //         $post['xendit_api_key']     = $request->xendit_api_key;
+    //         $post['xendit_token']       = $request->xendit_token;
+    //     } else {
+    //         $post['is_xendit_enabled'] = 'off';
+    //     }
+
+    //     foreach ($post as $key => $data) {
+    //         $arr = [
+    //             $data,
+    //             $key,
+    //             Auth::user()->id,
+    //         ];
+    //         \DB::insert(
+    //             'insert into admin_payment_settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+    //             $arr
+    //         );
+    //     }
+    //     return redirect()->back()->with('success', __('Payment setting successfully updated.'));
+    // }
 
     public function saveZoomSettings(Request $request)
     {
@@ -2204,7 +2174,7 @@ class SettingController extends Controller
             Session()->put('crm_theme_setting', 'light');
             $user->dark_mode = 'light';
             $user->save();
-        } elseif ($user->dark_mode	== 'light') {
+        } elseif ($user->dark_mode    == 'light') {
             Session()->put('crm_theme_setting', 'dark');
             $user->dark_mode = 'dark';
             $user->save();
