@@ -11,6 +11,7 @@ use App\Models\Utility;
 use Google\Service\CloudTasks\Attempt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AttendanceController extends Controller
 {
@@ -377,7 +378,7 @@ class AttendanceController extends Controller
                 $errorRecord[] = implode(',', $errorData->toArray());
             }
 
-            \Session::put('errorArray', $errorRecord);
+            Session::put('errorArray', $errorRecord);
         }
 
         return redirect()->back()->with($data['status'], $data['msg']);
@@ -387,10 +388,9 @@ class AttendanceController extends Controller
     {
         $startTime           =   Utility::getValByName('company_start_time');
         $endTime             =   Utility::getValByName('company_end_time');
-        $todayAttendance     =   Attendance::where('employee_id', '=', \Auth::user()->id)->where('date', date('Y-m-d'))->first();
-
+        $todayAttendance     =   Attendance::where('employee_id', '=', Auth::user()->id)->where('date', date('Y-m-d'))->first();
         if (empty($todayAttendance)) {
-            $attendance = Attendance::orderBy('id', 'desc')->where('employee_id', '=', \Auth::user()->id)->where('clock_out', '=', '00:00:00')->first();
+            $attendance = Attendance::orderBy('id', 'desc')->where('employee_id', '=', Auth::user()->id)->where('clock_out', '=', '00:00:00')->first();
 
             if ($attendance != null) {
                 $attendance            = Attendance::find($attendance->id);

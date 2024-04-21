@@ -14,9 +14,7 @@
             {{ \Auth::user()->employeeIdFormat($employee->employee_id) . ' ' . __('Details') }}
 @endsection
 @section('breadcrumb')
-
-    <li class="breadcrumb-item"><a href="{{ route('employee.index') }}">{{ __('Employee') }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ $user->name }}</li>
+    {{ $user->name }}
 @endsection
 @section('action-btn')
 @endsection
@@ -27,7 +25,7 @@
                 <div class="card-header">
                     <h5>{{ $user->name }}</h5>
                 </div>
-                <div class="card-footer py-0">
+                <div class="card-footer ">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item px-0">
                             <div class="row align-items-center">
@@ -123,7 +121,7 @@
                 <div class="card-header">
                     <h5>{{ 'Company Detail' }}</h5>
                 </div>
-                <div class="card-footer py-0">
+                <div class="card-footer ">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item px-0">
                             <div class="row align-items-center">
@@ -195,7 +193,7 @@
                 <div class="card-header">
                     <h5 class="mb-0">{{ __('Bank Detail') }}</h5>
                 </div>
-                <div class="card-footer py-0">
+                <div class="card-footer ">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item px-0">
                             <div class="row align-items-center">

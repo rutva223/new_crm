@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Models\Utility;
 use App\Models\Mail\CommonEmailTemplate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -24,7 +26,7 @@ class EmployeeController extends Controller
 
     public function index(Request $request)
     {
-        
+
         if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee') {
             $status           =     Employee::$statues;
             $department       =     Department::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
@@ -94,7 +96,7 @@ class EmployeeController extends Controller
                 $validator = \Validator::make(
                     $request->all(), ['password' => 'required|min:6']
                 );
-    
+
                 if($validator->fails())
                 {
                     return redirect()->back()->with('error', $validator->errors()->first());
@@ -118,7 +120,7 @@ class EmployeeController extends Controller
                 $user->avatar               =   '';
                 $user['is_enable_login'] = $enableLogin;
                 $user->save();
-               
+
 
                 if (!empty($user)) {
                     $employee                =  new Employee();
@@ -173,23 +175,23 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        $eId        = \Crypt::decrypt($id);
+        $eId        =Crypt::decrypt($id);
         //Branchges
-        $branches = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+        $branches = Branch::where('created_by',Auth::user()->creatorId())->get()->pluck('name', 'id');
         $branches->prepend('Select Branch', '');
         //Department
-        $department = Department::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+        $department = Department::where('created_by', '=',Auth::user()->creatorId())->get()->pluck('name', 'id');
         $department->prepend('Select Department', '');
         //Designation
-        $designation = Designation::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+        $designation = Designation::where('created_by', '=',Auth::user()->creatorId())->get()->pluck('name', 'id');
         $designation->prepend('Select Designation', '');
         //SalaryType
-        $salaryType = SalaryType::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+        $salaryType = SalaryType::where('created_by', '=',Auth::user()->creatorId())->get()->pluck('name', 'id');
         $salaryType->prepend('Select Type', '');
         $user = User::find($eId);
         $employee = Employee::where('user_id', $eId)->first();
-        $employeesId  = \Auth::user()->employeeIdFormat(!empty($employee->employee_id) ? $employee->employee_id : '');
-        $departmentData  = Department::where('created_by', \Auth::user()->creatorId())->where('branch_id', $employee->branch_id)->get()->pluck('name', 'id');
+        $employeesId  =Auth::user()->employeeIdFormat(!empty($employee->employee_id) ? $employee->employee_id : '');
+        $departmentData  = Department::where('created_by',Auth::user()->creatorId())->where('branch_id', $employee->branch_id)->get()->pluck('name', 'id');
         //  dd($departmentData);
 
         return view('employee.edit', compact('user', 'departmentData', 'employeesId', 'branches', 'employee', 'department', 'designation', 'salaryType'));

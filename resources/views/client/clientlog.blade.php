@@ -12,8 +12,7 @@
      {{ __('Client') }}
 @endsection
 @section('breadcrumb')
-
-    <li class="breadcrumb-item">{{ __('Client Log') }}</li>
+{{ __('Client Log') }}
 @endsection
 
 @section('content')
@@ -23,7 +22,7 @@
                 <div class="card-body">
                     {{ Form::open(['route' => ['client.clientlog'], 'method' => 'get', 'id' => 'user_userlog']) }}
                     <div class="row align-items-center justify-content-end">
-                        <div class="col-xl-10">
+                        <div class="col-xl-9">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                 </div>
@@ -43,22 +42,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto mt-4">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <a href="#" class="btn btn-sm btn-primary"
-                                        onclick="document.getElementById('user_userlog').submit(); return false;"
-                                        data-bs-toggle="tooltip" title="{{ __('Apply') }}"
-                                        data-original-title="{{ __('apply') }}">
-                                        <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
-                                    </a>
-                                    <a href="{{ route('client.clientlog') }}" class="btn btn-sm btn-danger "
-                                        data-bs-toggle="tooltip" title="{{ __('Reset') }}"
-                                        data-original-title="{{ __('Reset') }}">
-                                        <span class="btn-inner--icon"><i class="fa fa-trash-off text-white-off "></i></span>
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="col-auto my-1 mt-2 p-0 ">
+                            <button type="submit" class=" btn btn-primary me-2"
+                                data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i class="fa-sharp fa-solid fa-filter me-2"></i>Filter</button>
+                        </div>
+                        <div class="col-auto my-1 p-0 mt-2 px-2">
+                                        <a href="{{ route('client.clientlog') }}" data-bs-toggle="tooltip"
+                                            title="{{ __('Reset') }}" class=" btn btn-danger light ">Remove Filter</a>
                         </div>
                     </div>
                     {{ Form::close() }}

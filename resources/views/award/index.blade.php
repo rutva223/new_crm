@@ -8,14 +8,10 @@
      {{__('Award')}}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{__('Award')}}</li>
+    {{__('Award')}}
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
-    <a href="{{route('award.export')}}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-original-title="{{__('Export award CSV file')}}" data-bs-toggle="tooltip">
-        <i class="fa fa-file-export"></i>
-    </a>
 
     <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
       data-url="{{ route('award.create') }}"

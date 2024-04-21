@@ -7,11 +7,10 @@
     {{__('Document')}}
 @endsection
 @section('title')
-     {{__('Document')}}
+    {{__('Document')}}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{__('Document')}}</li>
+    {{__('Document')}}
 @endsection
 @section('action-btn')
     @if(\Auth::user()->type=='company')
@@ -26,10 +25,10 @@
 @section('content')
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header card-body table-border-style">
+            <div class=" card-body table-border-style">
                 <!-- <h5></h5> -->
                 <div class="table-responsive">
-                    <table class="table" id="pc-dt-simple">
+                    <table class="display" id="example" >
                         <thead>
                             <tr>
                                 <th>{{__('Document')}}</th>
@@ -53,7 +52,7 @@
                                             <i class="fa fa-download" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Download') }}"></i>
                                         </a>
                                         <a class="btn btn-sm btn-secondary btn-icon rounded-pill" href="{{$documentPath.'/'.$document->document}}" target="_blank"  >
-                                            <i class="fa fa-crosshair" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Preview') }}"></i>
+                                            <i class="fa fa-eye" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Preview') }}"></i>
                                         </a>
                                     @else
                                         <p>-</p>
@@ -63,23 +62,17 @@
                                 <td>{{ $document->description }}</td>
                                 @if(\Auth::user()->type=='company')
                                 <td class="text-right">
-                                    <div class="action-btn bg-info ms-2">
-                                        <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center" data-ajax-popup="true"
-                                              data-url="{{ route('document-upload.edit',$document->id) }}"
+                                    <div class="d-flex">
+                                        <a href="#" class="btn btn-primary shadow btn-sm sharp me-1 text-white" data-ajax-popup="true"
+                                                data-url="{{ route('document-upload.edit',$document->id) }}"
                                             data-title="{{__('Edit Document')}}" data-bs-toggle="tooltip" title="Edit Document"
                                             data-bs-original-title="{{__('Edit Document')}}"> <span class="text-white"> <i
                                                     class="fa fa-edit" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Edit') }}"></i></span></a>
-                                    </div>
-
-
-                                    <div class="action-btn bg-danger ms-2">
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['document-upload.destroy', $document->id]]) !!}
-                                        <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
+                                        <a href="#!" class="btn btn-danger shadow btn-sm sharp text-white js-sweetalert ">
                                             <i class="fa fa-trash text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Delete') }}"></i>
                                         </a>
                                         {!! Form::close() !!}
-
-
                                     </div>
                                 </td>
                                 @endif

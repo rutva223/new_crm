@@ -5,12 +5,10 @@
     {{ __('Department') }}
 @endsection
 @section('title')
-    <div class="d-inline-block">
-        <h5 class="h4 d-inline-block font-weight-400 mb-0 ">{{ __('Department') }}
+    {{ __('Department') }}
 @endsection
 @section('breadcrumb')
-
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Department') }}</li>
+    {{ __('Department') }}
 @endsection
 @section('action-btn')
     @if (\Auth::user()->type == 'company')
@@ -27,10 +25,13 @@
 @section('content')
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header card-body table-border-style">
+            <div class="card-header">
+                <h4 class="card-title"><i class="fa-solid fa-file-lines me-1"></i>Department List</h4>
+            </div>
+            <div class="card-body pb-4">
                 <!-- <h5></h5> -->
                 <div class="table-responsive">
-                    <table class="table" id="pc-dt-simple">
+                    <table class="display" id="example">
                         <thead>
                             <tr>
                                 <th scope="col">{{ __('Branch') }}</th>
@@ -42,30 +43,32 @@
                         </thead>
                         <tbody>
                             @foreach ($departments as $department)
-                                 <tr class="font-style">
-                                    <td>{{ !empty($department->branch_id)?$department->branch->name:'' }}</td>
+                                <tr class="font-style">
+                                    <td>{{ !empty($department->branch_id) ? $department->branch->name : '' }}</td>
                                     <td>{{ $department->name }} </td>
                                     @if (\Auth::user()->type == 'company')
-                                        <td class="action text-right">
-                                            <div class="action-btn bg-info ms-2">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                                                    data-ajax-popup="true"
-                                                    data-url="{{ route('department.edit', $department->id) }}"
-                                                    data-title="{{ __('Edit Department') }}"> <span
-                                                        class="text-white"> <i class="fa fa-edit" data-bs-toggle="tooltip"
-                                                            data-bs-original-title="{{ __('Edit') }}"></i></span></a>
-                                            </div>
+                                        <td class="">
+                                            <div class="d-flex ">
 
-                                            <div class="action-btn bg-danger ms-2">
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['department.destroy', $department->id]]) !!}
-                                                <a href="#!" class="mx-3 btn btn-sm  align-items-center show_confirm ">
-                                                    <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
-                                                        data-bs-original-title="{{ __('Delete') }}"></i>
+                                                <a class="btn btn-primary shadow btn-sm sharp me-1 text-white"
+                                                    data-url="{{ route('department.edit', $department->id) }}"
+                                                    data-ajax-popup="true" data-size="md" data-bs-toggle="tooltip"
+                                                    title="" data-title="{{ __('Edit Department') }}"
+                                                    data-bs-original-title="{{ __('Edit') }}">
+                                                    <i class="fa fa-edit text-white"></i>
                                                 </a>
-                                                {!! Form::close() !!}
+                                                {{ Form::open(['route' => ['department.destroy', $department->id], 'class' => 'm-0']) }}
+                                                @method('DELETE')
+                                                <a class="btn btn-danger shadow btn-sm sharp text-white js-sweetalert"
+                                                    data-bs-toggle="tooltip" title="" data-bs-original-title="Delete"
+                                                    aria-label="Delete" data-confirm="{{ __('Are You Sure?') }}"
+                                                    data-text="{{ __('This action can not be undone. Do you want to continue?') }}"
+                                                    data-confirm-yes="delete-form-{{ $department->id }}"><i
+                                                        class="ti ti-trash text-white text-white"></i></a>
+                                                {{ Form::close() }}
                                             </div>
-                                         </td>
-                                      @endif
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

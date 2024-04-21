@@ -94,7 +94,7 @@
     --font-family-base: Poppins, sans-serif;
     --font-family-title: Poppins, sans-serif;
     --title: #424562;
-    --dz-sidebar-width: 16.5rem;
+    --dz-sidebar-width: 18.5rem !important;
     --dz-header-height: 5rem;
     --dz-sidebar-pos: absolute;
     --dz-header-pos: relative;
@@ -2834,6 +2834,7 @@ progress {
 
 textarea.form-control {
     min-height: calc(1.5em + 1.375rem + calc(var(--bs-border-width) * 2));
+    margin-bottom: 1rem !important;
 }
 
 textarea.form-control-sm {
@@ -6580,8 +6581,24 @@ fieldset:disabled .btn {
     border-bottom-right-radius: var(--bs-modal-inner-border-radius);
     border-bottom-left-radius: var(--bs-modal-inner-border-radius);
 }
+.modal-footer1 {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * .5);
+    background-color: var(--bs-modal-footer-bg);
+    border-top: var(--bs-modal-footer-border-width) solid var(--bs-modal-footer-border-color);
+    border-bottom-right-radius: var(--bs-modal-inner-border-radius);
+    border-bottom-left-radius: var(--bs-modal-inner-border-radius);
+}
 
 .modal-footer>* {
+    margin: calc(var(--bs-modal-footer-gap) * .5);
+}
+
+.modal-footer1>* {
     margin: calc(var(--bs-modal-footer-gap) * .5);
 }
 
@@ -33598,7 +33615,9 @@ code {
 .modal-footer {
     padding: 1rem 1.875rem;
 }
-
+.modal-footer1 {
+    padding: 1rem 1.875rem;
+}
 .modal-content {
     border-radius: 0.5rem;
     background-color: var(--card);
@@ -40914,7 +40933,7 @@ a.btn.dlab-load-more {
 .cm-content-box {
     background: var(--card);
     border-radius: 0.5rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .cm-content-box.filter {
@@ -41284,6 +41303,7 @@ a.btn.dlab-load-more {
 
 input.form-control {
     position: relative;
+    margin-bottom: 1rem !important;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -42763,7 +42783,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
     border-radius: 0;
 }
-
+.modal-footer1 {
+    bottom: 0;
+    width: 100%;
+    border-radius: 0;
+}
 .colorinput-input {
     opacity: 0 !important;
     outline: none !important;

@@ -2,8 +2,7 @@
 @push('pre-purpose-css-page-page')
 @endpush
 
-@push('pre-purpose-script-page')
-<script src="{{ asset('assets/js/plugins/main.min.js') }}"></script>
+@push('script-page')
 <script type="text/javascript">
 $(document).ready(function() {
     get_data();
@@ -65,13 +64,10 @@ function get_data() {
 {{ __('Holiday') }}
 @endsection
 @section('title')
-<div class="d-inline-block">
-    <h5 class="h4 d-inline-block font-weight-400 mb-0">{{ __('Holiday') }}</h5>
-</div>
+    {{ __('Holiday') }}
 @endsection
 @section('breadcrumb')
-
-<li class="breadcrumb-item active" aria-current="page">{{ __('Holiday') }}</li>
+    {{ __('Holiday') }}
 @endsection
 @section('action-btn')
 
@@ -89,8 +85,7 @@ function get_data() {
 </a>
 @endif
 @endsection
-@section('filter')
-@endsection
+
 @section('content')
 <div class="row">
     <!-- [ sample-page ] start -->
@@ -111,7 +106,7 @@ function get_data() {
                 @endif
             </div>
             <div class="card-body">
-                <div id='calendar' class='calendar local_calender'></div>
+                <div id="calendar" class="app-fullcalendar"></div>
             </div>
         </div>
     </div>

@@ -1,15 +1,9 @@
 {{ Form::model($appraisal, ['route' => ['appraisal.update', $appraisal->id], 'method' => 'PUT']) }}
-@php 
+@php
 $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
-@if (isset($plansettings['enable_chatgpt']) && $plansettings['enable_chatgpt'] == 'on')
- <div class="text-end">
-       <a href="#" data-size="lg" data-ajax-popup-over="true" data-url="{{ route('generate',['appraisal']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Generate') }}" data-title="{{ __('Generate') }}" float-end>
-            <span class="btn btn-primary btn-sm"> <i class="fas fa-robot">  {{ __('Generate With AI') }}</span></i>
-        </a>
- </div>
- @endif
+
         <div class="col-md-12">
             <div class="form-group">
                 {{ Form::label('branch', __('Branch*'), ['class' => 'col-form-label']) }}
@@ -25,7 +19,7 @@ $plansettings = App\Models\Utility::plansettings();
                 {{ Form::label('employees', __('Employee*'), ['class' => 'col-form-label']) }}
                 <div class="employee_div">
                     <select name="employees" id="employee" class="form-control " required>
-                        
+
                     </select>
                  </div>
 
@@ -54,7 +48,7 @@ $plansettings = App\Models\Utility::plansettings();
 {{ Form::close() }}
 
 <script>
-        
+
     $(document).on( "change", "#employee", function() {
     // $('#employee').change(function(){
         var emp_id = $('#employee').val();
@@ -65,10 +59,10 @@ $plansettings = App\Models\Utility::plansettings();
                 "employee": emp_id,
                 "_token": "{{ csrf_token() }}",
             },
-            
+
             cache: false,
             success: function(data) {
-                
+
                 $('#stares').html(data.html);
             }
         })
@@ -93,7 +87,7 @@ $plansettings = App\Models\Utility::plansettings();
                 success: function(data) {
                      $('#employee').html('<option value="">Select Employee</option>');
                     $.each(data.employee, function (key, value) {
-                        
+
                         if(value.id == {{ $appraisal->employee }}){
                             $("#employee").append('<option  selected value="' + value.id + '">' + value.name + '</option>');
                         }else{
@@ -112,10 +106,10 @@ $plansettings = App\Models\Utility::plansettings();
 
                     "_token": "{{ csrf_token() }}",
                 },
-                
+
                 cache: false,
                 success: function(data) {
-                    
+
                     $('#stares').html(data.html);
                 }
             })
@@ -138,7 +132,7 @@ $plansettings = App\Models\Utility::plansettings();
                     $('#employee').html('<option value="">Select Employee</option>');
                     $.each(data.employee, function (key, value) {
                         $("#employee").append('<option value="' + value.id + '">' + value.name + '</option>');
-              
+
                     });
 
                 }

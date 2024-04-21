@@ -7,18 +7,7 @@
     $plansettings = App\Models\Utility::plansettings();
 @endphp
 <div class="row">
-    @if (isset($plansettings['enable_chatgpt']) && $plansettings['enable_chatgpt'] == 'on')
-        <div class="text-end">
-
-            <a href="#" data-size="lg" data-ajax-popup-over="true" data-url="{{ route('generate', ['deal']) }}"
-                data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Generate') }}"
-                data-title="{{ __('Generate') }}" float-end>
-                <span class="btn btn-primary btn-sm"> <i class="fas fa-robot"> {{ __('Generate With AI') }}</span></i>
-            </a>
-        </div>
-    @endif
-
-
+    
     <div class="form-group">
         {{ Form::label('subject', __('Subject'), ['class' => 'col-form-label']) }}
         {{ Form::text('subject', null, ['class' => 'form-control', 'required' => 'required']) }}

@@ -42,8 +42,7 @@
      {{ __('Leave') }}
 @endsection
 @section('breadcrumb')
-
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Leave') }}</li>
+    {{ __('Leave') }}
 @endsection
 
 @section('action-btn')
@@ -54,7 +53,7 @@
         </a>
 
         <a href="#" class="btn btn-sm btn-primary btn-icon m-1" data-ajax-popup="true"
-            data-url="{{ route('leave.create') }}" data-title="{{ __('Create New Leave') }}" data-size="lg">
+            data-url="{{ route('leave.create') }}" data-title="{{ __('Create New Leave') }}" >
             <i class="fa fa-plus text-white" data-bs-toggle="tooltip" data-bs-original-title="{{ __('Create') }}"></i>
         </a>
     @endif
@@ -78,24 +77,14 @@
                         <div class="col-auto">
                             {{ Form::date('end_date', isset($_GET['end_date']) ? $_GET['end_date'] : new \DateTime(), ['class' => 'form-control']) }}
                         </div>
-                        <div class="action-btn bg-info ms-2">
-                            <div class="col-auto my-1">
-                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center"
-                                    data-bs-toggle="tooltip" title="{{ __('Apply') }}">
-                                    <i class="fa fa-search text-white"></i>
-                                </button>
-                            </div>
+                        <div class="col-auto my-1 p-0 ">
+                            <button type="submit" class=" btn btn-primary me-2"
+                                data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i class="fa-sharp fa-solid fa-filter me-2"></i>Filter</button>
                         </div>
-                        <!-- <div class="col-auto"><button type="submit" class="btn btn-sm btn-primary btn-icon-only" data-toggle="tooltip" data-title="{{ __('Apply') }}"><i class="fa fa-search"></i></button></div> -->
-                        <div class="action-btn bg-danger ms-2">
-                            <div class="col-auto my-1">
-                                <a href="{{ route('leave.index') }}" data-bs-toggle="tooltip" title="{{ __('Reset') }}"
-                                    class="mx-3 btn btn-sm d-flex align-items-center">
-                                    <i class="fa fa-trash-off text-white"></i>
-                                </a>
-                            </div>
+                        <div class="col-auto my-1 p-0  px-2">
+                            <a href="{{ route('leave.index') }}" data-bs-toggle="tooltip"
+                                title="{{ __('Reset') }}" class=" btn btn-danger light ">Remove Filter</a>
                         </div>
-                        <!-- <div class="col-auto"><a href="{{ route('leave.index') }}" data-toggle="tooltip" data-title="{{ __('Reset') }}" class="btn btn-sm btn-danger btn-icon-only"><i class="fa fa-trash"></i></a></div> -->
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -106,10 +95,10 @@
 
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header card-body table-border-style">
-                <!-- <h5></h5> -->
+
+            <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="pc-dt-simple">
+                    <table class="display" id="example" >
                         <thead>
                             <tr>
                                 @if (\Auth::user()->type != 'employee')
@@ -128,7 +117,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @dd($leaves); --}}
                             @foreach ($leaves as $leave)
                                 <tr>
                                     @if (\Auth::user()->type != 'employee')
@@ -162,12 +150,11 @@
                                         @endif
                                     </td>
                                     @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
-                                        <div class="row ">
-                                            <td class="">
-                                                @if (\Auth::user()->type == 'company')
-                                                    <div class="action-btn bg-warning ms-2">
+                                            <td >
+                                                <div class="d-flex float-end">
+                                                    @if (\Auth::user()->type == 'company')
                                                         <a href="#"
-                                                            class="mx-3 btn btn-sm d-inline-flex align-items-center"
+                                                            class="btn btn-primary shadow btn-sm sharp me-1 text-white"
                                                             data-ajax-popup="true"
                                                             data-url="{{ route('leave.action', $leave->id) }}"
                                                             data-title="{{ __('View Leave') }}">
@@ -175,33 +162,28 @@
                                                                 <i class="fa fa-eye" data-bs-toggle="tooltip" data-bs-original-title="{{ __('View') }}"></i>
                                                             </span>
                                                         </a>
-                                                    </div>
-                                                @endif
+                                                    @endif
 
-                                                @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
-                                                    <div class="action-btn bg-info ms-2">
+                                                    @if (\Auth::user()->type == 'company' || \Auth::user()->type == 'employee')
                                                         <a href="#"
-                                                            class="mx-3 btn btn-sm d-inline-flex align-items-center"
+                                                            class="btn btn-warning shadow btn-sm sharp me-1 text-white"
                                                             data-ajax-popup="true"
                                                             data-url="{{ route('leave.edit', $leave->id) }}"
-                                                            data-title="{{ __('Edit Leave') }}" data-size="lg"> <span
+                                                            data-title="{{ __('Edit Leave') }}" > <span
                                                                 class="text-white"> <i class="fa fa-edit"
                                                                     data-bs-toggle="tooltip"
                                                                     data-bs-original-title="{{ __('Edit') }}"></i></span>
                                                         </a>
-                                                    </div>
-                                                    <div class="action-btn bg-danger ms-2">
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['leave.destroy', $leave->id]]) !!}
                                                         <a href="#!"
-                                                            class="mx-3 btn btn-sm  align-items-center show_confirm ">
+                                                            class="btn btn-danger shadow btn-sm sharp text-white js-sweetalert">
                                                             <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                                 data-bs-original-title="{{ __('Delete') }}"></i>
                                                         </a>
                                                         {!! Form::close() !!}
-                                                    </div>
-                                                @endif
+                                                    @endif
+                                                </div>
                                             </td>
-                                        </div>
                                     @endif
 
                                 </tr>

@@ -12,6 +12,7 @@
 
 <script src="{{ asset('assets/js/letter.avatar.js') }}"></script>
 <script src="{{ asset('assets/vendor/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('assets/vendor/fullcalendar/js/main.min.js') }}"></script>
 
 <!--swiper-slider-->
 <script src="{{ asset('assets/vendor/swiper/js/swiper-bundle.min.js') }}"></script>

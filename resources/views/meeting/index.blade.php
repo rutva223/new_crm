@@ -8,13 +8,12 @@
      {{ __('Meeting') }}
 @endsection
 @section('breadcrumb')
-
-    <li class="breadcrumb-item active" aria-current="page">{{ __('Meeting') }}</li>
+    {{ __('Meeting') }}
 @endsection
 @section('action-btn')
     <a href="{{ route('meeting.calendar') }}" class="btn btn-sm btn-primary btn-icon m-1" data-bs-toggle="tooltip"
         data-bs-placement="top" title="Calendar View"> <span class="text-white">
-            <i class="fa fa-calendar-event text-white"></i></span>
+            <i class="fa fa-calendar text-white"></i></span>
     </a>
 
     @if (\Auth::user()->type == 'company'|| \Auth::user()->type == 'employee')
@@ -48,18 +47,13 @@
                     <div class="col-auto">
                         {{ Form::date('end_date', isset($_GET['end_date']) ? $_GET['end_date'] : new \DateTime(), ['class' => 'form-control']) }}
                     </div>
-                    <div class="action-btn bg-info ms-2">
-                        <button type="submit" class="mx-3 btn btn-sm d-inline-flex align-items-center"
-                            data-toggle="tooltip" data-title="{{ __('Apply') }}"><i data-bs-toggle="tooltip"
-                                data-bs-original-title="{{ __('Apply') }}" class="fa fa-search text-white"></i></button>
+                    <div class="col-auto my-1 p-0 ">
+                        <button type="submit" class=" btn btn-primary me-2"
+                            data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i class="fa-sharp fa-solid fa-filter me-2"></i>Filter</button>
                     </div>
-                    <div class="action-btn bg-danger ms-2">
-                        <a href="{{ route('meeting.index') }}" data-toggle="tooltip" data-title="{{ __('Reset') }}"
-                            class="mx-3 btn btn-sm d-inline-flex align-items-center">
-                            <i data-bs-toggle="tooltip" data-bs-original-title="{{ __('Reset') }}"
-                                class="fa fa-trash-off text-white">
-                            </i>
-                        </a>
+                    <div class="col-auto my-1 p-0  px-2">
+                        <a href="{{ route('meeting.index') }}" data-bs-toggle="tooltip"
+                            title="{{ __('Reset') }}" class=" btn btn-danger light ">Remove Filter</a>
                     </div>
                 </div>
                 {{ Form::close() }}
@@ -70,10 +64,10 @@
 
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header card-body table-border-style">
-                <h5></h5>
+
+            <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="pc-dt-simple">
+                    <table class="display" id="example" >
                         <thead>
                             <th>{{ __('title') }}</th>
                             <th>{{ __('Date') }}</th>
@@ -94,12 +88,9 @@
                                     <td>{{ !empty($meeting->designations) ? $meeting->designations->name : 'All' }}</td>
                                     @if (\Auth::user()->type == 'company')
                                         <td class="text-right">
-                                            {{-- <a href="#" class="action-item" data-url="{{ route('meeting.edit',$meeting->id) }}" data-ajax-popup="true" data-title="{{__('Edit Meeting')}}" data-toggle="tooltip" data-original-title="{{__('Edit')}}">
-                                            <i class="far fa-edit"></i>
-                                        </a> --}}
+                                            <div class="d-flex">
 
-                                            <div class="action-btn bg-info ms-2">
-                                                <a href="#" class="mx-3 btn btn-sm d-inline-flex align-items-center"
+                                                <a href="#" class="btn btn-primary shadow btn-sm sharp me-1 text-white"
                                                     data-ajax-popup="true"
                                                     data-url="{{ route('meeting.edit', $meeting->id) }}"
                                                     data-title="{{ __('Edit Meeting') }}" data-bs-placement="top"
@@ -110,18 +101,17 @@
                                                         </i>
                                                     </span>
                                                 </a>
-                                            </div>
 
-                                            <div class="action-btn bg-danger ms-2">
                                                 {!! Form::open(['method' => 'DELETE', 'route' => ['meeting.destroy', $meeting->id]]) !!}
                                                 <a href="#!"
-                                                    class="mx-3 btn btn-sm d-inline-flex align-items-center show_confirm m-2">
+                                                    class="btn btn-danger shadow btn-sm sharp text-white js-sweetalert">
                                                     <i class="fa fa-trash text-white" data-bs-toggle="tooltip"
                                                         data-bs-original-title="{{ __('Delete') }}">
                                                     </i>
                                                 </a>
                                                 {!! Form::close() !!}
                                             </div>
+
                                         </td>
                                     @endif
                                 </tr>

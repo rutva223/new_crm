@@ -51,8 +51,7 @@
      {{__('Bulk Attendance')}}
 @endsection
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{__('Bulk Attendance')}}</li>
+   {{__('Bulk Attendance')}}
 @endsection
 @section('content')
 <div class="col-xl-12">
@@ -69,17 +68,13 @@
                             {{-- @dd($department); --}}
                             {{ Form::select('department', $department,isset($_GET['department'])?$_GET['department']:'', array('class' => 'form-control','data-toggle'=>'select')) }}
                         </div>
-                        <div class="action-btn bg-info ms-2">
-                            <div class="col-auto">
-                                <button type="submit" class="mx-3 btn btn-sm d-flex align-items-center" data-bs-toggle="tooltip" ]
-                                title="{{__('Apply')}}"><i class="fa fa-search  text-white"></i></button>
-                            </div>
+                        <div class="col-auto my-1 p-0 ">
+                            <button type="submit" class=" btn btn-primary me-2"
+                                data-bs-toggle="tooltip" title="{{ __('Apply') }}"><i class="fa-sharp fa-solid fa-filter me-2"></i>Filter</button>
                         </div>
-                        <div class="action-btn bg-danger ms-2">
-                            <div class="col-auto">
-                                <a href="{{route('bulk.attendance')}}" data-bs-toggle="tooltip" title="{{__('Reset')}}"
-                                class="mx-3 btn btn-sm d-flex align-items-center"><i class="fa fa-trash-off text-white" ></i></a>
-                            </div>
+                        <div class="col-auto my-1 p-0  px-2">
+                            <a href="{{ route('bulk.attendance') }}" data-bs-toggle="tooltip"
+                                title="{{ __('Reset') }}" class=" btn btn-danger light ">Remove Filter</a>
                         </div>
                     </div>
                     {{ Form::close() }}
@@ -89,10 +84,11 @@
     </div>
 </div>
 
-
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header card-body table-border-style pb-0">
+            <div class="card-header table-border-style pb-0">
+            </div>
+            <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
